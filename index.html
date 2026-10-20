@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TONI KROOS ACADEMY - Select Your Course & Level</title>
+    <title>Toni Kroos Academy - Select Course & Level</title>
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax for Formulas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <script>
@@ -57,10 +62,8 @@
         </div>
     </header>
 
-    <!-- Main Container -->
+    <!-- Welcome / Course Selection Screen -->
     <main class="max-w-5xl mx-auto px-4 py-8">
-        
-        <!-- Welcome View -->
         <div id="homeView" class="space-y-8">
             <div class="text-center max-w-2xl mx-auto space-y-4 pt-2">
                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/50">
@@ -82,7 +85,7 @@
                     <label class="block text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
                         <i class="fa-solid fa-school mr-1"></i> Level of Education:
                     </label>
-                    <select id="levelSelect" onchange="updateCourseOptions()" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                    <select id="levelSelect" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
                         <option value="wassce">🏫 WASSCE / SHS</option>
                         <option value="bece">🎓 BECE / JHS</option>
                         <option value="tertiary">🏛️ University / Tertiary</option>
@@ -94,7 +97,7 @@
                     <label class="block text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
                         <i class="fa-solid fa-book-bookmark mr-1"></i> Course / Stream:
                     </label>
-                    <select id="courseSelect" onchange="renderSubjects()" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                    <select id="courseSelect" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
                     </select>
                 </div>
 
@@ -105,7 +108,7 @@
             </div>
         </div>
 
-        <!-- Quiz View -->
+        <!-- Active Quiz View -->
         <div id="quizView" class="hidden max-w-2xl mx-auto space-y-6">
             <div class="flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400">
                 <button onclick="resetToHome()" class="hover:text-slate-800 dark:hover:text-white flex items-center">
@@ -149,9 +152,9 @@
                 </button>
             </div>
         </div>
-
     </main>
 
+    <!-- Data and Script Engine -->
     <script>
         const courseMapping = {
             wassce: [
@@ -193,6 +196,12 @@
             comp_sci: [
                 { id: 'dsa', name: 'Data Structures & Cache', desc: 'L1/L2 Cache Memory, Memory Latency', icon: 'fa-microchip' },
                 { id: 'linear_algebra', name: 'Linear Algebra', desc: 'Matrix Multiplication, Determinants', icon: 'fa-square-root-variable' }
+            ],
+            engineering: [
+                { id: 'linear_algebra', name: 'Linear Algebra', desc: 'Matrix Multiplication, Determinants', icon: 'fa-square-root-variable' }
+            ],
+            business_admin: [
+                { id: 'bus_stats', name: 'Business Statistics', desc: 'Probability, Sampling & Data', icon: 'fa-chart-line' }
             ]
         };
 
@@ -225,7 +234,8 @@
         }
 
         function renderSubjects() {
-            const courseId = document.getElementById('courseSelect').value;
+            const courseSelect = document.getElementById('courseSelect');
+            const courseId = courseSelect.value;
             const grid = document.getElementById('subjectCardsGrid');
             grid.innerHTML = '';
 
@@ -241,4 +251,104 @@
                 card.onclick = () => startCourseQuiz(courseId, s.id);
                 card.className = `glass-card rounded-2xl p-6 space-y-4 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer border border-slate-200 dark:border-slate-800`;
                 card.innerHTML = `
-                    <div
+                    <div class="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid ${s.icon}"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-lg">${s.name}</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${s.desc}</p>
+                    </div>
+                    <div class="pt-2 flex items-center text-xs font-bold text-indigo-600">
+                        Start Practice <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function startCourseQuiz(courseId, subjectId) {
+            activeQuizQuestions = quizQuestions.filter(q => q.courseId === courseId && q.subjectId === subjectId);
+
+            if (activeQuizQuestions.length === 0) {
+                alert('Quiz questions for this subject are currently being added!');
+                return;
+            }
+
+            currentIndex = 0;
+            score = 0;
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('resultView').classList.add('hidden');
+            document.getElementById('quizView').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = activeQuizQuestions[currentIndex];
+            document.getElementById('questionTracker').innerText = `Question ${currentIndex + 1} of ${activeQuizQuestions.length}`;
+            document.getElementById('progressBar').style.width = `${((currentIndex) / activeQuizQuestions.length) * 100}%`;
+            document.getElementById('questionText').innerHTML = q.question;
+            document.getElementById('explanationBox').classList.add('hidden');
+            document.getElementById('nextBtn').classList.add('hidden');
+
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-left font-medium text-sm flex items-center justify-between";
+                btn.onclick = () => selectOption(idx);
+                btn.innerHTML = `<span>${opt}</span> <i class="fa-regular fa-circle"></i>`;
+                container.appendChild(btn);
+            });
+
+            if (window.MathJax) { MathJax.Hub.Queue(["Typeset", MathJax.Hub, "quizView"]); }
+        }
+
+        function selectOption(idx) {
+            const q = activeQuizQuestions[currentIndex];
+            const buttons = document.getElementById('optionsContainer').children;
+            for (let b of buttons) b.disabled = true;
+
+            if (idx === q.correct) {
+                score++;
+                buttons[idx].className = "w-full p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-sm flex justify-between";
+            } else {
+                buttons[idx].className = "w-full p-4 rounded-xl border-2 border-rose-500 bg-rose-50 text-rose-900 font-bold text-sm flex justify-between";
+                buttons[q.correct].className = "w-full p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-sm flex justify-between";
+            }
+
+            document.getElementById('explanationText').innerText = q.explanation;
+            document.getElementById('explanationBox').classList.remove('hidden');
+            document.getElementById('nextBtn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentIndex++;
+            if (currentIndex < activeQuizQuestions.length) { loadQuestion(); } 
+            else { showResults(); }
+        }
+
+        function showResults() {
+            document.getElementById('quizView').classList.add('hidden');
+            document.getElementById('resultView').classList.remove('hidden');
+            document.getElementById('finalScore').innerText = `${score}/${activeQuizQuestions.length}`;
+            if (window.confetti) confetti({ particleCount: 100, spread: 70 });
+        }
+
+        function resetToHome() {
+            document.getElementById('quizView').classList.add('hidden');
+            document.getElementById('resultView').classList.add('hidden');
+            document.getElementById('homeView').classList.remove('hidden');
+        }
+
+        function toggleDarkMode() { document.documentElement.classList.toggle('dark'); }
+
+        // Event listeners to ensure options populate instantly
+        document.getElementById('levelSelect').addEventListener('change', updateCourseOptions);
+        document.getElementById('courseSelect').addEventListener('change', renderSubjects);
+
+        // Run immediately when script loads
+        updateCourseOptions();
+    </script>
+</body>
+</html>
