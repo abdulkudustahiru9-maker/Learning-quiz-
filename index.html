@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toni Kroos Academy - Educational Quiz Platform</title>
+    <title>Toni Kroos Academy - Interactive Quiz Platform</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome CDN -->
@@ -29,18 +30,24 @@
                 </div>
             </div>
 
-            <!-- Stats Bar (XP & Streaks) -->
-            <div class="flex items-center space-x-3 bg-gray-100 px-3 py-1.5 rounded-xl border border-gray-200 text-xs">
-                <div class="flex items-center space-x-1" title="Daily Study Streak">
-                    <i class="fas fa-fire text-amber-500 animate-pulse"></i>
-                    <span id="streak-count" class="font-bold text-gray-800">1</span>
-                    <span class="text-gray-500">Days</span>
+            <!-- Gamification Tracker Bar -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <div class="hidden sm:flex flex-col text-right">
+                    <span id="rank-title" class="text-xs font-bold text-blue-600 uppercase tracking-wider">Scholar I</span>
+                    <span class="text-[10px] text-gray-400">Level Rank</span>
                 </div>
-                <div class="h-3 w-px bg-gray-300"></div>
-                <div class="flex items-center space-x-1" title="Total XP Earned">
-                    <i class="fas fa-bolt text-yellow-500"></i>
-                    <span id="xp-count" class="font-bold text-gray-800">0</span>
-                    <span class="text-yellow-600 font-semibold">XP</span>
+                <div class="flex items-center space-x-3 bg-gray-100 px-3 py-1.5 rounded-xl border border-gray-200 text-xs">
+                    <div class="flex items-center space-x-1" title="Daily Study Streak">
+                        <i class="fas fa-fire text-amber-500 animate-pulse"></i>
+                        <span id="streak-count" class="font-bold text-gray-800">1</span>
+                        <span class="text-gray-500 hidden sm:inline">Days</span>
+                    </div>
+                    <div class="h-3 w-px bg-gray-300"></div>
+                    <div class="flex items-center space-x-1" title="Total XP Earned">
+                        <i class="fas fa-bolt text-yellow-500"></i>
+                        <span id="xp-count" class="font-bold text-gray-800">0</span>
+                        <span class="text-yellow-600 font-semibold">XP</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -52,101 +59,135 @@
         <!-- HOME SCREEN -->
         <div id="home-screen" class="space-y-8">
             
-            <!-- Hero Banner featuring TONI KROOS ACADEMY -->
+            <!-- Hero Banner -->
             <div class="bg-gradient-to-r from-blue-700 via-indigo-600 to-blue-800 text-white rounded-3xl p-6 md:p-8 shadow-xl relative overflow-hidden">
                 <div class="relative z-10 space-y-3 max-w-2xl">
                     <span class="inline-block bg-white/20 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider">
-                        ✨ Official Educational Platform
+                        ✨ Official Learning Portal
                     </span>
                     <h2 class="text-3xl md:text-5xl font-black leading-tight tracking-tight">
                         TONI KROOS ACADEMY
                     </h2>
                     <p class="text-blue-100 text-sm md:text-base leading-relaxed">
-                        Master your WASSCE, BECE, and Tertiary exam preparation with comprehensive core and elective courses, step-by-step solutions, and instant progress tracking!
+                        Master your WASSCE, BECE, and Tertiary exams with 7-question challenge sets across all Core and Elective subjects. Earn XP, rank up, and unlock unlimited question pools!
                     </p>
                 </div>
-                <div class="absolute -right-10 -bottom-10 opacity-10 text-white text-9xl">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-white text-9xl pointer-events-none">
                     <i class="fas fa-futbol"></i>
                 </div>
             </div>
 
             <!-- Level Selector Tabs -->
-            <div class="flex border-b border-gray-200 text-sm font-bold justify-center space-x-4 md:space-x-8">
-                <button onclick="filterLevel('WASSCE')" id="tab-wassce" class="pb-3 border-b-2 border-blue-600 text-blue-600 px-2">WASSCE (SHS Streams)</button>
-                <button onclick="filterLevel('BECE')" id="tab-bece" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-2">BECE (JHS Core)</button>
-                <button onclick="filterLevel('TERTIARY')" id="tab-tertiary" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-2">Tertiary Courses</button>
+            <div class="flex border-b border-gray-200 text-sm font-bold justify-center space-x-2 md:space-x-8">
+                <button onclick="filterLevel('WASSCE')" id="tab-wassce" class="pb-3 border-b-2 border-blue-600 text-blue-600 px-3">WASSCE (SHS Streams)</button>
+                <button onclick="filterLevel('BECE')" id="tab-bece" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-3">BECE (JHS Core)</button>
+                <button onclick="filterLevel('TERTIARY')" id="tab-tertiary" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-3">Tertiary Courses</button>
             </div>
 
-            <!-- Courses Container -->
+            <!-- Dynamic Courses Container -->
             <div id="courses-container" class="space-y-8">
-                <!-- Dynamically rendered by JS -->
+                <!-- Rendered dynamically by JavaScript -->
+            </div>
+        </div>
+
+        <!-- SET SELECTOR MODAL / OVERLAY -->
+        <div id="set-selector-modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl max-w-lg w-full p-6 space-y-6 shadow-2xl border border-gray-200">
+                <div class="flex justify-between items-center border-b border-gray-100 pb-4">
+                    <div>
+                        <h3 id="modal-subject-title" class="font-extrabold text-xl text-gray-900">Subject Name</h3>
+                        <p class="text-xs text-blue-600 font-semibold">Select a 7-Question Challenge Set</p>
+                    </div>
+                    <button onclick="closeSetModal()" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center transition">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <!-- Set List -->
+                <div id="modal-sets-list" class="space-y-3 max-h-80 overflow-y-auto pr-1">
+                    <!-- Rendered by JS -->
+                </div>
             </div>
         </div>
 
         <!-- QUIZ SCREEN -->
         <div id="quiz-screen" class="hidden space-y-6">
             
-            <!-- Quiz Header -->
+            <!-- Quiz Bar -->
             <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
                 <button onclick="showHomeScreen()" class="text-xs font-semibold text-gray-600 hover:text-blue-600 flex items-center">
                     <i class="fas fa-arrow-left mr-2"></i> Exit Quiz
                 </button>
-                <span id="quiz-title" class="font-bold text-sm text-blue-600">Subject Name</span>
-                <span id="quiz-progress-text" class="text-xs text-gray-500 font-mono font-bold">Q 1/5</span>
+                <div class="text-center">
+                    <span id="quiz-title" class="font-extrabold text-sm text-gray-900 block">Subject Name</span>
+                    <span id="quiz-set-badge" class="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-bold uppercase">Set 1</span>
+                </div>
+                <span id="quiz-progress-text" class="text-xs text-blue-600 font-mono font-bold">Q 1/7</span>
             </div>
 
-            <!-- Question & Options Card -->
+            <!-- Question Card -->
             <div class="bg-white rounded-3xl border border-gray-200 p-6 md:p-8 space-y-6 shadow-md">
                 
-                <!-- Question Box -->
                 <div id="question-text" class="text-base sm:text-lg font-semibold text-gray-900 leading-relaxed">
-                    <!-- Question string rendered here -->
+                    <!-- Question string -->
                 </div>
 
-                <!-- Options List -->
+                <!-- Options -->
                 <div id="options-container" class="space-y-3">
-                    <!-- Option buttons rendered here -->
+                    <!-- Option buttons -->
                 </div>
 
-                <!-- Solution & Explanation Box -->
+                <!-- Worked Solution Box -->
                 <div id="explanation-box" class="hidden bg-blue-50 border border-blue-200 p-5 rounded-2xl text-sm text-blue-900 space-y-2">
-                    <div class="font-bold text-blue-700 flex items-center text-sm">
-                        <i class="fas fa-lightbulb text-amber-500 mr-2 text-base"></i> Step-by-Step Explanation:
+                    <div class="font-bold text-blue-800 flex items-center text-sm">
+                        <i class="fas fa-lightbulb text-amber-500 mr-2 text-base"></i> Step-by-Step Solution:
                     </div>
                     <div id="explanation-text" class="text-gray-700 leading-relaxed"></div>
                 </div>
 
                 <!-- Controls -->
                 <div class="pt-2 flex justify-end">
-                    <button id="next-btn" onclick="nextQuestion()" class="hidden px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition shadow-lg">
+                    <button id="next-btn" onclick="nextQuestion()" class="hidden px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition shadow-lg flex items-center">
                         Next Question <i class="fas fa-chevron-right ml-2"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- SUMMARY / RESULTS SCREEN -->
+        <!-- RESULTS SCREEN -->
         <div id="results-screen" class="hidden text-center bg-white rounded-3xl border border-gray-200 p-8 md:p-12 space-y-6 shadow-xl max-w-lg mx-auto">
             <div class="text-6xl">🏆</div>
-            <h2 class="text-2xl font-black text-gray-900">Quiz Completed!</h2>
+            <div>
+                <h2 class="text-2xl font-black text-gray-900">Set Completed!</h2>
+                <p id="results-subtitle" class="text-xs text-gray-500 mt-1">Great job practicing on Toni Kroos Academy</p>
+            </div>
             
             <div class="grid grid-cols-2 gap-4 max-w-xs mx-auto">
                 <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
-                    <span id="final-score" class="block text-3xl font-extrabold text-emerald-600">0/5</span>
+                    <span id="final-score" class="block text-3xl font-extrabold text-emerald-600">0/7</span>
                     <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Score</span>
                 </div>
                 <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
                     <span id="final-xp" class="block text-3xl font-extrabold text-yellow-500">+0 XP</span>
-                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">XP Gained</span>
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">XP Earned</span>
                 </div>
             </div>
 
-            <div class="flex justify-center space-x-4 pt-2">
-                <button onclick="restartCurrentQuiz()" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition shadow-md">
-                    <i class="fas fa-redo mr-2"></i> Try Again
+            <!-- Next Set Action Box -->
+            <div id="do-more-box" class="bg-blue-50 border border-blue-200 p-4 rounded-2xl text-left space-y-2">
+                <div class="flex items-center space-x-2 text-blue-900 font-bold text-sm">
+                    <i class="fas fa-rocket text-blue-600"></i>
+                    <span>Ready for More Questions?</span>
+                </div>
+                <p id="do-more-desc" class="text-xs text-blue-800">Continue building your knowledge with another 7-question challenge set!</p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-3 pt-2">
+                <button id="next-set-btn" onclick="loadNextSet()" class="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition shadow-md flex items-center justify-center">
+                    <i class="fas fa-forward mr-2"></i> Try Next Set (Set 2)
                 </button>
-                <button onclick="showHomeScreen()" class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-bold rounded-xl transition">
-                    Back to Courses
+                <button onclick="showHomeScreen()" class="w-full sm:w-auto px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-bold rounded-xl transition flex items-center justify-center">
+                    Choose Another Subject
                 </button>
             </div>
         </div>
@@ -155,114 +196,278 @@
 
     <!-- App Data & Logic -->
     <script>
-        // COMPREHENSIVE COURSE & SUBJECT DATABASE (Electives + Core)
+        // COMPREHENSIVE MULTI-SET DATABASE (Core + Electives, Exactly 7 Questions per Set)
         const courseDatabase = {
             WASSCE: [
                 {
-                    stream: "General Science Stream",
+                    stream: "General Science Stream (Core & Electives)",
                     subjects: [
-                        { name: "Elective Mathematics", icon: "fa-calculator", questions: [
-                            { q: "Solve for $x$: $2x + 5 = 15$", options: ["x = 3", "x = 5", "x = 10", "x = 7"], correct: 1, sol: "Subtract 5: $2x = 10$, then divide by 2: $x = 5$." },
-                            { q: "Evaluate $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$", options: ["0", "2", "4", "Undefined"], correct: 2, sol: "Factor numerator: $(x-2)(x+2)/(x-2) = x+2$. Evaluate at $x=2$: $2+2 = 4$." },
-                            { q: "If $f(x) = 3x^2 + 2x$, find $f'(x)$.", options: ["$6x + 2$", "$3x + 2$", "$6x^2$", "$6x$"], correct: 0, sol: "Apply power rule: $d/dx(3x^2) = 6x$ and $d/dx(2x) = 2$." },
-                            { q: "Find the determinant of $\\begin{pmatrix} 3 & 2 \\\\ 1 & 4 \\end{pmatrix}$.", options: ["10", "14", "12", "8"], correct: 0, sol: "Det = $(3 \\times 4) - (2 \\times 1) = 12 - 2 = 10$." },
-                            { q: "Evaluate $\\int 2x \\, dx$", options: ["$x^2 + C$", "$2x^2 + C$", "$x + C$", "$2 + C$"], correct: 0, sol: "Integral of $2x$ is $2(x^2/2) + C = x^2 + C$." }
-                        ]},
-                        { name: "Physics", icon: "fa-atom", questions: [
-                            { q: "What is the SI unit of Force?", options: ["Joule", "Watt", "Newton", "Pascal"], correct: 2, sol: "The SI unit of force is Newton (N)." },
-                            { q: "Calculate kinetic energy of a 2kg mass moving at 3m/s.", options: ["6 J", "9 J", "18 J", "12 J"], correct: 1, sol: "$KE = \\frac{1}{2} mv^2 = \\frac{1}{2} (2)(3^2) = 9\\text{ J}$." },
-                            { q: "Standard acceleration due to gravity on Earth is:", options: ["$9.8\\text{ m/s}^2$", "$10\\text{ m/s}^2$", "$8.9\\text{ m/s}^2$", "$9.8\\text{ cm/s}^2$"], correct: 0, sol: "Standard value is approximately $9.8\\text{ m/s}^2$." },
-                            { q: "State Ohm's Law formula.", options: ["$P = VI$", "$V = IR$", "$F = ma$", "$E = mc^2$"], correct: 1, sol: "$V = IR$." },
-                            { q: "Which electromagnetic wave has highest frequency?", options: ["Radio waves", "Microwaves", "Gamma rays", "Infrared"], correct: 2, sol: "Gamma rays have the highest frequency and energy." }
-                        ]},
-                        { name: "Chemistry", icon: "fa-vial", questions: [
-                            { q: "What is the atomic number of Carbon?", options: ["12", "6", "14", "8"], correct: 1, sol: "Carbon has 6 protons, so its atomic number is 6." },
-                            { q: "What is the molecular formula of methane?", options: ["$\\text{CH}_4$", "$\\text{C}_2\\text{H}_6$", "$\\text{CO}_2$", "$\\text{C}_3\\text{H}_8$"], correct: 0, sol: "Methane is the simplest alkane with formula $\\text{CH}_4$." },
-                            { q: "Which gas turns limewater milky?", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"], correct: 1, sol: "Carbon dioxide forms insoluble calcium carbonate precipitate in limewater." },
-                            { q: "What pH value represents a neutral solution?", options: ["0", "7", "14", "1"], correct: 1, sol: "pH 7 is neutral." },
-                            { q: "What type of bond forms between Sodium and Chlorine?", options: ["Covalent", "Ionic", "Metallic", "Hydrogen"], correct: 1, sol: "Ionic bond forms due to electron transfer from metal to non-metal." }
-                        ]},
-                        { name: "Biology", icon: "fa-dna", questions: [
-                            { q: "Which organelle synthesizes proteins?", options: ["Nucleus", "Ribosome", "Mitochondria", "Golgi"], correct: 1, sol: "Ribosomes are responsible for protein synthesis." },
-                            { q: "Which pigment absorbs light in photosynthesis?", options: ["Hemoglobin", "Chlorophyll", "Carotene", "Xanthophyll"], correct: 1, sol: "Chlorophyll absorbs solar energy for photosynthesis." },
-                            { q: "Human blood cells that transport oxygen are:", options: ["Leukocytes", "Erythrocytes (RBC)", "Thrombocytes", "Plasma"], correct: 1, sol: "Erythrocytes (Red Blood Cells) contain hemoglobin to transport oxygen." },
-                            { q: "What is the basic unit of life?", options: ["Tissue", "Organ", "Cell", "Organism"], correct: 2, sol: "The cell is the basic structural and functional unit of life." },
-                            { q: "Which enzyme digests starch in the mouth?", options: ["Pepsin", "Lipase", "Salivary Amylase", "Trypsin"], correct: 2, sol: "Salivary Amylase breaks down starch into maltose." }
-                        ]}
+                        { 
+                            name: "Core Mathematics", icon: "fa-square-root-variable", isCore: true,
+                            sets: [
+                                {
+                                    setName: "Set 1: Algebra & Geometry",
+                                    questions: [
+                                        { q: "Solve for $x$: $3(x - 2) = 2x + 5$", options: ["$x = 11$", "$x = 7$", "$x = 1$", "$x = -1$"], correct: 0, sol: "Expand: $3x - 6 = 2x + 5 \\implies 3x - 2x = 5 + 6 \\implies x = 11$." },
+                                        { q: "Find the sum of interior angles of a hexagon.", options: ["$540^\\circ$", "$720^\\circ$", "$360^\\circ$", "$900^\\circ$"], correct: 1, sol: "Formula: $(n-2) \\times 180^\\circ = (6-2) \\times 180^\\circ = 4 \\times 180^\\circ = 720^\\circ$." },
+                                        { q: "If $\\tan \\theta = \\frac{3}{4}$, find $\\sin \\theta$ (acute angle).", options: ["$\\frac{3}{5}$", "$\\frac{4}{5}$", "$\\frac{5}{3}$", "$\\frac{3}{7}$"], correct: 0, sol: "Hypotenuse = $\\sqrt{3^2 + 4^2} = 5$. Thus $\\sin \\theta = \\frac{\\text{opposite}}{\\text{hypotenuse}} = \\frac{3}{5}$." },
+                                        { q: "Evaluate: $\\log_{10} 25 + \\log_{10} 4$", options: ["1", "2", "100", "0.5"], correct: 1, sol: "Using log laws: $\\log_{10}(25 \\times 4) = \\log_{10}(100) = 2$." },
+                                        { q: "Calculate simple interest on $GHC\\ 500$ for 3 years at $5\\%$ per annum.", options: ["GHC 75", "GHC 150", "GHC 50", "GHC 25"], correct: 0, sol: "$I = \\frac{P \\times R \\times T}{100} = \\frac{500 \\times 5 \\times 3}{100} = 75$." },
+                                        { q: "Find the mean of $6, 11, 7, 12, 4$.", options: ["7", "8", "9", "10"], correct: 1, sol: "Sum = $6+11+7+12+4 = 40$. Count = 5. Mean = $40 / 5 = 8$." },
+                                        { q: "What is the gradient of the line $2y = 4x + 6$?", options: ["4", "2", "6", "3"], correct: 1, sol: "Divide by 2: $y = 2x + 3$. The gradient $m = 2$." }
+                                    ]
+                                },
+                                {
+                                    setName: "Set 2: Trigonometry & Quadratic Equations",
+                                    questions: [
+                                        { q: "Solve $x^2 - 5x + 6 = 0$.", options: ["$x=2, 3$", "$x=-2, -3$", "$x=1, 6$", "$x=-1, 6$"], correct: 0, sol: "Factorize: $(x-2)(x-3)=0 \\implies x=2$ or $x=3$." },
+                                        { q: "If $\\sin 30^\\circ = 0.5$, find $\\cos 60^\\circ$.", options: ["0.5", "0.866", "1.0", "0"], correct: 0, sol: "Complementary angles property: $\\sin \\theta = \\cos(90^\\circ - \\theta)$. $\\cos 60^\\circ = 0.5$." },
+                                        { q: "Find the area of a circle with radius $7\\text{ cm}$ $(\\pi = \\frac{22}{7})$.", options: ["$154\\text{ cm}^2$", "$44\\text{ cm}^2$", "$308\\text{ cm}^2$", "$98\\text{ cm}^2$"], correct: 0, sol: "Area = $\\pi r^2 = \\frac{22}{7} \\times 7 \\times 7 = 154\\text{ cm}^2$." },
+                                        { q: "Simplify $\\sqrt{48}$ in surd form.", options: ["$4\\sqrt{3}$", "$3\\sqrt{4}$", "$2\\sqrt{12}$", "$16\\sqrt{3}$"], correct: 0, sol: "$\\sqrt{48} = \\sqrt{16 \\times 3} = 4\\sqrt{3}$." },
+                                        { q: "The median of $2, 5, 7, 8, 12$ is:", options: ["7", "5", "8", "6.8"], correct: 0, sol: "The middle value in sorted set is 7." },
+                                        { q: "Express $0.00045$ in standard form.", options: ["$4.5 \\times 10^{-4}$", "$4.5 \\times 10^{-3}$", "$45 \\times 10^{-5}$", "$4.5 \\times 10^4$"], correct: 0, sol: "Move decimal point 4 places right: $4.5 \\times 10^{-4}$." },
+                                        { q: "Find the volume of a cube with edge $4\\text{ cm}$.", options: ["$64\\text{ cm}^3$", "$16\\text{ cm}^3$", "$96\\text{ cm}^3$", "$32\\text{ cm}^3$"], correct: 0, sol: "Volume = $s^3 = 4^3 = 64\\text{ cm}^3$." }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            name: "Elective Mathematics", icon: "fa-calculator", isCore: false,
+                            sets: [
+                                {
+                                    setName: "Set 1: Calculus & Matrices",
+                                    questions: [
+                                        { q: "Find $\\frac{d}{dx}(4x^3 - 5x^2 + 2x)$.", options: ["$12x^2 - 10x + 2$", "$12x^2 - 5x$", "$4x^2 - 10x + 2$", "$12x^3 - 10x$"], correct: 0, sol: "Power rule: $\\frac{d}{dx}(4x^3) = 12x^2$, $\\frac{d}{dx}(-5x^2) = -10x$, $\\frac{d}{dx}(2x) = 2$." },
+                                        { q: "Evaluate $\\int_0^2 3x^2 \\, dx$.", options: ["8", "6", "12", "4"], correct: 0, sol: "$\\int 3x^2 dx = [x^3]_0^2 = 2^3 - 0 = 8$." },
+                                        { q: "Find the determinant of $\\begin{pmatrix} 5 & 2 \\\\ 3 & 4 \\end{pmatrix}$.", options: ["14", "20", "26", "6"], correct: 0, sol: "Det = $(5 \\times 4) - (2 \\times 3) = 20 - 6 = 14$." },
+                                        { q: "If vector $\\mathbf{a} = 3\\mathbf{i} + 4\\mathbf{j}$, find $|\\mathbf{a}|$.", options: ["5", "7", "25", "1"], correct: 0, sol: "$|\\mathbf{a}| = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$." },
+                                        { q: "Solve $2^x = 32$.", options: ["5", "4", "6", "16"], correct: 0, sol: "Since $32 = 2^5$, $x = 5$." },
+                                        { q: "Evaluate $\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3}$.", options: ["6", "3", "0", "Undefined"], correct: 0, sol: "Factor numerator: $\\frac{(x-3)(x+3)}{x-3} = x+3$. As $x \\to 3$, $3+3 = 6$." },
+                                        { q: "Find the center of circle $x^2 + y^2 - 6x + 8y = 0$.", options: ["$(3, -4)$", "$(-3, 4)$", "$(6, -8)$", "$(3, 4)$"], correct: 0, sol: "Center $(h,k) = (-\\frac{g}{2}, -\\frac{f}{2}) = (3, -4)$." }
+                                    ]
+                                },
+                                {
+                                    setName: "Set 2: Vectors & Trigonometric Identities",
+                                    questions: [
+                                        { q: "Simplify $\\sin^2 \\theta + \\cos^2 \\theta$.", options: ["1", "0", "2", "$\\tan \\theta$"], correct: 0, sol: "Fundamental Pythagorean trigonometric identity equals 1." },
+                                        { q: "Find the gradient of curve $y = x^2$ at $x = 3$.", options: ["6", "9", "3", "2"], correct: 0, sol: "$\\frac{dy}{dx} = 2x$. At $x=3$, $2(3) = 6$." },
+                                        { q: "Evaluate $\\binom{5}{2}$.", options: ["10", "20", "6", "12"], correct: 0, sol: "$\\frac{5!}{2!3!} = \\frac{120}{2 \\times 6} = 10$." },
+                                        { q: "If $\\mathbf{u} = \\begin{pmatrix} 2 \\\\ 3 \\end{pmatrix}$ and $\\mathbf{v} = \\begin{pmatrix} -1 \\\\ 4 \\end{pmatrix}$, find $\\mathbf{u} + 2\\mathbf{v}$.", options: ["$\\begin{pmatrix} 0 \\\\ 11 \\end{pmatrix}$", "$\\begin{pmatrix} 1 \\\\ 7 \\end{pmatrix}$", "$\\begin{pmatrix} 4 \\\\ 11 \\end{pmatrix}$", "$\\begin{pmatrix} 0 \\\\ 7 \\end{pmatrix}$"], correct: 0, sol: "$\\begin{pmatrix} 2 \\\\ 3 \\end{pmatrix} + \\begin{pmatrix} -2 \\\\ 8 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 11 \\end{pmatrix}$." },
+                                        { q: "Find the 5th term of AP with $a=2, d=3$.", options: ["14", "17", "11", "15"], correct: 0, sol: "$U_n = a + (n-1)d = 2 + 4(3) = 14$." },
+                                        { q: "Find derivative of $y = \\sin x$.", options: ["$\\cos x$", "$-\\cos x$", "$\\tan x$", "$-\\sin x$"], correct: 0, sol: "Standard derivative of $\\sin x$ is $\\cos x$." },
+                                        { q: "Find sum to infinity of GP: $8, 4, 2, 1...$", options: ["16", "12", "32", "15"], correct: 0, sol: "$S_\\infty = \\frac{a}{1-r} = \\frac{8}{1 - 0.5} = 16$." }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            name: "Physics", icon: "fa-atom", isCore: false,
+                            sets: [
+                                {
+                                    setName: "Set 1: Mechanics & Energy",
+                                    questions: [
+                                        { q: "Calculate kinetic energy of 2kg mass moving at 3m/s.", options: ["9 J", "6 J", "18 J", "12 J"], correct: 0, sol: "$KE = \\frac{1}{2} mv^2 = \\frac{1}{2}(2)(3^2) = 9\\text{ Joules}$." },
+                                        { q: "SI unit of electrical resistance is:", options: ["Ohm ($\\Omega$)", "Volt", "Ampere", "Watt"], correct: 0, sol: "Resistance is measured in Ohms." },
+                                        { q: "State Newton's Second Law formula.", options: ["$F = ma$", "$E = mc^2$", "$V = IR$", "$P = VI$"], correct: 0, sol: "Force = mass $\\times$ acceleration ($F = ma$)." },
+                                        { q: "Calculate work done in moving 10N weight through 5 meters.", options: ["50 J", "15 J", "2 J", "500 J"], correct: 0, sol: "Work = Force $\\times$ Distance = $10 \\times 5 = 50\\text{ Joules}$." },
+                                        { q: "Acceleration due to gravity on Earth surface is approx:", options: ["$9.8\\text{ m/s}^2$", "$10\\text{ m/s}$", "$8.9\\text{ m/s}^2$", "$9.8\\text{ cm/s}^2$"], correct: 0, sol: "Standard value is $9.8\\text{ m/s}^2$." },
+                                        { q: "Which electromagnetic wave has the highest frequency?", options: ["Gamma rays", "Microwaves", "Radio waves", "Infrared"], correct: 0, sol: "Gamma rays have the shortest wavelength and highest frequency." },
+                                        { q: "Pressure in liquids depends on:", options: ["Depth and density", "Container shape", "Surface area", "Atmospheric temp"], correct: 0, sol: "Liquid pressure formula: $P = h \\rho g$ (depth $\\times$ density $\\times$ gravity)." }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            name: "Chemistry", icon: "fa-vial", isCore: false,
+                            sets: [
+                                {
+                                    setName: "Set 1: Atomic Structure & Bonding",
+                                    questions: [
+                                        { q: "What is the atomic number of Carbon?", options: ["6", "12", "14", "8"], correct: 0, sol: "Carbon has 6 protons." },
+                                        { q: "Identify the formula for Methane.", options: ["$\\text{CH}_4$", "$\\text{C}_2\\text{H}_6$", "$\\text{CO}_2$", "$\\text{C}_3\\text{H}_8$"], correct: 0, sol: "Methane is $\\text{CH}_4$." },
+                                        { q: "Which gas turns limewater milky?", options: ["Carbon Dioxide", "Oxygen", "Nitrogen", "Hydrogen"], correct: 0, sol: "$\\text{CO}_2$ forms insoluble calcium carbonate in limewater." },
+                                        { q: "Pure water pH at 25°C is:", options: ["7", "0", "14", "5"], correct: 0, sol: "pH 7 represents neutral water." },
+                                        { q: "Bonds formed by sharing electrons are called:", options: ["Covalent bonds", "Ionic bonds", "Metallic bonds", "Hydrogen bonds"], correct: 0, sol: "Covalent bonding involves shared electron pairs." },
+                                        { q: "Avogadro's constant value is approx:", options: ["$6.02 \\times 10^{23}$", "$3.00 \\times 10^8$", "$1.60 \\times 10^{-19}$", "$9.81$"], correct: 0, sol: "$6.02 \\times 10^{23} \\text{ particles/mole}$." },
+                                        { q: "Which element is halogen in Group 7?", options: ["Chlorine", "Sodium", "Helium", "Magnesium"], correct: 0, sol: "Chlorine is a Group 7 halogen." }
+                                    ]
+                                }
+                            ]
+                        }
                     ]
                 },
                 {
-                    stream: "General Arts Stream",
+                    stream: "General Arts Stream (Core & Electives)",
                     subjects: [
-                        { name: "Economics", icon: "fa-chart-line", questions: [
-                            { q: "What is the fundamental economic problem?", options: ["Inflation", "Scarcity", "Poverty", "Unemployment"], correct: 1, sol: "Scarcity of resources relative to unlimited wants is the core problem." },
-                            { q: "When demand exceeds supply, price tends to:", options: ["Fall", "Rise", "Stay constant", "Fluctuate randomly"], correct: 1, sol: "Excess demand creates shortage, driving prices upward." },
-                            { q: "What is opportunity cost?", options: ["Monetary cost", "Next best alternative forgone", "Total cost", "Variable cost"], correct: 1, sol: "Opportunity cost is the value of the next best alternative sacrificed." },
-                            { q: "Which market structure has a single seller?", options: ["Monopoly", "Oligopoly", "Perfect Competition", "Monopsony"], correct: 0, sol: "Monopoly consists of one single producer/seller." },
-                            { q: "Elasticity of demand measures response to change in:", options: ["Income", "Price", "Taste", "Population"], correct: 1, sol: "Price elasticity measures how quantity demanded responds to price changes." }
-                        ]},
-                        { name: "Government", icon: "fa-landmark", questions: [
-                            { q: "Which arm of government enforces laws?", options: ["Legislature", "Executive", "Judiciary", "Press"], correct: 1, sol: "The Executive enforces and implements laws." },
-                            { q: "Rule of Law implies:", options: ["Kings are above law", "Equality before the law", "Military rule", "No laws exist"], correct: 1, sol: "Rule of Law means everyone is subject to and equal before the law." },
-                            { q: "Democracy is defined as government of the people by the:", options: ["Military", "People", "Wealthy", "Monarch"], correct: 1, sol: "Abraham Lincoln defined democracy as government of the people, by the people, for the people." },
-                            { q: "A constitution that is difficult to amend is:", options: ["Flexible", "Rigid", "Written", "Unwritten"], correct: 1, sol: "Rigid constitutions require special majority procedures to amend." },
-                            { q: "Franchise means:", options: ["Right to trade", "Right to vote", "Right to speak", "Right to work"], correct: 1, sol: "Franchise refers to the constitutional right to vote." }
-                        ]}
+                        {
+                            name: "Economics", icon: "fa-chart-line", isCore: false,
+                            sets: [
+                                {
+                                    setName: "Set 1: Basic Economics & Markets",
+                                    questions: [
+                                        { q: "What is the primary economic problem facing society?", options: ["Scarcity", "Inflation", "Taxation", "Poverty"], correct: 0, sol: "Scarcity of resources relative to unlimited wants." },
+                                        { q: "Opportunity cost is defined as:", options: ["The next best alternative forgone", "Monetary expenses", "Total production cost", "Fixed cost"], correct: 0, sol: "Opportunity cost is the value of the next best choice sacrificed." },
+                                        { q: "In a free market, prices are determined by:", options: ["Demand and Supply", "Government decrees", "Monopolists", "Central Bank"], correct: 0, sol: "Market equilibrium price is set by demand and supply interaction." },
+                                        { q: "Which market structure has only ONE single seller?", options: ["Monopoly", "Oligopoly", "Perfect Competition", "Monopsony"], correct: 0, sol: "Monopoly consists of one firm controlling the entire supply." },
+                                        { q: "Inflation is best described as:", options: ["Persistent rise in general price level", "One-time price increase", "Increase in stock market", "Drop in currency value"], correct: 0, sol: "Continuous, sustained increase in general price levels." },
+                                        { q: "A good with price elasticity of demand > 1 is:", options: ["Elastic", "Inelastic", "Unitary", "Perfectly inelastic"], correct: 0, sol: "Elastic demand means percentage change in quantity > percentage change in price." },
+                                        { q: "Which of the following is a direct tax?", options: ["Income Tax", "VAT", "Customs Duty", "Excise Duty"], correct: 0, sol: "Income tax is levied directly on an individual's earnings." }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            name: "Government", icon: "fa-landmark", isCore: false,
+                            sets: [
+                                {
+                                    setName: "Set 1: Political Systems & Governance",
+                                    questions: [
+                                        { q: "Which arm of government formulates and passes laws?", options: ["Legislature", "Executive", "Judiciary", "Civil Service"], correct: 0, sol: "The Legislature (Parliament) makes laws." },
+                                        { q: "Rule of Law principle implies:", options: ["Equality of all citizens before the law", "Lawyers rule society", "Military supreme authority", "No written constitution"], correct: 0, sol: "Rule of Law means everyone is equal before and subject to the law." },
+                                        { q: "A constitutional system where power is shared between central & regional units is:", options: ["Federalism", "Unitary system", "Confederation", "Monarchy"], correct: 0, sol: "Federalism divides sovereignty between central and state governments." },
+                                        { q: "Universal Adult Suffrage means:", options: ["Right of all qualified adults to vote", "Voting reserved for landowners", "Only educated adults vote", "Freedom of speech"], correct: 0, sol: "All adults above age limit have voting rights." },
+                                        { q: "Who was Ghana's first Prime Minister and President?", options: ["Dr. Kwame Nkrumah", "J.B. Danquah", "K.A. Busia", "Edward Akufo-Addo"], correct: 0, sol: "Dr. Kwame Nkrumah led Ghana to independence in 1957." },
+                                        { q: "A constitution that requires complex procedures to amend is:", options: ["Rigid", "Flexible", "Unwritten", "Unitary"], correct: 0, sol: "Rigid constitutions require special parliamentary majorities or referendums." },
+                                        { q: "Electoral Commission's primary duty is to:", options: ["Conduct free and fair elections", "Write state constitution", "Judge legal disputes", "Appoint ministers"], correct: 0, sol: "Organize and oversee national voting processes." }
+                                    ]
+                                }
+                            ]
+                        }
                     ]
                 },
                 {
-                    stream: "Business Stream",
+                    stream: "Business Stream (Core & Electives)",
                     subjects: [
-                        { name: "Financial Accounting", icon: "fa-file-invoice-dollar", questions: [
-                            { q: "The accounting equation is:", options: ["Assets = Liabilities + Capital", "Assets = Capital - Liabilities", "Liabilities = Assets + Capital", "Capital = Assets + Liabilities"], correct: 0, sol: "Assets = Liabilities + Owner's Equity (Capital)." },
-                            { q: "Which book of prime entry records credit sales?", options: ["Cash Book", "Sales Journal", "Purchases Journal", "Petty Cash"], correct: 1, sol: "Sales Journal records credit sales of trading inventory." },
-                            { q: "A trial balance checks:", options: ["Profit", "Arithmetic accuracy", "Cash balance", "Stock level"], correct: 1, sol: "Trial balance verifies mathematical equality of debit and credit balances." },
-                            { q: "Depreciation is:", options: ["Increase in asset value", "Fall in fixed asset value over time", "Cash spent on maintenance", "Profit on sale"], correct: 1, sol: "Depreciation is the systematic allocation of cost of a fixed asset over its useful life." },
-                            { q: "Bad debts are written off as:", options: ["Income", "Expense", "Liability", "Asset"], correct: 1, sol: "Bad debts are irrecoverable debts treated as expenses in Profit & Loss." }
-                        ]}
+                        {
+                            name: "Financial Accounting", icon: "fa-file-invoice-dollar", isCore: false,
+                            sets: [
+                                {
+                                    setName: "Set 1: Basic Accounting Principles",
+                                    questions: [
+                                        { q: "State the fundamental Accounting Equation.", options: ["$\text{Assets} = \text{Liabilities} + \text{Capital}$", "$\text{Assets} = \text{Capital} - \text{Liabilities}$", "$\text{Capital} = \text{Assets} + \text{Liabilities}$", "$\text{Liabilities} = \text{Assets} + \text{Capital}$"], correct: 0, sol: "Assets equal Liabilities plus Owner's Equity (Capital)." },
+                                        { q: "Which prime book records credit sales of goods?", options: ["Sales Day Book", "Cash Book", "Purchases Journal", "Petty Cash"], correct: 0, sol: "Sales Day Book records all credit sales of trading stock." },
+                                        { q: "Trial balance primarily verifies:", options: ["Arithmetic accuracy of debit and credit entries", "Total profit earned", "Cash balance", "Bank reconciliation"], correct: 0, sol: "It ensures total debits equal total credits." },
+                                        { q: "Depreciation is defined as:", options: ["Systematic allocation of asset cost over useful life", "Increase in market value", "Cash kept in bank", "Payment to creditors"], correct: 0, sol: "Reflects wear, tear, and obsolescence of fixed assets." },
+                                        { q: "In double entry, an increase in an asset is recorded as:", options: ["Debit", "Credit", "Balance b/d", "Journal voucher"], correct: 0, sol: "Asset increases are always debited." },
+                                        { q: "Current liabilities include:", options: ["Trade Creditors", "Premises", "Machinery", "Long-term Bank Loan"], correct: 0, sol: "Trade creditors must be paid within one year." },
+                                        { q: "Working Capital formula is:", options: ["$\text{Current Assets} - \text{Current Liabilities}$", "$\\text{Total Assets} - \\text{Total Liabilities}$", "$\\text{Fixed Assets} + \\text{Stock}$", "$\\text{Capital} + \\text{Net Profit}$"], correct: 0, sol: "Working Capital = Current Assets minus Current Liabilities." }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    stream: "Home Economics, Visual Arts & Agricultural Science",
+                    subjects: [
+                        {
+                            name: "Food & Nutrition", icon: "fa-utensils", isCore: false,
+                            sets: [
+                                {
+                                    setName: "Set 1: Nutrients & Digestion",
+                                    questions: [
+                                        { q: "Which nutrient is mainly responsible for body growth and repair?", options: ["Protein", "Carbohydrate", "Vitamin C", "Calcium"], correct: 0, sol: "Proteins build and repair body tissues." },
+                                        { q: "Deficiency of Vitamin C causes:", options: ["Scurvy", "Rickets", "Night blindness", "Beriberi"], correct: 0, sol: "Vitamin C deficiency leads to scurvy (bleeding gums)." },
+                                        { q: "Which enzyme in saliva breaks down starch?", options: ["Ptyalin (Salivary Amylase)", "Pepsin", "Lipase", "Renning"], correct: 0, sol: "Salivary amylase converts starch into maltose." },
+                                        { q: "Calcium and Phosphorus are essential for:", options: ["Strong bones and teeth", "Blood clotting", "Vision in dark", "Thyroid regulation"], correct: 0, sol: "Mineralize bones and dental structures." },
+                                        { q: "Rickets is caused by deficiency of:", options: ["Vitamin D", "Vitamin A", "Iron", "Iodine"], correct: 0, sol: "Vitamin D deficiency impairs bone calcification in children." },
+                                        { q: "Moist heat cooking method includes:", options: ["Steaming", "Roasting", "Baking", "Grilling"], correct: 0, sol: "Steaming utilizes water vapor thermal energy." },
+                                        { q: "Which nutrient yields the highest energy per gram?", options: ["Fats / Lipids", "Carbohydrates", "Proteins", "Water"], correct: 0, sol: "Fats yield ~9 kcal/g compared to ~4 kcal/g for carbs/proteins." }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            name: "General Agriculture", icon: "fa-wheat-awn", isCore: false,
+                            sets: [
+                                {
+                                    setName: "Set 1: Crop & Soil Science",
+                                    questions: [
+                                        { q: "Which soil type has the highest water retention capacity?", options: ["Clay soil", "Sandy soil", "Loamy soil", "Gravel"], correct: 0, sol: "Clay particles are tiny with microscopic pores that trap water." },
+                                        { q: "Macro-nutrients required by crops include:", options: ["Nitrogen, Phosphorus, Potassium (NPK)", "Iron, Boron, Zinc", "Copper, Manganese, Cobalt", "Calcium, Iron, Iodine"], correct: 0, sol: "N, P, and K are primary plant macro-nutrients." },
+                                        { q: "Vegetative propagation method using stems embedded in soil is:", options: ["Layering / Cuttings", "Pollination", "Fertilization", "Seed sowing"], correct: 0, sol: "Asexual reproduction utilizing vegetative cuttings or layering." },
+                                        { q: "Ruminant animals possess a stomach with how many chambers?", options: ["4", "2", "3", "1"], correct: 0, sol: "Rumen, Reticulum, Omasum, Abomasum (4 compartments)." },
+                                        { q: "Soil erosion caused by uniform removal of topsoil is:", options: ["Sheet erosion", "Gully erosion", "Rill erosion", "Splash erosion"], correct: 0, sol: "Sheet erosion removes thin uniform layer across wide area." },
+                                        { q: "Process of removing excess water from farmland is:", options: ["Drainage", "Irrigation", "Mulching", "Tillage"], correct: 0, sol: "Drainage prevents waterlogging in root zones." },
+                                        { q: "Leguminous crops enrich soil nitrogen through symbiotic bacteria called:", options: ["Rhizobium", "Azotobacter", "Fungi", "Virus"], correct: 0, sol: "Rhizobium fix atmospheric nitrogen in root nodules." }
+                                    ]
+                                }
+                            ]
+                        }
                     ]
                 }
             ],
             BECE: [
                 {
-                    stream: "BECE JHS Core Subjects",
+                    stream: "BECE Junior High Core Subjects",
                     subjects: [
-                        { name: "Core Mathematics", icon: "fa-square-root-variable", questions: [
-                            { q: "Simplify: $3(x + 4) - 2x$", options: ["$x + 12$", "$x + 4$", "$5x + 12$", "$x - 12$"], correct: 0, sol: "$3x + 12 - 2x = x + 12$." },
-                            { q: "Find mean of 4, 8, 12, 16.", options: ["8", "10", "12", "14"], correct: 1, sol: "Sum = 40. Mean = $40 / 4 = 10$." },
-                            { q: "Convert 0.75 to a simple fraction.", options: ["1/2", "3/4", "2/3", "4/5"], correct: 1, sol: "$75/100 = 3/4$." },
-                            { q: "Perimeter of square with side 5cm is:", options: ["20 cm", "25 cm", "10 cm", "15 cm"], correct: 0, sol: "Perimeter = $4 \\times 5 = 20\\text{ cm}$." },
-                            { q: "Prime factors of 12 are:", options: ["2 and 3", "3 and 4", "1 and 12", "2 and 6"], correct: 0, sol: "$12 = 2^2 \\times 3$. Prime factors are 2 and 3." }
-                        ]},
-                        { name: "Integrated Science", icon: "fa-flask", questions: [
-                            { q: "Which organ produces bile?", options: ["Stomach", "Liver", "Pancreas", "Gallbladder"], correct: 1, sol: "The liver produces bile (stored in gallbladder)." },
-                            { q: "Which metal is liquid at room temperature?", options: ["Iron", "Mercury", "Copper", "Aluminum"], correct: 1, sol: "Mercury is a liquid metal at room temperature." },
-                            { q: "Process of water evaporation from plant leaves is:", options: ["Transpiration", "Respiration", "Osmosis", "Photosynthesis"], correct: 0, sol: "Transpiration is the loss of water vapor from stomata." },
-                            { q: "Symbol for Sodium is:", options: ["So", "Na", "Sd", "K"], correct: 1, sol: "Na comes from Latin Natrium." },
-                            { q: "Electric current is measured using an:", options: ["Voltmeter", "Ammeter", "Ohmmeter", "Barometer"], correct: 1, sol: "An ammeter measures electric current in Amperes." }
-                        ]}
+                        {
+                            name: "Integrated Science (JHS)", icon: "fa-flask", isCore: true,
+                            sets: [
+                                {
+                                    setName: "Set 1: Matter & Living Systems",
+                                    questions: [
+                                        { q: "Which liquid metal is used in traditional glass thermometers?", options: ["Mercury", "Alcohol", "Water", "Iron"], correct: 0, sol: "Mercury expands uniformly and remains liquid at room temperature." },
+                                        { q: "Plant process that releases water vapor through leaf stomata is:", options: ["Transpiration", "Respiration", "Photosynthesis", "Osmosis"], correct: 0, sol: "Transpiration evaporates water through stomatal pores." },
+                                        { q: "Chemical symbol for Sodium is:", options: ["Na", "So", "Sd", "K"], correct: 0, sol: "Derived from Latin name Natrium." },
+                                        { q: "Which organ produces bile for fat digestion?", options: ["Liver", "Pancreas", "Stomach", "Kidney"], correct: 0, sol: "Liver secretes bile, stored in gallbladder." },
+                                        { q: "SI unit of electric current is:", options: ["Ampere (A)", "Volt (V)", "Watt (W)", "Joule (J)"], correct: 0, sol: "Current is measured in Amperes." },
+                                        { q: "Which organelle controls all cellular activities?", options: ["Nucleus", "Cytoplasm", "Cell Wall", "Vacuole"], correct: 0, sol: "Nucleus houses genetic blueprint (DNA)." },
+                                        { q: "Gas required for combustion (burning) is:", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"], correct: 0, sol: "Oxygen supports burning reactions." }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            name: "Social Studies (JHS)", icon: "fa-earth-africa", isCore: true,
+                            sets: [
+                                {
+                                    setName: "Set 1: Environment & Heritage",
+                                    questions: [
+                                        { q: "In which year did Ghana gain independence?", options: ["1957", "1960", "1948", "1966"], correct: 0, sol: "March 6, 1957." },
+                                        { q: "Capital city of Ghana is:", options: ["Accra", "Kumasi", "Tamale", "Cape Coast"], correct: 0, sol: "Accra is the capital city." },
+                                        { q: "Water body bordering Ghana to the south is:", options: ["Gulf of Guinea (Atlantic Ocean)", "Lake Volta", "Indian Ocean", "Red Sea"], correct: 0, sol: "Located along the Gulf of Guinea." },
+                                        { q: "Largest artificial lake in Ghana and world by surface area is:", options: ["Lake Volta", "Lake Bosomtwe", "River Pra", "River Tano"], correct: 0, sol: "Lake Volta formed by Akosombo Dam." },
+                                        { q: "Primary duty of a good citizen is to:", options: ["Obey laws and pay taxes", "Avoid voting", "Travel abroad", "Criticize others"], correct: 0, sol: "Law abiding and civic responsibility." },
+                                        { q: "The Premier castle that served as early seat of government in Accra is:", options: ["Osu Castle (Christiansborg)", "Elmina Castle", "Cape Coast Castle", "Fort James"], correct: 0, sol: "Christiansborg Castle in Osu." },
+                                        { q: "Major vegetation zone covering northern Ghana is:", options: ["Savannah Woodland", "Tropical Rainforest", "Mangrove Swamp", "Desert"], correct: 0, sol: "Northern Ghana is dominated by Guinea Savannah." }
+                                    ]
+                                }
+                            ]
+                        }
                     ]
                 }
             ],
             TERTIARY: [
                 {
-                    stream: "Tertiary Courses",
+                    stream: "Tertiary University Courses",
                     subjects: [
-                        { name: "Computer Science", icon: "fa-laptop-code", questions: [
-                            { q: "What does HTML stand for?", options: ["Hyper Text Markup Language", "High Tech Machine Language", "Hyperlink Text Management Language", "Home Tool Markup Language"], correct: 0, sol: "HTML stands for Hyper Text Markup Language." },
-                            { q: "Which data structure uses FIFO?", options: ["Stack", "Queue", "Tree", "Graph"], correct: 1, sol: "Queue works on First-In-First-Out (FIFO)." },
-                            { q: "Time complexity of Binary Search is:", options: ["O(n)", "O(1)", "O(log n)", "O(n^2)"], correct: 2, sol: "Binary search runs in logarithmic time $O(\\log n)$." },
-                            { q: "Primary Key in database ensures:", options: ["Duplicates allowed", "Uniqueness of records", "Faster printing", "Table backup"], correct: 1, sol: "Primary key uniquely identifies each record in a table." },
-                            { q: "Which memory is fastest?", options: ["RAM", "Hard Disk", "Cache Memory", "ROM"], correct: 2, sol: "Cache memory built into CPU cores provides fastest access." }
-                        ]}
+                        {
+                            name: "Computer Science & Data", icon: "fa-laptop-code", isCore: false,
+                            sets: [
+                                {
+                                    setName: "Set 1: Algorithms & Data Structures",
+                                    questions: [
+                                        { q: "What does HTML stand for?", options: ["HyperText Markup Language", "HighTech Machine Language", "Hyperlink Text Manager", "Home Tool Markup"], correct: 0, sol: "Standard markup language for web pages." },
+                                        { q: "Which data structure operates on LIFO (Last In First Out)?", options: ["Stack", "Queue", "Array", "Linked List"], correct: 0, sol: "Stack pushes/pops from top (LIFO)." },
+                                        { q: "Time complexity of searching an element in balanced Binary Search Tree is:", options: ["$O(\\log n)$", "$O(n)$", "$O(1)$", "$O(n^2)$"], correct: 0, sol: "Halves search space each step: $O(\\log n)$." },
+                                        { q: "SQL command used to retrieve data from database is:", options: ["SELECT", "INSERT", "UPDATE", "DELETE"], correct: 0, sol: "SELECT queries database records." },
+                                        { q: "Which memory component has lowest latency and highest speed?", options: ["CPU Cache (L1/L2)", "RAM", "NVMe SSD", "Virtual Memory"], correct: 0, sol: "L1/L2 cache integrated directly inside CPU die." },
+                                        { q: "Primary Key constraint in relational database ensures:", options: ["Uniqueness and Non-Null values", "Encrypted numbers", "Auto increment only", "Foreign key linking"], correct: 0, sol: "Uniquely identifies each record row." },
+                                        { q: "In OOP, inheriting properties from parent class is termed:", options: ["Inheritance", "Polymorphism", "Encapsulation", "Abstraction"], correct: 0, sol: "Inheritance passes properties/methods to child class." }
+                                    ]
+                                }
+                            ]
+                        }
                     ]
                 }
             ]
         };
 
-        // App State
+        // State Management
         let currentLevel = 'WASSCE';
-        let currentSubjectObj = null;
+        let activeSubject = null;
+        let activeSetIndex = 0;
         let qIdx = 0;
         let score = 0;
         let userXP = parseInt(localStorage.getItem('tka_xp')) || 0;
@@ -271,6 +476,13 @@
         function updateStatsDisplay() {
             document.getElementById('xp-count').innerText = userXP;
             document.getElementById('streak-count').innerText = userStreak;
+
+            // Compute Rank Title
+            let rank = "Scholar I";
+            if (userXP >= 300) rank = "Master Scholar";
+            else if (userXP >= 150) rank = "Scholar III";
+            else if (userXP >= 70) rank = "Scholar II";
+            document.getElementById('rank-title').innerText = rank;
         }
 
         function filterLevel(level) {
@@ -278,9 +490,9 @@
             ['wassce', 'bece', 'tertiary'].forEach(l => {
                 const btn = document.getElementById(`tab-${l}`);
                 if (l.toUpperCase() === level) {
-                    btn.className = "pb-3 border-b-2 border-blue-600 text-blue-600 px-2 font-bold";
+                    btn.className = "pb-3 border-b-2 border-blue-600 text-blue-600 px-3 font-bold";
                 } else {
-                    btn.className = "pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-2";
+                    btn.className = "pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-3";
                 }
             });
             renderCourses();
@@ -298,13 +510,17 @@
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         ${streamObj.subjects.map(s => `
-                            <div onclick='startQuiz(${JSON.stringify(s).replace(/'/g, "&apos;")})' class="bg-white border border-gray-200 hover:border-blue-500 hover:shadow-lg p-5 rounded-2xl cursor-pointer transition flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-blue-50 text-blue-600 border border-blue-100 rounded-xl flex items-center justify-center text-xl shrink-0">
+                            <div onclick='openSetModal(${JSON.stringify(s).replace(/'/g, "&apos;")})' class="bg-white border border-gray-200 hover:border-blue-500 hover:shadow-lg p-5 rounded-2xl cursor-pointer transition flex items-start space-x-4 group">
+                                <div class="w-12 h-12 bg-blue-50 text-blue-600 border border-blue-100 rounded-xl flex items-center justify-center text-xl shrink-0 group-hover:bg-blue-600 group-hover:text-white transition">
                                     <i class="fas ${s.icon}"></i>
                                 </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-900 text-sm leading-tight">${s.name}</h4>
-                                    <p class="text-xs text-gray-500 mt-1">${s.questions.length} Practice Questions</p>
+                                <div class="flex-grow">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="font-bold text-gray-900 text-sm leading-tight">${s.name}</h4>
+                                        ${s.isCore ? `<span class="text-[10px] bg-emerald-100 text-emerald-800 font-extrabold px-2 py-0.5 rounded-full">CORE</span>` : `<span class="text-[10px] bg-indigo-100 text-indigo-800 font-extrabold px-2 py-0.5 rounded-full">ELECTIVE</span>`}
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">${s.sets.length} Challenge Sets • 7 Qs Each</p>
+                                    <span class="inline-block mt-3 text-xs font-bold text-blue-600 hover:underline">Choose Set <i class="fas fa-chevron-right text-[10px] ml-1"></i></span>
                                 </div>
                             </div>
                         `).join('')}
@@ -313,37 +529,59 @@
             `).join('');
         }
 
+        function openSetModal(subjectObj) {
+            activeSubject = subjectObj;
+            document.getElementById('modal-subject-title').innerText = subjectObj.name;
+            
+            const list = document.getElementById('modal-sets-list');
+            list.innerHTML = subjectObj.sets.map((set, idx) => `
+                <div onclick="startQuizSet(${idx})" class="p-4 rounded-xl border border-gray-200 bg-gray-50 hover:bg-blue-50 hover:border-blue-300 cursor-pointer transition flex justify-between items-center">
+                    <div>
+                        <h5 class="font-bold text-sm text-gray-900">${set.setName}</h5>
+                        <p class="text-xs text-gray-500">${set.questions.length} Exam Standard Questions</p>
+                    </div>
+                    <span class="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-blue-600 font-bold text-xs">
+                        <i class="fas fa-play ml-0.5"></i>
+                    </span>
+                </div>
+            `).join('');
+
+            document.getElementById('set-selector-modal').classList.remove('hidden');
+        }
+
+        function closeSetModal() {
+            document.getElementById('set-selector-modal').classList.add('hidden');
+        }
+
         function showHomeScreen() {
             document.getElementById('home-screen').classList.remove('hidden');
             document.getElementById('quiz-screen').classList.add('hidden');
             document.getElementById('results-screen').classList.add('hidden');
+            closeSetModal();
             renderCourses();
         }
 
-        function startQuiz(subjectObj) {
-            currentSubjectObj = subjectObj;
+        function startQuizSet(setIdx) {
+            activeSetIndex = setIdx;
             qIdx = 0;
             score = 0;
 
+            closeSetModal();
             document.getElementById('home-screen').classList.add('hidden');
             document.getElementById('results-screen').classList.add('hidden');
             document.getElementById('quiz-screen').classList.remove('hidden');
-            document.getElementById('quiz-title').innerText = currentSubjectObj.name;
 
-            renderQuestion();
-        }
+            document.getElementById('quiz-title').innerText = activeSubject.name;
+            document.getElementById('quiz-set-badge').innerText = `Set ${setIdx + 1}`;
 
-        function restartCurrentQuiz() {
-            qIdx = 0;
-            score = 0;
-            document.getElementById('results-screen').classList.add('hidden');
-            document.getElementById('quiz-screen').classList.remove('hidden');
             renderQuestion();
         }
 
         function renderQuestion() {
-            const q = currentSubjectObj.questions[qIdx];
-            document.getElementById('quiz-progress-text').innerText = `Q ${qIdx + 1}/${currentSubjectObj.questions.length}`;
+            const currentSet = activeSubject.sets[activeSetIndex];
+            const q = currentSet.questions[qIdx];
+
+            document.getElementById('quiz-progress-text').innerText = `Q ${qIdx + 1}/${currentSet.questions.length}`;
             document.getElementById('question-text').innerHTML = q.q;
 
             document.getElementById('explanation-box').classList.add('hidden');
@@ -361,7 +599,8 @@
         }
 
         function checkAnswer(chosenIdx) {
-            const q = currentSubjectObj.questions[qIdx];
+            const currentSet = activeSubject.sets[activeSetIndex];
+            const q = currentSet.questions[qIdx];
             const isCorrect = chosenIdx === q.correct;
 
             q.options.forEach((_, i) => {
@@ -392,8 +631,9 @@
         }
 
         function nextQuestion() {
+            const currentSet = activeSubject.sets[activeSetIndex];
             qIdx++;
-            if (qIdx < currentSubjectObj.questions.length) {
+            if (qIdx < currentSet.questions.length) {
                 renderQuestion();
             } else {
                 showResults();
@@ -401,13 +641,36 @@
         }
 
         function showResults() {
+            const currentSet = activeSubject.sets[activeSetIndex];
             document.getElementById('quiz-screen').classList.add('hidden');
             document.getElementById('results-screen').classList.remove('hidden');
 
-            document.getElementById('final-score').innerText = `${score}/${currentSubjectObj.questions.length}`;
+            document.getElementById('final-score').innerText = `${score}/${currentSet.questions.length}`;
             document.getElementById('final-xp').innerText = `+${score * 10} XP`;
 
+            // Configure Next Set Button
+            const nextSetBtn = document.getElementById('next-set-btn');
+            const doMoreDesc = document.getElementById('do-more-desc');
+
+            if (activeSetIndex + 1 < activeSubject.sets.length) {
+                nextSetBtn.disabled = false;
+                nextSetBtn.innerHTML = `<i class="fas fa-forward mr-2"></i> Try Next Set (Set ${activeSetIndex + 2})`;
+                nextSetBtn.className = "w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition shadow-md flex items-center justify-center";
+                doMoreDesc.innerText = `You have completed Set ${activeSetIndex + 1}! Move on to Set ${activeSetIndex + 2} to tackle 7 fresh questions.`;
+            } else {
+                nextSetBtn.disabled = true;
+                nextSetBtn.innerHTML = `<i class="fas fa-check-circle mr-2"></i> All Sets Completed`;
+                nextSetBtn.className = "w-full sm:w-auto px-6 py-3 bg-gray-300 text-gray-500 text-sm font-bold rounded-xl cursor-not-allowed flex items-center justify-center";
+                doMoreDesc.innerText = `Amazing! You have mastered all available sets for ${activeSubject.name}. Choose another course!`;
+            }
+
             confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+        }
+
+        function loadNextSet() {
+            if (activeSetIndex + 1 < activeSubject.sets.length) {
+                startQuizSet(activeSetIndex + 1);
+            }
         }
 
         // Init
@@ -418,3 +681,4 @@
     </script>
 </body>
 </html>
+```
