@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toni Kroos Academy | WASSCE • BECE • Tertiary Learning Hub</title>
+  <title>Toni Kroos Academy | WASSCE • BECE • Research Hub</title>
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -98,7 +98,7 @@
             TONI KROOS ACADEMY
           </h1>
           <p class="text-[10px] font-semibold tracking-wider text-brand-600 uppercase mt-0.5">
-            WASSCE • BECE • TERTIARY • KROOS AI
+            WASSCE • BECE • TERTIARY • TONI KROOS AI
           </p>
         </div>
       </div>
@@ -109,25 +109,25 @@
           <i class="fa-solid fa-book-open mr-2"></i>Courses & Practice
         </button>
         <button id="nav-ai-btn" onclick="switchTab('ai')" class="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900">
-          <i class="fa-solid fa-robot mr-2 text-brand-600"></i>Kroos AI Research
+          <i class="fa-solid fa-robot mr-2 text-brand-600"></i>TONI KROOS AI
+        </button>
+        <button id="nav-research-btn" onclick="switchTab('research')" class="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900">
+          <i class="fa-solid fa-microscope mr-2 text-indigo-600"></i>Research Hub
         </button>
       </nav>
 
       <!-- Right User Stats & Settings -->
       <div class="flex items-center space-x-3 sm:space-x-4">
-        <!-- Streak Counter -->
         <div class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 text-xs sm:text-sm font-bold">
           <i class="fa-solid fa-fire text-amber-500 animate-pulse"></i>
           <span id="user-streak">1 Days</span>
         </div>
 
-        <!-- XP Points -->
         <div class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs sm:text-sm font-bold">
           <i class="fa-solid fa-bolt text-emerald-500"></i>
           <span id="user-xp">10 XP</span>
         </div>
 
-        <!-- API Key Settings Button -->
         <button onclick="openApiKeyModal()" title="Configure Gemini API Key" class="p-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900 transition-colors">
           <i class="fa-solid fa-key"></i>
         </button>
@@ -140,7 +140,10 @@
         <i class="fa-solid fa-book-open block text-base mb-0.5"></i>Courses
       </button>
       <button id="mobile-nav-ai-btn" onclick="switchTab('ai')" class="flex-1 py-2.5 text-center text-xs font-bold text-slate-500 border-b-2 border-transparent">
-        <i class="fa-solid fa-robot block text-base mb-0.5 text-brand-600"></i>Kroos AI Research
+        <i class="fa-solid fa-robot block text-base mb-0.5 text-brand-600"></i>TONI KROOS AI
+      </button>
+      <button id="mobile-nav-research-btn" onclick="switchTab('research')" class="flex-1 py-2.5 text-center text-xs font-bold text-slate-500 border-b-2 border-transparent">
+        <i class="fa-solid fa-microscope block text-base mb-0.5 text-indigo-600"></i>Research
       </button>
     </div>
   </header>
@@ -157,13 +160,12 @@
           <span>Official WAEC / WASSCE & BECE Master Hub</span>
         </div>
         <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-2 leading-tight">
-          Master Your Exams with Kroos AI Support
+          Master Your Exams with TONI KROOS AI Support
         </h2>
         <p class="text-white/80 text-sm sm:text-base mb-6">
-          Practice standard WAEC questions with step-by-step LaTeX math rendering, instant grading, and ask our integrated Kroos AI research tutor for deep topic breakdowns.
+          Practice standard WAEC questions with step-by-step LaTeX math rendering, instant grading, and conduct deep academic research with TONI KROOS AI.
         </p>
 
-        <!-- Stats Badges -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div class="bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/10">
             <span class="block text-xs text-white/70">Target Level</span>
@@ -179,7 +181,7 @@
           </div>
           <div class="bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/10">
             <span class="block text-xs text-white/70">AI Engine</span>
-            <span class="text-sm font-bold text-amber-300"><i class="fa-solid fa-sparkles mr-1"></i>Gemini AI</span>
+            <span class="text-sm font-bold text-amber-300"><i class="fa-solid fa-sparkles mr-1"></i>TONI KROOS AI</span>
           </div>
         </div>
       </div>
@@ -187,8 +189,6 @@
 
     <!-- SECTION 1: COURSES & QUIZ MODULE -->
     <div id="courses-section" class="space-y-6">
-      
-      <!-- Program Stream Selection Tabs -->
       <div class="bg-white p-2 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-2 overflow-x-auto custom-scrollbar">
         <button onclick="selectProgram('wassce-sc')" id="prog-wassce-sc" class="prog-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-bold text-sm transition-all bg-brand-600 text-white shadow-md">
           <i class="fa-solid fa-flask mr-2"></i>WASSCE Science
@@ -210,14 +210,9 @@
         </button>
       </div>
 
-      <!-- Subject Selection Cards Container -->
-      <div id="subject-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- Dynamically Filled by JavaScript -->
-      </div>
+      <div id="subject-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
 
-      <!-- QUIZ VIEW CONTAINER -->
       <div id="quiz-container" class="hidden bg-white rounded-2xl border border-slate-200 shadow-lg p-6 sm:p-8">
-        <!-- Quiz Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-5 mb-6 gap-4">
           <div>
             <button onclick="exitQuiz()" class="text-xs font-bold text-brand-600 hover:text-brand-800 mb-2 inline-flex items-center">
@@ -227,7 +222,6 @@
             <span id="quiz-category-badge" class="inline-block mt-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-50 text-brand-700">WASSCE Core</span>
           </div>
 
-          <!-- Question Progress Bar -->
           <div class="flex items-center space-x-4">
             <div class="text-right">
               <span class="block text-xs font-medium text-slate-400">Progress</span>
@@ -239,18 +233,13 @@
           </div>
         </div>
 
-        <!-- Question Body -->
         <div id="question-card" class="space-y-6">
           <div class="p-4 bg-slate-50 rounded-xl border border-slate-200/80">
-            <p id="question-text" class="text-lg font-medium text-slate-800 leading-relaxed">
-              Loading question...
-            </p>
+            <p id="question-text" class="text-lg font-medium text-slate-800 leading-relaxed">Loading question...</p>
           </div>
 
-          <!-- Answer Choices -->
           <div id="options-list" class="space-y-3"></div>
 
-          <!-- Immediate Explanation Box -->
           <div id="explanation-box" class="hidden p-4 rounded-xl border bg-slate-50 border-slate-200 text-sm">
             <h4 class="font-bold flex items-center mb-1 text-slate-800" id="explanation-title">
               <i class="fa-solid fa-lightbulb text-amber-500 mr-2"></i>Step-by-Step Explanation
@@ -258,7 +247,6 @@
             <div id="explanation-text" class="text-slate-700 space-y-1"></div>
           </div>
 
-          <!-- Quiz Action Footer -->
           <div class="flex justify-end pt-4 border-t border-slate-100">
             <button id="next-question-btn" onclick="nextQuestion()" disabled class="px-6 py-3 rounded-xl font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-all">
               Next Question <i class="fa-solid fa-arrow-right ml-2"></i>
@@ -266,7 +254,6 @@
           </div>
         </div>
 
-        <!-- QUIZ RESULT VIEW -->
         <div id="quiz-result-card" class="hidden text-center py-6 space-y-6">
           <div class="w-20 h-20 rounded-full bg-brand-50 text-brand-600 mx-auto flex items-center justify-center text-3xl font-black shadow-inner">
             <i class="fa-solid fa-trophy"></i>
@@ -277,7 +264,6 @@
             <p class="text-slate-500 text-sm mt-1">Official WAEC Standard Assessment Grade</p>
           </div>
 
-          <!-- Score & Grade Badges -->
           <div class="max-w-md mx-auto grid grid-cols-2 gap-4">
             <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
               <span class="block text-xs font-semibold text-slate-400 uppercase">Score</span>
@@ -295,13 +281,12 @@
             Great performance! You demonstrated a deep understanding of core principles.
           </p>
 
-          <!-- Result Buttons -->
           <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
             <button onclick="retakeCurrentQuiz()" class="px-6 py-3 rounded-xl font-bold bg-brand-600 text-white hover:bg-brand-700 transition-all shadow-md">
               <i class="fa-solid fa-rotate-right mr-2"></i>Retake Quiz
             </button>
             <button onclick="askAIToExplainWeakness()" class="px-6 py-3 rounded-xl font-bold bg-emerald-600 text-white hover:bg-emerald-700 transition-all shadow-md">
-              <i class="fa-solid fa-robot mr-2"></i>Ask Kroos AI to Review Topics
+              <i class="fa-solid fa-robot mr-2"></i>Ask TONI KROOS AI to Review Topics
             </button>
             <button onclick="exitQuiz()" class="px-6 py-3 rounded-xl font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
               <i class="fa-solid fa-list mr-2"></i>Choose Another Subject
@@ -311,11 +296,8 @@
       </div>
     </div>
 
-
-    <!-- SECTION 2: KROOS AI RESEARCH ASSISTANT -->
+    <!-- SECTION 2: TONI KROOS AI CHAT -->
     <div id="ai-section" class="hidden h-[calc(100vh-140px)] flex flex-col bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
-      
-      <!-- AI Chat Header -->
       <div class="bg-slate-900 text-white p-4 px-6 flex items-center justify-between">
         <div class="flex items-center space-x-3">
           <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-indigo-500 flex items-center justify-center text-white text-lg shadow-md">
@@ -323,16 +305,15 @@
           </div>
           <div>
             <div class="flex items-center space-x-2">
-              <h3 class="font-bold text-base leading-tight">Kroos AI Study Assistant</h3>
+              <h3 class="font-bold text-base leading-tight">TONI KROOS AI Study Assistant</h3>
               <span id="api-status-tag" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                AI Active
+                TONI KROOS AI Active
               </span>
             </div>
-            <p class="text-xs text-slate-400">Ask any WASSCE/BECE problem, greeting, essay, or research question</p>
+            <p class="text-xs text-slate-400">Ask any WASSCE/BECE problem, research essay, or topic breakdown</p>
           </div>
         </div>
 
-        <!-- Chat Header Controls -->
         <div class="flex items-center space-x-2">
           <button onclick="clearChatHistory()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">
             <i class="fa-solid fa-trash-can mr-1.5"></i>Clear Chat
@@ -340,10 +321,9 @@
         </div>
       </div>
 
-      <!-- Quick Prompt Chips Banner -->
       <div class="bg-slate-50 border-b border-slate-200 p-2.5 px-4 overflow-x-auto custom-scrollbar flex items-center space-x-2 text-xs flex-shrink-0">
         <span class="font-bold text-slate-400 flex-shrink-0 uppercase text-[10px] tracking-wider">Quick Prompts:</span>
-        <button onclick="usePromptChip('Hi Kroos AI! Can you introduce yourself and how you help students?')" class="chip-btn flex-shrink-0 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 hover:border-brand-500 hover:text-brand-600 transition-colors">
+        <button onclick="usePromptChip('Hi TONI KROOS AI! Can you introduce yourself and how you help students research?')" class="chip-btn flex-shrink-0 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 hover:border-brand-500 hover:text-brand-600 transition-colors">
           👋 Friendly Greeting
         </button>
         <button onclick="usePromptChip('Explain Photosynthesis step-by-step for WASSCE Biology.')" class="chip-btn flex-shrink-0 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 hover:border-brand-500 hover:text-brand-600 transition-colors">
@@ -355,47 +335,39 @@
         <button onclick="usePromptChip('Give me key tips to score Grade A1 in WASSCE English Essay writing.')" class="chip-btn flex-shrink-0 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 hover:border-brand-500 hover:text-brand-600 transition-colors">
           ✍️ WASSCE Essay Tips
         </button>
-        <button onclick="usePromptChip('Explain Ohm\'s Law with mathematical formula and practical circuit application.')" class="chip-btn flex-shrink-0 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 hover:border-brand-500 hover:text-brand-600 transition-colors">
-          ⚡ Ohm's Law (Physics)
-        </button>
       </div>
 
-      <!-- Chat Scrollable History Area -->
       <div id="ai-chat-history" class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-4 custom-scrollbar bg-slate-50/50">
-        <!-- Initial AI Welcome Message -->
         <div class="flex items-start space-x-3 max-w-3xl">
           <div class="w-8 h-8 rounded-lg bg-brand-600 text-white flex items-center justify-center text-sm font-bold flex-shrink-0">
             <i class="fa-solid fa-robot"></i>
           </div>
           <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-none p-4 shadow-sm text-sm text-slate-800 leading-relaxed markdown-content">
-            <p><strong>Hello! I am Kroos AI</strong>, your personal study assistant and research tutor.</p>
+            <p><strong>Hello! I am TONI KROOS AI</strong>, your personal study assistant and research tutor.</p>
             <p>I can help you with:</p>
             <ul>
-              <li>Step-by-step explanations for <strong>WASSCE & BECE Core/Elective subjects</strong></li>
-              <li>Solving Mathematics, Physics, Chemistry, and Accounting problems with formulas</li>
-              <li>Essay breakdowns, history timelines, and scientific concepts</li>
-              <li>Or just answer any question you have! What topic are we studying today?</li>
+              <li>Conducting deep academic research and topic summaries</li>
+              <li>Solving Mathematics, Physics, Chemistry, and Accounting problems step-by-step</li>
+              <li>Writing essays, structuring research reports, and breaking down complex theories</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <!-- Typing Indicator -->
       <div id="ai-typing-indicator" class="hidden px-6 py-2 bg-white border-t border-slate-100 text-xs font-semibold text-slate-500 flex items-center space-x-2">
         <div class="flex space-x-1">
           <div class="w-2 h-2 bg-brand-500 rounded-full animate-bounce"></div>
           <div class="w-2 h-2 bg-brand-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
           <div class="w-2 h-2 bg-brand-500 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
         </div>
-        <span>Kroos AI is thinking and generating answer...</span>
+        <span>TONI KROOS AI is analyzing and writing response...</span>
       </div>
 
-      <!-- AI Chat Input Box Bar -->
       <div class="p-4 bg-white border-t border-slate-200 flex items-center space-x-3">
         <input 
           type="text" 
           id="ai-user-input" 
-          placeholder="Ask Kroos AI a study question, topic explanation, equation, or greeting..." 
+          placeholder="Ask TONI KROOS AI a study question, research topic, equation, or summary..." 
           onkeydown="if(event.key === 'Enter') sendAIMessage()"
           class="flex-1 bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all"
         />
@@ -408,12 +380,75 @@
           <i class="fa-solid fa-paper-plane"></i>
         </button>
       </div>
+    </div>
 
+    <!-- SECTION 3: DEDICATED RESEARCH HUB WITH TONI KROOS AI -->
+    <div id="research-section" class="hidden space-y-6">
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+        <div class="flex items-center space-x-3 mb-4">
+          <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-xl font-bold">
+            <i class="fa-solid fa-microscope"></i>
+          </div>
+          <div>
+            <h2 class="text-2xl font-extrabold text-slate-900">TONI KROOS AI Research Hub</h2>
+            <p class="text-xs text-slate-500">Deep academic synthesis, essay structuring, formula derivations, and source analysis.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+          <button onclick="setResearchMode('deep-summary')" id="rmode-summary" class="p-3 rounded-xl border border-brand-500 bg-brand-50/50 text-left transition-all">
+            <span class="block text-xs font-bold text-brand-700 uppercase mb-0.5"><i class="fa-solid fa-file-lines mr-1"></i> Mode 1</span>
+            <span class="text-sm font-extrabold text-slate-900 block">Deep Subject Summary</span>
+            <span class="text-[11px] text-slate-500">Get complete topic outlines & key points</span>
+          </button>
+          
+          <button onclick="setResearchMode('step-solver')" id="rmode-solver" class="p-3 rounded-xl border border-slate-200 hover:border-brand-300 text-left transition-all">
+            <span class="block text-xs font-bold text-slate-400 uppercase mb-0.5"><i class="fa-solid fa-calculator mr-1"></i> Mode 2</span>
+            <span class="text-sm font-extrabold text-slate-900 block">Step-by-Step Problem Solver</span>
+            <span class="text-[11px] text-slate-500">Math, Physics & Accounting derivations</span>
+          </button>
+
+          <button onclick="setResearchMode('essay-outline')" id="rmode-essay" class="p-3 rounded-xl border border-slate-200 hover:border-brand-300 text-left transition-all">
+            <span class="block text-xs font-bold text-slate-400 uppercase mb-0.5"><i class="fa-solid fa-pen-nib mr-1"></i> Mode 3</span>
+            <span class="text-sm font-extrabold text-slate-900 block">Essay & Thesis Builder</span>
+            <span class="text-[11px] text-slate-500">Structure WASSCE & Tertiary research papers</span>
+          </button>
+        </div>
+
+        <div class="space-y-3">
+          <textarea 
+            id="research-topic-input" 
+            rows="3" 
+            placeholder="Enter your research topic, essay title, or math/science problem here..."
+            class="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all"
+          ></textarea>
+          
+          <div class="flex justify-end">
+            <button onclick="runResearchQuery()" id="research-submit-btn" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-md transition-all flex items-center space-x-2">
+              <i class="fa-solid fa-atom"></i>
+              <span>Generate Research Report</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research Output Box -->
+      <div id="research-output-card" class="hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-lg space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+          <h3 class="text-xl font-extrabold text-slate-900 flex items-center">
+            <i class="fa-solid fa-graduation-cap text-indigo-600 mr-2"></i>TONI KROOS AI Research Report
+          </h3>
+          <button onclick="copyResearchOutput()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors">
+            <i class="fa-solid fa-copy mr-1"></i>Copy Report
+          </button>
+        </div>
+        <div id="research-output-content" class="text-slate-800 leading-relaxed text-sm markdown-content"></div>
+      </div>
     </div>
 
   </main>
 
-  <!-- MODAL: SET GEMINI API KEY -->
+  <!-- MODAL: SET API KEY -->
   <div id="api-key-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
       <div class="flex items-center justify-between border-b border-slate-100 pb-3">
@@ -426,7 +461,7 @@
       </div>
 
       <p class="text-xs text-slate-600 leading-relaxed">
-        Kroos AI has an intelligent built-in academic engine. Optionally, enter a free Google Gemini API Key below to query live models directly.
+        Canvas automatically handles Gemini API calls seamlessly. You can also provide a custom Google Gemini API Key below if desired.
       </p>
 
       <div>
@@ -440,12 +475,8 @@
       </div>
 
       <div class="flex items-center justify-end space-x-3 pt-2">
-        <button onclick="closeApiKeyModal()" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">
-          Cancel
-        </button>
-        <button onclick="saveApiKey()" class="px-5 py-2 rounded-xl text-xs font-bold bg-brand-600 text-white hover:bg-brand-700 shadow-md">
-          Save Configuration
-        </button>
+        <button onclick="closeApiKeyModal()" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">Cancel</button>
+        <button onclick="saveApiKey()" class="px-5 py-2 rounded-xl text-xs font-bold bg-brand-600 text-white hover:bg-brand-700 shadow-md">Save Configuration</button>
       </div>
     </div>
   </div>
@@ -453,11 +484,10 @@
   <!-- FOOTER -->
   <footer class="bg-white border-t border-slate-200 py-6 mt-12">
     <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
-      <p>© 2026 <strong>Toni Kroos Academy</strong>. All learning materials are aligned with WAEC (WASSCE / BECE) guidelines.</p>
+      <p>© 2026 <strong>Toni Kroos Academy</strong>. Powered by TONI KROOS AI.</p>
     </div>
   </footer>
 
-  <!-- APPLICATION JAVASCRIPT LOGIC -->
   <script>
     // ==========================================
     // DATA STRUCTURE: COURSES & QUESTIONS
@@ -480,56 +510,193 @@
               options: ['A) $m = 1$', 'B) $m = 2$', 'C) $m = 3$', 'D) $m = 4$'],
               answer: 1,
               exp: 'Gradient $m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{13 - 5}{6 - 2} = \\frac{8}{4} = 2$.'
-            },
-            {
-              q: 'Evaluate $\\log_{10}(1000) + \\log_{10}(100)$.',
-              options: ['A) $3$', 'B) $4$', 'C) $5$', 'D) $6$'],
-              answer: 2,
-              exp: '$\\log_{10}(1000) = 3$ and $\\log_{10}(100) = 2$. Therefore, $3 + 2 = 5$.'
-            },
-            {
-              q: 'If the mean of $4, 8, x, 12, 16$ is $10$, find $x$.',
-              options: ['A) $8$', 'B) $10$', 'C) $11$', 'D) $12$'],
-              answer: 1,
-              exp: '$\\frac{4 + 8 + x + 12 + 16}{5} = 10 \\implies 40 + x = 50 \\implies x = 10$.'
-            },
-            {
-              q: 'Find the volume of a sphere with radius $r = 3\\text{ cm}$.',
-              options: ['A) $12\\pi\\text{ cm}^3$', 'B) $36\\pi\\text{ cm}^3$', 'C) $48\\pi\\text{ cm}^3$', 'D) $108\\pi\\text{ cm}^3$'],
-              answer: 1,
-              exp: 'Volume $V = \\frac{4}{3}\\pi r^3 = \\frac{4}{3}\\pi (27) = 36\\pi\\text{ cm}^3$.'
-            },
-            {
-              q: 'Calculate the simple interest on GH₵ 1,200 for 3 years at 5% per annum.',
-              options: ['A) GH₵ 150', 'B) GH₵ 180', 'C) GH₵ 200', 'D) GH₵ 240'],
-              answer: 1,
-              exp: '$\\text{S.I.} = \\frac{P \\times R \\times T}{100} = \\frac{1200 \\times 5 \\times 3}{100} = \\text{GH₵ } 180$.'
-            },
-            {
-              q: 'In a right-angled triangle, if $\\sin \\theta = \\frac{3}{5}$, find $\\cos \\theta$.',
-              options: ['A) $\\frac{4}{5}$', 'B) $\\frac{3}{4}$', 'C) $\\frac{5}{4}$', 'D) $\\frac{2}{5}$'],
-              answer: 0,
-              exp: 'By Pythagoras theorem, $\\text{Adjacent} = \\sqrt{5^2 - 3^2} = 4$. Thus $\\cos \\theta = \\frac{4}{5}$.'
             }
           ]
-        },
-        {
-          id: 'sc-phy',
-          title: 'Elective Physics',
-          badge: 'Elective Subject',
-          questions: [
-            {
-              q: 'A force of $20\\text{ N}$ acts on a mass of $4\\text{ kg}$. Calculate the acceleration.',
-              options: ['A) $2\\text{ m/s}^2$', 'B) $5\\text{ m/s}^2$', 'C) $10\\text{ m/s}^2$', 'D) $80\\text{ m/s}^2$'],
-              answer: 1,
-              exp: 'According to Newton\'s 2nd Law, $F = ma \\implies a = \\frac{F}{m} = \\frac{20}{4} = 5\\text{ m/s}^2$.'
-            },
-            {
-              q: 'Which of the following is a scalar quantity?',
-              options: ['A) Velocity', 'B) Acceleration', 'C) Electric Potential', 'D) Force'],
-              answer: 2,
-              exp: 'Electric potential has magnitude only without direction, making it a scalar.'
-            },
-            {
-              q: 'Calculate the kinetic energy of a $2\\text{ kg}$ object moving at $6\\text{ m/s}$.',
-              options: ['A) $12\\text{ J}$', 'B) $24\\text{ J}$', 'C) $36\\text{ J}$', 'D) $72\\text{ J}$'],
+        }
+      ]
+    };
+
+    let currentProgram = 'wassce-sc';
+    let currentSubjectData = null;
+    let currentQuestionIdx = 0;
+    let userScore = 0;
+    let selectedOptionIdx = null;
+    let userXP = 10;
+    let userStreak = 1;
+    let userApiKey = localStorage.getItem('GEMINI_CUSTOM_KEY') || '';
+    let selectedResearchMode = 'deep-summary';
+
+    let chatHistory = [
+      {
+        role: 'model',
+        parts: [{ text: "Hello! I am TONI KROOS AI, your personal study assistant and research tutor powered by Google Gemini. Ask me any study question, research topic, math problem, or greeting!" }]
+      }
+    ];
+
+    window.onload = function() {
+      renderSubjectCards();
+      updateUserStatsUI();
+      if (typeof marked !== 'undefined') {
+        marked.setOptions({ breaks: true, gfm: true });
+      }
+    };
+
+    function switchTab(tabName) {
+      const coursesSection = document.getElementById('courses-section');
+      const aiSection = document.getElementById('ai-section');
+      const researchSection = document.getElementById('research-section');
+      const heroBanner = document.getElementById('hero-banner');
+
+      const navCoursesBtn = document.getElementById('nav-courses-btn');
+      const navAiBtn = document.getElementById('nav-ai-btn');
+      const navResearchBtn = document.getElementById('nav-research-btn');
+
+      coursesSection.classList.add('hidden');
+      aiSection.classList.add('hidden');
+      researchSection.classList.add('hidden');
+      heroBanner.classList.add('hidden');
+
+      navCoursesBtn.className = "px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900";
+      navAiBtn.className = "px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900";
+      navResearchBtn.className = "px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900";
+
+      if (tabName === 'courses') {
+        coursesSection.classList.remove('hidden');
+        heroBanner.classList.remove('hidden');
+        navCoursesBtn.className = "px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-brand-700 shadow-sm";
+      } else if (tabName === 'ai') {
+        aiSection.classList.remove('hidden');
+        navAiBtn.className = "px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-brand-700 shadow-sm";
+        setTimeout(scrollChatToBottom, 100);
+      } else if (tabName === 'research') {
+        researchSection.classList.remove('hidden');
+        navResearchBtn.className = "px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-indigo-700 shadow-sm";
+      }
+    }
+
+    function selectProgram(progKey) {
+      currentProgram = progKey;
+      document.querySelectorAll('.prog-tab').forEach(btn => {
+        btn.className = "prog-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-bold text-sm text-slate-600 hover:bg-slate-100 transition-all";
+      });
+      const activeBtn = document.getElementById(`prog-${progKey}`);
+      if (activeBtn) activeBtn.className = "prog-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-bold text-sm transition-all bg-brand-600 text-white shadow-md";
+      exitQuiz();
+      renderSubjectCards();
+    }
+
+    function renderSubjectCards() {
+      const container = document.getElementById('subject-cards-container');
+      const subjects = COURSE_DATA[currentProgram] || [];
+
+      if (subjects.length === 0) {
+        container.innerHTML = `<div class="col-span-full p-8 text-center bg-white rounded-2xl border border-slate-200 text-slate-500"><p class="font-medium">No subjects found for this category yet.</p></div>`;
+        return;
+      }
+
+      container.innerHTML = subjects.map(sub => `
+        <div class="bg-white rounded-2xl border border-slate-200 hover:border-brand-300 p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-brand-50 text-brand-700 border border-brand-100">${sub.badge}</span>
+              <span class="text-xs font-semibold text-slate-400">${sub.questions.length} Questions</span>
+            </div>
+            <h3 class="text-xl font-extrabold text-slate-900 mb-1">${sub.title}</h3>
+            <p class="text-xs text-slate-500">Full WAEC question bank with LaTeX math formulas & explanations.</p>
+          </div>
+          <button onclick="startQuiz('${sub.id}')" class="w-full py-3 rounded-xl bg-slate-900 hover:bg-brand-600 text-white text-xs font-bold transition-all flex items-center justify-center space-x-2 shadow-sm">
+            <span>Start Practice Quiz</span>
+            <i class="fa-solid fa-play text-[10px]"></i>
+          </button>
+        </div>
+      `).join('');
+
+      if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
+    }
+
+    function startQuiz(subjectId) {
+      const subjects = COURSE_DATA[currentProgram] || [];
+      currentSubjectData = subjects.find(s => s.id === subjectId);
+      if (!currentSubjectData) return;
+
+      currentQuestionIdx = 0; userScore = 0;
+      document.getElementById('subject-cards-container').classList.add('hidden');
+      document.getElementById('quiz-container').classList.remove('hidden');
+      document.getElementById('quiz-result-card').classList.add('hidden');
+      document.getElementById('question-card').classList.remove('hidden');
+
+      document.getElementById('quiz-subject-title').innerText = currentSubjectData.title;
+      document.getElementById('quiz-category-badge').innerText = currentSubjectData.badge;
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      selectedOptionIdx = null;
+      const qData = currentSubjectData.questions[currentQuestionIdx];
+      const totalQ = currentSubjectData.questions.length;
+
+      document.getElementById('quiz-progress-text').innerText = `Question ${currentQuestionIdx + 1} of ${totalQ}`;
+      document.getElementById('quiz-progress-bar').style.width = `${((currentQuestionIdx + 1) / totalQ) * 100}%`;
+      document.getElementById('question-text').innerHTML = qData.q;
+
+      const optionsContainer = document.getElementById('options-list');
+      optionsContainer.innerHTML = qData.options.map((optText, idx) => `
+        <button onclick="selectOption(${idx})" id="opt-btn-${idx}" class="w-full text-left p-4 rounded-xl border border-slate-200 bg-white hover:border-brand-500 hover:bg-brand-50/50 text-slate-800 font-medium text-sm transition-all flex items-center justify-between">
+          <span>${optText}</span>
+          <i id="opt-icon-${idx}" class="fa-regular fa-circle text-slate-300 text-base"></i>
+        </button>
+      `).join('');
+
+      document.getElementById('explanation-box').classList.add('hidden');
+      const nextBtn = document.getElementById('next-question-btn');
+      nextBtn.disabled = true;
+      nextBtn.innerText = (currentQuestionIdx === totalQ - 1) ? "Finish Assessment" : "Next Question";
+
+      if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
+    }
+
+    function selectOption(optIdx) {
+      if (selectedOptionIdx !== null) return;
+      selectedOptionIdx = optIdx;
+
+      const qData = currentSubjectData.questions[currentQuestionIdx];
+      const isCorrect = (optIdx === qData.answer);
+      if (isCorrect) { userScore++; addXP(10); }
+
+      qData.options.forEach((_, idx) => {
+        const btn = document.getElementById(`opt-btn-${idx}`);
+        const icon = document.getElementById(`opt-icon-${idx}`);
+        btn.disabled = true;
+        if (idx === qData.answer) {
+          btn.className = "w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-semibold text-sm flex items-center justify-between";
+          icon.className = "fa-solid fa-circle-check text-emerald-600 text-lg";
+        } else if (idx === optIdx && !isCorrect) {
+          btn.className = "w-full text-left p-4 rounded-xl border-2 border-rose-500 bg-rose-50 text-rose-900 font-semibold text-sm flex items-center justify-between";
+          icon.className = "fa-solid fa-circle-xmark text-rose-600 text-lg";
+        } else {
+          btn.className = "w-full text-left p-4 rounded-xl border border-slate-200 bg-slate-50 text-slate-400 text-sm flex items-center justify-between opacity-60";
+        }
+      });
+
+      const expBox = document.getElementById('explanation-box');
+      expBox.classList.remove('hidden');
+      document.getElementById('explanation-text').innerHTML = qData.exp;
+      document.getElementById('next-question-btn').disabled = false;
+
+      if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
+    }
+
+    function nextQuestion() {
+      if (currentQuestionIdx < currentSubjectData.questions.length - 1) {
+        currentQuestionIdx++;
+        loadQuestion();
+      } else {
+        showQuizResults();
+      }
+    }
+
+    function showQuizResults() {
+      document.getElementById('question-card').classList.add('hidden');
+      document.getElementById('quiz-result-card').classList.remove('hidden');
+      const totalQ = currentSubjectData.questions.length;
+      document.getElementById('final-score-text').innerText = `${userScore} / ${totalQ}`;
