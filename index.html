@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toni Kroos Academy - Educational Quiz Platform</title>
+    <title>Toni Kroos Academy - Educational Quiz & AI Research Platform</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome 6 CDN -->
@@ -18,45 +18,79 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
+        /* Custom Scrollbar for Chat & Options */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col selection:bg-blue-500 selection:text-white">
 
     <!-- Header / Navbar -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
             <!-- Brand Logo & Title -->
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="showHomeScreen()">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchNavTab('home')">
                 <div class="bg-gradient-to-tr from-blue-700 to-indigo-600 text-white p-2.5 rounded-2xl font-black text-xl flex items-center justify-center w-11 h-11 shadow-md shadow-blue-500/20">
                     <i class="fas fa-graduation-cap"></i>
                 </div>
                 <div>
                     <h1 class="font-extrabold text-xl text-slate-900 tracking-tight leading-tight">TONI KROOS ACADEMY</h1>
-                    <p class="text-xs text-blue-600 font-semibold tracking-wide uppercase">WASSCE • BECE • TERTIARY</p>
+                    <p class="text-[10px] sm:text-xs text-blue-600 font-semibold tracking-wide uppercase">WASSCE • BECE • TERTIARY • KROOS AI</p>
                 </div>
             </div>
 
-            <!-- Stats Bar (Streak & XP) -->
-            <div class="flex items-center space-x-3 bg-slate-100 px-3.5 py-1.5 rounded-full border border-slate-200 text-xs font-bold">
-                <div class="flex items-center space-x-1.5" title="Daily Study Streak">
-                    <i class="fas fa-fire text-amber-500 animate-bounce"></i>
-                    <span id="streak-count" class="text-slate-900">1</span>
-                    <span class="text-slate-500">Days</span>
-                </div>
-                <div class="h-3 w-px bg-slate-300"></div>
-                <div class="flex items-center space-x-1.5" title="Total XP Earned">
-                    <i class="fas fa-bolt text-yellow-500"></i>
-                    <span id="xp-count" class="text-slate-900">0</span>
-                    <span class="text-blue-600 font-extrabold">XP</span>
+            <!-- Navigation Tabs & Stats -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <!-- Main Nav Links -->
+                <nav class="hidden md:flex items-center space-x-1 bg-slate-100 p-1 rounded-2xl border border-slate-200 text-xs font-bold">
+                    <button id="nav-home" onclick="switchNavTab('home')" class="px-3.5 py-1.5 rounded-xl bg-white text-blue-700 shadow-sm transition">
+                        <i class="fas fa-book-open mr-1.5"></i> Courses
+                    </button>
+                    <button id="nav-ai" onclick="switchNavTab('ai')" class="px-3.5 py-1.5 rounded-xl text-slate-600 hover:text-slate-900 transition">
+                        <i class="fas fa-robot text-indigo-500 mr-1.5"></i> Kroos AI Research
+                    </button>
+                </nav>
+
+                <!-- Stats Bar (Streak & XP) -->
+                <div class="flex items-center space-x-2 sm:space-x-3 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 text-xs font-bold">
+                    <div class="flex items-center space-x-1" title="Daily Study Streak">
+                        <i class="fas fa-fire text-amber-500 animate-bounce"></i>
+                        <span id="streak-count" class="text-slate-900">1</span>
+                        <span class="text-slate-500 hidden sm:inline">Days</span>
+                    </div>
+                    <div class="h-3 w-px bg-slate-300"></div>
+                    <div class="flex items-center space-x-1" title="Total XP Earned">
+                        <i class="fas fa-bolt text-yellow-500"></i>
+                        <span id="xp-count" class="text-slate-900">0</span>
+                        <span class="text-blue-600 font-extrabold">XP</span>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Mobile Navigation Bar -->
+    <div class="md:hidden bg-white border-b border-slate-200 px-4 py-2 flex justify-center space-x-2 text-xs font-bold">
+        <button id="mobile-nav-home" onclick="switchNavTab('home')" class="flex-1 py-2 rounded-xl bg-blue-50 text-blue-700 border border-blue-200 text-center">
+            <i class="fas fa-book-open mr-1.5"></i> Practice Courses
+        </button>
+        <button id="mobile-nav-ai" onclick="switchNavTab('ai')" class="flex-1 py-2 rounded-xl bg-slate-100 text-slate-600 border border-slate-200 text-center">
+            <i class="fas fa-robot text-indigo-500 mr-1.5"></i> Kroos AI Research
+        </button>
+    </div>
+
     <!-- Main Content Area -->
     <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6 space-y-8">
 
-        <!-- HOME SCREEN -->
+        <!-- HOME / COURSES TAB -->
         <div id="home-screen" class="space-y-8">
             
             <!-- HERO BANNER: TONI KROOS ACADEMY -->
@@ -67,23 +101,23 @@
                 <div class="relative z-10 max-w-2xl space-y-3">
                     <div class="inline-flex items-center space-x-2 bg-blue-500/20 border border-blue-400/30 text-blue-300 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
                         <i class="fas fa-star text-yellow-400"></i>
-                        <span>Premier Exam Prep Platform</span>
+                        <span>WAEC & WASSCE Academic Excellence</span>
                     </div>
                     <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
                         TONI KROOS ACADEMY
                     </h2>
                     <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                        Master your <strong class="text-white">WASSCE Core & Elective Streams</strong>, <strong class="text-white">BECE Subjects</strong>, and <strong class="text-white">Tertiary Courses</strong> with step-by-step worked solutions, instant AI-style explanations, and earned XP rewards!
+                        Master <strong class="text-white">WASSCE Core & Electives</strong>, <strong class="text-white">BECE JHS</strong>, and <strong class="text-white">Tertiary Courses</strong> with 7-question practice sets, WAEC grading schemes, step-by-step math rendering, and AI research support!
                     </p>
-                    <div class="pt-2 flex flex-wrap gap-3">
-                        <span class="bg-white/10 backdrop-blur px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-200 border border-white/10">
-                            <i class="fas fa-check-circle text-emerald-400 mr-1.5"></i> All SHS Streams Included
+                    <div class="pt-2 flex flex-wrap gap-2 sm:gap-3">
+                        <span class="bg-white/10 backdrop-blur px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-200 border border-white/10 flex items-center">
+                            <i class="fas fa-check-circle text-emerald-400 mr-1.5"></i> 7 Questions per Subject
                         </span>
-                        <span class="bg-white/10 backdrop-blur px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-200 border border-white/10">
-                            <i class="fas fa-check-circle text-emerald-400 mr-1.5"></i> Core & Elective Subjects
+                        <span class="bg-white/10 backdrop-blur px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-200 border border-white/10 flex items-center">
+                            <i class="fas fa-check-circle text-emerald-400 mr-1.5"></i> WAEC Grades (A1 - F9)
                         </span>
-                        <span class="bg-white/10 backdrop-blur px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-200 border border-white/10">
-                            <i class="fas fa-check-circle text-emerald-400 mr-1.5"></i> Step-by-Step Solutions
+                        <span class="bg-white/10 backdrop-blur px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-200 border border-white/10 flex items-center">
+                            <i class="fas fa-robot text-indigo-300 mr-1.5"></i> Kroos AI Tutor
                         </span>
                     </div>
                 </div>
@@ -94,7 +128,7 @@
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
                     <div>
                         <h3 class="text-xl font-extrabold text-slate-900">Select Exam Level & Course Stream</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">Pick your specific stream to access Core and Elective subjects.</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Pick a level to view both Core and Elective subjects.</p>
                     </div>
 
                     <!-- Level Selector Tabs -->
@@ -124,6 +158,67 @@
             </div>
         </div>
 
+        <!-- KROOS AI RESEARCH ASSISTANT TAB -->
+        <div id="ai-screen" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-indigo-900 to-blue-900 rounded-3xl p-6 text-white shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div class="space-y-2">
+                    <div class="inline-flex items-center space-x-2 bg-indigo-500/30 border border-indigo-400/30 px-3 py-1 rounded-full text-xs font-bold text-indigo-200">
+                        <i class="fas fa-brain text-yellow-300"></i>
+                        <span>AI Academic Tutor & Research Assistant</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black">Kroos AI Research Lab</h2>
+                    <p class="text-indigo-200 text-xs sm:text-sm max-w-xl">Ask any educational question, request step-by-step homework help, generate study summaries, or explore complex topics across WASSCE, BECE & Tertiary syllabi.</p>
+                </div>
+                <button onclick="clearAIChat()" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold border border-white/20 transition flex items-center">
+                    <i class="fas fa-trash-alt mr-2"></i> Clear Conversation
+                </button>
+            </div>
+
+            <!-- Quick Starter Prompts -->
+            <div class="space-y-2">
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Suggested Research Topics:</span>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="sendQuickPrompt('Explain Newton\'s Second Law of Motion with WASSCE example calculations.')" class="bg-white hover:bg-blue-50 border border-slate-200 text-slate-700 hover:text-blue-700 text-xs font-bold px-3 py-2 rounded-xl transition shadow-sm">
+                        ⚡ Newton's Second Law
+                    </button>
+                    <button onclick="sendQuickPrompt('Explain photosynthesis step-by-step including light and dark reactions for Integrated Science.')" class="bg-white hover:bg-blue-50 border border-slate-200 text-slate-700 hover:text-blue-700 text-xs font-bold px-3 py-2 rounded-xl transition shadow-sm">
+                        🌱 Photosynthesis Process
+                    </button>
+                    <button onclick="sendQuickPrompt('Solve this Elective Math quadratic equation step by step: 2x^2 + 5x - 3 = 0.')" class="bg-white hover:bg-blue-50 border border-slate-200 text-slate-700 hover:text-blue-700 text-xs font-bold px-3 py-2 rounded-xl transition shadow-sm">
+                        📐 Solve Quadratic Equation
+                    </button>
+                    <button onclick="sendQuickPrompt('Summarize the main features of the 1992 Fourth Republican Constitution of Ghana for Social Studies.')" class="bg-white hover:bg-blue-50 border border-slate-200 text-slate-700 hover:text-blue-700 text-xs font-bold px-3 py-2 rounded-xl transition shadow-sm">
+                        🇬🇭 1992 Ghana Constitution
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Window Container -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden flex flex-col h-[520px]">
+                <!-- Chat Messages Stream -->
+                <div id="ai-chat-messages" class="flex-grow p-4 sm:p-6 overflow-y-auto space-y-4 custom-scrollbar">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-9 h-9 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="bg-slate-100 rounded-2xl rounded-tl-none p-4 text-xs sm:text-sm text-slate-800 leading-relaxed max-w-2xl border border-slate-200 space-y-2">
+                            <p class="font-extrabold text-indigo-900">Hello student! I am Kroos AI 👋</p>
+                            <p>How can I assist your studies today? You can paste past questions, ask for step-by-step math/science explanations, or search for key WASSCE / BECE concepts.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Box -->
+                <div class="p-3 sm:p-4 bg-slate-50 border-t border-slate-200 flex items-center space-x-2">
+                    <input type="text" id="ai-input" onkeypress="handleAIKeyPress(event)" placeholder="Ask Kroos AI a study question, topic explanation, or equation..." class="flex-grow bg-white border border-slate-300 focus:border-indigo-500 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none transition text-slate-900 placeholder:text-slate-400 font-medium shadow-inner">
+                    <button id="ai-send-btn" onclick="sendAIMessage()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold px-5 py-3 rounded-2xl transition shadow-md flex items-center text-xs sm:text-sm flex-shrink-0">
+                        <span>Send</span>
+                        <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!-- QUIZ RUNNER SCREEN -->
         <div id="quiz-screen" class="hidden max-w-3xl mx-auto space-y-6">
             
@@ -136,7 +231,7 @@
                     <span id="quiz-title" class="font-extrabold text-sm text-slate-900 block">Subject Title</span>
                     <span id="quiz-stream-badge" class="text-[10px] font-bold text-blue-600 uppercase tracking-wider">Stream Badge</span>
                 </div>
-                <span id="quiz-progress-text" class="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200 font-mono">Q 1/5</span>
+                <span id="quiz-progress-text" class="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200 font-mono">Q 1/7</span>
             </div>
 
             <!-- Question Card -->
@@ -145,7 +240,7 @@
                 <!-- Question Header & Text -->
                 <div class="space-y-3">
                     <div class="flex items-center justify-between text-xs font-bold text-slate-400 border-b border-slate-100 pb-2">
-                        <span>QUESTION</span>
+                        <span id="q-number-title">QUESTION 1 OF 7</span>
                         <span class="text-amber-500"><i class="fas fa-bolt mr-1"></i> +10 XP</span>
                     </div>
                     <div id="question-text" class="text-base sm:text-lg font-bold text-slate-900 leading-relaxed">
@@ -158,12 +253,12 @@
                     <!-- Option Buttons populated by JS -->
                 </div>
 
-                <!-- Explanation Box -->
-                <div id="explanation-box" class="hidden bg-blue-50/80 border border-blue-200 p-5 rounded-2xl text-sm text-slate-800 space-y-2">
-                    <div class="font-bold text-blue-900 flex items-center text-sm">
+                <!-- Step-by-Step Explanation Box -->
+                <div id="explanation-box" class="hidden bg-blue-50/90 border border-blue-200 p-5 rounded-2xl text-xs sm:text-sm text-slate-800 space-y-2">
+                    <div class="font-extrabold text-blue-900 flex items-center text-sm">
                         <i class="fas fa-lightbulb text-yellow-500 mr-2 text-base"></i> Step-by-Step Solution:
                     </div>
-                    <div id="explanation-text" class="text-slate-700 leading-relaxed"></div>
+                    <div id="explanation-text" class="text-slate-700 leading-relaxed space-y-1"></div>
                 </div>
 
                 <!-- Controls -->
@@ -175,33 +270,52 @@
             </div>
         </div>
 
-        <!-- SUMMARY / RESULTS SCREEN -->
-        <div id="results-screen" class="hidden max-w-lg mx-auto text-center bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 space-y-6 shadow-2xl">
-            <div class="w-20 h-20 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center mx-auto text-4xl shadow-inner border border-amber-200">
+        <!-- SUMMARY / OFFICIAL WAEC RESULTS SCREEN -->
+        <div id="results-screen" class="hidden max-w-xl mx-auto text-center bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 space-y-6 shadow-2xl">
+            <div id="result-badge-icon" class="w-20 h-20 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center mx-auto text-4xl shadow-inner border border-amber-200">
                 🏆
             </div>
-            <div>
-                <h2 class="text-2xl font-black text-slate-900">Quiz Completed!</h2>
-                <p class="text-slate-500 text-xs mt-1">Excellent practice session on Toni Kroos Academy.</p>
-            </div>
             
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                    <span id="final-score" class="block text-3xl font-black text-emerald-600">0/5</span>
-                    <span class="text-xs font-bold text-slate-400 uppercase">Correct Score</span>
+            <div class="space-y-1">
+                <span class="text-xs font-extrabold uppercase text-blue-600 tracking-widest" id="result-subject-tag">WASSCE PERFORMANCE REPORT</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Quiz Completed!</h2>
+                <p id="result-feedback-sub" class="text-slate-500 text-xs">Official WAEC / WASSCE Grade Assessment</p>
+            </div>
+
+            <!-- WAEC Grade & Score Display Grid -->
+            <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col justify-center">
+                    <span id="final-score" class="block text-2xl sm:text-3xl font-black text-slate-900">0 / 7</span>
+                    <span class="text-[10px] sm:text-xs font-bold text-slate-400 uppercase mt-1">Raw Score</span>
                 </div>
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                    <span id="final-xp" class="block text-3xl font-black text-yellow-500">+0 XP</span>
-                    <span class="text-xs font-bold text-slate-400 uppercase">XP Earned</span>
+                <div class="bg-blue-50 p-4 rounded-2xl border border-blue-200 flex flex-col justify-center">
+                    <span id="final-percentage" class="block text-2xl sm:text-3xl font-black text-blue-700">0%</span>
+                    <span class="text-[10px] sm:text-xs font-bold text-blue-500 uppercase mt-1">Percentage</span>
+                </div>
+                <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200 col-span-2 flex justify-between items-center px-6">
+                    <div class="text-left">
+                        <span class="text-[10px] font-bold text-amber-600 uppercase tracking-wider block">Official WAEC Grade</span>
+                        <span id="final-waec-grade" class="text-xl sm:text-2xl font-black text-amber-900">A1 - Excellent</span>
+                    </div>
+                    <div class="text-right">
+                        <span id="final-xp-gained" class="text-lg sm:text-xl font-black text-yellow-600">+70 XP</span>
+                        <span class="text-[10px] font-bold text-slate-400 block">XP Reward</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row justify-center gap-3 pt-2">
-                <button onclick="restartCurrentQuiz()" class="px-6 py-3 bg-blue-700 hover:bg-blue-600 text-white text-sm font-bold rounded-xl transition shadow-md">
-                    <i class="fas fa-redo mr-2"></i> Try Again
-                </button>
-                <button onclick="showHomeScreen()" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold rounded-xl transition border border-slate-200">
-                    Choose Another Subject
+            <!-- Retake / Fresh Question Set Controls -->
+            <div class="space-y-3 pt-2">
+                <div class="flex flex-col sm:flex-row justify-center gap-3">
+                    <button onclick="generateFreshQuestionSet()" class="px-6 py-3.5 bg-gradient-to-r from-blue-700 to-indigo-600 hover:from-blue-600 hover:to-indigo-500 text-white text-xs sm:text-sm font-extrabold rounded-xl transition shadow-lg shadow-blue-500/20 flex items-center justify-center">
+                        <i class="fas fa-random mr-2"></i> Practice New Question Set
+                    </button>
+                    <button onclick="restartCurrentQuiz()" class="px-5 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs sm:text-sm font-bold rounded-xl transition border border-slate-200 flex items-center justify-center">
+                        <i class="fas fa-redo mr-2"></i> Retry Same Questions
+                    </button>
+                </div>
+                <button onclick="showHomeScreen()" class="text-xs font-bold text-slate-500 hover:text-slate-800 transition py-1 block mx-auto">
+                    ← Return to Subject Catalog
                 </button>
             </div>
         </div>
@@ -210,25 +324,29 @@
 
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto">
-        <p class="font-semibold">&copy; 2026 Toni Kroos Academy. All rights reserved.</p>
+        <p class="font-semibold">&copy; 2026 Toni Kroos Academy. Powered by Gemini API & WAEC Academic Standards.</p>
     </footer>
 
     <!-- App Logic & Database -->
     <script>
-        // COMPREHENSIVE COURSE & SUBJECT DATABASE (WASSCE Streams, BECE, Tertiary)
+        // COMPREHENSIVE COURSE & SUBJECT DATABASE (7 Questions Per Subject Minimum)
         const db = {
             WASSCE: [
-                // SCIENCE STREAM
+                // SCIENCE STREAM ELECTIVES
                 {
                     subject: "Elective Mathematics",
                     stream: "Science",
                     type: "Elective",
                     icon: "fa-calculator",
-                    color: "bg-blue-500",
+                    color: "bg-blue-600",
                     questions: [
                         { q: "Solve for $x$: $2x + 5 = 15$", options: ["x = 3", "x = 5", "x = 10", "x = 7"], correct: 1, sol: "Subtract 5 from both sides: $2x = 10$. Divide by 2: $x = 5$." },
-                        { q: "Evaluate $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$", options: ["0", "2", "4", "Undefined"], correct: 2, sol: "Factor numerator: $\\frac{(x-2)(x+2)}{x-2} = x+2$. Evaluate at $x=2$: $2+2 = 4$." },
-                        { q: "If $f(x) = 3x^2 + 2x$, find $f'(x)$.", options: ["$6x + 2$", "$3x + 2$", "$6x^2$", "$6x$"], correct: 0, sol: "Apply power rule: $\\frac{d}{dx}(3x^2) = 6x$ and $\\frac{d}{dx}(2x) = 2$. Derivative is $6x + 2$." }
+                        { q: "Evaluate the limit: $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$", options: ["0", "2", "4", "Undefined"], correct: 2, sol: "Factor numerator: $\\frac{(x-2)(x+2)}{x-2} = x+2$. Substitute $x=2$: $2+2 = 4$." },
+                        { q: "If $f(x) = 3x^2 + 2x$, find $f'(x)$.", options: ["$6x + 2$", "$3x + 2$", "$6x^2$", "$6x$"], correct: 0, sol: "Apply power rule: $\\frac{d}{dx}(3x^2) = 6x$ and $\\frac{d}{dx}(2x) = 2$. Derivative is $6x + 2$." },
+                        { q: "Solve the quadratic equation: $x^2 - 5x + 6 = 0$", options: ["x = 1, 6", "x = 2, 3", "x = -2, -3", "x = 0, 5"], correct: 1, sol: "Factor as $(x-2)(x-3) = 0$. Roots are $x=2$ and $x=3$." },
+                        { q: "Find the magnitude of the vector $\\vec{v} = 3\\mathbf{i} + 4\\mathbf{j}$.", options: ["5", "7", "25", "12"], correct: 0, sol: "$|\\vec{v}| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$." },
+                        { q: "Integrate $\\int (4x^3) dx$", options: ["$x^4 + C$", "$12x^2 + C$", "$x^3 + C$", "$4x^4 + C$"], correct: 0, sol: "Applying integration power rule: $\\int 4x^3 dx = 4 \\frac{x^4}{4} + C = x^4 + C$." },
+                        { q: "Find the 5th term of the Geometric Progression: 2, 6, 18...", options: ["54", "162", "486", "108"], correct: 1, sol: "First term $a = 2$, common ratio $r = 3$. $T_5 = a r^4 = 2 \\times 3^4 = 2 \\times 81 = 162$." }
                     ]
                 },
                 {
@@ -236,10 +354,15 @@
                     stream: "Science",
                     type: "Elective",
                     icon: "fa-atom",
-                    color: "bg-indigo-500",
+                    color: "bg-indigo-600",
                     questions: [
-                        { q: "What is the SI unit of Force?", options: ["Joule", "Watt", "Newton", "Pascal"], correct: 2, sol: "The SI unit of Force is the Newton (N), defined as $1\\text{ kg}\\cdot\\text{m/s}^2$." },
-                        { q: "Calculate kinetic energy of a 2kg mass moving at 3m/s.", options: ["6 J", "9 J", "18 J", "12 J"], correct: 1, sol: "$KE = \\frac{1}{2} mv^2 = \\frac{1}{2} (2)(3^2) = 9\\text{ Joules}$." }
+                        { q: "What is the SI unit of Force?", options: ["Joule", "Watt", "Newton", "Pascal"], correct: 2, sol: "The SI unit of Force is Newton ($N = \\text{kg}\\cdot\\text{m/s}^2$)." },
+                        { q: "Calculate kinetic energy of a 2kg mass moving at 3m/s.", options: ["6 J", "9 J", "18 J", "12 J"], correct: 1, sol: "$KE = \\frac{1}{2} mv^2 = \\frac{1}{2}(2)(3^2) = 9\\text{ Joules}$." },
+                        { q: "Which law states that pressure is inversely proportional to volume at constant temperature?", options: ["Charles's Law", "Boyle's Law", "Hooke's Law", "Ohm's Law"], correct: 1, sol: "Boyle's Law states $P \\propto \\frac{1}{V}$ at constant temperature." },
+                        { q: "An electric iron rated 1000W operates for 2 hours. Calculate energy used in kWh.", options: ["1 kWh", "2 kWh", "5 kWh", "0.5 kWh"], correct: 1, sol: "Energy = Power (kW) × Time (h) = $1\\text{ kW} \\times 2\\text{ h} = 2\\text{ kWh}$." },
+                        { q: "Which electromagnetic wave has the shortest wavelength?", options: ["Radio waves", "Microwaves", "Gamma rays", "Infrared"], correct: 2, sol: "Gamma rays have the highest frequency and shortest wavelength in the EM spectrum." },
+                        { q: "A concave mirror has a focal length of 10cm. Find its radius of curvature.", options: ["5 cm", "10 cm", "20 cm", "40 cm"], correct: 2, sol: "Radius of curvature $R = 2f = 2 \\times 10 = 20\\text{ cm}$." },
+                        { q: "What acceleration is produced by a force of 50N acting on a 10kg mass?", options: ["5 m/s²", "500 m/s²", "0.2 m/s²", "10 m/s²"], correct: 0, sol: "Using $F = ma \\implies a = \\frac{F}{m} = \\frac{50}{10} = 5\\text{ m/s}^2$." }
                     ]
                 },
                 {
@@ -247,10 +370,15 @@
                     stream: "Science",
                     type: "Elective",
                     icon: "fa-flask",
-                    color: "bg-teal-500",
+                    color: "bg-teal-600",
                     questions: [
-                        { q: "What is the atomic number of Carbon?", options: ["6", "12", "14", "8"], correct: 0, sol: "Carbon has an atomic number of 6 with 6 protons." },
-                        { q: "Which gas is released when zinc reacts with hydrochloric acid?", options: ["Oxygen", "Hydrogen", "Carbon Dioxide", "Nitrogen"], correct: 1, sol: "Metal + Acid produces Salt + Hydrogen gas: $\\text{Zn} + 2\\text{HCl} \\rightarrow \\text{ZnCl}_2 + \\text{H}_2\\uparrow$." }
+                        { q: "What is the atomic number of Carbon?", options: ["6", "12", "14", "8"], correct: 0, sol: "Carbon has 6 protons, making its atomic number 6." },
+                        { q: "Which gas is released when zinc reacts with hydrochloric acid?", options: ["Oxygen", "Hydrogen", "Carbon Dioxide", "Nitrogen"], correct: 1, sol: "$\\text{Zn} + 2\\text{HCl} \\rightarrow \\text{ZnCl}_2 + \\text{H}_2\\uparrow$." },
+                        { q: "What type of bond is formed by the sharing of electrons?", options: ["Ionic bond", "Covalent bond", "Metallic bond", "Hydrogen bond"], correct: 1, sol: "Covalent bonding involves the mutual sharing of electron pairs." },
+                        { q: "Calculate the molar mass of Water ($H_2O$) where H=1, O=16.", options: ["17 g/mol", "18 g/mol", "32 g/mol", "16 g/mol"], correct: 1, sol: "Molar mass = $(2 \\times 1) + 16 = 18\\text{ g/mol}$." },
+                        { q: "Which hydrocarbon is saturated?", options: ["Ethene", "Ethyne", "Ethane", "Benzene"], correct: 2, sol: "Ethane ($C_2H_6$) is an alkane and contains only single covalent bonds." },
+                        { q: "What is the pH of a neutral solution at 25°C?", options: ["0", "7", "14", "1"], correct: 1, sol: "A neutral solution has equal $[H^+]$ and $[OH^-]$ giving a pH of 7." },
+                        { q: "Which oxidation number is assigned to uncombined free elements?", options: ["+1", "-1", "0", "Depends on element"], correct: 2, sol: "Free uncombined elements always have an oxidation state of 0." }
                     ]
                 },
                 {
@@ -258,23 +386,33 @@
                     stream: "Science",
                     type: "Elective",
                     icon: "fa-dna",
-                    color: "bg-emerald-500",
+                    color: "bg-emerald-600",
                     questions: [
-                        { q: "Which cell organelle is responsible for cellular respiration?", options: ["Nucleus", "Ribosome", "Mitochondria", "Golgi Body"], correct: 2, sol: "Mitochondria produce ATP through cellular respiration." },
-                        { q: "What is the green pigment in plants called?", options: ["Xanthophyll", "Chlorophyll", "Carotene", "Hemoglobin"], correct: 1, sol: "Chlorophyll absorbs light energy needed for photosynthesis." }
+                        { q: "Which organelle is responsible for cellular ATP energy production?", options: ["Nucleus", "Ribosome", "Mitochondria", "Golgi body"], correct: 2, sol: "Mitochondria carry out cellular respiration to produce ATP." },
+                        { q: "What pigment absorbs light energy in photosynthesis?", options: ["Carotene", "Chlorophyll", "Hemoglobin", "Xanthophyll"], correct: 1, sol: "Chlorophyll absorbs light energy during photosynthesis." },
+                        { q: "Which blood vessel carries oxygenated blood from lungs to the heart?", options: ["Pulmonary Artery", "Pulmonary Vein", "Aorta", "Vena Cava"], correct: 1, sol: "The Pulmonary Vein uniquely carries oxygenated blood to the left atrium." },
+                        { q: "The functional unit of the kidney is the:", options: ["Neuron", "Nephron", "Alveolus", "Villus"], correct: 1, sol: "Nephrons filter blood and produce urine in the kidneys." },
+                        { q: "Which base pairs with Adenine in DNA?", options: ["Cytosine", "Guanine", "Thymine", "Uracil"], correct: 2, sol: "In DNA, Adenine (A) pairs with Thymine (T) via double hydrogen bonds." },
+                        { q: "Enzymes are biologically categorized as:", options: ["Carbohydrates", "Proteins", "Lipids", "Nucleic Acids"], correct: 1, sol: "Enzymes are globular proteins that act as biological catalysts." },
+                        { q: "Which hormone regulates blood glucose levels by lowering sugar?", options: ["Glucagon", "Insulin", "Adrenaline", "Thyroxine"], correct: 1, sol: "Insulin secreted by pancreatic beta cells lowers blood glucose." }
                     ]
                 },
 
-                // GENERAL ARTS STREAM
+                // GENERAL ARTS STREAM ELECTIVES
                 {
                     subject: "Economics",
                     stream: "Arts",
                     type: "Elective",
                     icon: "fa-chart-line",
-                    color: "bg-amber-500",
+                    color: "bg-amber-600",
                     questions: [
-                        { q: "What is the basic economic problem facing all societies?", options: ["Inflation", "Unemployment", "Scarcity", "Poverty"], correct: 2, sol: "Scarcity arises because human wants are unlimited while resources are finite." },
-                        { q: "If price increases and demand decreases, this illustrates:", options: ["Law of Supply", "Law of Demand", "Inflation", "Equilibrium"], correct: 1, sol: "The Law of Demand states that price and quantity demanded are inversely related." }
+                        { q: "What is the fundamental economic problem facing all human societies?", options: ["Inflation", "Unemployment", "Scarcity", "Poverty"], correct: 2, sol: "Scarcity occurs because human wants are unlimited while productive resources are limited." },
+                        { q: "When price increases and quantity demanded decreases, this demonstrates:", options: ["Law of Supply", "Law of Demand", "Inflation", "Equilibrium"], correct: 1, sol: "The Law of Demand states price and quantity demanded have an inverse relationship." },
+                        { q: "Opportunity cost is defined as:", options: ["Total monetary expense", "Next best alternative foregone", "Fixed production cost", "Marginal revenue"], correct: 1, sol: "Opportunity cost represents the value of the next best alternative given up." },
+                        { q: "Which market structure has a single seller of a unique product?", options: ["Perfect Competition", "Monopoly", "Oligopoly", "Monopolistic Competition"], correct: 1, sol: "A monopoly consists of a single firm dominating the entire market." },
+                        { q: "Price elasticity of demand measures responsiveness of demand to changes in:", options: ["Income", "Price", "Supply", "Taxes"], correct: 1, sol: "Price elasticity measures percentage change in quantity demanded divided by percentage change in price." },
+                        { q: "Gross Domestic Product (GDP) measures:", options: ["Total value of goods produced within a nation in a year", "Total national debt", "Export earnings minus imports", "Personal disposable income"], correct: 0, sol: "GDP is the total market value of all final goods and services produced domestically." },
+                        { q: "Inflation caused by increases in production costs is called:", options: ["Demand-pull inflation", "Cost-push inflation", "Hyperinflation", "Structural inflation"], correct: 1, sol: "Cost-push inflation occurs when raw material or wage costs push general prices up." }
                     ]
                 },
                 {
@@ -282,23 +420,19 @@
                     stream: "Arts",
                     type: "Elective",
                     icon: "fa-landmark",
-                    color: "bg-purple-500",
+                    color: "bg-purple-600",
                     questions: [
-                        { q: "Which organ of government interprets laws?", options: ["Executive", "Legislature", "Judiciary", "Press"], correct: 2, sol: "The Judiciary interprets laws and administers justice." }
-                    ]
-                },
-                {
-                    subject: "Geography",
-                    stream: "Arts",
-                    type: "Elective",
-                    icon: "fa-earth-africa",
-                    color: "bg-sky-500",
-                    questions: [
-                        { q: "Which instrument is used to measure atmospheric pressure?", options: ["Anemometer", "Barometer", "Hygrometer", "Thermometer"], correct: 1, sol: "Barometers measure atmospheric pressure." }
+                        { q: "Which organ of government interprets laws and protects constitutional rights?", options: ["Executive", "Legislature", "Judiciary", "Civil Service"], correct: 2, sol: "The Judiciary interprets laws and administers justice in courts." },
+                        { q: "A system of government where power is shared between central and regional units is:", options: ["Unitary System", "Federal System", "Confederal System", "Monarchy"], correct: 1, sol: "Federalism constitutionally divides power between central and component state governments." },
+                        { q: "Rule of Law implies:", options: ["Military supreme authority", "Equality of all citizens before the law", "Presidential immunity", "Parliamentary sovereignty"], correct: 1, sol: "Rule of Law means everyone is subject to and equal before the law." },
+                        { q: "Which body conducted elections in Ghana prior to local government reforms?", options: ["Electoral Commission", "Public Services Commission", "Judicial Council", "Council of State"], correct: 0, sol: "The Electoral Commission (EC) organizes all public elections and referenda." },
+                        { q: "Bicameral legislature means a parliament with:", options: ["One house", "Two houses", "Three houses", "No elected members"], correct: 1, sol: "Bicameralism consists of two legislative chambers (e.g., Senate and House of Reps)." },
+                        { q: "The head of government in a cabinet parliamentary system is the:", options: ["President", "Prime Minister", "Chief Justice", "Speaker"], correct: 1, sol: "In a parliamentary system, the Prime Minister holds executive leadership." },
+                        { q: "The policy of Indirect Rule in West Africa was introduced by the:", options: ["French", "British", "Portuguese", "Germans"], correct: 1, sol: "Lord Lugard implemented British Indirect Rule through traditional chiefs." }
                     ]
                 },
 
-                // BUSINESS STREAM
+                // BUSINESS STREAM ELECTIVES
                 {
                     subject: "Financial Accounting",
                     stream: "Business",
@@ -306,39 +440,31 @@
                     icon: "fa-file-invoice-dollar",
                     color: "bg-green-600",
                     questions: [
-                        { q: "Which account equation is correct?", options: ["Assets = Capital + Liabilities", "Assets = Capital - Liabilities", "Liabilities = Assets + Capital", "Capital = Assets + Liabilities"], correct: 0, sol: "The fundamental accounting equation is $\\text{Assets} = \\text{Capital} + \\text{Liabilities}$." }
-                    ]
-                },
-                {
-                    subject: "Business Management",
-                    stream: "Business",
-                    type: "Elective",
-                    icon: "fa-briefcase",
-                    color: "bg-blue-600",
-                    questions: [
-                        { q: "Which management function involves setting goals and choosing actions?", options: ["Planning", "Organizing", "Directing", "Controlling"], correct: 0, sol: "Planning involves defining goals and strategies to achieve them." }
+                        { q: "Which fundamental accounting equation is correct?", options: ["Assets = Capital + Liabilities", "Assets = Capital - Liabilities", "Liabilities = Assets + Capital", "Capital = Assets + Liabilities"], correct: 0, sol: "The accounting equation states $\\text{Assets} = \\text{Capital} + \\text{Liabilities}$." },
+                        { q: "In double entry bookkeeping, an increase in an asset is recorded as a:", options: ["Credit entry", "Debit entry", "Balance sheet note", "Journal deduction"], correct: 1, sol: "Asset accounts increase on the Debit side and decrease on the Credit side." },
+                        { q: "The primary purpose of a Trial Balance is to check:", options: ["Net profit", "Arithmetical accuracy of ledger postings", "Cash availability", "Tax liability"], correct: 1, sol: "Trial balances verify that total debits equal total credits." },
+                        { q: "Which financial statement shows a firm's financial position at a specific date?", options: ["Income Statement", "Statement of Financial Position (Balance Sheet)", "Cash Flow Statement", "Trial Balance"], correct: 1, sol: "The Balance Sheet presents assets, liabilities, and equity at a specific point in time." },
+                        { q: "Bad debts written off are treated as a/an:", options: ["Current Asset", "Expense in Profit & Loss", "Capital Reserve", "Liability"], correct: 1, sol: "Irrecoverable debts are debited as operating expenses in the Income Statement." },
+                        { q: "Working Capital is calculated as:", options: ["Current Assets - Current Liabilities", "Total Assets - Total Liabilities", "Capital + Reserves", "Fixed Assets - Depreciation"], correct: 0, sol: "$\\text{Working Capital} = \\text{Current Assets} - \\text{Current Liabilities}$." },
+                        { q: "Discount allowed to customers is recorded on which side of the Cash Book?", options: ["Debit side", "Credit side", "Balance sheet only", "Journal entry only"], correct: 0, sol: "Discount allowed is recorded in the debit column of the multi-column cash book." }
                     ]
                 },
 
-                // HOME ECONS & VISUAL ARTS & AGRIC STREAMS
+                // HOME ECONS, VISUAL ARTS, AGRIC ELECTIVES
                 {
                     subject: "Food & Nutrition",
                     stream: "HomeEcons",
                     type: "Elective",
                     icon: "fa-utensils",
-                    color: "bg-rose-500",
+                    color: "bg-rose-600",
                     questions: [
-                        { q: "Which vitamin deficiency causes scurvy?", options: ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin D"], correct: 2, sol: "Vitamin C deficiency leads to scurvy." }
-                    ]
-                },
-                {
-                    subject: "Graphic Design",
-                    stream: "VisualArts",
-                    type: "Elective",
-                    icon: "fa-palette",
-                    color: "bg-orange-500",
-                    questions: [
-                        { q: "Which color model is used primarily for print design?", options: ["RGB", "CMYK", "HSB", "HEX"], correct: 1, sol: "CMYK (Cyan, Magenta, Yellow, Key/Black) is used in commercial printing." }
+                        { q: "Which vitamin deficiency causes scurvy?", options: ["Vitamin A", "Vitamin B12", "Vitamin C", "Vitamin D"], correct: 2, sol: "Vitamin C (ascorbic acid) deficiency leads to scurvy." },
+                        { q: "Proteins are composed of building blocks called:", options: ["Fatty acids", "Amino acids", "Glucose", "Glycerol"], correct: 1, sol: "Amino acids link together via peptide bonds to form proteins." },
+                        { q: "Which mineral is necessary for hemoglobin formation in blood?", options: ["Calcium", "Iron", "Iodine", "Sodium"], correct: 1, sol: "Iron is the core element required to synthesize hemoglobin." },
+                        { q: "Kwashiorkor is caused by a severe deficiency of:", options: ["Carbohydrates", "Proteins", "Fats", "Vitamins"], correct: 1, sol: "Kwashiorkor results from inadequate protein intake in children." },
+                        { q: "Dry heat cooking method includes:", options: ["Steaming", "Baking", "Boiling", "Poaching"], correct: 1, sol: "Baking uses dry air radiation in an oven without direct water contact." },
+                        { q: "Rickets in children is associated with a lack of:", options: ["Vitamin D and Calcium", "Vitamin A", "Vitamin K", "Iron"], correct: 0, sol: "Vitamin D and Calcium deficiency weakens bone density causing rickets." },
+                        { q: "Perishable foods should be stored below what temperature to reduce bacterial growth?", options: ["10°C", "5°C", "20°C", "15°C"], correct: 1, sol: "Refrigeration at or below 5°C slows microbial spoilage." }
                     ]
                 },
                 {
@@ -346,21 +472,33 @@
                     stream: "Agric",
                     type: "Elective",
                     icon: "fa-wheat-awn",
-                    color: "bg-emerald-600",
+                    color: "bg-emerald-700",
                     questions: [
-                        { q: "Which soil type has the highest water retention capacity?", options: ["Sandy Soil", "Clay Soil", "Loamy Soil", "Gravel"], correct: 1, sol: "Clay soil has small particles and retains the most water." }
+                        { q: "Which soil type has the highest water retention capacity?", options: ["Sandy soil", "Clay soil", "Loamy soil", "Gravel"], correct: 1, sol: "Clay soil has micro-pores that retain water tightly." },
+                        { q: "Ruminant animals possess a stomach with how many chambers?", options: ["1", "2", "3", "4"], correct: 3, sol: "Ruminants (cows, sheep) have 4 chambers: Rumen, Reticulum, Omasum, Abomasum." },
+                        { q: "The process of removing excess water from farmland is known as:", options: ["Irrigation", "Drainage", "Mulching", "Tillage"], correct: 1, sol: "Drainage artificially removes surplus surface or groundwater." },
+                        { q: "N-P-K fertilizer supplies which primary plant nutrients?", options: ["Nitrogen, Phosphorus, Potassium", "Nickel, Phosphate, Calcium", "Nitrogen, Protein, Potassium", "Sodium, Potassium, Zinc"], correct: 0, sol: "NPK stands for Nitrogen (N), Phosphorus (P), and Potassium (K)." },
+                        { q: "Which pest attacks stored cereal grains?", options: ["Aphid", "Weevil", "Tsetse fly", "Caterpillar"], correct: 1, sol: "Grain weevils bore into stored maize and rice seeds." },
+                        { q: "Vegetative propagation by joining a scion to a stock is called:", options: ["Layering", "Grafting", "Cuttings", "Tissue culture"], correct: 1, sol: "Grafting connects a rootstock with a shoots scion." },
+                        { q: "Photosynthesis in crop plants requires sunlight, water, and:", options: ["Oxygen", "Carbon Dioxide", "Nitrogen gas", "Methane"], correct: 1, sol: "$6CO_2 + 6H_2O \\xrightarrow{\\text{Sunlight}} C_6H_{12}O_6 + 6O_2$." }
                     ]
                 },
 
-                // WASSCE CORE SUBJECTS (Available across all SHS streams)
+                // CORE WASSCE SUBJECTS
                 {
                     subject: "Core Mathematics",
                     stream: "Core",
                     type: "Core Subject",
                     icon: "fa-square-root-variable",
-                    color: "bg-blue-700",
+                    color: "bg-blue-800",
                     questions: [
-                        { q: "Simplify: $3(x + 4) - 2x$", options: ["$x + 12$", "$x + 4$", "$5x + 12$", "$x - 12$"], correct: 0, sol: "Expand: $3x + 12 - 2x = x + 12$." }
+                        { q: "Simplify: $3(x + 4) - 2x$", options: ["x + 12", "x + 4", "5x + 12", "x - 12"], correct: 0, sol: "Expand terms: $3x + 12 - 2x = (3x - 2x) + 12 = x + 12$." },
+                        { q: "If $\\sin \\theta = 0.6$, find $\\cos \\theta$ for an acute angle $\\theta$.", options: ["0.8", "0.4", "0.5", "1.0"], correct: 0, sol: "Using $\\sin^2 \\theta + \\cos^2 \\theta = 1 \\implies 0.36 + \\cos^2 \\theta = 1 \\implies \\cos \\theta = \\sqrt{0.64} = 0.8$." },
+                        { q: "Calculate the simple interest on GH₵ 1,000 at 5% per annum for 3 years.", options: ["GH₵ 150", "GH₵ 50", "GH₵ 300", "GH₵ 1,150"], correct: 0, sol: "$I = \\frac{P \\times R \\times T}{100} = \\frac{1000 \\times 5 \\times 3}{100} = 150$." },
+                        { q: "Find the mean of numbers: 12, 15, 18, 21, 24.", options: ["18", "15", "20", "19"], correct: 0, sol: "Sum = $90$. Mean = $90 / 5 = 18$." },
+                        { q: "Solve for $y$: $3^{y+1} = 27$", options: ["1", "2", "3", "0"], correct: 1, sol: "$3^{y+1} = 3^3 \\implies y+1 = 3 \\implies y = 2$." },
+                        { q: "A bag contains 3 red and 7 blue balls. What is the probability of picking a red ball?", options: ["3/10", "7/10", "1/3", "3/7"], correct: 0, sol: "$\\text{Probability} = \\frac{\\text{Red balls}}{\\text{Total balls}} = \\frac{3}{3+7} = \\frac{3}{10}$." },
+                        { q: "Find the interior angle sum of a 6-sided polygon (hexagon).", options: ["360°", "540°", "720°", "900°"], correct: 2, sol: "$\\text{Sum} = (n-2) \\times 180^\\circ = (6-2) \\times 180^\\circ = 4 \\times 180^\\circ = 720^\\circ$." }
                     ]
                 },
                 {
@@ -368,29 +506,15 @@
                     stream: "Core",
                     type: "Core Subject",
                     icon: "fa-vial",
-                    color: "bg-teal-700",
+                    color: "bg-teal-800",
                     questions: [
-                        { q: "What is the neutral pH value?", options: ["0", "7", "14", "5"], correct: 1, sol: "A pH of 7 is neutral (e.g., pure water)." }
-                    ]
-                },
-                {
-                    subject: "English Language",
-                    stream: "Core",
-                    type: "Core Subject",
-                    icon: "fa-book-open",
-                    color: "bg-indigo-700",
-                    questions: [
-                        { q: "Identify the pronoun in: 'Kofi went to his classroom.'", options: ["Kofi", "went", "his", "classroom"], correct: 2, sol: "'His' is a possessive pronoun referring to Kofi." }
-                    ]
-                },
-                {
-                    subject: "Social Studies",
-                    stream: "Core",
-                    type: "Core Subject",
-                    icon: "fa-users",
-                    color: "bg-amber-700",
-                    questions: [
-                        { q: "In which year did Ghana gain independence?", options: ["1957", "1960", "1948", "1966"], correct: 0, sol: "Ghana achieved independence on March 6, 1957." }
+                        { q: "What is the neutral pH value for pure water at room temperature?", options: ["0", "7", "14", "5"], correct: 1, sol: "A pH value of 7 is completely neutral." },
+                        { q: "Which planet in our solar system is closest to the Sun?", options: ["Venus", "Earth", "Mercury", "Mars"], correct: 2, sol: "Mercury is the innermost planet orbiting closest to the Sun." },
+                        { q: "Work done is calculated as:", options: ["Force × Distance", "Mass × Acceleration", "Power ÷ Time", "Force ÷ Area"], correct: 0, sol: "$W = F \\times d$, where $F$ is force and $d$ is displacement." },
+                        { q: "The physical change from gas to liquid state is called:", options: ["Evaporation", "Condensation", "Sublimation", "Melting"], correct: 1, sol: "Condensation transforms vapor gas into liquid droplets upon cooling." },
+                        { q: "Which vector transmits malaria parasite (Plasmodium)?", options: ["Housefly", "Female Anopheles mosquito", "Tsetse fly", "Aedes mosquito"], correct: 1, sol: "Female Anopheles mosquitoes carry and inject Plasmodium parasites." },
+                        { q: "An electric circuit with only one pathway for current is called a:", options: ["Parallel circuit", "Series circuit", "Short circuit", "Open circuit"], correct: 1, sol: "In a series circuit, components are connected end-to-end in a single loop." },
+                        { q: "Which soil component provides mineral nutrients to growing crops?", options: ["Humus", "Weathered rock particles", "Soil air", "Soil organisms"], correct: 1, sol: "Inorganic weathered rock fragments release essential minerals like potassium and calcium." }
                     ]
                 }
             ],
@@ -403,7 +527,13 @@
                     icon: "fa-calculator",
                     color: "bg-blue-600",
                     questions: [
-                        { q: "Find the mean of numbers 4, 8, 12, 16.", options: ["8", "10", "12", "14"], correct: 1, sol: "Sum = $4+8+12+16 = 40$. Mean = $40 / 4 = 10$." }
+                        { q: "Find the mean of numbers 4, 8, 12, 16.", options: ["8", "10", "12", "14"], correct: 1, sol: "Sum = $40$. Mean = $40 / 4 = 10$." },
+                        { q: "Simplify $2a + 3b + 4a - b$", options: ["$6a + 2b$", "$5a + 2b$", "$6a + 4b$", "$2a + 2b$"], correct: 0, sol: "Group like terms: $(2a+4a) + (3b-b) = 6a + 2b$." },
+                        { q: "Express 0.0045 in standard form.", options: ["$4.5 \\times 10^{-3}$", "$4.5 \\times 10^{-4}$", "$45 \\times 10^{-4}$", "$4.5 \\times 10^3$"], correct: 0, sol: "Shift decimal point 3 places right: $4.5 \\times 10^{-3}$." },
+                        { q: "Find 15% of GH₵ 200.", options: ["GH₵ 20", "GH₵ 30", "GH₵ 15", "GH₵ 40"], correct: 1, sol: "$\\frac{15}{100} \\times 200 = 30$." },
+                        { q: "Solve $3x - 4 = 11$", options: ["x = 3", "x = 5", "x = 4", "x = 15"], correct: 1, sol: "$3x = 15 \\implies x = 5$." },
+                        { q: "Evaluate $2^3 + 3^2$", options: ["12", "17", "18", "25"], correct: 1, sol: "$8 + 9 = 17$." },
+                        { q: "Convert 3/5 into a percentage.", options: ["30%", "50%", "60%", "75%"], correct: 2, sol: "$\\frac{3}{5} \\times 100\\% = 60\\%$." }
                     ]
                 },
                 {
@@ -413,17 +543,13 @@
                     icon: "fa-flask",
                     color: "bg-emerald-600",
                     questions: [
-                        { q: "Which organelle controls cell activity?", options: ["Cell Wall", "Nucleus", "Vacuole", "Cytoplasm"], correct: 1, sol: "The nucleus contains genetic material and directs cell operations." }
-                    ]
-                },
-                {
-                    subject: "Computing / ICT",
-                    stream: "JHS Elective",
-                    type: "Elective",
-                    icon: "fa-desktop",
-                    color: "bg-purple-600",
-                    questions: [
-                        { q: "What does CPU stand for?", options: ["Central Processing Unit", "Computer Personal Unit", "Central Power Unit", "Core Program Unit"], correct: 0, sol: "CPU stands for Central Processing Unit." }
+                        { q: "Which cell structure controls cell activities?", options: ["Cell wall", "Nucleus", "Vacuole", "Cytoplasm"], correct: 1, sol: "The nucleus houses DNA and directs cellular activities." },
+                        { q: "Density is defined as:", options: ["Mass per unit volume", "Weight per area", "Force × acceleration", "Volume ÷ mass"], correct: 0, sol: "$\\text{Density} = \\frac{\\text{Mass}}{\\text{Volume}}$." },
+                        { q: "Which state of matter has a definite volume but no fixed shape?", options: ["Solid", "Liquid", "Gas", "Plasma"], correct: 1, sol: "Liquids take the shape of their container while retaining fixed volume." },
+                        { q: "What energy transformation occurs in a solar panel?", options: ["Light to Electrical", "Chemical to Light", "Heat to Mechanical", "Electrical to Light"], correct: 0, sol: "Solar cells convert sunlight directly into electrical energy." },
+                        { q: "Which part of a flower develops into a fruit after fertilization?", options: ["Ovule", "Ovary", "Petal", "Stamen"], correct: 1, sol: "The ovary matures into a fruit while ovules become seeds." },
+                        { q: "Which component of air supports combustion (burning)?", options: ["Nitrogen", "Oxygen", "Carbon Dioxide", "Argon"], correct: 1, sol: "Oxygen gas is essential for burning." },
+                        { q: "The process by which liquid water changes into water vapor at room temperature is:", options: ["Boiling", "Evaporation", "Sublimation", "Melting"], correct: 1, sol: "Evaporation occurs at the surface of liquids below boiling point." }
                     ]
                 }
             ],
@@ -436,52 +562,85 @@
                     icon: "fa-laptop-code",
                     color: "bg-slate-800",
                     questions: [
-                        { q: "What is the time complexity of Binary Search?", options: ["O(n)", "O(1)", "O(log n)", "O(n^2)"], correct: 2, sol: "Binary Search operates in $O(\\log n)$ logarithmic time." }
-                    ]
-                },
-                {
-                    subject: "Business Administration",
-                    stream: "Business School",
-                    type: "Degree",
-                    icon: "fa-chart-pie",
-                    color: "bg-indigo-800",
-                    questions: [
-                        { q: "What does SWOT analysis evaluate?", options: ["Strengths, Weaknesses, Opportunities, Threats", "Sales, Wealth, Operations, Taxes", "Strategy, Work, Objectives, Targets", "System, Worth, Options, Trends"], correct: 0, sol: "SWOT stands for Strengths, Weaknesses, Opportunities, and Threats." }
+                        { q: "What is the worst-case time complexity of Binary Search?", options: ["O(n)", "O(1)", "O(log n)", "O(n^2)"], correct: 2, sol: "Binary search halves search space yielding $O(\\log n)$ complexity." },
+                        { q: "Which data structure operates on a LIFO (Last In First Out) basis?", options: ["Queue", "Stack", "Array", "Linked List"], correct: 1, sol: "Stacks process elements in LIFO order (Push/Pop)." },
+                        { q: "In relational databases, SQL stands for:", options: ["Sequential Query Language", "Structured Query Language", "Standard System Logic", "System Query Level"], correct: 1, sol: "SQL stands for Structured Query Language." },
+                        { q: "Which protocol operates at the Transport Layer of the OSI Model?", options: ["HTTP", "IP", "TCP", "Ethernet"], correct: 2, sol: "TCP (Transmission Control Protocol) is a Transport layer protocol." },
+                        { q: "What does HTTP status code 404 signify?", options: ["OK Success", "Unauthorized", "Not Found", "Internal Server Error"], correct: 2, sol: "HTTP 404 indicates requested resource was not found on server." },
+                        { q: "Which sorting algorithm has average time complexity of $O(n \\log n)$?", options: ["Bubble Sort", "Quick Sort", "Insertion Sort", "Selection Sort"], correct: 1, sol: "Quick Sort averages $O(n \\log n)$ efficiency." },
+                        { q: "A pointer in C programming stores:", options: ["The value of a variable", "The memory address of a variable", "The data type size", "A constant string"], correct: 1, sol: "Pointers hold memory addresses pointing to variables." }
                     ]
                 }
             ]
         };
 
-        // App State
+        // App State Variables
         let currentLevel = 'WASSCE';
         let currentStream = 'ALL';
         let currentQuizSubject = null;
+        let activeQuestions = [];
         let qIdx = 0;
         let score = 0;
         let userXP = parseInt(localStorage.getItem('tka_xp')) || 0;
         let userStreak = parseInt(localStorage.getItem('tka_streak')) || 1;
 
-        // Render Functions
+        // Render Navigation Stats
         function updateStatsUI() {
             document.getElementById('xp-count').innerText = userXP;
             document.getElementById('streak-count').innerText = userStreak;
+        }
+
+        // Tab Navigation Switcher
+        function switchNavTab(tab) {
+            const homeScr = document.getElementById('home-screen');
+            const aiScr = document.getElementById('ai-screen');
+            const quizScr = document.getElementById('quiz-screen');
+            const resScr = document.getElementById('results-screen');
+
+            const navHome = document.getElementById('nav-home');
+            const navAi = document.getElementById('nav-ai');
+            const mNavHome = document.getElementById('mobile-nav-home');
+            const mNavAi = document.getElementById('mobile-nav-ai');
+
+            if (tab === 'home') {
+                homeScr.classList.remove('hidden');
+                aiScr.classList.add('hidden');
+                quizScr.classList.add('hidden');
+                resScr.classList.add('hidden');
+
+                navHome.className = "px-3.5 py-1.5 rounded-xl bg-white text-blue-700 shadow-sm font-extrabold transition";
+                navAi.className = "px-3.5 py-1.5 rounded-xl text-slate-600 hover:text-slate-900 transition font-bold";
+                
+                mNavHome.className = "flex-1 py-2 rounded-xl bg-blue-50 text-blue-700 border border-blue-200 text-center font-extrabold";
+                mNavAi.className = "flex-1 py-2 rounded-xl bg-slate-100 text-slate-600 border border-slate-200 text-center font-bold";
+                renderSubjects();
+            } else if (tab === 'ai') {
+                homeScr.classList.add('hidden');
+                aiScr.classList.remove('hidden');
+                quizScr.classList.add('hidden');
+                resScr.classList.add('hidden');
+
+                navAi.className = "px-3.5 py-1.5 rounded-xl bg-indigo-600 text-white shadow-sm font-extrabold transition";
+                navHome.className = "px-3.5 py-1.5 rounded-xl text-slate-600 hover:text-slate-900 transition font-bold";
+
+                mNavAi.className = "flex-1 py-2 rounded-xl bg-indigo-600 text-white text-center font-extrabold";
+                mNavHome.className = "flex-1 py-2 rounded-xl bg-slate-100 text-slate-600 border border-slate-200 text-center font-bold";
+            }
         }
 
         function filterLevel(level) {
             currentLevel = level;
             currentStream = 'ALL';
 
-            // Tab styling
             ['wassce', 'bece', 'tertiary'].forEach(l => {
                 const btn = document.getElementById(`tab-${l}`);
                 if (l.toUpperCase() === level) {
                     btn.className = "px-4 py-2 rounded-xl transition bg-white text-blue-700 shadow-sm font-extrabold";
                 } else {
-                    btn.className = "px-4 py-2 rounded-xl transition hover:text-slate-900";
+                    btn.className = "px-4 py-2 rounded-xl transition hover:text-slate-900 font-bold";
                 }
             });
 
-            // Toggle WASSCE Stream Filter Bar visibility
             const streamBar = document.getElementById('stream-filter-bar');
             if (level === 'WASSCE') {
                 streamBar.classList.remove('hidden');
@@ -499,13 +658,13 @@
             streamBtnIds.forEach(id => {
                 const btn = document.getElementById(`stream-${id}`);
                 if (btn) {
-                    btn.className = "px-3 py-1.5 rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-100 whitespace-nowrap";
+                    btn.className = "px-3 py-1.5 rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-100 whitespace-nowrap font-bold";
                 }
             });
 
             const activeBtn = document.getElementById(`stream-${stream.toLowerCase()}`);
             if (activeBtn) {
-                activeBtn.className = "px-3 py-1.5 rounded-xl border border-blue-600 bg-blue-600 text-white whitespace-nowrap shadow-sm";
+                activeBtn.className = "px-3 py-1.5 rounded-xl border border-blue-600 bg-blue-600 text-white whitespace-nowrap shadow-sm font-extrabold";
             }
 
             renderSubjects();
@@ -535,17 +694,14 @@
                             <span class="text-[10px] font-bold text-blue-600">${s.type}</span>
                         </div>
                         <h4 class="font-extrabold text-slate-900 text-base leading-snug group-hover:text-blue-600 transition-colors">${s.subject}</h4>
-                        <p class="text-xs text-slate-500 font-medium">${s.questions.length} Practice Questions • Step-by-Step</p>
+                        <p class="text-xs text-slate-500 font-medium">${s.questions.length} Practice Questions • Step-by-Step Solutions</p>
                     </div>
                 </div>
             `).join('');
         }
 
         function showHomeScreen() {
-            document.getElementById('home-screen').classList.remove('hidden');
-            document.getElementById('quiz-screen').classList.add('hidden');
-            document.getElementById('results-screen').classList.add('hidden');
-            renderSubjects();
+            switchNavTab('home');
         }
 
         function startQuiz(level, index) {
@@ -555,10 +711,12 @@
             }
 
             currentQuizSubject = subjects[index];
+            activeQuestions = [...currentQuizSubject.questions];
             qIdx = 0;
             score = 0;
 
             document.getElementById('home-screen').classList.add('hidden');
+            document.getElementById('ai-screen').classList.add('hidden');
             document.getElementById('results-screen').classList.add('hidden');
             document.getElementById('quiz-screen').classList.remove('hidden');
 
@@ -568,7 +726,18 @@
             renderQuestion();
         }
 
+        function generateFreshQuestionSet() {
+            // Shuffle question order to simulate fresh test set
+            activeQuestions = [...currentQuizSubject.questions].sort(() => Math.random() - 0.5);
+            qIdx = 0;
+            score = 0;
+            document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            renderQuestion();
+        }
+
         function restartCurrentQuiz() {
+            activeQuestions = [...currentQuizSubject.questions];
             qIdx = 0;
             score = 0;
             document.getElementById('results-screen').classList.add('hidden');
@@ -577,8 +746,9 @@
         }
 
         function renderQuestion() {
-            const q = currentQuizSubject.questions[qIdx];
-            document.getElementById('quiz-progress-text').innerText = `Q ${qIdx + 1}/${currentQuizSubject.questions.length}`;
+            const q = activeQuestions[qIdx];
+            document.getElementById('q-number-title').innerText = `QUESTION ${qIdx + 1} OF ${activeQuestions.length}`;
+            document.getElementById('quiz-progress-text').innerText = `Q ${qIdx + 1}/${activeQuestions.length}`;
             document.getElementById('question-text').innerHTML = q.q;
 
             document.getElementById('explanation-box').classList.add('hidden');
@@ -586,7 +756,7 @@
 
             const container = document.getElementById('options-container');
             container.innerHTML = q.options.map((opt, i) => `
-                <button id="opt-${i}" onclick="checkAnswer(${i})" class="w-full text-left p-4 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-slate-100 hover:border-slate-300 font-bold text-sm text-slate-800 transition flex justify-between items-center group">
+                <button id="opt-${i}" onclick="checkAnswer(${i})" class="w-full text-left p-4 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-slate-100 hover:border-slate-300 font-bold text-xs sm:text-sm text-slate-800 transition flex justify-between items-center group">
                     <span>${opt}</span>
                     <span class="w-7 h-7 rounded-xl border border-slate-300 bg-white flex items-center justify-center text-xs text-slate-500 font-extrabold group-hover:border-blue-500 group-hover:text-blue-600">${String.fromCharCode(65 + i)}</span>
                 </button>
@@ -596,19 +766,19 @@
         }
 
         function checkAnswer(chosenIdx) {
-            const q = currentQuizSubject.questions[qIdx];
+            const q = activeQuestions[qIdx];
             const isCorrect = chosenIdx === q.correct;
 
             q.options.forEach((_, i) => {
                 const btn = document.getElementById(`opt-${i}`);
-                btn.onclick = null; // Disable clicking
+                btn.onclick = null; // Disable further clicks
 
                 if (i === q.correct) {
-                    btn.className = "w-full text-left p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-sm flex justify-between items-center shadow-sm";
+                    btn.className = "w-full text-left p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-xs sm:text-sm flex justify-between items-center shadow-sm";
                 } else if (i === chosenIdx) {
-                    btn.className = "w-full text-left p-4 rounded-2xl border-2 border-rose-500 bg-rose-50 text-rose-900 font-bold text-sm flex justify-between items-center";
+                    btn.className = "w-full text-left p-4 rounded-2xl border-2 border-rose-500 bg-rose-50 text-rose-900 font-bold text-xs sm:text-sm flex justify-between items-center";
                 } else {
-                    btn.className = "w-full text-left p-4 rounded-2xl border border-slate-100 bg-slate-50 text-slate-400 font-medium text-sm flex justify-between items-center opacity-50";
+                    btn.className = "w-full text-left p-4 rounded-2xl border border-slate-100 bg-slate-50 text-slate-400 font-medium text-xs sm:text-sm flex justify-between items-center opacity-50";
                 }
             });
 
@@ -629,24 +799,201 @@
 
         function nextQuestion() {
             qIdx++;
-            if (qIdx < currentQuizSubject.questions.length) {
+            if (qIdx < activeQuestions.length) {
                 renderQuestion();
             } else {
                 showResults();
             }
         }
 
+        // WAEC Official Grading Calculation System
         function showResults() {
             document.getElementById('quiz-screen').classList.add('hidden');
             document.getElementById('results-screen').classList.remove('hidden');
 
-            document.getElementById('final-score').innerText = `${score}/${currentQuizSubject.questions.length}`;
-            document.getElementById('final-xp').innerText = `+${score * 10} XP`;
+            const total = activeQuestions.length;
+            const percentage = Math.round((score / total) * 100);
 
-            confetti({ particleCount: 90, spread: 80, origin: { y: 0.6 } });
+            document.getElementById('final-score').innerText = `${score} / ${total}`;
+            document.getElementById('final-percentage').innerText = `${percentage}%`;
+            document.getElementById('final-xp-gained').innerText = `+${score * 10} XP`;
+            document.getElementById('result-subject-tag').innerText = `${currentQuizSubject.subject.toUpperCase()} PERFORMANCE REPORT`;
+
+            // Compute WAEC Grade
+            let waecGrade = "F9 - Fail";
+            let icon = "⚠️";
+            let iconBg = "bg-rose-100 text-rose-500 border-rose-200";
+
+            if (percentage >= 75) {
+                waecGrade = "A1 - Excellent";
+                icon = "🏆";
+                iconBg = "bg-amber-100 text-amber-500 border-amber-200";
+            } else if (percentage >= 70) {
+                waecGrade = "B2 - Very Good";
+                icon = "🌟";
+                iconBg = "bg-blue-100 text-blue-600 border-blue-200";
+            } else if (percentage >= 65) {
+                waecGrade = "B3 - Good";
+                icon = "👍";
+                iconBg = "bg-emerald-100 text-emerald-600 border-emerald-200";
+            } else if (percentage >= 60) {
+                waecGrade = "C4 - Credit";
+                icon = "📈";
+                iconBg = "bg-slate-100 text-slate-700 border-slate-200";
+            } else if (percentage >= 55) {
+                waecGrade = "C5 - Credit";
+                icon = "📊";
+                iconBg = "bg-slate-100 text-slate-700 border-slate-200";
+            } else if (percentage >= 50) {
+                waecGrade = "C6 - Credit";
+                icon = "✅";
+                iconBg = "bg-slate-100 text-slate-700 border-slate-200";
+            } else if (percentage >= 45) {
+                waecGrade = "D7 - Pass";
+                icon = "⚠️";
+                iconBg = "bg-yellow-100 text-yellow-600 border-yellow-200";
+            } else if (percentage >= 40) {
+                waecGrade = "E8 - Pass";
+                icon = "⚠️";
+                iconBg = "bg-orange-100 text-orange-600 border-orange-200";
+            }
+
+            document.getElementById('final-waec-grade').innerText = waecGrade;
+            const badgeIconEl = document.getElementById('result-badge-icon');
+            badgeIconEl.innerHTML = icon;
+            badgeIconEl.className = `w-20 h-20 ${iconBg} rounded-full flex items-center justify-center mx-auto text-4xl shadow-inner border`;
+
+            if (percentage >= 60) {
+                confetti({ particleCount: 90, spread: 80, origin: { y: 0.6 } });
+            }
         }
 
-        // Init on Dom Loaded
+        // KROOS AI GEMINI INTEGRATION
+        const API_KEY = ""; // Provided runtime by environment
+        const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;
+
+        function sendQuickPrompt(promptText) {
+            switchNavTab('ai');
+            document.getElementById('ai-input').value = promptText;
+            sendAIMessage();
+        }
+
+        function handleAIKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendAIMessage();
+            }
+        }
+
+        async function sendAIMessage() {
+            const inputEl = document.getElementById('ai-input');
+            const messageText = inputEl.value.trim();
+            if (!messageText) return;
+
+            const chatMessages = document.getElementById('ai-chat-messages');
+
+            // Render User Message
+            chatMessages.innerHTML += `
+                <div class="flex items-start justify-end space-x-3">
+                    <div class="bg-indigo-600 text-white rounded-2xl rounded-tr-none p-4 text-xs sm:text-sm leading-relaxed max-w-xl font-medium shadow-md">
+                        ${escapeHtml(messageText)}
+                    </div>
+                </div>
+            `;
+            inputEl.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Render Loading Message
+            const loadingId = 'loading-' + Date.now();
+            chatMessages.innerHTML += `
+                <div id="${loadingId}" class="flex items-start space-x-3">
+                    <div class="w-9 h-9 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
+                        <i class="fas fa-robot animate-spin"></i>
+                    </div>
+                    <div class="bg-slate-100 rounded-2xl rounded-tl-none p-4 text-xs sm:text-sm text-slate-500 font-bold border border-slate-200">
+                        Kroos AI is thinking & researching...
+                    </div>
+                </div>
+            `;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Construct Gemini Payload
+            const systemPrompt = "You are 'Kroos AI', the intelligent academic tutor for Toni Kroos Academy. You help high school (WASSCE / BECE) and university students with step-by-step math, science, humanities, and general research. Format math equations clearly using standard notation. Be encouraging, precise, and educational.";
+
+            const payload = {
+                contents: [{ parts: [{ text: messageText }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            try {
+                const response = await fetch(GEMINI_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                const aiResponseText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "I couldn't process that specific query. Please try rephrasing your research question!";
+
+                // Replace loading with AI response
+                const loadingEl = document.getElementById(loadingId);
+                if (loadingEl) {
+                    loadingEl.outerHTML = `
+                        <div class="flex items-start space-x-3">
+                            <div class="w-9 h-9 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="bg-slate-100 rounded-2xl rounded-tl-none p-4 text-xs sm:text-sm text-slate-800 leading-relaxed max-w-2xl border border-slate-200 space-y-2 font-medium">
+                                <div>${formatAIResponse(aiResponseText)}</div>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                const loadingEl = document.getElementById(loadingId);
+                if (loadingEl) {
+                    loadingEl.outerHTML = `
+                        <div class="flex items-start space-x-3">
+                            <div class="w-9 h-9 rounded-2xl bg-rose-600 text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="bg-rose-50 rounded-2xl rounded-tl-none p-4 text-xs sm:text-sm text-rose-800 border border-rose-200 font-bold">
+                                Connection error. Please check your internet connection and try asking Kroos AI again.
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            if (window.MathJax) MathJax.typesetPromise();
+        }
+
+        function clearAIChat() {
+            document.getElementById('ai-chat-messages').innerHTML = `
+                <div class="flex items-start space-x-3">
+                    <div class="w-9 h-9 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-bold text-sm shadow-md flex-shrink-0">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="bg-slate-100 rounded-2xl rounded-tl-none p-4 text-xs sm:text-sm text-slate-800 leading-relaxed max-w-2xl border border-slate-200 space-y-2">
+                        <p class="font-extrabold text-indigo-900">Conversation reset!</p>
+                        <p>Ask Kroos AI another research question or select a topic above.</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        function formatAIResponse(text) {
+            // Replace line breaks with HTML breaks and convert basic markdown bolding
+            let formatted = text.replace(/\n/g, '<br>');
+            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            return formatted;
+        }
+
+        // Initialize App on DOM Load
         document.addEventListener('DOMContentLoaded', () => {
             updateStatsUI();
             filterLevel('WASSCE');
