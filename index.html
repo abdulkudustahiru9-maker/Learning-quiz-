@@ -1,592 +1,195 @@
-```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toni Kroos Academy - Interactive Learning Engine</title>
-    
-    <!-- Tailwind CSS -->
+    <title>Toni Kroos Academy - Educational Quiz Platform</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax for Formulas -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-    <!-- Canvas Confetti -->
+    <!-- MathJax for Math & Science formulas -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Canvas Confetti CDN -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] }
-                }
-            }
-        }
-    </script>
-    <style>
-        .glass-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
-        }
-        .dark .glass-card {
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-    </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased">
+<body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col font-sans">
 
-    <!-- Header Navigation -->
-    <header class="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
-        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="resetToHome()">
-                <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-xl shadow-lg shadow-indigo-500/30">
-                    <i class="fa-solid fa-graduation-cap"></i>
+    <!-- Header / Navbar with Gamification Dashboard -->
+    <header class="bg-gray-800 border-b border-gray-700 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
+            <!-- Brand -->
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 text-white p-2 rounded-lg font-bold text-xl flex items-center justify-center w-10 h-10 shadow-lg">
+                    <i class="fas fa-graduation-cap"></i>
                 </div>
                 <div>
-                    <span class="font-extrabold text-lg text-slate-900 dark:text-white tracking-tight">Toni Kroos Academy</span>
-                    <span class="block text-xs font-semibold text-indigo-600 dark:text-indigo-400">Interactive Learning Engine</span>
+                    <h1 class="font-bold text-lg text-white leading-tight">Toni Kroos Academy</h1>
+                    <p class="text-xs text-blue-400 font-medium">WASSCE • BECE • Tertiary</p>
                 </div>
             </div>
 
-            <div class="flex items-center space-x-3">
-                <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
-                    <i class="fa-solid fa-moon dark:hidden"></i>
-                    <i class="fa-solid fa-sun hidden dark:block"></i>
-                </button>
+            <!-- Stats Bar (XP & Streaks) -->
+            <div class="flex items-center space-x-4 bg-gray-900/80 px-4 py-2 rounded-xl border border-gray-700">
+                <!-- Streak -->
+                <div class="flex items-center space-x-1.5" title="Daily Study Streak">
+                    <i class="fas fa-fire text-amber-500 text-lg animate-pulse"></i>
+                    <span id="streak-count" class="font-bold text-white text-sm">1</span>
+                    <span class="text-xs text-gray-400 font-semibold">Days</span>
+                </div>
+                
+                <div class="h-4 w-px bg-gray-700"></div>
+
+                <!-- XP -->
+                <div class="flex items-center space-x-1.5" title="Total XP Earned">
+                    <i class="fas fa-bolt text-yellow-400 text-lg"></i>
+                    <span id="xp-count" class="font-bold text-white text-sm">0</span>
+                    <span class="text-xs text-yellow-400/80 font-semibold">XP</span>
+                </div>
+
+                <div class="h-4 w-px bg-gray-700"></div>
+
+                <!-- Level Badge -->
+                <div class="flex items-center space-x-1" title="Current Level">
+                    <i class="fas fa-shield-halved text-blue-400 text-sm"></i>
+                    <span id="user-level" class="text-xs font-bold text-blue-300">Scholar I</span>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="max-w-6xl mx-auto px-4 py-8">
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto p-4 md:p-6 space-y-6">
         
-        <!-- Welcome / Course Selection Screen -->
-        <div id="homeView" class="space-y-8">
-            <div class="text-center max-w-3xl mx-auto space-y-4 pt-2">
-                <span class="inline-flex items-center px-3.5 py-1 rounded-full text-xs font-bold bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/50">
-                    <i class="fa-solid fa-circle-check mr-2"></i> 5+ Detailed Practice Questions Per Subject
-                </span>
-                <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
-                    Select Your Level & Course Stream
-                </h1>
-                <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base">
-                    Choose your educational stage and major stream to test your knowledge with 5 full step-by-step solved questions per subject!
-                </p>
+        <!-- Welcome Banner & Badges Preview -->
+        <section class="bg-gradient-to-r from-blue-900/40 via-indigo-900/40 to-purple-900/40 border border-blue-500/30 rounded-2xl p-5 shadow-xl">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-white">Welcome back, Scholar! 👋</h2>
+                    <p class="text-sm text-gray-300 mt-1">Keep your daily streak alive and gain XP by answering questions correctly!</p>
+                </div>
+                <!-- Badges Display -->
+                <div class="flex items-center space-x-2 bg-gray-800/80 px-3 py-2 rounded-lg border border-gray-700">
+                    <span class="text-xs font-semibold text-gray-400 mr-1">Badges:</span>
+                    <span title="First Quiz Completed" id="badge-first" class="opacity-30 text-lg">🎯</span>
+                    <span title="3 Day Streak" id="badge-streak" class="opacity-30 text-lg">🔥</span>
+                    <span title="Perfect Quiz Score" id="badge-perfect" class="opacity-30 text-lg">👑</span>
+                </div>
             </div>
+        </section>
 
-            <!-- DUAL SELECTOR BOX (Level + Course) -->
-            <div class="max-w-2xl mx-auto glass-card p-6 rounded-2xl shadow-xl border border-indigo-100 dark:border-slate-800 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Dynamic Content Section for Quizzes -->
+        <div id="quiz-app-container">
+            <!-- Educational Level & Subject Selector Rendered Here -->
+            <div class="bg-gray-800 rounded-2xl border border-gray-700 p-6 text-center space-y-4">
+                <i class="fas fa-book-open text-4xl text-blue-400"></i>
+                <h3 class="text-lg font-bold text-white">Ready to Practice?</h3>
+                <p class="text-sm text-gray-400">Select your level and course to start earning XP and boosting your aggregate!</p>
                 
-                <!-- 1. Education Level -->
-                <div class="space-y-2">
-                    <label class="block text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-                        <i class="fa-solid fa-school mr-1"></i> Level of Education:
-                    </label>
-                    <select id="levelSelect" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-                        <option value="wassce">🏫 WASSCE / Senior High School (SHS)</option>
-                        <option value="bece">🎓 BECE / Junior High School (JHS)</option>
-                        <option value="tertiary">🏛️ University / Tertiary Level</option>
-                    </select>
-                </div>
-
-                <!-- 2. Course / Department -->
-                <div class="space-y-2">
-                    <label class="block text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-                        <i class="fa-solid fa-book-bookmark mr-1"></i> Course / Stream:
-                    </label>
-                    <select id="courseSelect" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-                    </select>
-                </div>
-
-            </div>
-
-            <!-- Header Info for Selected Stream -->
-            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
-                <h2 id="streamTitle" class="text-xl font-extrabold text-slate-900 dark:text-white flex items-center">
-                    <i class="fa-solid fa-layer-group text-indigo-600 mr-2"></i> Available Elective Subjects
-                </h2>
-                <span id="subjectCountBadge" class="text-xs font-bold bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full">
-                    0 Subjects
-                </span>
-            </div>
-
-            <!-- Subject Cards Container -->
-            <div id="subjectCardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
-            </div>
-        </div>
-
-        <!-- Active Quiz View -->
-        <div id="quizView" class="hidden max-w-2xl mx-auto space-y-6">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400">
-                <button onclick="resetToHome()" class="hover:text-slate-800 dark:hover:text-white flex items-center">
-                    <i class="fa-solid fa-xmark mr-1 text-sm"></i> Exit Practice
-                </button>
-                <div id="questionTracker">Question 1 of 5</div>
-                <div id="activeBadge" class="text-indigo-600 font-extrabold uppercase tracking-wider">PRACTICE QUIZ</div>
-            </div>
-
-            <div class="w-full bg-slate-200 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
-                <div id="progressBar" class="bg-indigo-600 h-full w-0 transition-all duration-300"></div>
-            </div>
-
-            <div class="glass-card rounded-2xl p-6 md:p-8 space-y-6 border border-slate-200 dark:border-slate-800 shadow-xl">
-                <div id="questionText" class="text-lg md:text-xl font-bold text-slate-900 dark:text-white leading-relaxed"></div>
-                <div id="optionsContainer" class="space-y-3 pt-2"></div>
-
-                <div id="explanationBox" class="hidden p-4 rounded-xl bg-indigo-50/70 dark:bg-slate-800/90 border border-indigo-200 dark:border-slate-700 space-y-2">
-                    <div class="font-bold text-xs text-indigo-600 dark:text-indigo-400 flex items-center">
-                        <i class="fa-solid fa-lightbulb mr-1.5"></i> Step-by-Step Solution & Explanation
-                    </div>
-                    <div id="explanationText" class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed"></div>
-                </div>
-
-                <button id="nextBtn" onclick="nextQuestion()" class="hidden w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg shadow-indigo-500/30 transition">
-                    Next Question <i class="fa-solid fa-arrow-right ml-2"></i>
+                <!-- Quick level select demo button -->
+                <button onclick="startDemoQuiz()" class="mt-4 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition shadow-lg">
+                    <i class="fas fa-play mr-2"></i> Start Daily Practice Quiz
                 </button>
             </div>
         </div>
 
-        <!-- Result View -->
-        <div id="resultView" class="hidden max-w-xl mx-auto space-y-6 text-center">
-            <div class="glass-card rounded-2xl p-8 space-y-6 border border-slate-200 dark:border-slate-800 shadow-2xl">
-                <div class="w-20 h-20 mx-auto rounded-full bg-indigo-100 dark:bg-indigo-950/80 text-indigo-600 flex items-center justify-center text-3xl font-extrabold">
-                    <i class="fa-solid fa-trophy"></i>
-                </div>
-                <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white">Practice Set Complete!</h2>
-                
-                <div class="space-y-1">
-                    <div id="finalScore" class="text-4xl font-extrabold text-indigo-600">0/5</div>
-                    <div id="scorePercentage" class="text-sm font-semibold text-slate-500 dark:text-slate-400">Score Percentage: 0%</div>
-                </div>
-
-                <p id="scoreFeedback" class="text-xs text-slate-600 dark:text-slate-400 px-4">
-                    Great job practicing! Keep reviewing your solutions to master every subject.
-                </p>
-
-                <button onclick="resetToHome()" class="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg shadow-indigo-500/30 transition">
-                    Select Another Course <i class="fa-solid fa-rotate-right ml-2"></i>
-                </button>
-            </div>
-        </div>
     </main>
 
-    <!-- Master Database & Script Engine -->
+    <!-- Footer -->
+    <footer class="bg-gray-800 border-t border-gray-700 py-4 mt-8 text-center text-xs text-gray-500">
+        <p>&copy; 2026 Toni Kroos Academy. Powered by Netlify & GitHub.</p>
+    </footer>
+
+    <!-- Gamification Logic Script -->
     <script>
-        const courseMapping = {
-            wassce: [
-                { id: 'gen_science', name: 'General Science' },
-                { id: 'gen_arts', name: 'General Arts' },
-                { id: 'business', name: 'Business Stream' },
-                { id: 'home_econ', name: 'Home Economics' },
-                { id: 'vis_arts', name: 'Visual Arts' },
-                { id: 'agric_sci', name: 'Agricultural Science' }
-            ],
-            bece: [
-                { id: 'bece_core', name: 'BECE Core Subjects (JHS 1 - 3)' }
-            ],
-            tertiary: [
-                { id: 'tertiary_cs', name: 'Computer Science & Software' },
-                { id: 'tertiary_math', name: 'Mathematics & Engineering' }
-            ]
+        // --- GAMIFICATION & USER PROGRESS ENGINE ---
+        const USER_DATA_KEY = 'tka_user_stats';
+
+        // Load or initialize user stats
+        let userStats = JSON.parse(localStorage.getItem(USER_DATA_KEY)) || {
+            xp: 0,
+            streak: 1,
+            lastVisit: new Date().toDateString(),
+            badges: {
+                firstQuiz: false,
+                threeDayStreak: false,
+                perfectScore: false
+            }
         };
 
-        const subjectDatabase = {
-            // WASSCE General Science
-            gen_science: [
-                { id: 'elect_math', name: 'Elective Mathematics', desc: 'Matrices, Calculus, Vectors & Polynomials', icon: 'fa-calculator' },
-                { id: 'biology', name: 'Biology', desc: 'Cells, Fungal Hyphae, Photosynthesis & Mitosis', icon: 'fa-dna' },
-                { id: 'physics', name: 'Physics', desc: 'Ohm’s Law, Resistance, Acceleration & Work', icon: 'fa-bolt' },
-                { id: 'chemistry', name: 'Chemistry', desc: 'Atomic Number, Formulas, pH & Moles', icon: 'fa-flask' }
-            ],
-            // WASSCE General Arts
-            gen_arts: [
-                { id: 'core_math', name: 'Core Mathematics', desc: 'Expansion, Quadratics, Percentages & Interest', icon: 'fa-square-root-variable' },
-                { id: 'econ', name: 'Economics', desc: 'Demand, Supply, Inflation, GDP & Cost', icon: 'fa-chart-line' },
-                { id: 'gov', name: 'Government', desc: 'Legislature, Judiciary, Arms of Gov & Sovereignty', icon: 'fa-landmark' },
-                { id: 'geog', name: 'Geography', desc: 'Weathering, Planets, Earth Rotation & Maps', icon: 'fa-earth-africa' },
-                { id: 'lit', name: 'Literature-in-English', desc: 'Simile, Metaphor, Sonnets & Protagonists', icon: 'fa-book-open' }
-            ],
-            // WASSCE Business
-            business: [
-                { id: 'fin_acc', name: 'Financial Accounting', desc: 'Double-entry, Assets, Trial Balance & Cash Book', icon: 'fa-receipt' },
-                { id: 'cost_acc', name: 'Cost Accounting', desc: 'Labor Costs, Materials, Overheads & Prime Cost', icon: 'fa-file-invoice-dollar' },
-                { id: 'bus_mgmt', name: 'Business Management', desc: 'Functions, 4Ps Marketing, HR & Delegation', icon: 'fa-briefcase' }
-            ],
-            // WASSCE Home Economics
-            home_econ: [
-                { id: 'food_nutr', name: 'Food & Nutrition', desc: 'Vitamins, Proteins, Carbohydrates & Scurvy', icon: 'fa-utensils' },
-                { id: 'mgmt_living', name: 'Management-in-Living', desc: 'Budgeting, Consumer Rights & Time Management', icon: 'fa-house-user' },
-                { id: 'cloth_text', name: 'Clothing & Textiles', desc: 'Fibers, Seams, Pattern Drafting & Fabric Care', icon: 'fa-shirt' }
-            ],
-            // WASSCE Visual Arts
-            vis_arts: [
-                { id: 'gfx_design', name: 'Graphic Design', desc: 'RGB vs CMYK, Typography, Branding & Layouts', icon: 'fa-palette' },
-                { id: 'picture_making', name: 'Picture Making', desc: 'Primary Colors, Perspective, Chiaroscuro & Canvas', icon: 'fa-image' },
-                { id: 'gka', name: 'General Knowledge in Art', desc: 'Kente Weaving, Terracotta, Nok Culture & History', icon: 'fa-paint-brush' }
-            ],
-            // WASSCE Agricultural Science
-            agric_sci: [
-                { id: 'gen_agric', name: 'General Agriculture', desc: 'Soil Humus, Erosion Prevention, Mechanization & Rotation', icon: 'fa-wheat-awn' },
-                { id: 'animal_hosp', name: 'Animal Husbandry', desc: 'Ruminants, Poultry Brooding, Vaccination & Insemination', icon: 'fa-cow' }
-            ],
-            // BECE Core
-            bece_core: [
-                { id: 'bece_math', name: 'BECE Core Math', desc: 'Sets, Fraction Addition, Angles & Ratio Sharing', icon: 'fa-calculator' },
-                { id: 'bece_sci', name: 'BECE Integrated Science', desc: 'Photosynthesis Equation, Matter & Solar System', icon: 'fa-flask' },
-                { id: 'bece_ict', name: 'BECE Computing / ICT', desc: 'CPU Roles, RAM vs Hard Drive & Web Browsers', icon: 'fa-desktop' }
-            ],
-            // Tertiary
-            tertiary_cs: [
-                { id: 'dsa_cache', name: 'Data Structures & Cache Architecture', desc: 'L1/L2 Cache, Arrays vs Linked Lists & Stacks', icon: 'fa-microchip' }
-            ],
-            tertiary_math: [
-                { id: 'linear_alg', name: 'Linear Algebra', desc: 'Determinants, Inverse Conditions, Vectors & Eigenvalues', icon: 'fa-square-root-variable' }
-            ]
-        };
+        // Check & Update Daily Streak
+        function updateStreak() {
+            const today = new Date().toDateString();
+            const yesterday = new Date(Date.now() - 86400000).toDateString();
 
-        // COMPREHENSIVE QUESTION DATABASE (5 Questions Per Subject)
-        const quizQuestions = [
-            // --- ELECTIVE MATH (5) ---
-            { subjectId: 'elect_math', question: 'Solve matrix addition: $$\\begin{bmatrix} 2 & 4 \\\\ 1 & 3 \\end{bmatrix} + \\begin{bmatrix} 5 & 1 \\\\ 2 & 6 \\end{bmatrix}$$', options: ['$$\\begin{bmatrix} 7 & 5 \\\\ 3 & 9 \\end{bmatrix}$$', '$$\\begin{bmatrix} 10 & 4 \\\\ 2 & 18 \\end{bmatrix}$$', '$$\\begin{bmatrix} 7 & 4 \\\\ 3 & 6 \\end{bmatrix}$$'], correct: 0, explanation: 'Add matching positions: $2+5=7$, $4+1=5$, $1+2=3$, $3+6=9$.' },
-            { subjectId: 'elect_math', question: 'Find the determinant of matrix $$\\begin{bmatrix} 4 & 2 \\\\ 1 & 3 \\end{bmatrix}$$:', options: ['10', '12', '14'], correct: 0, explanation: '$$\\det = (4 \\times 3) - (2 \\times 1) = 12 - 2 = 10$$.' },
-            { subjectId: 'elect_math', question: 'Calculate the matrix product: $$\\begin{bmatrix} 1 & 2 \\\\ 0 & 3 \\end{bmatrix} \\begin{bmatrix} 2 & 1 \\\\ 4 & 0 \\end{bmatrix}$$', options: ['$$\\begin{bmatrix} 10 & 1 \\\\ 12 & 0 \\end{bmatrix}$$', '$$\\begin{bmatrix} 2 & 2 \\\\ 0 & 0 \\end{bmatrix}$$', '$$\\begin{bmatrix} 8 & 3 \\\\ 4 & 1 \\end{bmatrix}$$'], correct: 0, explanation: 'Row 1 x Col 1: $(1)(2)+(2)(4) = 10$. Row 1 x Col 2: $(1)(1)+(2)(0)=1$. Row 2 x Col 1: $(0)(2)+(3)(4)=12$. Row 2 x Col 2: $(0)(1)+(3)(0)=0$.' },
-            { subjectId: 'elect_math', question: 'What is the scalar product $$3 \\times \\begin{bmatrix} 2 & -1 \\\\ 4 & 0 \\end{bmatrix}$$?', options: ['$$\\begin{bmatrix} 6 & -3 \\\\ 12 & 0 \\end{bmatrix}$$', '$$\\begin{bmatrix} 5 & 2 \\\\ 7 & 3 \\end{bmatrix}$$', '$$\\begin{bmatrix} 6 & -1 \\\\ 12 & 0 \\end{bmatrix}$$'], correct: 0, explanation: 'Multiply every individual element in the matrix by the scalar 3.' },
-            { subjectId: 'elect_math', question: 'Simplify $$(3 + 2i) + (4 - 5i)$$ in complex number addition:', options: ['$$7 - 3i$$', '$$7 + 7i$$', '$$12 - 10i$$'], correct: 0, explanation: 'Combine real parts $(3+4=7)$ and imaginary parts $(2i - 5i = -3i)$.' },
-
-            // --- BIOLOGY (5) ---
-            { subjectId: 'biology', question: 'Which hyphae structure anchors *Rhizopus* fungi to its substrate?', options: ['Rhizoids', 'Stolons', 'Sporangiophores'], correct: 0, explanation: 'Rhizoids anchor the mold to its nutrient source and secrete digestive enzymes.' },
-            { subjectId: 'biology', question: 'What tough nitrogenous polysaccharide forms fungal cell walls?', options: ['Chitin', 'Cellulose', 'Peptidoglycan'], correct: 0, explanation: 'Fungal cell walls are composed of chitin, unlike plant cell walls made of cellulose.' },
-            { subjectId: 'biology', question: 'Unlike respiration, photosynthesis is an anabolic process that:', options: ['Stores energy by producing glucose using sunlight', 'Breaks down glucose to release ATP', 'Consumes oxygen to produce carbon dioxide'], correct: 0, explanation: 'Photosynthesis synthesizes glucose from CO2 and water using solar energy.' },
-            { subjectId: 'biology', question: 'Mitosis results in daughter cells that are genetically:', options: ['Identical diploid cells', 'Diverse haploid gametes', 'Polyploid mutations'], correct: 0, explanation: 'Mitosis creates two genetically identical daughter cells with the same chromosome count.' },
-            { subjectId: 'biology', question: 'Enzymes speed up metabolic reactions in living organisms by:', options: ['Lowering the activation energy', 'Raising body temperature', 'Consuming substrates permanently'], correct: 0, explanation: 'Enzymes act as biological catalysts by lowering required activation energy.' },
-
-            // --- PHYSICS (5) ---
-            { subjectId: 'physics', question: 'According to Ohm\'s Law, voltage ($$V$$) across a conductor equals:', options: ['$$V = I \\times R$$', '$$V = I / R$$', '$$V = I + R$$'], correct: 0, explanation: 'Ohm’s law states Voltage ($$V$$) = Current ($$I$$) multiplied by Resistance ($$R$$).' },
-            { subjectId: 'physics', question: 'What is the standard SI unit of electrical resistance?', options: ['Ohm ($\\Omega$)', 'Volt (V)', 'Ampere (A)'], correct: 0, explanation: 'Resistance is measured in Ohms ($\\Omega$).' },
-            { subjectId: 'physics', question: 'What formula calculates linear acceleration ($$a$$) given initial velocity ($$u$$) and final velocity ($$v$$)?', options: ['$$a = \\frac{v - u}{t}$$', '$$a = v \\times t$$', '$$a = \\frac{u + v}{2}$$'], correct: 0, explanation: 'Acceleration is the rate of change of velocity over time: $$a = (v-u)/t$$.' },
-            { subjectId: 'physics', question: 'Which equation correctly expresses Kinetic Energy ($$E_k$$) of a moving body?', options: ['$$E_k = \\frac{1}{2}m v^2$$', '$$E_k = m g h$$', '$$E_k = m v$$'], correct: 0, explanation: 'Kinetic energy depends on mass and the square of velocity ($$\\frac{1}{2}mv^2$$).' },
-            { subjectId: 'physics', question: 'How much Work ($$W$$) is done when a force of $$10\\text{ N}$$ moves an object $$5\\text{ m}$$ in its direction?', options: ['$$50\\text{ Joules}$$', '$$15\\text{ Joules}$$', '$$2\\text{ Joules}$$'], correct: 0, explanation: '$$\\text{Work} = \\text{Force} \\times \\text{Distance} = 10 \\times 5 = 50\\text{ J}$$.' },
-
-            // --- CHEMISTRY (5) ---
-            { subjectId: 'chemistry', question: 'What is the atomic number of Carbon on the periodic table?', options: ['6', '12', '8'], correct: 0, explanation: 'Carbon has 6 protons in its nucleus, giving it atomic number 6.' },
-            { subjectId: 'chemistry', question: 'What is the chemical formula for common table salt?', options: ['$$\\text{NaCl}$$', '$$\\text{NaHCO}_3$$', '$$\\text{KCl}$$'], correct: 0, explanation: 'Sodium Chloride is written chemically as $\\text{NaCl}$.' },
-            { subjectId: 'chemistry', question: 'On the pH scale at $$25^\\circ\\text{C}$$, a neutral solution has a pH value of:', options: ['7', '0', '14'], correct: 0, explanation: 'A pH of 7 indicates a perfectly neutral solution (like pure water).' },
-            { subjectId: 'chemistry', question: 'How many particles are contained in 1 mole of any substance (Avogadro\'s number)?', options: ['$$6.022 \\times 10^{23}$$', '$$3.00 \\times 10^8$$', '$$1.60 \\times 10^{-19}$$'], correct: 0, explanation: 'Avogadro’s constant is $$6.022 \\times 10^{23}\\text{ mol}^{-1}$$.' },
-            { subjectId: 'chemistry', question: 'Elements located in Group 1 of the Periodic Table are known as:', options: ['Alkali Metals', 'Halogens', 'Noble Gases'], correct: 0, explanation: 'Group 1 elements (Lithium, Sodium, Potassium, etc.) are Alkali Metals.' },
-
-            // --- CORE MATH (5) ---
-            { subjectId: 'core_math', question: 'Expand the algebraic expression: $$(x + 3)(x + 2)$$', options: ['$$x^2 + 5x + 6$$', '$$x^2 + 6x + 6$$', '$$x^2 + 5x + 5$$'], correct: 0, explanation: 'FOIL expansion: $$x^2 + 2x + 3x + 6 = x^2 + 5x + 6$$.' },
-            { subjectId: 'core_math', question: 'Solve for $$x$$ in the quadratic equation $$x^2 - 9 = 0$$:', options: ['$$x = \\pm 3$$', '$$x = 9$$', '$$x = 3$$'], correct: 0, explanation: '$$x^2 = 9 \\implies x = \\sqrt{9} = \\pm 3$$.' },
-            { subjectId: 'core_math', question: 'Express $$\\frac{3}{5}$$ as a percentage:', options: ['$$60\\%$$', '$$30\\%$$', '$$75\\%$$'], correct: 0, explanation: '$$\\frac{3}{5} \\times 100\\% = 60\\%$$.' },
-            { subjectId: 'core_math', question: 'Calculate Simple Interest on $$\\$1,000$$ at $$5\\%$$ per annum for $$2$$ years:', options: ['$$\\$100$$', '$$\\$50$$', '$$\\$200$$'], correct: 0, explanation: '$$I = \\frac{P \\times R \\times T}{100} = \\frac{1000 \\times 5 \\times 2}{100} = \\$100$$.' },
-            { subjectId: 'core_math', question: 'What is the probability of rolling a prime number on a fair 6-sided die?', options: ['$$\\frac{1}{2}$$', '$$\\frac{1}{3}$$', '$$\\frac{2}{3}$$'], correct: 0, explanation: 'Prime numbers on a die are {2, 3, 5} (3 outcomes out of 6) $$\\implies \\frac{3}{6} = \\frac{1}{2}$$.' },
-
-            // --- ECONOMICS (5) ---
-            { subjectId: 'econ', question: 'According to the Law of Demand, as the price of a good increases, quantity demanded:', options: ['Decreases', 'Increases', 'Stays constant'], correct: 0, explanation: 'Price and quantity demanded share an inverse relationship.' },
-            { subjectId: 'econ', question: 'The Law of Supply states that producers will supply more goods when prices:', options: ['Rise', 'Fall', 'Remain subsidized'], correct: 0, explanation: 'Higher market prices incentive producers to supply larger quantities.' },
-            { subjectId: 'econ', question: 'What term defines a general and sustained increase in the overall price level of goods?', options: ['Inflation', 'Deflation', 'Devaluation'], correct: 0, explanation: 'Inflation reduces purchasing power over time.' },
-            { subjectId: 'econ', question: 'What is "Opportunity Cost"?', options: ['The cost of the next best alternative foregone', 'The total money spent on production', 'The market price of a commodity'], correct: 0, explanation: 'Opportunity cost measures what you give up when making a choice.' },
-            { subjectId: 'econ', question: 'Gross Domestic Product (GDP) measures:', options: ['Total market value of all final goods produced within a country in a year', 'Total tax collected by the government', 'Total exports minus total imports only'], correct: 0, explanation: 'GDP quantifies total national economic output within country borders.' },
-
-            // --- GOVERNMENT (5) ---
-            { subjectId: 'gov', question: 'What is the primary constitutional duty of the Legislative arm of government?', options: ['Enacting and passing laws', 'Enforcing laws', 'Interpreting judicial statutes'], correct: 0, explanation: 'The Legislature drafts, debates, and enacts laws.' },
-            { subjectId: 'gov', question: 'The Judiciary branch of government is responsible for:', options: ['Interpreting laws and resolving disputes', 'Implementing public policies', 'Preparing annual fiscal budgets'], correct: 0, explanation: 'Judges interpret laws and enforce justice.' },
-            { subjectId: 'gov', question: 'Which three organs form the classic separation of powers in a democracy?', options: ['Legislature, Executive, Judiciary', 'Police, Army, Civil Service', 'President, Cabinet, Monarchy'], correct: 0, explanation: 'Democracy separates powers into Legislature, Executive, and Judiciary.' },
-            { subjectId: 'gov', question: 'The doctrine of the "Rule of Law" implies that:', options: ['All citizens and authorities are subject to the same laws', 'The military rules supreme', 'Judges make laws without parliamentary approval'], correct: 0, explanation: 'Rule of Law ensures equality before the law without arbitrary privilege.' },
-            { subjectId: 'gov', question: 'What is "Sovereignty" in political science?', options: ['The supreme legal authority of a state over its territory', 'A country ruled by foreign powers', 'The right to hold elections every year'], correct: 0, explanation: 'Sovereignty is absolute independent political power.' },
-
-            // --- GEOGRAPHY (5) ---
-            { subjectId: 'geog', question: 'Which weathering process involves freeze-thaw water expansion in rock cracks?', options: ['Physical / Mechanical Weathering', 'Chemical Weathering', 'Biological Weathering'], correct: 0, explanation: 'Frost wedging is a key physical weathering process.' },
-            { subjectId: 'geog', question: 'Which planet in our solar system is closest to the Sun?', options: ['Mercury', 'Venus', 'Mars'], correct: 0, explanation: 'Mercury orbits closest to the Sun.' },
-            { subjectId: 'geog', question: 'The rotation of Earth on its axis once every 24 hours causes:', options: ['Day and night', 'Changing seasons', 'Oceanic tides'], correct: 0, explanation: 'Rotation causes day and night, while revolution around the sun causes seasons.' },
-            { subjectId: 'geog', question: 'A map scale of $$1 : 50,000$$ means $$1\\text{ cm}$$ on the map represents how many meters on ground?', options: ['$$500\\text{ meters}$$', '$$50\\text{ meters}$$', '$$5,000\\text{ meters}$$'], correct: 0, explanation: '$$50,000\\text{ cm} = 500\\text{ meters}$$.' },
-            { subjectId: 'geog', question: 'Lines of Latitude measure angular distances north or south of the:', options: ['Equator', 'Prime Meridian', 'Tropic of Cancer'], correct: 0, explanation: 'Latitude lines run horizontally parallel to the Equator ($0^\\circ$).' },
-
-            // --- LITERATURE-IN-ENGLISH (5) ---
-            { subjectId: 'lit', question: 'Which literary device directly compares two things using "like" or "as"?', options: ['Simile', 'Metaphor', 'Personification'], correct: 0, explanation: 'Similes explicitly use "like" or "as" (e.g., "brave as a lion").' },
-            { subjectId: 'lit', question: 'What figure of speech repeats initial consonant sounds in consecutive words?', options: ['Alliteration', 'Assonance', 'Onomatopoeia'], correct: 0, explanation: 'Alliteration repeats initial consonant sounds (e.g., "Peter Piper picked").' },
-            { subjectId: 'lit', question: 'The main central character around whom a story revolves is called the:', options: ['Protagonist', 'Antagonist', 'Foil'], correct: 0, explanation: 'The protagonist leads the story arc.' },
-            { subjectId: 'lit', question: 'How many lines are contained in a standard Shakespearean Sonnet poem?', options: ['14 lines', '12 lines', '16 lines'], correct: 0, explanation: 'Sonnets strictly consist of 14 lines in iambic pentameter.' },
-            { subjectId: 'lit', question: 'Words like "buzz", "crash", and "hiss" that imitate real sounds are examples of:', options: ['Onomatopoeia', 'Hyperbole', 'Irony'], correct: 0, explanation: 'Onomatopoeia forms words from sounds.' },
-
-            // --- FINANCIAL ACCOUNTING (5) ---
-            { subjectId: 'fin_acc', question: 'In double-entry accounting, an increase in an asset account is recorded as a:', options: ['Debit', 'Credit', 'Liability'], correct: 0, explanation: 'Assets increase on the Debit side and decrease on Credit.' },
-            { subjectId: 'fin_acc', question: 'What is the fundamental Accounting Equation?', options: ['$$\\text{Assets} = \\text{Liabilities} + \\text{Owner\'s Equity}$$', '$$\\text{Assets} = \\text{Revenue} - \\text{Expenses}$$', '$$\\text{Liabilities} = \\text{Assets} + \\text{Equity}$$'], correct: 0, explanation: 'The balance sheet equation must always balance.' },
-            { subjectId: 'fin_acc', question: 'What is the primary purpose of preparing a Trial Balance?', options: ['To test mathematical accuracy of debit and credit balances', 'To calculate exact net profit', 'To pay government taxes'], correct: 0, explanation: 'Trial balance checks that total debits equal total credits.' },
-            { subjectId: 'fin_acc', question: 'Which financial book records all cash and bank receipts and payments?', options: ['Cash Book', 'General Journal', 'Sales Ledger'], correct: 0, explanation: 'The Cash Book records all liquid cash transactions.' },
-            { subjectId: 'fin_acc', question: 'The gradual allocation of the cost of a fixed physical asset over its useful life is:', options: ['Depreciation', 'Appreciation', 'Amortization'], correct: 0, explanation: 'Depreciation accounts for wear and tear of physical fixed assets.' },
-
-            // --- COST ACCOUNTING (5) ---
-            { subjectId: 'cost_acc', question: 'Wages paid to factory workers directly assembling products are classified as:', options: ['Direct Labor Cost', 'Indirect Overhead', 'Administrative Cost'], correct: 0, explanation: 'Direct labor directly creates the finished good.' },
-            { subjectId: 'cost_acc', question: 'Raw materials consumed directly in producing goods are:', options: ['Direct Material Cost', 'Factory Overhead', 'Period Expense'], correct: 0, explanation: 'Direct materials are traceable parts of final units.' },
-            { subjectId: 'cost_acc', question: 'Factory electricity and building rent are categorized as:', options: ['Overhead Costs', 'Prime Costs', 'Direct Expenses'], correct: 0, explanation: 'Overheads are indirect costs required for operations.' },
-            { subjectId: 'cost_acc', question: 'Prime Cost is the sum of:', options: ['Direct Materials + Direct Labor + Direct Expenses', 'Factory Overheads + Selling Expenses', 'Total Cost + Profit Margin'], correct: 0, explanation: 'Prime cost represents all direct manufacturing costs combined.' },
-            { subjectId: 'cost_acc', question: 'Costs that change directly in total proportion to production output are:', options: ['Variable Costs', 'Fixed Costs', 'Sunk Costs'], correct: 0, explanation: 'Variable costs scale with production volume.' },
-
-            // --- BUSINESS MANAGEMENT (5) ---
-            { subjectId: 'bus_mgmt', question: 'Which management function involves setting goals and choosing strategies?', options: ['Planning', 'Controlling', 'Staffing'], correct: 0, explanation: 'Planning defines objectives and maps out action plans.' },
-            { subjectId: 'bus_mgmt', question: 'The 4Ps of the Marketing Mix consist of Product, Price, Place, and:', options: ['Promotion', 'Profit', 'Process'], correct: 0, explanation: 'Product, Price, Place, and Promotion form the classic 4Ps.' },
-            { subjectId: 'bus_mgmt', question: 'A business owned and operated by a single individual with unlimited liability is a:', options: ['Sole Proprietorship', 'Partnership', 'Public Limited Company'], correct: 0, explanation: 'Sole proprietorships have one owner with full liability.' },
-            { subjectId: 'bus_mgmt', question: 'Delegation in management involves:', options: ['Assigning authority and responsibility to subordinates', 'Firing underperforming employees', 'Promoting managers'], correct: 0, explanation: 'Delegation distributes tasks down the chain of command.' },
-            { subjectId: 'bus_mgmt', question: 'Human Resource Management primarily focuses on:', options: ['Recruiting, training, and managing personnel', 'Managing financial investments', 'Designing logos'], correct: 0, explanation: 'HR manages people and workforce operations.' },
-
-            // --- FOOD & NUTRITION (5) ---
-            { subjectId: 'food_nutr', question: 'Deficiency in Vitamin A primarily causes which vision condition?', options: ['Night Blindness', 'Scurvy', 'Rickets'], correct: 0, explanation: 'Vitamin A is crucial for retinal health and night vision.' },
-            { subjectId: 'food_nutr', question: 'Which nutrient is essential for body growth, cellular repair, and maintenance?', options: ['Protein', 'Carbohydrate', 'Fat'], correct: 0, explanation: 'Proteins provide amino acids for tissue growth and repair.' },
-            { subjectId: 'food_nutr', question: 'Carbohydrates primarily serve the body as a source of:', options: ['Immediate Energy', 'Immune Antibodies', 'Bone Mineralization'], correct: 0, explanation: 'Carbohydrates break down into glucose for energy.' },
-            { subjectId: 'food_nutr', question: 'Scurvy is caused by a severe deficiency of which vitamin?', options: ['Vitamin C', 'Vitamin D', 'Vitamin B12'], correct: 0, explanation: 'Vitamin C deficiency leads to bleeding gums and scurvy.' },
-            { subjectId: 'food_nutr', question: 'Refrigeration preserves food by:', options: ['Slowing down microbial growth and enzyme activity', 'Killing all bacteria instantly', 'Removing water completely'], correct: 0, explanation: 'Low temperatures slow metabolic decay.' },
-
-            // --- MANAGEMENT-IN-LIVING (5) ---
-            { subjectId: 'mgmt_living', question: 'Creating a family budget helps households to:', options: ['Plan income allocation and avoid overspending', 'Increase interest rates', 'Avoid paying taxes'], correct: 0, explanation: 'Budgeting balances income against expenditure.' },
-            { subjectId: 'mgmt_living', question: 'Consumer rights protect buyers against:', options: ['Unsafe products and deceptive advertising', 'Paying fair prices', 'Buying durable goods'], correct: 0, explanation: 'Consumer laws prevent exploitation and unsafe goods.' },
-            { subjectId: 'mgmt_living', question: 'Time management involves:', options: ['Prioritizing tasks to accomplish goals efficiently', 'Working continuous hours without rest', 'Avoiding schedules'], correct: 0, explanation: 'Time management optimizes personal productivity.' },
-            { subjectId: 'mgmt_living', question: 'Human resources in family living include:', options: ['Skills, energy, and time', 'Money and furniture', 'Houses and cars'], correct: 0, explanation: 'Human resources originate within people (knowledge, energy, skills).' },
-            { subjectId: 'mgmt_living', question: 'Providing adequate housing fulfills which basic human need category?', options: ['Physical / Shelter Need', 'Social Status Need', 'Luxury Need'], correct: 0, explanation: 'Shelter protects against weather and hazards.' },
-
-            // --- CLOTHING & TEXTILES (5) ---
-            { subjectId: 'cloth_text', question: 'Which fiber is a natural plant-based textile fiber?', options: ['Cotton', 'Nylon', 'Polyester'], correct: 0, explanation: 'Cotton comes directly from the cotton plant boll.' },
-            { subjectId: 'cloth_text', question: 'A plain seam in garment construction is made by:', options: ['Joining two fabric edges right sides together with stitching', 'Cutting fabric with pinking shears only', 'Hand-weaving threads'], correct: 0, explanation: 'Plain seams are standard structural seams.' },
-            { subjectId: 'cloth_text', question: 'Pattern drafting in clothing construction refers to:', options: ['Creating paper templates based on body measurements', 'Dyeing finished garments', 'Washing fabrics'], correct: 0, explanation: 'Patterns guide fabric cutting.' },
-            { subjectId: 'cloth_text', question: 'Basting or tacking stitches are temporary stitches used to:', options: ['Hold fabric layers together before final stitching', 'Finish seam edges permanently', 'Embroider decorative logos'], correct: 0, explanation: 'Basting holds pieces in place temporarily.' },
-            { subjectId: 'cloth_text', question: 'Care labels on garments provide instructions regarding:', options: ['Washing, ironing, and drying temperatures', 'Retail price history', 'Designer biography'], correct: 0, explanation: 'Garment labels specify safe laundering.' },
-
-            // --- GRAPHIC DESIGN (5) ---
-            { subjectId: 'gfx_design', question: 'Which color model is used specifically for digital screen displays?', options: ['RGB', 'CMYK', 'Grayscale'], correct: 0, explanation: 'RGB (Red, Green, Blue) emits light on digital displays.' },
-            { subjectId: 'gfx_design', question: 'Typography is the art and technique of:', options: ['Arranging typefaces and fonts legibly and visually', 'Mixing paint colors', 'Designing 3D clay models'], correct: 0, explanation: 'Typography deals with letterform arrangement.' },
-            { subjectId: 'gfx_design', question: 'A brand identity logo should ideally be:', options: ['Simple, memorable, and versatile', 'Extremely cluttered with text', 'Only rendered in black and white'], correct: 0, explanation: 'Great logos are scalable and distinct.' },
-            { subjectId: 'gfx_design', question: 'In poster layout, visual hierarchy guides the viewer\'s eye to:', options: ['The most important information first', 'The page footer first', 'Random decorative elements'], correct: 0, explanation: 'Hierarchy uses size and weight to prioritize information.' },
-            { subjectId: 'gfx_design', question: 'Which color mode must be chosen when preparing artwork for professional offset printing?', options: ['CMYK', 'RGB', 'HEX'], correct: 0, explanation: 'CMYK (Cyan, Magenta, Yellow, Black) is the print ink standard.' },
-
-            // --- PICTURE MAKING (5) ---
-            { subjectId: 'picture_making', question: 'The three primary subtractive colors in traditional painting are:', options: ['Red, Yellow, Blue', 'Red, Green, Blue', 'Orange, Green, Purple'], correct: 0, explanation: 'Red, Yellow, and Blue cannot be created by mixing other paints.' },
-            { subjectId: 'picture_making', question: 'Linear perspective in drawing creates the illusion of 3D depth using:', options: ['Vanishing points and horizon lines', 'Dark outlines only', 'Flat color washes'], correct: 0, explanation: 'Perspective converges parallel lines toward a vanishing point.' },
-            { subjectId: 'picture_making', question: 'Chiaroscuro is an art technique defined by:', options: ['Strong contrast between light and shade', 'Using pastels exclusively', 'Painting rapidly outdoors'], correct: 0, explanation: 'Chiaroscuro creates dramatic volume through high contrast.' },
-            { subjectId: 'picture_making', question: 'Priming a canvas with Gesso before painting prevents:', options: ['Oil paint from soaking directly into raw fabric fibers', 'Colors from drying too fast', 'Brushes from wearing out'], correct: 0, explanation: 'Gesso seals the canvas fabric.' },
-            { subjectId: 'picture_making', question: 'Complementary colors sit where on the traditional color wheel?', options: ['Directly opposite each other', 'Next to each other', 'In a triangle shape'], correct: 0, explanation: 'Complementary pairs (e.g., Blue/Orange) sit directly opposite.' },
-
-            // --- GENERAL KNOWLEDGE IN ART (5) ---
-            { subjectId: 'gka', question: 'Traditional Ashanti Kente cloth is woven on a special strip loom using:', options: ['Brightly colored silk and cotton threads', 'Raw animal hides', 'Sculpted clay wire'], correct: 0, explanation: 'Kente is famous for woven strip patterns.' },
-            { subjectId: 'gka', question: 'Nok Culture terracotta sculptures from ancient Nigeria are known for:', options: ['Hollow earthenware human heads with pierced eyes', 'Polished glass beads', 'Carved marble pillars'], correct: 0, explanation: 'Nok terracottas feature distinct pierced triangular eyes.' },
-            { subjectId: 'gka', question: 'In West African art, Adinkra symbols are traditionally printed on cloth to convey:', options: ['Philosophical proverbs and historical wisdom', 'Commercial price tags', 'Geographical maps'], correct: 0, explanation: 'Adinkra symbols convey deep cultural proverbs.' },
-            { subjectId: 'gka', question: 'Prehistoric cave paintings at Lascaux primarily depict:', options: ['Large wild animals hunted by early humans', 'Abstract geometric blueprints', 'Architectural buildings'], correct: 0, explanation: 'Paleolithic art depicted game animals.' },
-            { subjectId: 'gka', question: 'Which term describes evaluating, interpreting, and analyzing art works?', options: ['Art Criticism / Appreciation', 'Art Restoration', 'Art Forgery'], correct: 0, explanation: 'Art appreciation evaluates visual elements and meaning.' },
-
-            // --- GENERAL AGRICULTURE (5) ---
-            { subjectId: 'gen_agric', question: 'Humus improves soil fertility by:', options: ['Adding organic nutrients and retaining soil moisture', 'Making soil rocky and compact', 'Increasing soil erosion speed'], correct: 0, explanation: 'Humus is decayed organic material that retains water and plant nutrients.' },
-            { subjectId: 'gen_agric', question: 'Soil erosion can be minimized on sloped farmland by practicing:', options: ['Contour plowing and terracing', 'Overgrazing livestock', 'Deforestation'], correct: 0, explanation: 'Contour plowing slows down water runoff down hills.' },
-            { subjectId: 'gen_agric', question: 'The communal land tenure system allows land usage based on:', options: ['Community or family inheritance rights', 'Outright individual purchase deeds only', 'Foreign lease agreements'], correct: 0, explanation: 'Communal tenure allocates land by lineage or chieftaincy.' },
-            { subjectId: 'gen_agric', question: 'Farm mechanization involves:', options: ['Using modern machinery like tractors to perform farm tasks', 'Relying solely on hand hoes', 'Abolishing irrigation'], correct: 0, explanation: 'Mechanization boosts efficiency and output.' },
-            { subjectId: 'gen_agric', question: 'Crop rotation controls crop pests and diseases by:', options: ['Breaking pest life cycles through changing plant families', 'Applying excess chemical fertilizer', 'Planting single crops continuously'], correct: 0, explanation: 'Pests starve when host plant species are rotated out.' },
-
-            // --- ANIMAL HUSBANDRY (5) ---
-            { subjectId: 'animal_hosp', question: 'Ruminant animals (like cattle and goats) digest cellulose using a stomach with:', options: ['4 compartments (Rumen, Reticulum, Omasum, Abomasum)', '1 simple single chamber', '2 stomach sacs'], correct: 0, explanation: 'Ruminants have 4 distinct stomach compartments.' },
-            { subjectId: 'animal_hosp', question: 'Poultry brooding refers to:', options: ['Providing artificial heat and care to young chicks after hatching', 'Collecting adult eggs', 'Slaughtering mature birds'], correct: 0, explanation: 'Brooding keeps young chicks warm until feathers develop.' },
-            { subjectId: 'animal_hosp', question: 'Vaccinating livestock protects animals against:', options: ['Infectious viral and bacterial diseases', 'Malnutrition', 'Insect bites'], correct: 0, explanation: 'Vaccines build active immunity against diseases.' },
-            { subjectId: 'animal_hosp', question: 'A balanced ration for livestock must contain:', options: ['All essential nutrients in correct proportions', 'Carbohydrates only', 'Water without minerals'], correct: 0, explanation: 'Balanced rations provide protein, energy, minerals, and vitamins.' },
-            { subjectId: 'animal_hosp', question: 'Artificial Insemination (AI) in livestock breeding allows:', options: ['Breeding superior genetic traits without moving male animals', 'Cloning animals in labs', 'Natural herd mating'], correct: 0, explanation: 'AI deposits collected semen from high-quality sires.' },
-
-            // --- BECE MATH (5) ---
-            { subjectId: 'bece_math', question: 'If Set $$A = \\{1, 2, 3\\}$$ and Set $$B = \\{3, 4, 5\\}$$, what is $$A \\cap B$$?', options: ['$$\\{3\\}$$', '$$\\{1, 2, 3, 4, 5\\}$$', '$$\\{\\}$$'], correct: 0, explanation: 'Intersection ($\\cap$) identifies elements shared in both sets.' },
-            { subjectId: 'bece_math', question: 'Solve $$\\frac{1}{2} + \\frac{1}{3}$$:', options: ['$$\\frac{5}{6}$$', '$$\\frac{2}{5}$$', '$$\\frac{1}{6}$$'], correct: 0, explanation: 'Common denominator is 6: $$\\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$$.' },
-            { subjectId: 'bece_math', question: 'What is the sum of interior angles in any triangle?', options: ['$$180^\\circ$$', '$$360^\\circ$$', '$$90^\\circ$$'], correct: 0, explanation: 'Interior angles of any triangle sum to $$180^\\circ$$.' },
-            { subjectId: 'bece_math', question: 'Share $$\\$50$$ between Kofi and Ama in the ratio $$2 : 3$$. What is Ama\'s share?', options: ['$$\\$30$$', '$$\\$20$$', '$$\\$25$$'], correct: 0, explanation: 'Total parts = $$2+3=5$$. Ama gets $$\\frac{3}{5} \\times 50 = \\$30$$.' },
-            { subjectId: 'bece_math', question: 'What is the probability of picking an even number from numbers 1 to 10?', options: ['$$\\frac{1}{2}$$', '$$\\frac{1}{5}$$', '$$\\frac{2}{5}$$'], correct: 0, explanation: 'Even numbers are {2, 4, 6, 8, 10} (5 numbers out of 10) $$\\implies \\frac{5}{10} = \\frac{1}{2}$$.' },
-
-            // --- BECE INTEGRATED SCIENCE (5) ---
-            { subjectId: 'bece_sci', question: 'What chemical formula summarizes plant photosynthesis?', options: ['$$6\\text{CO}_2 + 6\\text{H}_2\\text{O} \\xrightarrow{\\text{light}} \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2$$', '$$\\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2 \\rightarrow 6\\text{CO}_2 + 6\\text{H}_2\\text{O}$$', '$$\\text{H}_2 + \\text{O}_2 \\rightarrow \\text{H}_2\\text{O}$$'], correct: 0, explanation: 'Photosynthesis combines carbon dioxide and water into glucose and oxygen.' },
-            { subjectId: 'bece_sci', question: 'Which state of matter has a fixed volume but takes the shape of its container?', options: ['Liquid', 'Solid', 'Gas'], correct: 0, explanation: 'Liquids have fixed volume but fluid shape.' },
-            { subjectId: 'bece_sci', question: 'Light bouncing off a polished flat mirror is called:', options: ['Reflection', 'Refraction', 'Diffraction'], correct: 0, explanation: 'Reflection bounces light rays off reflective surfaces.' },
-            { subjectId: 'bece_sci', question: 'Which celestial body sits at the center of our solar system?', options: ['The Sun', 'Earth', 'The Moon'], correct: 0, explanation: 'The Sun is the central star.' },
-            { subjectId: 'bece_sci', question: 'Which soil type has the largest particle size and lowest water retention capacity?', options: ['Sandy Soil', 'Clay Soil', 'Loam Soil'], correct: 0, explanation: 'Sandy soil drains quickly due to large particle gaps.' },
-
-            // --- BECE COMPUTING / ICT (5) ---
-            { subjectId: 'bece_ict', question: 'The Central Processing Unit (CPU) is known as the:', options: ['Brain of the computer that processes instructions', 'Primary power cable', 'Screen display panel'], correct: 0, explanation: 'CPU executes all logic and calculations.' },
-            { subjectId: 'bece_ict', question: 'How does RAM differ from a Hard Disk Drive?', options: ['RAM is temporary volatile memory, while Hard Drives store data permanently', 'RAM stores more data than hard drives', 'RAM is an output device'], correct: 0, explanation: 'RAM clears when powered off; hard drives store permanently.' },
-            { subjectId: 'bece_ict', question: 'Which hardware device is strictly an INPUT device?', options: ['Keyboard', 'Monitor', 'Printer'], correct: 0, explanation: 'Keyboards enter data into the computer system.' },
-            { subjectId: 'bece_ict', question: 'An Operating System (like Windows or Linux) is responsible for:', options: ['Managing computer hardware and running software applications', 'Cleaning physical dust from components', 'Providing internet connection cables'], correct: 0, explanation: 'OS acts as system software orchestrating hardware.' },
-            { subjectId: 'bece_ict', question: 'Google Chrome, Mozilla Firefox, and Microsoft Edge are examples of:', options: ['Web Browsers', 'Antivirus Programs', 'Search Algorithms'], correct: 0, explanation: 'Web browsers render internet websites.' },
-
-            // --- DATA STRUCTURES & CACHE (5) ---
-            { subjectId: 'dsa_cache', question: 'Which CPU cache level is built closest to the execution core for minimal latency?', options: ['L1 Cache', 'L2 Cache', 'L3 Cache'], correct: 0, explanation: 'L1 cache is integrated into the core for sub-nanosecond access.' },
-            { subjectId: 'dsa_cache', question: 'A "Cache Hit" occurs when requested data:', options: ['Is found in the fast cache memory', 'Is missing and must be fetched from RAM', 'Causes a system crash'], correct: 0, explanation: 'Cache hit means data was available in cache.' },
-            { subjectId: 'dsa_cache', question: 'What is the time complexity to access an element in an Array by index?', options: ['$$O(1)$$', '$$O(n)$$', '$$O(\\log n)$$'], correct: 0, explanation: 'Direct indexing gives constant $$O(1)$$ access time.' },
-            { subjectId: 'dsa_cache', question: 'Which data structure operates strictly on a Last-In, First-Out (LIFO) principle?', options: ['Stack', 'Queue', 'Array'], correct: 0, explanation: 'Stacks push and pop elements from the top (LIFO).' },
-            { subjectId: 'dsa_cache', question: 'A Queue data structure operates on which order principle?', options: ['First-In, First-Out (FIFO)', 'Last-In, First-Out (LIFO)', 'Random Access'], correct: 0, explanation: 'Queues process items in order of arrival (FIFO).' },
-
-            // --- LINEAR ALGEBRA (5) ---
-            { subjectId: 'linear_alg', question: 'A square matrix $$A$$ has an inverse $$A^{-1}$$ if and only if its determinant is:', options: ['Non-zero ($\\det(A) \\neq 0$)', 'Equal to zero', 'Negative'], correct: 0, explanation: 'Non-singular matrices with $$\\det \\neq 0$$ are invertible.' },
-            { subjectId: 'linear_alg', question: 'Calculate the dot product of vectors $$\\mathbf{u} = [2, 3]$$ and $$\\mathbf{v} = [4, -1]$$:', options: ['5', '8', '11'], correct: 0, explanation: '$$\\mathbf{u} \\cdot \\mathbf{v} = (2)(4) + (3)(-1) = 8 - 3 = 5$$.' },
-            { subjectId: 'linear_alg', question: 'For matrix $$A$$, an Eigenvalue $$\\lambda$$ satisfies the characteristic equation:', options: ['$$\\det(A - \\lambda I) = 0$$', '$$A \\lambda = 0$$', '$$\\det(A) = \\lambda$$'], correct: 0, explanation: '$$\\det(A - \\lambda I) = 0$$ solves for scalar eigenvalues.' },
-            { subjectId: 'linear_alg', question: 'What is the determinant of identity matrix $$\\begin{bmatrix} 1 & 0 \\\\ 0 & 1 \\end{bmatrix}$$?', options: ['1', '0', '2'], correct: 0, explanation: '$$\\det(I) = (1)(1) - (0)(0) = 1$$.' },
-            { subjectId: 'linear_alg', question: 'In system $$A\\mathbf{x} = \\mathbf{b}$$, if $$\\det(A) \\neq 0$$, the system has:', options: ['Exactly one unique solution', 'Infinitely many solutions', 'No solutions'], correct: 0, explanation: 'Full rank matrix $$A$$ guarantees a unique solution $$\\mathbf{x} = A^{-1}\\mathbf{b}$$.' }
-        ];
-
-        let activeQuizQuestions = [];
-        let currentIndex = 0;
-        let score = 0;
-
-        function updateCourseOptions() {
-            const selectedLevel = document.getElementById('levelSelect').value;
-            const courseSelect = document.getElementById('courseSelect');
-            courseSelect.innerHTML = '';
-
-            const courses = courseMapping[selectedLevel] || [];
-            courses.forEach(c => {
-                const opt = document.createElement('option');
-                opt.value = c.id;
-                opt.innerText = c.name;
-                courseSelect.appendChild(opt);
-            });
-
-            renderSubjects();
-        }
-
-        function renderSubjects() {
-            const courseSelect = document.getElementById('courseSelect');
-            const courseId = courseSelect.value;
-            const grid = document.getElementById('subjectCardsGrid');
-            grid.innerHTML = '';
-
-            const subjects = subjectDatabase[courseId] || [];
-            document.getElementById('subjectCountBadge').innerText = `${subjects.length} Subjects Available`;
-
-            if (subjects.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-8 text-slate-500 font-bold">No subjects configured for this stream yet.</div>`;
-                return;
+            if (userStats.lastVisit === yesterday) {
+                userStats.streak += 1;
+                userStats.lastVisit = today;
+            } else if (userStats.lastVisit !== today) {
+                userStats.streak = 1; // Reset streak if missed a day
+                userStats.lastVisit = today;
             }
 
-            subjects.forEach(s => {
-                const card = document.createElement('div');
-                card.onclick = () => startCourseQuiz(s.id);
-                card.className = `glass-card rounded-2xl p-6 space-y-4 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer border border-slate-200 dark:border-slate-800`;
-                card.innerHTML = `
-                    <div class="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 flex items-center justify-center text-xl font-bold">
-                        <i class="fa-solid ${s.icon}"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-slate-900 dark:text-white text-lg">${s.name}</h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${s.desc}</p>
-                    </div>
-                    <div class="pt-2 flex items-center text-xs font-bold text-indigo-600 dark:text-indigo-400">
-                        Start 5-Question Quiz <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        function startCourseQuiz(subjectId) {
-            activeQuizQuestions = quizQuestions.filter(q => q.subjectId === subjectId);
-
-            if (activeQuizQuestions.length === 0) {
-                alert('Quiz questions for this subject are being added!');
-                return;
+            if (userStats.streak >= 3) {
+                userStats.badges.threeDayStreak = true;
             }
 
-            currentIndex = 0;
-            score = 0;
-            document.getElementById('homeView').classList.add('hidden');
-            document.getElementById('resultView').classList.add('hidden');
-            document.getElementById('quizView').classList.remove('hidden');
-            loadQuestion();
+            saveUserStats();
         }
 
-        function loadQuestion() {
-            const q = activeQuizQuestions[currentIndex];
-            document.getElementById('questionTracker').innerText = `Question ${currentIndex + 1} of ${activeQuizQuestions.length}`;
-            document.getElementById('progressBar').style.width = `${((currentIndex) / activeQuizQuestions.length) * 100}%`;
-            document.getElementById('questionText').innerHTML = q.question;
-            document.getElementById('explanationBox').classList.add('hidden');
-            document.getElementById('nextBtn').classList.add('hidden');
-
-            const container = document.getElementById('optionsContainer');
-            container.innerHTML = '';
-
-            q.options.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = "w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-left font-medium text-sm flex items-center justify-between hover:border-indigo-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition";
-                btn.onclick = () => selectOption(idx);
-                btn.innerHTML = `<span>${opt}</span> <i class="fa-regular fa-circle text-slate-400"></i>`;
-                container.appendChild(btn);
-            });
-
-            if (window.MathJax) { MathJax.Hub.Queue(["Typeset", MathJax.Hub, "quizView"]); }
-        }
-
-        function selectOption(idx) {
-            const q = activeQuizQuestions[currentIndex];
-            const buttons = document.getElementById('optionsContainer').children;
-            for (let b of buttons) b.disabled = true;
-
-            if (idx === q.correct) {
-                score++;
-                buttons[idx].className = "w-full p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 font-bold text-sm flex items-center justify-between";
-                buttons[idx].innerHTML += ` <i class="fa-solid fa-circle-check text-emerald-600"></i>`;
-            } else {
-                buttons[idx].className = "w-full p-4 rounded-xl border-2 border-rose-500 bg-rose-50 dark:bg-rose-950/40 text-rose-900 dark:text-rose-200 font-bold text-sm flex items-center justify-between";
-                buttons[idx].innerHTML += ` <i class="fa-solid fa-circle-xmark text-rose-600"></i>`;
-                
-                buttons[q.correct].className = "w-full p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 font-bold text-sm flex items-center justify-between";
-            }
-
-            document.getElementById('explanationText').innerHTML = q.explanation;
-            document.getElementById('explanationBox').classList.remove('hidden');
-            document.getElementById('nextBtn').classList.remove('hidden');
-
-            if (window.MathJax) { MathJax.Hub.Queue(["Typeset", MathJax.Hub, "explanationBox"]); }
-        }
-
-        function nextQuestion() {
-            currentIndex++;
-            if (currentIndex < activeQuizQuestions.length) { 
-                loadQuestion(); 
-            } else { 
-                showResults(); 
-            }
-        }
-
-        function showResults() {
-            document.getElementById('quizView').classList.add('hidden');
-            document.getElementById('resultView').classList.remove('hidden');
+        // Add XP function
+        function addXP(points) {
+            userStats.xp += points;
             
-            const percentage = Math.round((score / activeQuizQuestions.length) * 100);
-            document.getElementById('finalScore').innerText = `${score} / ${activeQuizQuestions.length}`;
-            document.getElementById('scorePercentage').innerText = `Score Percentage: ${percentage}%`;
-
-            let feedback = "Great effort! Review the step-by-step solutions to master every topic.";
-            if (percentage === 100) feedback = "🌟 Outstanding! Perfect score! You have mastered this topic completely.";
-            else if (percentage >= 80) feedback = "🎉 Excellent work! You passed with high distinction!";
-            document.getElementById('scoreFeedback').innerText = feedback;
-
-            if (window.confetti && percentage >= 60) {
-                confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+            // Check for level up badge
+            if (userStats.xp > 0) {
+                userStats.badges.firstQuiz = true;
             }
+
+            saveUserStats();
+            renderStats();
+            
+            // Trigger floating XP visual feedback if needed
         }
 
-        function resetToHome() {
-            document.getElementById('quizView').classList.add('hidden');
-            document.getElementById('resultView').classList.add('hidden');
-            document.getElementById('homeView').classList.remove('hidden');
+        // Level Title Calculation
+        function getLevelTitle(xp) {
+            if (xp < 100) return 'Scholar I';
+            if (xp < 300) return 'Scholar II';
+            if (xp < 600) return 'Scholar III';
+            if (xp < 1000) return 'WASSCE Master';
+            return 'Grand Master';
         }
 
-        function toggleDarkMode() { 
-            document.documentElement.classList.toggle('dark'); 
+        // Save to LocalStorage
+        function saveUserStats() {
+            localStorage.setItem(USER_DATA_KEY, JSON.stringify(userStats));
         }
 
-        document.getElementById('levelSelect').addEventListener('change', updateCourseOptions);
-        document.getElementById('courseSelect').addEventListener('change', renderSubjects);
+        // Render UI Stats
+        function renderStats() {
+            document.getElementById('xp-count').innerText = userStats.xp;
+            document.getElementById('streak-count').innerText = userStats.streak;
+            document.getElementById('user-level').innerText = getLevelTitle(userStats.xp);
 
-        document.addEventListener("DOMContentLoaded", function() {
-            updateCourseOptions();
+            // Badges UI Opacity
+            if (userStats.badges.firstQuiz) document.getElementById('badge-first').classList.remove('opacity-30');
+            if (userStats.badges.threeDayStreak) document.getElementById('badge-streak').classList.remove('opacity-30');
+            if (userStats.badges.perfectScore) document.getElementById('badge-perfect').classList.remove('opacity-30');
+        }
+
+        // Initialize on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStreak();
+            renderStats();
         });
+
+        // Demo function for testing XP addition
+        function startDemoQuiz() {
+            addXP(10);
+            confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
+            alert("Awesome! You completed a practice question and earned +10 XP!");
+        }
     </script>
 </body>
 </html>
-```
