@@ -62,7 +62,7 @@
                         TONI KROOS ACADEMY
                     </h2>
                     <p class="text-blue-100 text-sm md:text-base leading-relaxed">
-                        Practice authentic WAEC past questions across all course streams, core subjects, and electives with step-by-step examiner solutions!
+                        Practice authentic WAEC past questions across all SHS course streams, core subjects, and electives with step-by-step examiner solutions!
                     </p>
                 </div>
                 <div class="absolute -right-10 -bottom-10 opacity-10 text-white text-9xl">
@@ -167,7 +167,7 @@
 
     <!-- App Data & Logic -->
     <script>
-        // COMPREHENSIVE WAEC EXAM DATABASE (Core & Electives, 7 Questions per Set, Multiple Sets)
+        // COMPLETE WASSCE, BECE & TERTIARY CURRICULUM DATABASE
         const curriculumData = {
             WASSCE: [
                 {
@@ -176,203 +176,223 @@
                     desc: "Physics, Chemistry, Biology, Elective Mathematics & Core Science",
                     subjects: [
                         {
-                            name: "Elective Mathematics",
-                            icon: "fa-calculator",
-                            type: "Elective",
-                            sets: [
-                                [
-                                    { q: "WASSCE Past Q: Solve for $x$ in the equation $2x + 5 = 15$.", options: ["x = 3", "x = 5", "x = 10", "x = 7"], correct: 1, sol: "Subtract 5 from both sides: $2x = 10$, then divide by 2: $x = 5$." },
-                                    { q: "WASSCE Past Q: Evaluate $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$.", options: ["0", "2", "4", "Undefined"], correct: 2, sol: "Factor the numerator: $\\frac{(x-2)(x+2)}{x-2} = x+2$. Substitute $x=2$ to get $4$." },
-                                    { q: "WASSCE Past Q: If $f(x) = 3x^2 + 2x$, find $f'(x)$.", options: ["$6x + 2$", "$3x + 2$", "$6x^2$", "$6x$"], correct: 0, sol: "Apply power rule: $\\frac{d}{dx}(3x^2) = 6x$ and $\\frac{d}{dx}(2x) = 2$." },
-                                    { q: "WASSCE Past Q: Find the determinant of matrix $\\begin{pmatrix} 3 & 2 \\\\ 1 & 4 \\end{pmatrix}$.", options: ["10", "14", "12", "8"], correct: 0, sol: "Determinant = $(3 \\times 4) - (2 \\times 1) = 12 - 2 = 10$." },
-                                    { q: "WASSCE Past Q: Evaluate $\\int 2x \\, dx$.", options: ["$x^2 + C$", "$2x^2 + C$", "$x + C$", "$2 + C$"], correct: 0, sol: "Integral of $2x$ is $2\\left(\\frac{x^2}{2}\\right) + C = x^2 + C$." },
-                                    { q: "WASSCE Past Q: Find the sum of the first 10 terms of AP: $2, 5, 8, ...$", options: ["155", "135", "145", "165"], correct: 0, sol: "$S_n = \\frac{n}{2}[2a + (n-1)d]$. Here $a=2, d=3, n=10$. $S_{10} = 5[4 + 27] = 5(31) = 155$." },
-                                    { q: "WASSCE Past Q: If $\\log_{10} 2 = 0.3010$, find $\\log_{10} 8$.", options: ["0.9030", "0.6020", "1.2040", "0.3010"], correct: 0, sol: "$\\log_{10}(2^3) = 3 \\log_{10} 2 = 3 \\times 0.3010 = 0.9030$." }
-                                ],
-                                [
-                                    { q: "WASSCE Past Q: Find the derivative of $y = 4x^3 - 5x + 7$.", options: ["$12x^2 - 5$", "$12x^2 - 5x$", "$4x^2 - 5$", "$12x^3 - 5$"], correct: 0, sol: "Differentiating term by term gives $12x^2 - 5$." },
-                                    { q: "WASSCE Past Q: If vector $\\mathbf{a} = 3\\mathbf{i} + 4\\mathbf{j}$, find its magnitude $|\\mathbf{a}|$.", options: ["5", "7", "25", "12"], correct: 0, sol: "$|\\mathbf{a}| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$." },
-                                    { q: "WASSCE Past Q: Solve the quadratic equation $x^2 - 5x + 6 = 0$.", options: ["$x = 2, 3$", "$x = -2, -3$", "$x = 1, 6$", "$x = -1, -6$"], correct: 0, sol: "Factorize as $(x-2)(x-3) = 0$, giving $x = 2$ or $3$." },
-                                    { q: "WASSCE Past Q: Find the coordinates of the midpoint between $(2, 3)$ and $(6, 7)$.", options: ["$(4, 5)$", "$(3, 4)$", "$(8, 10)$", "$(2, 2)$"], correct: 0, sol: "Midpoint formula: $\\left(\\frac{2+6}{2}, \\frac{3+7}{2}\\right) = (4, 5)$." },
-                                    { q: "WASSCE Past Q: What is the coefficient of $x^2$ in $(1 + 2x)^4$ expansion?", options: ["24", "12", "8", "48"], correct: 0, sol: "Using binomial theorem term $\\binom{4}{2}(1)^2(2x)^2 = 6 \\times 4 = 24$." },
-                                    { q: "WASSCE Past Q: Evaluate $\\sin 30^\\circ + \\cos 60^\\circ$.", options: ["1", "$0.5$", "$\\sqrt{3}$", "2"], correct: 0, sol: "$\\sin 30^\\circ = 0.5$ and $\\cos 60^\\circ = 0.5$. Sum = $0.5 + 0.5 = 1$." },
-                                    { q: "WASSCE Past Q: Find the gradient of the line perpendicular to $2y = 4x + 6$.", options: ["$-0.5$", "$2$", "$-2$", "$0.5$"], correct: 0, sol: "Line slope is $2$. Perpendicular slope is negative reciprocal: $-\\frac{1}{2} = -0.5$." }
-                                ]
-                            ]
+                            name: "Elective Mathematics", icon: "fa-calculator", type: "Elective",
+                            sets: [[
+                                { q: "WASSCE Past Q: Solve for $x$ in the equation $2x + 5 = 15$.", options: ["x = 3", "x = 5", "x = 10", "x = 7"], correct: 1, sol: "Subtract 5 from both sides: $2x = 10$, then divide by 2: $x = 5$." },
+                                { q: "WASSCE Past Q: Evaluate $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$.", options: ["0", "2", "4", "Undefined"], correct: 2, sol: "Factor the numerator: $\\frac{(x-2)(x+2)}{x-2} = x+2$. Substitute $x=2$ to get $4$." },
+                                { q: "WASSCE Past Q: If $f(x) = 3x^2 + 2x$, find $f'(x)$.", options: ["$6x + 2$", "$3x + 2$", "$6x^2$", "$6x$"], correct: 0, sol: "Apply power rule: $\\frac{d}{dx}(3x^2) = 6x$ and $\\frac{d}{dx}(2x) = 2$." },
+                                { q: "WASSCE Past Q: Find the determinant of matrix $\\begin{pmatrix} 3 & 2 \\\\ 1 & 4 \\end{pmatrix}$.", options: ["10", "14", "12", "8"], correct: 0, sol: "Determinant = $(3 \\times 4) - (2 \\times 1) = 12 - 2 = 10$." },
+                                { q: "WASSCE Past Q: Evaluate $\\int 2x \\, dx$.", options: ["$x^2 + C$", "$2x^2 + C$", "$x + C$", "$2 + C$"], correct: 0, sol: "Integral of $2x$ is $2\\left(\\frac{x^2}{2}\\right) + C = x^2 + C$." },
+                                { q: "WASSCE Past Q: Find sum of first 10 terms of AP: $2, 5, 8, ...$", options: ["155", "135", "145", "165"], correct: 0, sol: "$S_n = \\frac{n}{2}[2a + (n-1)d]$. Here $a=2, d=3, n=10$. $S_{10} = 5[4 + 27] = 155$." },
+                                { q: "WASSCE Past Q: If $\\log_{10} 2 = 0.3010$, find $\\log_{10} 8$.", options: ["0.9030", "0.6020", "1.2040", "0.3010"], correct: 0, sol: "$\\log_{10}(2^3) = 3 \\log_{10} 2 = 3 \\times 0.3010 = 0.9030$." }
+                            ]]
                         },
                         {
-                            name: "Physics",
-                            icon: "fa-bolt",
-                            type: "Elective",
-                            sets: [
-                                [
-                                    { q: "WASSCE Past Q: What is the SI unit of electric current?", options: ["Volt", "Ampere", "Ohm", "Watt"], correct: 1, sol: "The SI unit of electric current is the Ampere (A)." },
-                                    { q: "WASSCE Past Q: Calculate the kinetic energy of a 2 kg mass moving at 4 m/s.", options: ["8 J", "16 J", "32 J", "4 J"], correct: 0, sol: "$KE = \\frac{1}{2}mv^2 = \\frac{1}{2}(2)(4^2) = 16\\text{ J}$ (Wait: $4^2 = 16$, so $16\\text{ J}$. Option A is 8, Option B is 16. Correct is B)." },
-                                    { q: "WASSCE Past Q: Which device is used to step up alternating voltage?", options: ["Dynamo", "Transformer", "Generator", "Rectifier"], correct: 1, sol: "A step-up transformer increases alternating voltage." },
-                                    { q: "WASSCE Past Q: State Ohm's law equation.", options: ["$V = IR$", "$P = IV$", "$F = ma$", "$E = mc^2$"], correct: 0, sol: "Ohm's Law states $V = IR$." },
-                                    { q: "WASSCE Past Q: What type of wave is light wave?", options: ["Transverse wave", "Longitudinal wave", "Stationary wave", "Mechanical wave"], correct: 0, sol: "Light waves are electromagnetic and transverse in nature." },
-                                    { q: "WASSCE Past Q: The acceleration due to gravity $g$ is approximately:", options: ["$9.8\\text{ m/s}^2$", "$3\\times 10^8\\text{ m/s}$", "$340\\text{ m/s}$", "$1.6\\text{ m/s}^2$"], correct: 0, sol: "Standard gravity on Earth is $9.8\\text{ m/s}^2$." },
-                                    { q: "WASSCE Past Q: Refraction of light occurs because:", options: ["Speed of light changes in different media", "Frequency changes", "Wavelength remains constant", "Color changes"], correct: 0, sol: "Light refracts due to change in speed when entering a denser or rarer medium." }
-                                ]
-                            ]
+                            name: "Physics", icon: "fa-bolt", type: "Elective",
+                            sets: [[
+                                { q: "WASSCE Past Q: What is the SI unit of electric current?", options: ["Volt", "Ampere", "Ohm", "Watt"], correct: 1, sol: "The SI unit of electric current is the Ampere (A)." },
+                                { q: "WASSCE Past Q: Calculate kinetic energy of a 2 kg mass moving at 4 m/s.", options: ["8 J", "16 J", "32 J", "4 J"], correct: 1, sol: "$KE = \\frac{1}{2}mv^2 = \\frac{1}{2}(2)(4^2) = 16\\text{ J}$." },
+                                { q: "WASSCE Past Q: Which device steps up alternating voltage?", options: ["Dynamo", "Transformer", "Generator", "Rectifier"], correct: 1, sol: "A step-up transformer increases alternating voltage." },
+                                { q: "WASSCE Past Q: State Ohm's law equation.", options: ["$V = IR$", "$P = IV$", "$F = ma$", "$E = mc^2$"], correct: 0, sol: "Ohm's Law states $V = IR$." },
+                                { q: "WASSCE Past Q: What type of wave is light wave?", options: ["Transverse wave", "Longitudinal wave", "Stationary wave", "Mechanical wave"], correct: 0, sol: "Light waves are electromagnetic and transverse in nature." },
+                                { q: "WASSCE Past Q: Acceleration due to gravity $g$ is approximately:", options: ["$9.8\\text{ m/s}^2$", "$3\\times 10^8\\text{ m/s}$", "$340\\text{ m/s}$", "$1.6\\text{ m/s}^2$"], correct: 0, sol: "Standard gravity on Earth is $9.8\\text{ m/s}^2$." },
+                                { q: "WASSCE Past Q: Refraction of light occurs because:", options: ["Speed of light changes in different media", "Frequency changes", "Wavelength remains constant", "Color changes"], correct: 0, sol: "Light refracts due to change in speed when entering different media." }
+                            ]]
                         },
                         {
-                            name: "Core Mathematics",
-                            icon: "fa-square-root-variable",
-                            type: "Core",
-                            sets: [
-                                [
-                                    { q: "WASSCE Past Q: Evaluate $3 \\frac{1}{4} - 1 \\frac{1}{2}$", options: ["$1 \\frac{3}{4}$", "$2 \\frac{1}{4}$", "$1 \\frac{1}{4}$", "$2 \\frac{3}{4}$"], correct: 0, sol: "$3.25 - 1.50 = 1.75 = 1 \\frac{3}{4}$." },
-                                    { q: "WASSCE Past Q: Express 0.00547 in standard form.", options: ["$5.47 \\times 10^{-3}$", "$5.47 \\times 10^{3}$", "$54.7 \\times 10^{-4}$", "$0.547 \\times 10^{-2}$"], correct: 0, sol: "Move decimal 3 places to the right: $5.47 \\times 10^{-3}$." },
-                                    { q: "WASSCE Past Q: Expand $(x - 3)(x + 5)$.", options: ["$x^2 + 2x - 15$", "$x^2 - 2x - 15$", "$x^2 + 8x + 15$", "$x^2 - 8x - 15$"], correct: 0, sol: "$x^2 + 5x - 3x - 15 = x^2 + 2x - 15$." },
-                                    { q: "WASSCE Past Q: Find the simple interest on GH₵ 1,200 for 2 years at 5% per annum.", options: ["GH₵ 120", "GH₵ 60", "GH₵ 240", "GH₵ 300"], correct: 0, sol: "$SI = \\frac{P \\times R \\times T}{100} = \\frac{1200 \\times 5 \\times 2}{100} = \\text{GH₵ } 120$." },
-                                    { q: "WASSCE Past Q: If $y$ varies inversely as $x$, and $y = 4$ when $x = 3$, find $y$ when $x = 6$.", options: ["2", "8", "6", "1.5"], correct: 0, sol: "$y = \\frac{k}{x} \\implies 12 = k$. When $x=6$, $y = 12/6 = 2$." },
-                                    { q: "WASSCE Past Q: Calculate the area of a circle with radius 7 cm. (Use $\\pi = \\frac{22}{7}$)", options: ["$154\\text{ cm}^2$", "$44\\text{ cm}^2$", "$308\\text{ cm}^2$", "$88\\text{ cm}^2$"], correct: 0, sol: "Area = $\\pi r^2 = \\frac{22}{7} \\times 7^2 = 154\\text{ cm}^2$." },
-                                    { q: "WASSCE Past Q: Factorize completely: $ab + ay + 2xb + 2xy$.", options: ["$(a + 2x)(b + y)$", "$(a + b)(x + y)$", "$(a - 2x)(b - y)$", "$(2a + x)(b + y)$"], correct: 0, sol: "Group terms: $a(b + y) + 2x(b + y) = (a + 2x)(b + y)$." }
-                                ]
-                            ]
+                            name: "Chemistry", icon: "fa-vial", type: "Elective",
+                            sets: [[
+                                { q: "WASSCE Past Q: What is oxidation state of Manganese in $\\text{KMnO}_4$?", options: ["+7", "+5", "+4", "+2"], correct: 0, sol: "$1 + x + 4(-2) = 0 \\implies x = +7$." },
+                                { q: "WASSCE Past Q: Gas produced when dilute HCl reacts with zinc:", options: ["Hydrogen", "Oxygen", "Chlorine", "Carbon dioxide"], correct: 0, sol: "Metals react with acids to liberate hydrogen gas." },
+                                { q: "WASSCE Past Q: Element with atomic number 11 belongs to:", options: ["Group I", "Group II", "Group VII", "Group VIII"], correct: 0, sol: "Sodium (11) has electronic configuration 2,8,1 (Group I)." },
+                                { q: "WASSCE Past Q: Separation of crude oil into fractions is done by:", options: ["Fractional distillation", "Cracking", "Filtration", "Sublimation"], correct: 0, sol: "Fractional distillation separates hydrocarbons by boiling points." },
+                                { q: "WASSCE Past Q: Which is a Lewis acid?", options: ["$\\text{BF}_3$", "$\\text{NH}_3$", "$\\text{H}_2\\text{O}$", "$\\text{OH}^-$"], correct: 0, sol: "Boron trifluoride accepts an electron pair." },
+                                { q: "WASSCE Past Q: Molar volume of ideal gas at STP is:", options: ["$22.4\\text{ dm}^3$", "$24.0\\text{ dm}^3$", "$11.2\\text{ dm}^3$", "$22.4\\text{ cm}^3$"], correct: 0, sol: "One mole occupies $22.4\\text{ dm}^3$ at STP." },
+                                { q: "WASSCE Past Q: Polymer formed by condensation polymerization:", options: ["Nylon", "Polyethene", "PVC", "Polypropene"], correct: 0, sol: "Nylon is a polyamide formed with elimination of water." }
+                            ]]
                         },
                         {
-                            name: "Integrated Science",
-                            icon: "fa-flask",
-                            type: "Core",
-                            sets: [
-                                [
-                                    { q: "WASSCE Past Q: Which organelle is known as the powerhouse of the cell?", options: ["Mitochondria", "Ribosome", "Chloroplast", "Nucleus"], correct: 0, sol: "Mitochondria produce ATP energy via cellular respiration." },
-                                    { q: "WASSCE Past Q: What is the chemical symbol for Gold?", options: ["Au", "Ag", "Fe", "Cu"], correct: 0, sol: "Au is derived from the Latin word 'aurum'." },
-                                    { q: "WASSCE Past Q: Process by which plants manufacture food is:", options: ["Photosynthesis", "Respiration", "Transpiration", "Osmosis"], correct: 0, sol: "Photosynthesis converts sunlight into chemical energy in green plants." },
-                                    { q: "WASSCE Past Q: Which blood group is known as the universal donor?", options: ["O negative", "AB positive", "A positive", "B negative"], correct: 0, sol: "Type O negative red blood cells can be given to patients of any blood group." },
-                                    { q: "WASSCE Past Q: The pH of an acidic solution is:", options: ["Less than 7", "Greater than 7", "Exactly 7", "Equal to 14"], correct: 0, sol: "Acidic solutions have a pH scale reading below 7." },
-                                    { q: "WASSCE Past Q: Hardness of water is mainly caused by dissolved salts of:", options: ["Calcium and Magnesium", "Sodium and Potassium", "Iron and Zinc", "Copper and Lead"], correct: 0, sol: "Calcium and magnesium ions cause permanent or temporary water hardness." },
-                                    { q: "WASSCE Past Q: Vitamin C deficiency causes a disease known as:", options: ["Scurvy", "Rickets", "Beriberi", "Kwashiorkor"], correct: 0, sol: "Lack of ascorbic acid (Vitamin C) results in scurvy." }
-                                ]
-                            ]
+                            name: "Biology", icon: "fa-dna", type: "Elective",
+                            sets: [[
+                                { q: "WASSCE Past Q: Plant structure that produces pollen grains:", options: ["Anther", "Stigma", "Ovary", "Style"], correct: 0, sol: "The anther produces and releases pollen." },
+                                { q: "WASSCE Past Q: Functional unit of the kidney:", options: ["Nephron", "Alveolus", "Neuron", "Ureter"], correct: 0, sol: "Nephrons filter blood in the kidneys." },
+                                { q: "WASSCE Past Q: Nitrogen-fixing bacteria in legume roots:", options: ["Rhizobium", "Azotobacter", "Clostridium", "Nitrosomonas"], correct: 0, sol: "Rhizobium fixes atmospheric nitrogen in root nodules." },
+                                { q: "WASSCE Past Q: Blood vessel carrying oxygenated blood from lungs:", options: ["Pulmonary vein", "Pulmonary artery", "Vena cava", "Aorta"], correct: 0, sol: "Pulmonary veins carry oxygen-rich blood to the heart." },
+                                { q: "WASSCE Past Q: Crossing over occurs during:", options: ["Prophase I", "Metaphase I", "Anaphase II", "Telophase I"], correct: 0, sol: "Homologous chromosomes exchange genetic material in Prophase I." },
+                                { q: "WASSCE Past Q: Movement of water across semi-permeable membrane:", options: ["Osmosis", "Diffusion", "Active transport", "Phagocytosis"], correct: 0, sol: "Osmosis is water movement across membranes." },
+                                { q: "WASSCE Past Q: Mammalian tooth specialized for tearing meat:", options: ["Canine", "Incisor", "Premolar", "Molar"], correct: 0, sol: "Canines are pointed for tearing flesh." }
+                            ]]
                         },
                         {
-                            name: "Chemistry",
-                            icon: "fa-vial",
-                            type: "Elective",
-                            sets: [
-                                [
-                                    { q: "WASSCE Past Q: What is the oxidation state of Manganese in $\\text{KMnO}_4$?", options: ["+7", "+5", "+4", "+2"], correct: 0, sol: "$1 + x + 4(-2) = 0 \\implies x - 7 = 0 \\implies x = +7$." },
-                                    { q: "WASSCE Past Q: Which gas is produced when dilute hydrochloric acid reacts with zinc?", options: ["Hydrogen", "Oxygen", "Chlorine", "Carbon dioxide"], correct: 0, sol: "Active metals react with acids to liberate hydrogen gas: $\\text{Zn} + 2\\text{HCl} \\to \\text{ZnCl}_2 + \\text{H}_2\\uparrow$." },
-                                    { q: "WASSCE Past Q: An element with atomic number 11 belongs to which group?", options: ["Group I (Alkali metals)", "Group II", "Group VII (Halogens)", "Group VIII (Noble gases)"], correct: 0, sol: "Sodium (atomic number 11) has electronic configuration 2,8,1, placing it in Group I." },
-                                    { q: "WASSCE Past Q: The process of separation of crude oil into fractions is:", options: ["Fractional distillation", "Cracking", "Filtration", "Sublimation"], correct: 0, sol: "Fractional distillation separates hydrocarbons based on boiling point differences." },
-                                    { q: "WASSCE Past Q: Which of the following is a Lewis acid?", options: ["$\\text{BF}_3$", "$\\text{NH}_3$", "$\\text{H}_2\\text{O}$", "$\\text{OH}^-$"], correct: 0, sol: "Boron trifluoride accepts an electron pair, acting as a Lewis acid." },
-                                    { q: "WASSCE Past Q: Standard temperature and pressure (STP) molar volume of gas is:", options: ["$22.4\\text{ dm}^3$", "$24.0\\text{ dm}^3$", "$11.2\\text{ dm}^3$", "$22.4\\text{ cm}^3$"], correct: 0, sol: "One mole of any ideal gas occupies $22.4\\text{ dm}^3$ at STP." },
-                                    { q: "WASSCE Past Q: Which polymer is formed by condensation polymerization?", options: ["Nylon", "Polyethene", "Polyvinyl chloride", "Polypropene"], correct: 0, sol: "Nylon is a polyamide formed by condensation with elimination of water." }
-                                ]
-                            ]
+                            name: "Core Mathematics", icon: "fa-square-root-variable", type: "Core",
+                            sets: [[
+                                { q: "WASSCE Past Q: Evaluate $3 \\frac{1}{4} - 1 \\frac{1}{2}$", options: ["$1 \\frac{3}{4}$", "$2 \\frac{1}{4}$", "$1 \\frac{1}{4}$", "$2 \\frac{3}{4}$"], correct: 0, sol: "$3.25 - 1.50 = 1.75 = 1 \\frac{3}{4}$." },
+                                { q: "WASSCE Past Q: Express 0.00547 in standard form.", options: ["$5.47 \\times 10^{-3}$", "$5.47 \\times 10^{3}$", "$54.7 \\times 10^{-4}$", "$0.547 \\times 10^{-2}$"], correct: 0, sol: "Standard form: $5.47 \\times 10^{-3}$." },
+                                { q: "WASSCE Past Q: Expand $(x - 3)(x + 5)$.", options: ["$x^2 + 2x - 15$", "$x^2 - 2x - 15$", "$x^2 + 8x + 15$", "$x^2 - 8x - 15$"], correct: 0, sol: "$x^2 + 5x - 3x - 15 = x^2 + 2x - 15$." },
+                                { q: "WASSCE Past Q: Simple interest on GH₵ 1,200 for 2 years at 5% per annum.", options: ["GH₵ 120", "GH₵ 60", "GH₵ 240", "GH₵ 300"], correct: 0, sol: "$SI = \\frac{1200 \\times 5 \\times 2}{100} = \\text{GH₵ } 120$." },
+                                { q: "WASSCE Past Q: If $y$ varies inversely as $x$, $y=4$ when $x=3$, find $y$ when $x=6$.", options: ["2", "8", "6", "1.5"], correct: 0, sol: "$k = 12 \\implies y = 12/6 = 2$." },
+                                { q: "WASSCE Past Q: Area of a circle with radius 7 cm ($\\pi = \\frac{22}{7}$):", options: ["$154\\text{ cm}^2$", "$44\\text{ cm}^2$", "$308\\text{ cm}^2$", "$88\\text{ cm}^2$"], correct: 0, sol: "Area = $\\frac{22}{7} \\times 7^2 = 154\\text{ cm}^2$." },
+                                { q: "WASSCE Past Q: Factorize completely: $ab + ay + 2xb + 2xy$.", options: ["$(a + 2x)(b + y)$", "$(a + b)(x + y)$", "$(a - 2x)(b - y)$", "$(2a + x)(b + y)$"], correct: 0, sol: "Grouping gives $(a + 2x)(b + y)$." }
+                            ]]
                         },
                         {
-                            name: "Biology",
-                            icon: "fa-dna",
-                            type: "Elective",
-                            sets: [
-                                [
-                                    { q: "WASSCE Past Q: Which structure in flowering plants produces pollen grains?", options: ["Anther", "Stigma", "Ovary", "Style"], correct: 0, sol: "The anther of the stamen produces and releases pollen grains." },
-                                    { q: "WASSCE Past Q: The functional unit of the kidney is the:", options: ["Nephron", "Alveolus", "Neuron", "Ureter"], correct: 0, sol: "Nephrons filter blood and form urine in the kidneys." },
-                                    { q: "WASSCE Past Q: Nitrogen-fixing bacteria in root nodules of legumes are:", options: ["Rhizobium", "Azotobacter", "Clostridium", "Nitrosomonas"], correct: 0, sol: "Rhizobium species form symbiotic relationships with legume roots." },
-                                    { q: "WASSCE Past Q: Which blood vessel carries oxygenated blood from lungs to heart?", options: ["Pulmonary vein", "Pulmonary artery", "Vena cava", "Aorta"], correct: 0, sol: "Pulmonary veins transport oxygen-rich blood back to the left atrium." },
-                                    { q: "WASSCE Past Q: Crossing over during meiosis occurs during which phase?", options: ["Prophase I", "Metaphase I", "Anaphase II", "Telophase I"], correct: 0, sol: "Homologous chromosomes exchange genetic material during Prophase I." },
-                                    { q: "WASSCE Past Q: Movement of water molecules across a semi-permeable membrane is:", options: ["Osmosis", "Diffusion", "Active transport", "Phagocytosis"], correct: 0, sol: "Osmosis is the net movement of water from high to low water potential." },
-                                    { q: "WASSCE Past Q: The mammalian tooth specialized for tearing meat is the:", options: ["Canine", "Incisor", "Premolar", "Molar"], correct: 0, sol: "Canines are pointed teeth designed for piercing and tearing flesh." }
-                                ]
-                            ]
+                            name: "Integrated Science", icon: "fa-flask", type: "Core",
+                            sets: [[
+                                { q: "WASSCE Past Q: Powerhouse of the cell:", options: ["Mitochondria", "Ribosome", "Chloroplast", "Nucleus"], correct: 0, sol: "Mitochondria generate ATP." },
+                                { q: "WASSCE Past Q: Chemical symbol for Gold:", options: ["Au", "Ag", "Fe", "Cu"], correct: 0, sol: "Au is Gold." },
+                                { q: "WASSCE Past Q: Plant food-making process:", options: ["Photosynthesis", "Respiration", "Transpiration", "Osmosis"], correct: 0, sol: "Photosynthesis produces glucose." },
+                                { q: "WASSCE Past Q: Universal donor blood group:", options: ["O negative", "AB positive", "A positive", "B negative"], correct: 0, sol: "O negative can be donated to anyone." },
+                                { q: "WASSCE Past Q: pH of an acidic solution:", options: ["Less than 7", "Greater than 7", "Exactly 7", "14"], correct: 0, sol: "Acids read below 7 on pH scale." },
+                                { q: "WASSCE Past Q: Hardness of water caused by:", options: ["Calcium and Magnesium", "Sodium and Potassium", "Iron and Zinc", "Copper and Lead"], correct: 0, sol: "Calcium and magnesium ions cause hardness." },
+                                { q: "WASSCE Past Q: Vitamin C deficiency causes:", options: ["Scurvy", "Rickets", "Beriberi", "Kwashiorkor"], correct: 0, sol: "Lack of Vitamin C causes scurvy." }
+                            ]]
                         }
                     ]
                 },
                 {
                     streamName: "General Arts Stream",
                     icon: "fa-landmark",
-                    desc: "Economics, Government, Geography, History & Core Subjects",
+                    desc: "Economics, Government, Geography, History, Literature & Core Subjects",
                     subjects: [
                         {
-                            name: "Core Mathematics",
-                            icon: "fa-square-root-variable",
-                            type: "Core",
-                            sets: [
-                                [
-                                    { q: "WASSCE Past Q: Simplify $3(x + 4) - 2(x - 1)$.", options: ["$x + 14$", "$x + 10$", "$5x + 12$", "$x - 2$"], correct: 0, sol: "$3x + 12 - 2x + 2 = x + 14$." },
-                                    { q: "WASSCE Past Q: Find the median of the scores: $12, 15, 9, 17, 8, 20$.", options: ["13.5", "14", "12", "15"], correct: 0, sol: "Arrange: $8, 9, 12, 15, 17, 20$. Middle values are 12 and 15. Median = $(12+15)/2 = 13.5$." },
-                                    { q: "WASSCE Past Q: Express 45 as a percentage of 150.", options: ["$30\\%$", "$45\\%$", "$15\\%$", "$60\\%$"], correct: 0, sol: "$\\frac{45}{150} \\times 100\\% = 30\\%$." },
-                                    { q: "WASSCE Past Q: If $2^{x} = 32$, find the value of $x$.", options: ["5", "4", "6", "3"], correct: 0, sol: "$2^x = 2^5 \\implies x = 5$." },
-                                    { q: "WASSCE Past Q: Calculate the perimeter of a rectangle of length 12 cm and width 8 cm.", options: ["40 cm", "96 cm", "20 cm", "48 cm"], correct: 0, sol: "Perimeter = $2(l + w) = 2(12 + 8) = 40\\text{ cm}$." },
-                                    { q: "WASSCE Past Q: Solve simultaneous equations: $x + y = 10$, $x - y = 4$.", options: ["$x = 7, y = 3$", "$x = 6, y = 4$", "$x = 8, y = 2$", "$x = 5, y = 5$"], correct: 0, sol: "Add equations: $2x = 14 \\implies x = 7$. Then $7 + y = 10 \\implies y = 3$." },
-                                    { q: "WASSCE Past Q: Convert $72\\text{ km/h}$ to meters per second ($\\text{m/s}$).", options: ["$20\\text{ m/s}$", "$25\\text{ m/s}$", "$72\\text{ m/s}$", "$15\\text{ m/s}$"], correct: 0, sol: "$72 \\times \\frac{5}{18} = 20\\text{ m/s}$." }
-                                ]
-                            ]
+                            name: "Economics", icon: "fa-chart-line", type: "Elective",
+                            sets: [[
+                                { q: "WASSCE Past Q: What is opportunity cost?", options: ["Next best alternative forgone", "Total money spent", "Tax expenditure", "Production cost"], correct: 0, sol: "Opportunity cost is value of next best alternative sacrificed." },
+                                { q: "WASSCE Past Q: When demand is price inelastic, price hike will:", options: ["Increase total revenue", "Decrease total revenue", "Leave revenue unchanged", "Cause zero sales"], correct: 0, sol: "Inelastic demand increases total revenue when price rises." },
+                                { q: "WASSCE Past Q: State-owned economic system is:", options: ["Command / Socialist", "Capitalist", "Mixed", "Traditional"], correct: 0, sol: "State owns and controls command economies." },
+                                { q: "WASSCE Past Q: Inflation caused by excessive money supply:", options: ["Demand-pull inflation", "Cost-push", "Imported", "Structural"], correct: 0, sol: "Too much money causes demand-pull inflation." },
+                                { q: "WASSCE Past Q: GDP stands for:", options: ["Gross Domestic Product", "General Domestic Production", "Gross Distribution Price", "Government Debt Plan"], correct: 0, sol: "Gross Domestic Product measures national output." },
+                                { q: "WASSCE Past Q: Budget deficit happens when:", options: ["Expenditure exceeds revenue", "Revenue exceeds expenditure", "Exports equal imports", "Tax is zero"], correct: 0, sol: "Deficit occurs when spending surpasses income." },
+                                { q: "WASSCE Past Q: Reward for capital:", options: ["Interest", "Profit", "Rent", "Wages"], correct: 0, sol: "Interest is the payment for capital." }
+                            ]]
                         },
                         {
-                            name: "Economics",
-                            icon: "fa-chart-line",
-                            type: "Elective",
-                            sets: [
-                                [
-                                    { q: "WASSCE Past Q: What is opportunity cost?", options: ["The next best alternative forgone", "Total money spent on goods", "Government tax expenditure", "Production cost of a firm"], correct: 0, sol: "Opportunity cost represents the sacrifice of the next best choice." },
-                                    { q: "WASSCE Past Q: When demand for a commodity is price inelastic, a rise in price will:", options: ["Increase total revenue", "Decrease total revenue", "Leave revenue unchanged", "Cause zero sales"], correct: 0, sol: "Inelastic demand means quantity demanded drops proportionally less than price hike, raising revenue." },
-                                    { q: "WASSCE Past Q: An economic system where resources are owned and allocated by the state is:", options: ["Command / Socialist economy", "Capitalist economy", "Mixed economy", "Traditional economy"], correct: 0, sol: "Centrally planned economies are controlled by government decree." },
-                                    { q: "WASSCE Past Q: Inflation caused by excessive money supply in an economy is termed:", options: ["Demand-pull inflation", "Cost-push inflation", "Imported inflation", "Structural inflation"], correct: 0, sol: "Too much money chasing too few goods causes demand-pull inflation." },
-                                    { q: "WASSCE Past Q: GDP stands for:", options: ["Gross Domestic Product", "General Domestic Production", "Gross Distribution Price", "Government Debt Plan"], correct: 0, sol: "Gross Domestic Product measures total monetary value of goods and services produced." },
-                                    { q: "WASSCE Past Q: A budget deficit occurs when:", options: ["Government expenditure exceeds revenue", "Revenue exceeds expenditure", "Exports equal imports", "Taxation is zero"], correct: 0, sol: "Deficit happens when spending is higher than income earned." },
-                                    { q: "WASSCE Past Q: The reward for capital as a factor of production is:", options: ["Interest", "Profit", "Rent", "Wages"], correct: 0, sol: "Interest is the payment for capital investment." }
-                                ]
-                            ]
+                            name: "Government", icon: "fa-balance-scale", type: "Elective",
+                            sets: [[
+                                { q: "WASSCE Past Q: Arm of government responsible for executing laws:", options: ["The Executive", "The Legislature", "The Judiciary", "The Press"], correct: 0, sol: "The Executive branch implements laws." },
+                                { q: "WASSCE Past Q: Political system with only one legal party:", options: ["One-party state", "Multi-party democracy", "Confederation", "Diarchy"], correct: 0, sol: "One-party states allow no opposition." },
+                                { q: "WASSCE Past Q: Franchise refers to:", options: ["Right to vote in elections", "Trade license", "Tax exemption", "Parliamentary immunity"], correct: 0, sol: "Franchise is the constitutional right to vote." },
+                                { q: "WASSCE Past Q: Separation of powers popularized by:", options: ["Montesquieu", "John Locke", "Karl Marx", "A.V. Dicey"], correct: 0, sol: "Montesquieu proposed separation of government powers." },
+                                { q: "WASSCE Past Q: Head of state in a parliamentary republic:", options: ["Ceremonial President / Monarch", "Absolute dictator", "Chief Justice", "Police Chief"], correct: 0, sol: "Parliamentary head of state holds ceremonial roles." },
+                                { q: "WASSCE Past Q: Rule of law implies:", options: ["Equality before the law", "Supremacy of military decree", "Politician immunity", "No courts"], correct: 0, sol: "Rule of law means all are equal before the law." },
+                                { q: "WASSCE Past Q: Ghana became a republic in:", options: ["1960", "1957", "1966", "1992"], correct: 0, sol: "Ghana attained republican status on July 1, 1960." }
+                            ]]
                         },
                         {
-                            name: "Government",
-                            icon: "fa-balance-scale",
-                            type: "Elective",
-                            sets: [
-                                [
-                                    { q: "WASSCE Past Q: Which arm of government is responsible for executing laws?", options: ["The Executive", "The Legislature", "The Judiciary", "The Press"], correct: 0, sol: "The Executive branch implements and enforces laws." },
-                                    { q: "WASSCE Past Q: A political system with only one legal political party is:", options: ["One-party state", "Multi-party democracy", "Confederation", "Diarchy"], correct: 0, sol: "Single-party states permit no opposition parties." },
-                                    { q: "WASSCE Past Q: Franchise refers to:", options: ["The right of citizens to vote in elections", "A government trade license", "Tax exemption status", "Parliamentary immunity"], correct: 0, sol: "Suffrage or franchise is the constitutional right to vote." },
-                                    { q: "WASSCE Past Q: The principle of separation of powers was popularized by:", options: ["Montesquieu", "John Locke", "Karl Marx", "A.V. Dicey"], correct: 0, sol: "Baron de Montesquieu advocated for separating executive, legislative, and judicial powers." },
-                                    { q: "WASSCE Past Q: The head of state in a parliamentary republic is usually:", options: ["A ceremonial President or Monarch", "An absolute dictator", "The Chief Justice", "Head of Police"], correct: 0, sol: "In parliamentary systems, head of state holds ceremonial duties while Prime Minister leads government." },
-                                    { q: "WASSCE Past Q: Rule of law implies:", options: ["Equality of all citizens before the law", "Supremacy of military decree", "Immunity for politicians", "Absence of courts"], correct: 0, sol: "Rule of law dictates that no person is above the law." },
-                                    { q: "WASSCE Past Q: Ghana attained republican status in which year?", options: ["1960", "1957", "1966", "1992"], correct: 0, sol: "Ghana became a republic on July 1, 1960." }
-                                ]
-                            ]
+                            name: "Geography", icon: "fa-globe-americas", type: "Elective",
+                            sets: [[
+                                { q: "WASSCE Past Q: Lines of latitude run:", options: ["East to West", "North to South", "Diagonally", "Vertically from poles"], correct: 0, sol: "Latitudes are parallel circles running east-west." },
+                                { q: "WASSCE Past Q: Instrument used to measure atmospheric pressure:", options: ["Barometer", "Thermometer", "Anemometer", "Hygrometer"], correct: 0, sol: "Barometers measure air pressure." },
+                                { q: "WASSCE Past Q: Weathering caused by plant roots splitting rocks is:", options: ["Biological weathering", "Chemical weathering", "Mechanical exfoliation", "Glacial erosion"], correct: 0, sol: "Biological weathering involves living organisms breaking rocks." },
+                                { q: "WASSCE Past Q: Ocean currents are mainly driven by:", options: ["Prevailing winds and earth rotation", "Moon gravity only", "Fish movement", "Submarine volcanoes"], correct: 0, sol: "Surface currents are driven by global wind systems." },
+                                { q: "WASSCE Past Q: Sahel region in Africa is characterized by:", options: ["Semi-arid grassland transition", "Dense tropical rainforest", "Polar ice caps", "Coral reef systems"], correct: 0, sol: "Sahel is the semi-arid transition zone south of the Sahara." }
+                            ]]
+                        },
+                        {
+                            name: "Literature-in-English", icon: "fa-book-open", type: "Elective",
+                            sets: [[
+                                { q: "WASSCE Past Q: A figure of speech comparing two things using 'like' or 'as':", options: ["Simile", "Metaphor", "Personification", "Hyperbole"], correct: 0, sol: "Similes make direct comparisons using 'like' or 'as'." },
+                                { q: "WASSCE Past Q: The turning point or highest point of tension in a drama is:", options: ["Climax", "Resolution", "Exposition", "Denouement"], correct: 0, sol: "Climax is the peak of emotional intensity or conflict." },
+                                { q: "WASSCE Past Q: A poem consisting of 14 lines with a formal rhyme scheme is:", options: ["Sonnet", "Ballad", "Epic", "Ode"], correct: 0, sol: "Sonnets contain 14 lines structured in specific rhyme schemes." },
+                                { q: "WASSCE Past Q: Giving human qualities to inanimate objects or abstract ideas:", options: ["Personification", "Irony", "Alliteration", "Onomatopoeia"], correct: 0, sol: "Personification attributes human traits to non-human things." }
+                            ]]
+                        },
+                        {
+                            name: "Core Mathematics", icon: "fa-square-root-variable", type: "Core",
+                            sets: [[
+                                { q: "WASSCE Past Q: Simplify $3(x + 4) - 2(x - 1)$.", options: ["$x + 14$", "$x + 10$", "$5x + 12$", "$x - 2$"], correct: 0, sol: "$3x + 12 - 2x + 2 = x + 14$." },
+                                { q: "WASSCE Past Q: Median of scores: $12, 15, 9, 17, 8, 20$.", options: ["13.5", "14", "12", "15"], correct: 0, sol: "Middle values are 12 and 15. Median = $13.5$." },
+                                { q: "WASSCE Past Q: Express 45 as a percentage of 150.", options: ["$30\\%$", "$45\\%$", "$15\\%$", "$60\\%$"], correct: 0, sol: "$\\frac{45}{150} \\times 100\\% = 30\\%$." },
+                                { q: "WASSCE Past Q: If $2^x = 32$, find $x$.", options: ["5", "4", "6", "3"], correct: 0, sol: "$2^x = 2^5 \\implies x = 5$." },
+                                { q: "WASSCE Past Q: Perimeter of rectangle of length 12 cm and width 8 cm:", options: ["40 cm", "96 cm", "20 cm", "48 cm"], correct: 0, sol: "Perimeter = $2(12 + 8) = 40\\text{ cm}$." },
+                                { q: "WASSCE Past Q: Solve simultaneous equations: $x + y = 10$, $x - y = 4$.", options: ["$x = 7, y = 3$", "$x = 6, y = 4$", "$x = 8, y = 2$", "$x = 5, y = 5$"], correct: 0, sol: "$2x = 14 \\implies x = 7, y = 3$." },
+                                { q: "WASSCE Past Q: Convert $72\\text{ km/h}$ to $\\text{m/s}$:", options: ["$20\\text{ m/s}$", "$25\\text{ m/s}$", "$72\\text{ m/s}$", "$15\\text{ m/s}$"], correct: 0, sol: "$72 \\times \\frac{5}{18} = 20\\text{ m/s}$." }
+                            ]]
                         }
                     ]
                 },
                 {
                     streamName: "Business Stream",
                     icon: "fa-briefcase",
-                    desc: "Financial Accounting, Business Management & Economics",
+                    desc: "Financial Accounting, Cost Accounting, Business Management & Economics",
                     subjects: [
                         {
-                            name: "Core Mathematics",
-                            icon: "fa-square-root-variable",
-                            type: "Core",
-                            sets: [
-                                [
-                                    { q: "WASSCE Past Q: Solve $2(3x - 1) = 16$.", options: ["$x = 3$", "$x = 2$", "$x = 4$", "$x = 5$"], correct: 0, sol: "$6x - 2 = 16 \\implies 6x = 18 \\implies x = 3$." },
-                                    { q: "WASSCE Past Q: Evaluate $\\frac{2}{3} + \\frac{1}{4} - \\frac{1}{2}$.", options: ["$\\frac{5}{12}$", "$\\frac{7}{12}$", "$\\frac{1}{3}$", "$\\frac{3}{4}$"], correct: 0, sol: "Common denominator is 12: $\\frac{8 + 3 - 6}{12} = \\frac{5}{12}$." },
-                                    { q: "WASSCE Past Q: Find the gradient of line passing through $(1, 2)$ and $(3, 8)$.", options: ["3", "2", "4", "1.5"], correct: 0, sol: "Gradient $m = \\frac{8 - 2}{3 - 1} = \\frac{6}{2} = 3$." },
-                                    { q: "WASSCE Past Q: If $p = \\begin{pmatrix} 3 \\\\ -2 \\end{pmatrix}$ and $q = \\begin{pmatrix} -1 \\\\ 5 \\end{pmatrix}$, find $p + q$.", options: ["$\\begin{pmatrix} 2 \\\\ 3 \\end{pmatrix}$", "$\\begin{pmatrix} 4 \\\\ -7 \\end{pmatrix}$", "$\\begin{pmatrix} -3 \\\\ -10 \\end{pmatrix}$", "$\\begin{pmatrix} 2 \\\\ -3 \\end{pmatrix}$"], correct: 0, sol: "Add corresponding components: $3 + (-1) = 2$ and $-2 + 5 = 3$." },
-                                    { q: "WASSCE Past Q: Find the volume of a cylinder with radius 3 cm and height 10 cm. (Use $\\pi = \\frac{22}{7}$)", options: ["$282.86\\text{ cm}^3$", "$198\\text{ cm}^3$", "$94.2\\text{ cm}^3$", "$314\\text{ cm}^3$"], correct: 0, sol: "Volume = $\\pi r^2 h = \\frac{22}{7} \\times 3^2 \\times 10 = \\frac{1980}{7} \\approx 282.86\\text{ cm}^3$." },
-                                    { q: "WASSCE Past Q: Express 0.375 as a fraction in its lowest terms.", options: ["$\\frac{3}{8}$", "$\\frac{5}{8}$", "$\\frac{3}{5}$", "$\\frac{7}{16}$"], correct: 0, sol: "$0.375 = \\frac{375}{1000} = \\frac{3}{8}$." },
-                                    { q: "WASSCE Past Q: The interior angle of a regular polygon is $120^\\circ$. Find the number of sides.", options: ["6", "5", "8", "10"], correct: 0, sol: "Exterior angle = $180^\\circ - 120^\\circ = 60^\\circ$. Number of sides $n = \\frac{360}{60} = 6$." }
-                                ]
-                            ]
+                            name: "Financial Accounting", icon: "fa-file-invoice-dollar", type: "Elective",
+                            sets: [[
+                                { q: "WASSCE Past Q: Fundamental accounting equation:", options: ["Assets = Capital + Liabilities", "Assets = Capital - Liabilities", "Liabilities = Assets + Capital", "Capital = Assets + Liabilities"], correct: 0, sol: "Assets = Capital + Liabilities." },
+                                { q: "WASSCE Past Q: Book of prime entry for credit purchases:", options: ["Purchases Journal", "Sales Journal", "Cash Book", "General Journal"], correct: 0, sol: "Purchases journal records credit purchases." },
+                                { q: "WASSCE Past Q: Trial balance tests:", options: ["Arithmetical accuracy of ledgers", "Net profit", "Bank cash", "Customer debt"], correct: 0, sol: "Trial balance verifies debit and credit equality." },
+                                { q: "WASSCE Past Q: Depreciation of fixed assets is treated as:", options: ["An expense", "An asset", "A liability", "Capital revenue"], correct: 0, sol: "Depreciation is an operating expense." },
+                                { q: "WASSCE Past Q: Carriage inward is added to:", options: ["Trading account to find COGS", "Profit and loss office expense", "Balance sheet asset", "Capital account"], correct: 0, sol: "Carriage inward is direct purchasing cost." },
+                                { q: "WASSCE Past Q: Bad debts recovered classified as:", options: ["Revenue / Income", "Capital", "Expense", "Liability"], correct: 0, sol: "Recovered bad debts are income." },
+                                { q: "WASSCE Past Q: Working capital is:", options: ["Current Assets minus Current Liabilities", "Fixed Assets plus Current Assets", "Total Assets minus Liabilities", "Capital minus Drawings"], correct: 0, sol: "Working capital = Current Assets - Current Liabilities." }
+                            ]]
                         },
                         {
-                            name: "Financial Accounting",
-                            icon: "fa-file-invoice-dollar",
-                            type: "Elective",
-                            sets: [
-                                [
-                                    { q: "WASSCE Past Q: The fundamental accounting equation is:", options: ["Assets = Capital + Liabilities", "Assets = Capital - Liabilities", "Liabilities = Assets + Capital", "Capital = Assets + Liabilities"], correct: 0, sol: "Assets always equal the sum of Liabilities and Owner's Equity (Capital)." },
-                                    { q: "WASSCE Past Q: Which book of prime entry is used to record credit purchases of goods?", options: ["Purchases Journal", "Sales Journal", "Cash Book", "General Journal"], correct: 0, sol: "Purchases Journal (or Purchases Day Book) records goods bought on credit." },
-                                    { q: "WASSCE Past Q: A trial balance is prepared primarily to test:", options: ["Arithmetical accuracy of ledger accounts", "Total net profit of business", "Cash in bank", "Total customer debts"], correct: 0, sol: "Trial balance checks that total debits equal total credits in ledger accounts." },
-                                    { q: "WASSCE Past Q: Depreciation of fixed assets is treated in financial statements as:", options: ["An expense", "An asset", "A liability", "Capital revenue"], correct: 0, sol: "Depreciation reduces asset value and is charged as an operating expense." },
-                                    { q: "WASSCE Past Q: Carriage inward is added to:", options: ["Trading account to find Cost of Goods Sold", "Profit and loss account as office expense", "Balance sheet as current asset", "Capital account directly"], correct: 0, sol: "Carriage inward is direct cost associated with purchase of goods." },
-                                    { q: "WASSCE Past Q: Bad debts recovered are classified as:", options: ["Revenue / Income", "Capital", "Expense", "Liability"], correct: 0, sol: "Recovered bad debts represent income earned by the business." },
-                                    { q: "WASSCE Past Q: Working capital is defined as:", options: ["Current Assets minus Current Liabilities", "Fixed Assets plus Current Assets", "Total Assets minus Total Liabilities", "Capital minus Drawings"], correct: 0, sol: "Net working capital evaluates short-term financial health." }
-                                ]
-                            ]
+                            name: "Cost Accounting", icon: "fa-calculator", type: "Elective",
+                            sets: [[
+                                { q: "WASSCE Past Q: Costs that vary directly with output volume are:", options: ["Variable costs", "Fixed costs", "Sunk costs", "Opportunity costs"], correct: 0, sol: "Variable costs change directly with production volume." },
+                                { q: "WASSCE Past Q: Prime cost is the sum of:", options: ["Direct materials, direct labor & direct expenses", "Indirect materials and indirect labor", "Factory overheads and admin costs", "Selling and distribution expenses"], correct: 0, sol: "Prime cost = Total direct costs." },
+                                { q: "WASSCE Past Q: Overhead absorption rate is calculated by dividing total overheads by:", options: ["Direct labor hours or machine hours", "Net profit", "Total sales revenue", "Capital employed"], correct: 0, sol: "Overhead is absorbed using activity bases like labor/machine hours." }
+                            ]]
+                        },
+                        {
+                            name: "Business Management", icon: "fa-users-cog", type: "Elective",
+                            sets: [[
+                                { q: "WASSCE Past Q: The management function of setting goals and deciding actions is:", options: ["Planning", "Organizing", "Controlling", "Staffing"], correct: 0, sol: "Planning involves mapping out future business goals." },
+                                { q: "WASSCE Past Q: Leadership style where manager makes all decisions without subordinates:", options: ["Autocratic leadership", "Democratic leadership", "Laissez-faire", "Paternalistic"], correct: 0, sol: "Autocratic leaders retain all authority and decision-making." },
+                                { q: "WASSCE Past Q: SWOT analysis evaluates:", options: ["Strengths, Weaknesses, Opportunities, Threats", "Sales, Wages, Operations, Taxes", "Systems, Workforce, Output, Time", "Savings, Wealth, Ownership, Trade"], correct: 0, sol: "SWOT examines internal strengths/weaknesses and external opportunities/threats." }
+                            ]]
+                        }
+                    ]
+                },
+                {
+                    streamName: "Home Economics Stream",
+                    icon: "fa-utensils",
+                    desc: "Food & Nutrition, Management-in-Living, Clothing & Textiles",
+                    subjects: [
+                        {
+                            name: "Food & Nutrition", icon: "fa-utensils", type: "Elective",
+                            sets: [[
+                                { q: "WASSCE Past Q: Nutrient primarily responsible for body tissue repair:", options: ["Proteins", "Carbohydrates", "Fats and oils", "Vitamins"], correct: 0, sol: "Proteins provide amino acids necessary for growth and repair." },
+                                { q: "WASSCE Past Q: Deficiency disease caused by lack of protein and calories in children:", options: ["Kwashiorkor", "Scurvy", "Rickets", "Goiter"], correct: 0, sol: "Kwashiorkor is severe protein-energy malnutrition." },
+                                { q: "WASSCE Past Q: Method of cooking food by dry heat in an oven:", options: ["Baking", "Boiling", "Steaming", "Poaching"], correct: 0, sol: "Baking uses convection heat inside an oven." }
+                            ]]
+                        },
+                        {
+                            name: "Management-in-Living", icon: "fa-home", type: "Elective",
+                            sets: [[
+                                { q: "WASSCE Past Q: A detailed plan of expected income and expenditure is a:", options: ["Budget", "Ledger", "Balance sheet", "Receipt"], correct: 0, sol: "A budget manages financial resources over a period." },
+                                { q: "WASSCE Past Q: Decision making process begins with:", options: ["Identifying the problem or goal", "Evaluating alternatives", "Implementing the choice", "Gathering cash"], correct: 0, sol: "Recognizing the problem is the first step in decision making." }
+                            ]]
+                        }
+                    ]
+                },
+                {
+                    streamName: "Visual Arts Stream",
+                    icon: "fa-palette",
+                    desc: "Graphic Design, Picture Making, Sculpture, Textiles & Ceramics",
+                    subjects: [
+                        {
+                            name: "Graphic Design", icon: "fa-paint-brush", type: "Elective",
+                            sets: [[
+                                { q: "WASSCE Past Q: Primary colors in art and pigment mixing are:", options: ["Red, Yellow, Blue", "Orange, Green, Purple", "Black, White, Gray", "Cyan, Magenta, Yellow"], correct: 0, sol: "Traditional primary colors are red, yellow, and blue." },
+                                { q: "WASSCE Past Q: The lightness or darkness of a color is known as its:", options: ["Value / Tone", "Hue", "Chroma", "Texture"], correct: 0, sol: "Value refers to relative lightness or darkness of a hue." }
+                            ]]
+                        }
+                    ]
+                },
+                {
+                    streamName: "Agricultural Science Stream",
+                    icon: "fa-seedling",
+                    desc: "General Agriculture, Animal Husbandry, Crop Husbandry & Horticulture",
+                    subjects: [
+                        {
+                            name: "General Agriculture", icon: "fa-tractor", type: "Elective",
+                            sets: [[
+                                { q: "WASSCE Past Q: The topmost layer of the earth's crust supporting plant growth is:", options: ["Soil", "Bedrock", "Magma", "Clay deposit"], correct: 0, sol: "Soil provides mechanical anchorage and nutrients for crops." },
+                                { q: "WASSCE Past Q: Rearing of aquatic organisms like fish in controlled water bodies:", options: ["Aquaculture", "Apiculture", "Horticulture", "Sericulture"], correct: 0, sol: "Aquaculture is farming of aquatic life." }
+                            ]]
                         }
                     ]
                 }
@@ -381,55 +401,41 @@
                 {
                     streamName: "BECE Junior High School Core",
                     icon: "fa-school",
-                    desc: "Core Mathematics, Integrated Science, Social Studies & English",
+                    desc: "Core Mathematics, Integrated Science, Social Studies & English Language",
                     subjects: [
                         {
-                            name: "Core Mathematics",
-                            icon: "fa-square-root-variable",
-                            type: "Core",
-                            sets: [
-                                [
-                                    { q: "BECE Past Q: Find the LCM of 12, 15 and 20.", options: ["60", "120", "30", "240"], correct: 0, sol: "Prime factorizations give LCM = $2^2 \\times 3 \\times 5 = 60$." },
-                                    { q: "BECE Past Q: Simplify: $4x + 3y - 2x + 5y$.", options: ["$2x + 8y$", "$6x + 8y$", "$2x - 2y$", "$9xy$"], correct: 0, sol: "Collect like terms: $(4x - 2x) + (3y + 5y) = 2x + 8y$." },
-                                    { q: "BECE Past Q: Express $\\frac{3}{5}$ as a percentage.", options: ["$60\\%$", "$30\\%$", "$75\\%$", "$15\\%$"], correct: 0, sol: "$\\frac{3}{5} \\times 100\\% = 60\\%$." },
-                                    { q: "BECE Past Q: Find the value of $y$ if $3y - 5 = 16$.", options: ["7", "6", "8", "5"], correct: 0, sol: "$3y = 21 \\implies y = 7$." },
-                                    { q: "BECE Past Q: Calculate the area of a square whose side is 9 cm.", options: ["$81\\text{ cm}^2$", "$36\\text{ cm}^2$", "$18\\text{ cm}^2$", "$72\\text{ cm}^2$"], correct: 0, sol: "Area = $\\text{side} \\times \\text{side} = 9 \\times 9 = 81\\text{ cm}^2$." },
-                                    { q: "BECE Past Q: Write 4,500 in standard form.", options: ["$4.5 \\times 10^3$", "$4.5 \\times 10^2$", "$45 \\times 10^2$", "$0.45 \\times 10^4$"], correct: 0, sol: "Standard form: $4.5 \\times 10^3$." },
-                                    { q: "BECE Past Q: Find the median of: $5, 2, 9, 7, 3$.", options: ["5", "7", "3", "9"], correct: 0, sol: "Ordered: $2, 3, 5, 7, 9$. Middle number is 5." }
-                                ]
-                            ]
+                            name: "Core Mathematics", icon: "fa-square-root-variable", type: "Core",
+                            sets: [[
+                                { q: "BECE Past Q: Find LCM of 12, 15 and 20.", options: ["60", "120", "30", "240"], correct: 0, sol: "LCM of 12, 15, 20 is 60." },
+                                { q: "BECE Past Q: Simplify: $4x + 3y - 2x + 5y$.", options: ["$2x + 8y$", "$6x + 8y$", "$2x - 2y$", "$9xy$"], correct: 0, sol: "Combining like terms gives $2x + 8y$." },
+                                { q: "BECE Past Q: Express $\\frac{3}{5}$ as percentage:", options: ["$60\\%$", "$30\\%$", "$75\\%$", "$15\\%$"], correct: 0, sol: "$\\frac{3}{5} \\times 100\\% = 60\\%$." },
+                                { q: "BECE Past Q: If $3y - 5 = 16$, find $y$.", options: ["7", "6", "8", "5"], correct: 0, sol: "$3y = 21 \\implies y = 7$." },
+                                { q: "BECE Past Q: Area of a square with side 9 cm:", options: ["$81\\text{ cm}^2$", "$36\\text{ cm}^2$", "$18\\text{ cm}^2$", "$72\\text{ cm}^2$"], correct: 0, sol: "Area = $9 \\times 9 = 81\\text{ cm}^2$." },
+                                { q: "BECE Past Q: Write 4,500 in standard form:", options: ["$4.5 \\times 10^3$", "$4.5 \\times 10^2$", "$45 \\times 10^2$", "$0.45 \\times 10^4$"], correct: 0, sol: "Standard form is $4.5 \\times 10^3$." },
+                                { q: "BECE Past Q: Median of scores: $5, 2, 9, 7, 3$.", options: ["5", "7", "3", "9"], correct: 0, sol: "Ordered numbers middle value is 5." }
+                            ]]
                         },
                         {
-                            name: "Integrated Science",
-                            icon: "fa-flask",
-                            type: "Core",
-                            sets: [
-                                [
-                                    { q: "BECE Past Q: Which of the following is a living thing?", options: ["Amoeba", "Stone", "Water", "Plastic bag"], correct: 0, sol: "Amoeba is a single-celled living organism." },
-                                    { q: "BECE Past Q: The gas used in fire extinguishers is:", options: ["Carbon dioxide", "Oxygen", "Hydrogen", "Nitrogen"], correct: 0, sol: "Carbon dioxide does not support combustion and smothers fires." },
-                                    { q: "BECE Past Q: Boiling point of pure water is:", options: ["$100^\\circ\\text{C}$", "$0^\\circ\\text{C}$", "$50^\\circ\\text{C}$", "$212^\\circ\\text{C}$"], correct: 0, sol: "Pure water boils at $100^\\circ\\text{C}$ at standard atmospheric pressure." },
-                                    { q: "BECE Past Q: Which part of the flower develops into a fruit?", options: ["Ovary", "Ovule", "Petal", "Sepal"], correct: 0, sol: "The fertilized ovary develops into a fruit." },
-                                    { q: "BECE Past Q: The SI unit of temperature is:", options: ["Kelvin", "Celsius", "Fahrenheit", "Joule"], correct: 0, sol: "Kelvin (K) is the SI base unit for temperature." },
-                                    { q: "BECE Past Q: Teeth used for biting and cutting food are:", options: ["Incisors", "Canines", "Molars", "Premolars"], correct: 0, sol: "Incisors are chisel-shaped front teeth." },
-                                    { q: "BECE Past Q: An example of a renewable energy source is:", options: ["Solar energy", "Crude oil", "Coal", "Natural gas"], correct: 0, sol: "Sunlight is naturally replenished and inexhaustible." }
-                                ]
-                            ]
+                            name: "Integrated Science", icon: "fa-flask", type: "Core",
+                            sets: [[
+                                { q: "BECE Past Q: Which of these is a living thing?", options: ["Amoeba", "Stone", "Water", "Plastic bag"], correct: 0, sol: "Amoeba is unicellular life." },
+                                { q: "BECE Past Q: Gas used in fire extinguishers:", options: ["Carbon dioxide", "Oxygen", "Hydrogen", "Nitrogen"], correct: 0, sol: "Carbon dioxide smothers fires." },
+                                { q: "BECE Past Q: Boiling point of pure water:", options: ["$100^\\circ\\text{C}$", "$0^\\circ\\text{C}$", "$50^\\circ\\text{C}$", "$212^\\circ\\text{C}$"], correct: 0, sol: "Water boils at $100^\\circ\\text{C}$." },
+                                { q: "BECE Past Q: Plant part that develops into fruit:", options: ["Ovary", "Ovule", "Petal", "Sepal"], correct: 0, sol: "Fertilized ovary becomes fruit." },
+                                { q: "BECE Past Q: SI unit of temperature:", options: ["Kelvin", "Celsius", "Fahrenheit", "Joule"], correct: 0, sol: "Kelvin is SI temperature unit." },
+                                { q: "BECE Past Q: Teeth used for biting and cutting:", options: ["Incisors", "Canines", "Molars", "Premolars"], correct: 0, sol: "Incisors cut food." },
+                                { q: "BECE Past Q: Renewable energy source:", options: ["Solar energy", "Crude oil", "Coal", "Natural gas"], correct: 0, sol: "Sunlight is renewable." }
+                            ]]
                         },
                         {
-                            name: "Social Studies",
-                            icon: "fa-earth-africa",
-                            type: "Core",
-                            sets: [
-                                [
-                                    { q: "BECE Past Q: Ghana gained independence on:", options: ["6th March, 1957", "1st July, 1960", "25th May, 1963", "7th January, 1993"], correct: 0, sol: "Ghana became independent on March 6, 1957." },
-                                    { q: "BECE Past Q: The first President of Ghana was:", options: ["Dr. Kwame Nkrumah", "J.B. Danquah", "Jerry J. Rawlings", "John A. Kufuor"], correct: 0, sol: "Dr. Kwame Nkrumah led Ghana to independence and became first president." },
-                                    { q: "BECE Past Q: A nuclear family consists of:", options: ["Father, mother and children", "Grandparents, uncles and cousins", "Friends and neighbors", "Only teachers and students"], correct: 0, sol: "Nuclear family comprises parents and their children." },
-                                    { q: "BECE Past Q: The cardinal points of a map are:", options: ["North, South, East, West", "Up, Down, Left, Right", "Accra, Kumasi, Tamale, Takoradi", "Land, Sea, Air, Space"], correct: 0, sol: "The four primary cardinal directions are North, South, East, and West." },
-                                    { q: "BECE Past Q: The national currency of Ghana is the:", options: ["Ghana Cedi", "Naira", "Dollar", "Pound"], correct: 0, sol: "The Ghana Cedi (GH₵) is the official currency." },
-                                    { q: "BECE Past Q: Which of these is a symbol of national unity in Ghana?", options: ["National Flag", "School uniform", "Market square", "Football club"], correct: 0, sol: "The National Flag, Anthem, and Coat of Arms symbolize national unity." },
-                                    { q: "BECE Past Q: Adolescent chastity helps to prevent:", options: ["Sexually transmitted infections", "Good academic grades", "Physical fitness", "Talent development"], correct: 0, sol: "Abstinence protects youth from STIs and teenage pregnancies." }
-                                ]
-                            ]
+                            name: "Social Studies", icon: "fa-earth-africa", type: "Core",
+                            sets: [[
+                                { q: "BECE Past Q: Ghana gained independence on:", options: ["6th March, 1957", "1st July, 1960", "25th May, 1963", "7th January, 1993"], correct: 0, sol: "Independence day is March 6, 1957." },
+                                { q: "BECE Past Q: First President of Ghana:", options: ["Dr. Kwame Nkrumah", "J.B. Danquah", "Jerry J. Rawlings", "John A. Kufuor"], correct: 0, sol: "Dr. Kwame Nkrumah was first president." },
+                                { q: "BECE Past Q: Nuclear family consists of:", options: ["Father, mother and children", "Grandparents and cousins", "Friends", "Teachers and students"], correct: 0, sol: "Nuclear family includes parents and children." },
+                                { q: "BECE Past Q: Cardinal points of a map:", options: ["North, South, East, West", "Up, Down, Left, Right", "Accra, Kumasi", "Land and Sea"], correct: 0, sol: "Cardinal points are N, S, E, W." },
+                                { q: "BECE Past Q: National currency of Ghana:", options: ["Ghana Cedi", "Naira", "Dollar", "Pound"], correct: 0, sol: "Ghana Cedi is official currency." }
+                            ]]
                         }
                     ]
                 }
@@ -441,20 +447,21 @@
                     desc: "Computer Science, Software Engineering & Business Administration",
                     subjects: [
                         {
-                            name: "Computer Science",
-                            icon: "fa-laptop-code",
-                            type: "Core",
-                            sets: [
-                                [
-                                    { q: "University Exam Q: What does HTML stand for?", options: ["Hyper Text Markup Language", "High Tech Machine Language", "Hyperlink Text Management", "Home Tool Markup Language"], correct: 0, sol: "HTML is the standard markup language for creating web pages." },
-                                    { q: "University Exam Q: Which data structure operates on a Last-In-First-Out (LIFO) basis?", options: ["Stack", "Queue", "Array", "Graph"], correct: 0, sol: "A Stack pushes and pops elements from the same end (LIFO)." },
-                                    { q: "University Exam Q: What is the worst-case time complexity of Merge Sort?", options: ["$O(n \\log n)$", "$O(n^2)$", "$O(n)$", "$O(1)$"], correct: 0, sol: "Merge sort consistently runs in $O(n \\log n)$ time complexity." },
-                                    { q: "University Exam Q: Which SQL command is used to retrieve data from a database?", options: ["SELECT", "UPDATE", "INSERT", "DELETE"], correct: 0, sol: "SELECT query extracts records from database tables." },
-                                    { q: "University Exam Q: CPU scheduling algorithm that gives CPU to process with shortest burst time is:", options: ["Shortest Job First (SJF)", "First Come First Serve", "Round Robin", "Priority scheduling"], correct: 0, sol: "SJF minimizes waiting time by executing shortest jobs first." },
-                                    { q: "University Exam Q: IP address version 4 (IPv4) is expressed in how many bits?", options: ["32 bits", "64 bits", "128 bits", "16 bits"], correct: 0, sol: "IPv4 addresses consist of 32 bits divided into 4 octets." },
-                                    { q: "University Exam Q: Object-oriented programming principle of hiding internal state is called:", options: ["Encapsulation", "Inheritance", "Polymorphism", "Compilation"], correct: 0, sol: "Encapsulation bundles data and methods while restricting direct access." }
-                                ]
-                            ]
+                            name: "Computer Science", icon: "fa-laptop-code", type: "Core",
+                            sets: [[
+                                { q: "University Exam Q: What does HTML stand for?", options: ["Hyper Text Markup Language", "High Tech Machine Language", "Hyperlink Text Management", "Home Tool Markup Language"], correct: 0, sol: "HTML stands for Hyper Text Markup Language." },
+                                { q: "University Exam Q: Data structure operating on LIFO basis:", options: ["Stack", "Queue", "Array", "Graph"], correct: 0, sol: "Stack operates as Last-In-First-Out." },
+                                { q: "University Exam Q: Worst-case time complexity of Merge Sort:", options: ["$O(n \\log n)$", "$O(n^2)$", "$O(n)$", "$O(1)$"], correct: 0, sol: "Merge sort runs in $O(n \\log n)$ time." },
+                                { q: "University Exam Q: SQL command used to retrieve data:", options: ["SELECT", "UPDATE", "INSERT", "DELETE"], correct: 0, sol: "SELECT queries retrieve database table rows." },
+                                { q: "University Exam Q: IPv4 address is expressed in how many bits?", options: ["32 bits", "64 bits", "128 bits", "16 bits"], correct: 0, sol: "IPv4 uses 32-bit addresses." }
+                            ]]
+                        },
+                        {
+                            name: "Business Administration", icon: "fa-chart-pie", type: "Core",
+                            sets: [[
+                                { q: "University Exam Q: Process of monitoring performance and taking corrective action:", options: ["Controlling", "Planning", "Organizing", "Staffing"], correct: 0, sol: "Controlling measures performance against standards." },
+                                { q: "University Exam Q: Financial statement showing financial position at specific date:", options: ["Balance Sheet", "Income Statement", "Cash Flow Statement", "Trial Balance"], correct: 0, sol: "Balance sheet details assets, liabilities, and equity." }
+                            ]]
                         }
                     ]
                 }
@@ -605,7 +612,6 @@
             const q = currentSet[currentQuestionIndex];
             const isCorrect = chosenIdx === q.correct;
 
-            currentSet.forEach((_, i) => {}); // placeholder loop reference
             q.options.forEach((_, i) => {
                 const btn = document.getElementById(`opt-${i}`);
                 btn.onclick = null;
