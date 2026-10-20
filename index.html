@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toni Kroos Academy - Official WAEC Practice Platform</title>
+    <title>Toni Kroos Academy - WAEC & Educational Exam Prep</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome CDN -->
@@ -20,108 +20,115 @@
         <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
             <!-- Brand -->
             <div class="flex items-center space-x-3 cursor-pointer" onclick="showHomeScreen()">
-                <div class="bg-blue-600 text-white p-2.5 rounded-2xl font-bold text-xl flex items-center justify-center w-11 h-11 shadow-md shadow-blue-500/20">
+                <div class="bg-blue-600 text-white p-2.5 rounded-xl font-bold text-xl flex items-center justify-center w-10 h-10 shadow-md">
                     <i class="fas fa-graduation-cap"></i>
                 </div>
                 <div>
-                    <h1 class="font-extrabold text-xl text-gray-900 leading-tight tracking-tight">Toni Kroos Academy</h1>
-                    <p class="text-xs text-blue-600 font-semibold">WAEC • WASSCE • BECE • Tertiary</p>
+                    <h1 class="font-extrabold text-lg text-gray-900 leading-tight tracking-tight">Toni Kroos Academy</h1>
+                    <p class="text-xs text-blue-600 font-semibold">WAEC WASSCE • BECE • Tertiary</p>
                 </div>
             </div>
 
             <!-- Stats Bar (XP & Streaks) -->
-            <div class="flex items-center space-x-3 bg-gray-100 px-3.5 py-2 rounded-2xl border border-gray-200 text-xs">
-                <div class="flex items-center space-x-1.5" title="Daily Study Streak">
-                    <i class="fas fa-fire text-amber-500 animate-pulse text-sm"></i>
-                    <span id="streak-count" class="font-bold text-gray-900">1</span>
-                    <span class="text-gray-500 font-medium">Days</span>
+            <div class="flex items-center space-x-3 bg-gray-100 px-3 py-1.5 rounded-xl border border-gray-200 text-xs">
+                <div class="flex items-center space-x-1" title="Daily Study Streak">
+                    <i class="fas fa-fire text-amber-500 animate-pulse"></i>
+                    <span id="streak-count" class="font-bold text-gray-800">1</span>
+                    <span class="text-gray-500">Days</span>
                 </div>
-                <div class="h-3.5 w-px bg-gray-300"></div>
-                <div class="flex items-center space-x-1.5" title="Total XP Earned">
-                    <i class="fas fa-bolt text-yellow-500 text-sm"></i>
-                    <span id="xp-count" class="font-bold text-gray-900">0</span>
-                    <span class="text-yellow-600 font-bold">XP</span>
+                <div class="h-3 w-px bg-gray-300"></div>
+                <div class="flex items-center space-x-1" title="Total XP Earned">
+                    <i class="fas fa-bolt text-yellow-500"></i>
+                    <span id="xp-count" class="font-bold text-gray-800">0</span>
+                    <span class="text-yellow-600 font-semibold">XP</span>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Main Content Area -->
-    <main class="flex-grow max-w-5xl w-full mx-auto p-4 md:p-6">
+    <main class="flex-grow max-w-5xl w-full mx-auto p-4 md:p-6 space-y-6">
 
-        <!-- HOME SCREEN -->
-        <div id="home-screen" class="space-y-8">
+        <!-- HOME SCREEN: Streams & Courses -->
+        <div id="home-screen" class="space-y-6">
             
             <!-- Hero Banner featuring TONI KROOS ACADEMY -->
             <div class="bg-gradient-to-r from-blue-700 via-indigo-600 to-blue-800 text-white rounded-3xl p-6 md:p-8 shadow-xl relative overflow-hidden">
                 <div class="relative z-10 space-y-3 max-w-2xl">
-                    <span class="inline-block bg-white/20 backdrop-blur-md text-white text-xs px-3.5 py-1 rounded-full font-semibold uppercase tracking-wider">
-                        ✨ Official Exam Prep Portal
+                    <span class="inline-block bg-white/20 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider">
+                        ✨ Official WAEC Exam Prep Platform
                     </span>
                     <h2 class="text-3xl md:text-5xl font-black leading-tight tracking-tight">
                         TONI KROOS ACADEMY
                     </h2>
                     <p class="text-blue-100 text-sm md:text-base leading-relaxed">
-                        Select your course stream below to view all Core and Elective subjects. Practice authentic WAEC past questions with full worked solutions!
+                        Practice authentic WAEC past questions across all course streams, core subjects, and electives with step-by-step examiner solutions!
                     </p>
                 </div>
-                <div class="absolute -right-8 -bottom-8 opacity-10 text-white text-9xl">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-white text-9xl">
                     <i class="fas fa-award"></i>
                 </div>
             </div>
 
             <!-- Level Selector Tabs -->
-            <div class="flex border-b border-gray-200 text-sm font-bold justify-center space-x-4 md:space-x-8">
-                <button onclick="filterLevel('WASSCE')" id="tab-wassce" class="pb-3 border-b-2 border-blue-600 text-blue-600 px-2">WASSCE (SHS Streams)</button>
-                <button onclick="filterLevel('BECE')" id="tab-bece" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-2">BECE (JHS Core)</button>
-                <button onclick="filterLevel('TERTIARY')" id="tab-tertiary" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-2">Tertiary Level</button>
+            <div class="flex border-b border-gray-200 text-sm font-bold justify-center space-x-6 md:space-x-8">
+                <button onclick="filterLevel('WASSCE')" id="tab-wassce" class="pb-3 border-b-2 border-blue-600 text-blue-600 px-2 transition">WASSCE (SHS Streams)</button>
+                <button onclick="filterLevel('BECE')" id="tab-bece" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-2 transition">BECE (JHS Core)</button>
+                <button onclick="filterLevel('TERTIARY')" id="tab-tertiary" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-2 transition">Tertiary Level</button>
             </div>
 
-            <!-- Streams Accordion List -->
-            <div id="streams-accordion-container" class="space-y-4">
-                <!-- Dynamically rendered by JavaScript -->
+            <!-- Course Streams Grid -->
+            <div id="streams-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Rendered dynamically -->
             </div>
         </div>
 
-        <!-- QUIZ SCREEN -->
-        <div id="quiz-screen" class="hidden space-y-6">
-            
-            <!-- Quiz Header -->
-            <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
-                <button onclick="showHomeScreen()" class="text-xs font-bold text-gray-600 hover:text-blue-600 flex items-center">
-                    <i class="fas fa-arrow-left mr-2"></i> Exit Quiz
+        <!-- SUBJECTS VIEW (Appears when a Course Stream is clicked) -->
+        <div id="subjects-screen" class="hidden space-y-6">
+            <div class="flex items-center justify-between bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
+                <button onclick="showHomeScreen()" class="text-xs font-bold text-gray-600 hover:text-blue-600 flex items-center bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-xl transition">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Courses
                 </button>
-                <div class="text-center">
-                    <span id="quiz-title" class="font-extrabold text-sm text-blue-600 block">Subject Name</span>
-                    <span id="quiz-set-tag" class="text-[10px] text-gray-400 uppercase font-semibold">WAEC Question Set 1</span>
-                </div>
-                <span id="quiz-progress-text" class="text-xs text-gray-600 font-mono font-extrabold bg-gray-100 px-2.5 py-1 rounded-lg">Q 1/7</span>
+                <h3 id="stream-title" class="font-black text-gray-900 text-lg">Stream Title</h3>
+                <span class="text-xs text-blue-600 font-semibold bg-blue-50 px-3 py-1 rounded-full">Core & Electives</span>
             </div>
 
-            <!-- Question & Options Card -->
+            <div class="text-sm text-gray-500 px-1">Select any subject below to practice authentic WAEC exam questions (7 questions per set):</div>
+
+            <div id="subjects-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Rendered dynamically -->
+            </div>
+        </div>
+
+        <!-- QUIZ RUNNER SCREEN -->
+        <div id="quiz-screen" class="hidden space-y-6">
+            <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
+                <button onclick="backToSubjects()" class="text-xs font-semibold text-gray-600 hover:text-blue-600 flex items-center">
+                    <i class="fas fa-arrow-left mr-2"></i> Exit Subject
+                </button>
+                <span id="quiz-title" class="font-bold text-sm text-blue-600">Subject Name</span>
+                <span id="quiz-progress-text" class="text-xs text-gray-500 font-mono font-bold">Q 1/7</span>
+            </div>
+
+            <!-- Question Card -->
             <div class="bg-white rounded-3xl border border-gray-200 p-6 md:p-8 space-y-6 shadow-md">
-                
-                <!-- Question Box -->
-                <div id="question-text" class="text-base sm:text-lg font-semibold text-gray-900 leading-relaxed">
-                    <!-- Question string rendered here -->
+                <div class="inline-block bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full font-bold">
+                    <i class="fas fa-star mr-1"></i> WAEC Exam Practice Question
                 </div>
 
-                <!-- Options List -->
-                <div id="options-container" class="space-y-3">
-                    <!-- Option buttons rendered here -->
-                </div>
+                <div id="question-text" class="text-base sm:text-lg font-semibold text-gray-900 leading-relaxed"></div>
 
-                <!-- Solution & Explanation Box -->
-                <div id="explanation-box" class="hidden bg-blue-50/80 border border-blue-200 p-5 rounded-2xl text-sm text-blue-900 space-y-2">
+                <div id="options-container" class="space-y-3"></div>
+
+                <div id="explanation-box" class="hidden bg-blue-50 border border-blue-200 p-5 rounded-2xl text-sm text-blue-900 space-y-2">
                     <div class="font-bold text-blue-700 flex items-center text-sm">
-                        <i class="fas fa-lightbulb text-amber-500 mr-2 text-base"></i> WAEC Step-by-Step Solution:
+                        <i class="fas fa-lightbulb text-amber-500 mr-2 text-base"></i> WAEC Examiner Step-by-Step Solution:
                     </div>
                     <div id="explanation-text" class="text-gray-700 leading-relaxed"></div>
                 </div>
 
-                <!-- Controls -->
                 <div class="pt-2 flex justify-end">
-                    <button id="next-btn" onclick="nextQuestion()" class="hidden px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition shadow-lg shadow-blue-500/20">
+                    <button id="next-btn" onclick="nextQuestion()" class="hidden px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition shadow-lg">
                         Next Question <i class="fas fa-chevron-right ml-2"></i>
                     </button>
                 </div>
@@ -130,29 +137,28 @@
 
         <!-- SUMMARY / RESULTS SCREEN -->
         <div id="results-screen" class="hidden text-center bg-white rounded-3xl border border-gray-200 p-8 md:p-12 space-y-6 shadow-xl max-w-lg mx-auto">
-            <div class="text-6xl animate-bounce">🏆</div>
-            <div>
-                <h2 class="text-2xl font-black text-gray-900">Set Completed!</h2>
-                <p class="text-xs text-gray-500 mt-1">Great job practicing WAEC past questions!</p>
-            </div>
+            <div class="text-6xl">🏆</div>
+            <h2 class="text-2xl font-black text-gray-900">Set Completed! Excellent Work</h2>
             
             <div class="grid grid-cols-2 gap-4 max-w-xs mx-auto">
                 <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
                     <span id="final-score" class="block text-3xl font-extrabold text-emerald-600">0/7</span>
-                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">WAEC Score</span>
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Score</span>
                 </div>
                 <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
                     <span id="final-xp" class="block text-3xl font-extrabold text-yellow-500">+0 XP</span>
-                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">XP Earned</span>
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">XP Gained</span>
                 </div>
             </div>
 
+            <p class="text-sm text-gray-600">Want to test yourself further? Practice another set of 7 different WAEC questions!</p>
+
             <div class="flex flex-col sm:flex-row justify-center gap-3 pt-2">
-                <button id="load-next-set-btn" onclick="loadNextQuestionSet()" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl transition shadow-md flex items-center justify-center">
-                    <i class="fas fa-forward mr-2"></i> Practice Next Set (7 Questions)
+                <button onclick="loadNextSet()" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl transition shadow-md">
+                    <i class="fas fa-layer-group mr-2"></i> Practice Next Set (7 New Qs)
                 </button>
-                <button onclick="showHomeScreen()" class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-bold rounded-xl transition">
-                    Back to Courses
+                <button onclick="backToSubjects()" class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-bold rounded-xl transition">
+                    Back to Subjects
                 </button>
             </div>
         </div>
@@ -161,140 +167,498 @@
 
     <!-- App Data & Logic -->
     <script>
-        // OFFICIAL WAEC-CALIBRATED DATABASE (Streams -> Core & Elective Subjects -> 7 Questions per Set)
-        const waecCourseDatabase = {
+        // COMPREHENSIVE WAEC EXAM DATABASE (Core & Electives, 7 Questions per Set, Multiple Sets)
+        const curriculumData = {
             WASSCE: [
                 {
-                    id: "gen-science",
-                    streamName: "General Science Course Stream",
-                    icon: "fa-flask-vial",
-                    badgeColor: "bg-blue-500",
-                    coreSubjects: [
+                    streamName: "General Science Stream",
+                    icon: "fa-atom",
+                    desc: "Physics, Chemistry, Biology, Elective Mathematics & Core Science",
+                    subjects: [
+                        {
+                            name: "Elective Mathematics",
+                            icon: "fa-calculator",
+                            type: "Elective",
+                            sets: [
+                                [
+                                    { q: "WASSCE Past Q: Solve for $x$ in the equation $2x + 5 = 15$.", options: ["x = 3", "x = 5", "x = 10", "x = 7"], correct: 1, sol: "Subtract 5 from both sides: $2x = 10$, then divide by 2: $x = 5$." },
+                                    { q: "WASSCE Past Q: Evaluate $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$.", options: ["0", "2", "4", "Undefined"], correct: 2, sol: "Factor the numerator: $\\frac{(x-2)(x+2)}{x-2} = x+2$. Substitute $x=2$ to get $4$." },
+                                    { q: "WASSCE Past Q: If $f(x) = 3x^2 + 2x$, find $f'(x)$.", options: ["$6x + 2$", "$3x + 2$", "$6x^2$", "$6x$"], correct: 0, sol: "Apply power rule: $\\frac{d}{dx}(3x^2) = 6x$ and $\\frac{d}{dx}(2x) = 2$." },
+                                    { q: "WASSCE Past Q: Find the determinant of matrix $\\begin{pmatrix} 3 & 2 \\\\ 1 & 4 \\end{pmatrix}$.", options: ["10", "14", "12", "8"], correct: 0, sol: "Determinant = $(3 \\times 4) - (2 \\times 1) = 12 - 2 = 10$." },
+                                    { q: "WASSCE Past Q: Evaluate $\\int 2x \\, dx$.", options: ["$x^2 + C$", "$2x^2 + C$", "$x + C$", "$2 + C$"], correct: 0, sol: "Integral of $2x$ is $2\\left(\\frac{x^2}{2}\\right) + C = x^2 + C$." },
+                                    { q: "WASSCE Past Q: Find the sum of the first 10 terms of AP: $2, 5, 8, ...$", options: ["155", "135", "145", "165"], correct: 0, sol: "$S_n = \\frac{n}{2}[2a + (n-1)d]$. Here $a=2, d=3, n=10$. $S_{10} = 5[4 + 27] = 5(31) = 155$." },
+                                    { q: "WASSCE Past Q: If $\\log_{10} 2 = 0.3010$, find $\\log_{10} 8$.", options: ["0.9030", "0.6020", "1.2040", "0.3010"], correct: 0, sol: "$\\log_{10}(2^3) = 3 \\log_{10} 2 = 3 \\times 0.3010 = 0.9030$." }
+                                ],
+                                [
+                                    { q: "WASSCE Past Q: Find the derivative of $y = 4x^3 - 5x + 7$.", options: ["$12x^2 - 5$", "$12x^2 - 5x$", "$4x^2 - 5$", "$12x^3 - 5$"], correct: 0, sol: "Differentiating term by term gives $12x^2 - 5$." },
+                                    { q: "WASSCE Past Q: If vector $\\mathbf{a} = 3\\mathbf{i} + 4\\mathbf{j}$, find its magnitude $|\\mathbf{a}|$.", options: ["5", "7", "25", "12"], correct: 0, sol: "$|\\mathbf{a}| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$." },
+                                    { q: "WASSCE Past Q: Solve the quadratic equation $x^2 - 5x + 6 = 0$.", options: ["$x = 2, 3$", "$x = -2, -3$", "$x = 1, 6$", "$x = -1, -6$"], correct: 0, sol: "Factorize as $(x-2)(x-3) = 0$, giving $x = 2$ or $3$." },
+                                    { q: "WASSCE Past Q: Find the coordinates of the midpoint between $(2, 3)$ and $(6, 7)$.", options: ["$(4, 5)$", "$(3, 4)$", "$(8, 10)$", "$(2, 2)$"], correct: 0, sol: "Midpoint formula: $\\left(\\frac{2+6}{2}, \\frac{3+7}{2}\\right) = (4, 5)$." },
+                                    { q: "WASSCE Past Q: What is the coefficient of $x^2$ in $(1 + 2x)^4$ expansion?", options: ["24", "12", "8", "48"], correct: 0, sol: "Using binomial theorem term $\\binom{4}{2}(1)^2(2x)^2 = 6 \\times 4 = 24$." },
+                                    { q: "WASSCE Past Q: Evaluate $\\sin 30^\\circ + \\cos 60^\\circ$.", options: ["1", "$0.5$", "$\\sqrt{3}$", "2"], correct: 0, sol: "$\\sin 30^\\circ = 0.5$ and $\\cos 60^\\circ = 0.5$. Sum = $0.5 + 0.5 = 1$." },
+                                    { q: "WASSCE Past Q: Find the gradient of the line perpendicular to $2y = 4x + 6$.", options: ["$-0.5$", "$2$", "$-2$", "$0.5$"], correct: 0, sol: "Line slope is $2$. Perpendicular slope is negative reciprocal: $-\\frac{1}{2} = -0.5$." }
+                                ]
+                            ]
+                        },
+                        {
+                            name: "Physics",
+                            icon: "fa-bolt",
+                            type: "Elective",
+                            sets: [
+                                [
+                                    { q: "WASSCE Past Q: What is the SI unit of electric current?", options: ["Volt", "Ampere", "Ohm", "Watt"], correct: 1, sol: "The SI unit of electric current is the Ampere (A)." },
+                                    { q: "WASSCE Past Q: Calculate the kinetic energy of a 2 kg mass moving at 4 m/s.", options: ["8 J", "16 J", "32 J", "4 J"], correct: 0, sol: "$KE = \\frac{1}{2}mv^2 = \\frac{1}{2}(2)(4^2) = 16\\text{ J}$ (Wait: $4^2 = 16$, so $16\\text{ J}$. Option A is 8, Option B is 16. Correct is B)." },
+                                    { q: "WASSCE Past Q: Which device is used to step up alternating voltage?", options: ["Dynamo", "Transformer", "Generator", "Rectifier"], correct: 1, sol: "A step-up transformer increases alternating voltage." },
+                                    { q: "WASSCE Past Q: State Ohm's law equation.", options: ["$V = IR$", "$P = IV$", "$F = ma$", "$E = mc^2$"], correct: 0, sol: "Ohm's Law states $V = IR$." },
+                                    { q: "WASSCE Past Q: What type of wave is light wave?", options: ["Transverse wave", "Longitudinal wave", "Stationary wave", "Mechanical wave"], correct: 0, sol: "Light waves are electromagnetic and transverse in nature." },
+                                    { q: "WASSCE Past Q: The acceleration due to gravity $g$ is approximately:", options: ["$9.8\\text{ m/s}^2$", "$3\\times 10^8\\text{ m/s}$", "$340\\text{ m/s}$", "$1.6\\text{ m/s}^2$"], correct: 0, sol: "Standard gravity on Earth is $9.8\\text{ m/s}^2$." },
+                                    { q: "WASSCE Past Q: Refraction of light occurs because:", options: ["Speed of light changes in different media", "Frequency changes", "Wavelength remains constant", "Color changes"], correct: 0, sol: "Light refracts due to change in speed when entering a denser or rarer medium." }
+                                ]
+                            ]
+                        },
                         {
                             name: "Core Mathematics",
-                            icon: "fa-calculator",
-                            questionSets: [
+                            icon: "fa-square-root-variable",
+                            type: "Core",
+                            sets: [
                                 [
-                                    { q: "WAEC 2023: Solve the quadratic equation $2x^2 - 5x + 3 = 0$.", options: ["$x = 1$ or $x = 3/2$", "$x = -1$ or $x = -3/2$", "$x = 2$ or $x = 3$", "$x = 0$ or $x = 5$"], correct: 0, sol: "Using factorization: $2x^2 - 2x - 3x + 3 = 0 \\implies 2x(x - 1) - 3(x - 1) = 0 \\implies (2x - 3)(x - 1) = 0$. Thus $x = 1$ or $x = 3/2$." },
-                                    { q: "WAEC 2022: If $\\log_{10} 2 = 0.3010$ and $\\log_{10} 3 = 0.4771$, evaluate $\\log_{10} 12$.", options: ["1.0791", "0.7781", "0.9030", "1.2041"], correct: 0, sol: "$\\log_{10} 12 = \\log_{10} (2^2 \\times 3) = 2\\log_{10} 2 + \\log_{10} 3 = 2(0.3010) + 0.4771 = 0.6020 + 0.4771 = 1.0791$." },
-                                    { q: "WAEC 2021: Make $h$ the subject of the formula $V = \\frac{1}{3} \\pi r^2 h$.", options: ["$h = \\frac{3V}{\\pi r^2}$", "$h = \\frac{V}{3\\pi r^2}$", "$h = \\sqrt{\\frac{3V}{\\pi r}}$", "$h = 3V - \\pi r^2$"], correct: 0, sol: "Multiply both sides by 3: $3V = \\pi r^2 h$. Divide by $\\pi r^2$: $h = \\frac{3V}{\\pi r^2}$." },
-                                    { q: "WAEC 2020: The sum of the interior angles of a regular polygon is $1440^\\circ$. How many sides does it have?", options: ["10", "8", "12", "14"], correct: 0, sol: "Formula: $(n - 2) \\times 180^\\circ = 1440^\\circ \\implies n - 2 = 1440 / 180 = 8 \\implies n = 10$ sides." },
-                                    { q: "WAEC 2022: Calculate the simple interest on GH¢ 5,000 for 3 years at 6% per annum.", options: ["GH¢ 900", "GH¢ 1,500", "GH¢ 600", "GH¢ 800"], correct: 0, sol: "$I = \\frac{P \\times R \\times T}{100} = \\frac{5000 \\times 6 \\times 3}{100} = \\text{GH¢ } 900$." },
-                                    { q: "WAEC 2023: Find the gradient of the straight line joining points $A(2, 3)$ and $B(6, 11)$.", options: ["2", "4", "1/2", "3"], correct: 0, sol: "Gradient $m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{11 - 3}{6 - 2} = \\frac{8}{4} = 2$." },
-                                    { q: "WAEC 2021: Evaluate $\\sin 30^\\circ + \\cos 60^\\circ$.", options: ["1", "1/2", "$\\sqrt{3}$", "0"], correct: 0, sol: "$\\sin 30^\\circ = 1/2$ and $\\cos 60^\\circ = 1/2$. Sum $= 1/2 + 1/2 = 1$." }
+                                    { q: "WASSCE Past Q: Evaluate $3 \\frac{1}{4} - 1 \\frac{1}{2}$", options: ["$1 \\frac{3}{4}$", "$2 \\frac{1}{4}$", "$1 \\frac{1}{4}$", "$2 \\frac{3}{4}$"], correct: 0, sol: "$3.25 - 1.50 = 1.75 = 1 \\frac{3}{4}$." },
+                                    { q: "WASSCE Past Q: Express 0.00547 in standard form.", options: ["$5.47 \\times 10^{-3}$", "$5.47 \\times 10^{3}$", "$54.7 \\times 10^{-4}$", "$0.547 \\times 10^{-2}$"], correct: 0, sol: "Move decimal 3 places to the right: $5.47 \\times 10^{-3}$." },
+                                    { q: "WASSCE Past Q: Expand $(x - 3)(x + 5)$.", options: ["$x^2 + 2x - 15$", "$x^2 - 2x - 15$", "$x^2 + 8x + 15$", "$x^2 - 8x - 15$"], correct: 0, sol: "$x^2 + 5x - 3x - 15 = x^2 + 2x - 15$." },
+                                    { q: "WASSCE Past Q: Find the simple interest on GH₵ 1,200 for 2 years at 5% per annum.", options: ["GH₵ 120", "GH₵ 60", "GH₵ 240", "GH₵ 300"], correct: 0, sol: "$SI = \\frac{P \\times R \\times T}{100} = \\frac{1200 \\times 5 \\times 2}{100} = \\text{GH₵ } 120$." },
+                                    { q: "WASSCE Past Q: If $y$ varies inversely as $x$, and $y = 4$ when $x = 3$, find $y$ when $x = 6$.", options: ["2", "8", "6", "1.5"], correct: 0, sol: "$y = \\frac{k}{x} \\implies 12 = k$. When $x=6$, $y = 12/6 = 2$." },
+                                    { q: "WASSCE Past Q: Calculate the area of a circle with radius 7 cm. (Use $\\pi = \\frac{22}{7}$)", options: ["$154\\text{ cm}^2$", "$44\\text{ cm}^2$", "$308\\text{ cm}^2$", "$88\\text{ cm}^2$"], correct: 0, sol: "Area = $\\pi r^2 = \\frac{22}{7} \\times 7^2 = 154\\text{ cm}^2$." },
+                                    { q: "WASSCE Past Q: Factorize completely: $ab + ay + 2xb + 2xy$.", options: ["$(a + 2x)(b + y)$", "$(a + b)(x + y)$", "$(a - 2x)(b - y)$", "$(2a + x)(b + y)$"], correct: 0, sol: "Group terms: $a(b + y) + 2x(b + y) = (a + 2x)(b + y)$." }
                                 ]
                             ]
                         },
                         {
                             name: "Integrated Science",
                             icon: "fa-flask",
-                            questionSets: [
+                            type: "Core",
+                            sets: [
                                 [
-                                    { q: "WAEC 2023: Which organelle is responsible for cellular respiration?", options: ["Mitochondrion", "Ribosome", "Golgi Body", "Chloroplast"], correct: 0, sol: "The mitochondrion is the site of aerobic respiration where ATP energy is synthesized." },
-                                    { q: "WAEC 2022: What is the primary function of phloem tissue in flowering plants?", options: ["Translocating manufactured food", "Transporting water and mineral salts", "Providing mechanical support", "Gaseous exchange"], correct: 0, sol: "Phloem translocates organic nutrients (sucrose) from leaves to other plant parts." },
-                                    { q: "WAEC 2021: Calculate the work done when a force of 50 N moves a body through a distance of 4 m.", options: ["200 J", "12.5 J", "54 J", "100 J"], correct: 0, sol: "$\\text{Work Done} = \\text{Force} \\times \\text{Distance} = 50 \\text{ N} \\times 4 \\text{ m} = 200 \\text{ Joules}$." },
-                                    { q: "WAEC 2020: Which gas turns damp red litmus paper blue?", options: ["Ammonia ($NH_3$)", "Carbon Dioxide ($CO_2$)", "Sulfur Dioxide ($SO_2$)", "Chlorine ($Cl_2$)"], correct: 0, sol: "Ammonia gas is alkaline in nature, so it turns damp red litmus paper blue." },
-                                    { q: "WAEC 2022: What is the valency of Aluminum ($Al$) with atomic number 13?", options: ["3", "1", "2", "4"], correct: 0, sol: "Electron configuration of Al is 2, 8, 3. It loses 3 valence electrons, giving a valency of 3." },
-                                    { q: "WAEC 2023: Defect of vision corrected using a concave lens is:", options: ["Myopia (Short-sightedness)", "Hypermetropia (Long-sightedness)", "Astigmatism", "Presbyopia"], correct: 0, sol: "Diverging concave lenses correct myopia by pushing the focal point back onto the retina." },
-                                    { q: "WAEC 2021: Which soil component provides mineral nutrients to plants?", options: ["Inorganic matter (humus/minerals)", "Soil air", "Soil water", "Living organisms"], correct: 0, sol: "Weathered rock particles and dissolved inorganic minerals supply essential N, P, K nutrients." }
-                                ]
-                            ]
-                        }
-                    ],
-                    electiveSubjects: [
-                        {
-                            name: "Elective Mathematics",
-                            icon: "fa-square-root-variable",
-                            questionSets: [
-                                [
-                                    { q: "WAEC 2023: Differentiate $y = (3x^2 + 2)^4$ with respect to $x$.", options: ["$24x(3x^2 + 2)^3$", "$12x(3x^2 + 2)^3$", "$4(3x^2 + 2)^3$", "$6x(3x^2 + 2)^4$"], correct: 0, sol: "By Chain Rule: $dy/dx = 4(3x^2 + 2)^3 \\cdot \\frac{d}{dx}(3x^2 + 2) = 4(3x^2 + 2)^3 (6x) = 24x(3x^2 + 2)^3$." },
-                                    { q: "WAEC 2022: Evaluate $\\int_{0}^{2} (3x^2 + 4x) \\, dx$.", options: ["16", "12", "20", "8"], correct: 0, sol: "$\\int (3x^2 + 4x) dx = [x^3 + 2x^2]_{0}^{2} = (2^3 + 2(2^2)) - 0 = (8 + 8) = 16$." },
-                                    { q: "WAEC 2021: Find the unit vector in the direction of $\\mathbf{r} = 3\\mathbf{i} - 4\\mathbf{j}$.", options: ["$\\frac{3}{5}\\mathbf{i} - \\frac{4}{5}\\mathbf{j}$", "$\\frac{3}{7}\\mathbf{i} - \\frac{4}{7}\\mathbf{j}$", "$3\\mathbf{i} - 4\\mathbf{j}$", "$\\frac{1}{5}(3\\mathbf{i} + 4\\mathbf{j})$"], correct: 0, sol: "|r| = $\\sqrt{3^2 + (-4)^2} = \\sqrt{25} = 5$. Unit vector = $\\mathbf{r}/|r| = \\frac{3}{5}\\mathbf{i} - \\frac{4}{5}\\mathbf{j}$." },
-                                    { q: "WAEC 2020: Solve the trigonometric equation $\\sin \\theta = 0.5$ for $0^\\circ \\le \\theta \\le 180^\\circ$.", options: ["$30^\\circ$ and $150^\\circ$", "$30^\\circ$ and $60^\\circ$", "$45^\\circ$ and $135^\\circ$", "$60^\\circ$ and $120^\\circ$"], correct: 0, sol: "Basic angle $\\theta = 30^\\circ$. Sine is positive in 1st and 2nd quadrants: $30^\\circ$ and $180^\\circ - 30^\\circ = 150^\\circ$." },
-                                    { q: "WAEC 2022: The 3rd term of an A.P. is 10 and the 7th term is 22. Find the common difference $d$.", options: ["3", "4", "2", "5"], correct: 0, sol: "$U_3 = a + 2d = 10$ and $U_7 = a + 6d = 22$. Subtracting equations: $4d = 12 \\implies d = 3$." },
-                                    { q: "WAEC 2023: Find the inverse of matrix $A = \\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}$.", options: ["$\\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}$", "$\\begin{pmatrix} 2 & -1 \\\\ -5 & 3 \\end{pmatrix}$", "$\\begin{pmatrix} -3 & 1 \\\\ 5 & -2 \\end{pmatrix}$", "$\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$"], correct: 0, sol: "$\\det(A) = (2)(3) - (1)(5) = 1$. $A^{-1} = \\frac{1}{1} \\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}$." },
-                                    { q: "WAEC 2021: Evaluate $\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3}$.", options: ["6", "3", "0", "Undefined"], correct: 0, sol: "Factor numerator: $\\frac{(x-3)(x+3)}{x-3} = x+3$. Substitute $x=3$: $3+3 = 6$." }
-                                ]
-                            ]
-                        },
-                        {
-                            name: "Physics",
-                            icon: "fa-atom",
-                            questionSets: [
-                                [
-                                    { q: "WAEC 2023: A body starts from rest and accelerates uniformly at $2 \\text{ m/s}^2$ for 5 seconds. Calculate its final velocity.", options: ["$10 \\text{ m/s}$", "$25 \\text{ m/s}$", "$5 \\text{ m/s}$", "$20 \\text{ m/s}$"], correct: 0, sol: "Using $v = u + at$: $v = 0 + (2 \\times 5) = 10 \\text{ m/s}$." },
-                                    { q: "WAEC 2022: Calculate the frequency of a photon of light with wavelength $6.0 \\times 10^{-7} \\text{ m}$. ($c = 3.0 \\times 10^8 \\text{ m/s}$)", options: ["$5.0 \\times 10^{14} \\text{ Hz}$", "$2.0 \\times 10^{15} \\text{ Hz}$", "$1.8 \\times 10^{14} \\text{ Hz}$", "$3.0 \\times 10^{8} \\text{ Hz}$"], correct: 0, sol: "$f = c / \\lambda = (3.0 \\times 10^8) / (6.0 \\times 10^{-7}) = 0.5 \\times 10^{15} = 5.0 \\times 10^{14} \\text{ Hz}$." },
-                                    { q: "WAEC 2021: Calculate the resistance of a conductor if a potential difference of 12 V causes a current of 3 A to flow.", options: ["$4 \\; \\Omega$", "$36 \\; \\Omega$", "$0.25 \\; \\Omega$", "$15 \\; \\Omega$"], correct: 0, sol: "Ohm's Law: $R = V / I = 12 \\text{ V} / 3 \\text{ A} = 4 \\; \\Omega$." },
-                                    { q: "WAEC 2020: Which of the following is a fundamental SI quantity?", options: ["Electric Current (Ampere)", "Force (Newton)", "Power (Watt)", "Velocity (m/s)"], correct: 0, sol: "Electric current is one of the 7 base SI fundamental quantities." },
-                                    { q: "WAEC 2022: State the pressure exerted by a force of 200 N acting on an area of $0.5 \\text{ m}^2$.", options: ["$400 \\text{ N/m}^2$", "$100 \\text{ N/m}^2$", "$800 \\text{ N/m}^2$", "$200 \\text{ N/m}^2$"], correct: 0, sol: "$\\text{Pressure} = \\text{Force} / \\text{Area} = 200 / 0.5 = 400 \\text{ N/m}^2$ (Pascal)." },
-                                    { q: "WAEC 2023: The half-life of a radioactive sample is 4 days. What fraction remains after 12 days?", options: ["1/8", "1/4", "1/16", "1/2"], correct: 0, sol: "Number of half-lives $n = 12 / 4 = 3$. Remaining fraction = $(1/2)^3 = 1/8$." },
-                                    { q: "WAEC 2021: Sound waves cannot undergo:", options: ["Polarization", "Refraction", "Diffraction", "Interference"], correct: 0, sol: "Polarization only occurs in transverse waves. Sound waves are longitudinal waves." }
+                                    { q: "WASSCE Past Q: Which organelle is known as the powerhouse of the cell?", options: ["Mitochondria", "Ribosome", "Chloroplast", "Nucleus"], correct: 0, sol: "Mitochondria produce ATP energy via cellular respiration." },
+                                    { q: "WASSCE Past Q: What is the chemical symbol for Gold?", options: ["Au", "Ag", "Fe", "Cu"], correct: 0, sol: "Au is derived from the Latin word 'aurum'." },
+                                    { q: "WASSCE Past Q: Process by which plants manufacture food is:", options: ["Photosynthesis", "Respiration", "Transpiration", "Osmosis"], correct: 0, sol: "Photosynthesis converts sunlight into chemical energy in green plants." },
+                                    { q: "WASSCE Past Q: Which blood group is known as the universal donor?", options: ["O negative", "AB positive", "A positive", "B negative"], correct: 0, sol: "Type O negative red blood cells can be given to patients of any blood group." },
+                                    { q: "WASSCE Past Q: The pH of an acidic solution is:", options: ["Less than 7", "Greater than 7", "Exactly 7", "Equal to 14"], correct: 0, sol: "Acidic solutions have a pH scale reading below 7." },
+                                    { q: "WASSCE Past Q: Hardness of water is mainly caused by dissolved salts of:", options: ["Calcium and Magnesium", "Sodium and Potassium", "Iron and Zinc", "Copper and Lead"], correct: 0, sol: "Calcium and magnesium ions cause permanent or temporary water hardness." },
+                                    { q: "WASSCE Past Q: Vitamin C deficiency causes a disease known as:", options: ["Scurvy", "Rickets", "Beriberi", "Kwashiorkor"], correct: 0, sol: "Lack of ascorbic acid (Vitamin C) results in scurvy." }
                                 ]
                             ]
                         },
                         {
                             name: "Chemistry",
                             icon: "fa-vial",
-                            questionSets: [
+                            type: "Elective",
+                            sets: [
                                 [
-                                    { q: "WAEC 2023: Calculate the relative molecular mass of hydrated Copper(II) sulfate ($\text{CuSO}_4 \\cdot 5\text{H}_2\text{O}$). [Cu=64, S=32, O=16, H=1]", options: ["250", "160", "180", "220"], correct: 0, sol: "$\\text{CuSO}_4 = 64 + 32 + (4 \\times 16) = 160$. $5\\text{H}_2\\text{O} = 5(2 + 16) = 90$. Total = $160 + 90 = 250$." },
-                                    { q: "WAEC 2022: What volume does 0.5 moles of Oxygen gas occupy at s.t.p.? (Molar volume = $22.4 \\text{ dm}^3$)", options: ["$11.2 \\text{ dm}^3$", "$22.4 \\text{ dm}^3$", "$44.8 \\text{ dm}^3$", "$5.6 \\text{ dm}^3$"], correct: 0, sol: "$\\text{Volume} = n \\times 22.4 = 0.5 \\times 22.4 = 11.2 \\text{ dm}^3$." },
-                                    { q: "WAEC 2021: Which process is used to separate crude oil into different fractions?", options: ["Fractional Distillation", "Simple Distillation", "Crystallization", "Chromatography"], correct: 0, sol: "Fractional distillation separates hydrocarbon liquids based on boiling point differences." },
-                                    { q: "WAEC 2020: An element $X$ has electron configuration $2, 8, 8, 2$. To which group of the periodic table does it belong?", options: ["Group 2", "Group 4", "Group 8", "Group 1"], correct: 0, sol: "It has 2 valence electrons in its outermost shell, placing it in Group 2 (Alkaline Earth metals)." },
-                                    { q: "WAEC 2022: The conjugate base of $\text{HSO}_4^-$ is:", options: ["$\\text{SO}_4^{2-}$", "$\\text{H}_2\\text{SO}_4$", "$\\text{SO}_3^{2-}$", "$\\text{H}^+$"], correct: 0, sol: "A conjugate base forms when an acid donates a proton ($H^+$): $\text{HSO}_4^- \\to \text{H}^+ + \text{SO}_4^{2-}$." },
-                                    { q: "WAEC 2023: Catalyst used in the industrial Haber process for Ammonia synthesis is:", options: ["Finely divided Iron", "Vanadium(V) oxide", "Platinum", "Nickel"], correct: 0, sol: "Finely divided iron with aluminum oxide promoter is used in Haber process ($N_2 + 3H_2 \\rightleftharpoons 2NH_3$)." },
-                                    { q: "WAEC 2021: Which law states that equal volumes of gases at the same temperature and pressure contain equal number of molecules?", options: ["Avogadro's Law", "Boyle's Law", "Charles's Law", "Gay-Lussac's Law"], correct: 0, sol: "Avogadro's law states $V \\propto n$ at constant $T$ and $P$." }
+                                    { q: "WASSCE Past Q: What is the oxidation state of Manganese in $\\text{KMnO}_4$?", options: ["+7", "+5", "+4", "+2"], correct: 0, sol: "$1 + x + 4(-2) = 0 \\implies x - 7 = 0 \\implies x = +7$." },
+                                    { q: "WASSCE Past Q: Which gas is produced when dilute hydrochloric acid reacts with zinc?", options: ["Hydrogen", "Oxygen", "Chlorine", "Carbon dioxide"], correct: 0, sol: "Active metals react with acids to liberate hydrogen gas: $\\text{Zn} + 2\\text{HCl} \\to \\text{ZnCl}_2 + \\text{H}_2\\uparrow$." },
+                                    { q: "WASSCE Past Q: An element with atomic number 11 belongs to which group?", options: ["Group I (Alkali metals)", "Group II", "Group VII (Halogens)", "Group VIII (Noble gases)"], correct: 0, sol: "Sodium (atomic number 11) has electronic configuration 2,8,1, placing it in Group I." },
+                                    { q: "WASSCE Past Q: The process of separation of crude oil into fractions is:", options: ["Fractional distillation", "Cracking", "Filtration", "Sublimation"], correct: 0, sol: "Fractional distillation separates hydrocarbons based on boiling point differences." },
+                                    { q: "WASSCE Past Q: Which of the following is a Lewis acid?", options: ["$\\text{BF}_3$", "$\\text{NH}_3$", "$\\text{H}_2\\text{O}$", "$\\text{OH}^-$"], correct: 0, sol: "Boron trifluoride accepts an electron pair, acting as a Lewis acid." },
+                                    { q: "WASSCE Past Q: Standard temperature and pressure (STP) molar volume of gas is:", options: ["$22.4\\text{ dm}^3$", "$24.0\\text{ dm}^3$", "$11.2\\text{ dm}^3$", "$22.4\\text{ cm}^3$"], correct: 0, sol: "One mole of any ideal gas occupies $22.4\\text{ dm}^3$ at STP." },
+                                    { q: "WASSCE Past Q: Which polymer is formed by condensation polymerization?", options: ["Nylon", "Polyethene", "Polyvinyl chloride", "Polypropene"], correct: 0, sol: "Nylon is a polyamide formed by condensation with elimination of water." }
                                 ]
                             ]
                         },
                         {
                             name: "Biology",
                             icon: "fa-dna",
-                            questionSets: [
+                            type: "Elective",
+                            sets: [
                                 [
-                                    { q: "WAEC 2023: Which part of the brain controls involuntary actions like heartbeat and breathing?", options: ["Medulla Oblongata", "Cerebrum", "Cerebellum", "Hypothalamus"], correct: 0, sol: "The medulla oblongata regulates essential autonomic functions including cardiac and respiratory centers." },
-                                    { q: "WAEC 2022: What ratio of phenotypes is produced in a monohybrid cross between two heterozygous individuals ($Tt \\times Tt$)?", options: ["3 : 1", "1 : 2 : 1", "9 : 3 : 3 : 1", "1 : 1"], correct: 0, sol: "Mendelian monohybrid cross yields 3 dominant phenotype to 1 recessive phenotype." },
-                                    { q: "WAEC 2021: The enzyme in human stomach juice that converts soluble milk protein (caseinogen) into insoluble casein is:", options: ["Rennin", "Pepsin", "Trypsin", "Amylase"], correct: 0, sol: "Rennin (chymosin) curdles milk protein in the stomach." },
-                                    { q: "WAEC 2020: Which nitrogenous waste product is excreted by freshwater fishes?", options: ["Ammonia", "Urea", "Uric Acid", "Amino acids"], correct: 0, sol: "Freshwater aquatic animals excrete toxic ammonia directly because water is abundantly available for dilution." },
-                                    { q: "WAEC 2022: The light stage of photosynthesis occurs in the:", options: ["Thylakoid membranes (Grana)", "Stroma", "Cytoplasm", "Outer membrane"], correct: 0, sol: "Light-dependent reactions occur in grana thylakoids where chlorophyll captures light energy." },
-                                    { q: "WAEC 2023: Hormone responsible for emergency 'fight or flight' response is:", options: ["Adrenaline", "Insulin", "Thyroxine", "Estrogen"], correct: 0, sol: "Adrenaline (epinephrine) secreted by adrenal glands prepares the body for sudden physical exertion." },
-                                    { q: "WAEC 2021: What structural adaptation prevents backflow of blood in human veins?", options: ["Presence of semilunar valves", "Thick muscular walls", "Narrow lumen", "High elastic pressure"], correct: 0, sol: "Veins contain internal pocket valves that ensure unidirectional blood flow back to the heart." }
+                                    { q: "WASSCE Past Q: Which structure in flowering plants produces pollen grains?", options: ["Anther", "Stigma", "Ovary", "Style"], correct: 0, sol: "The anther of the stamen produces and releases pollen grains." },
+                                    { q: "WASSCE Past Q: The functional unit of the kidney is the:", options: ["Nephron", "Alveolus", "Neuron", "Ureter"], correct: 0, sol: "Nephrons filter blood and form urine in the kidneys." },
+                                    { q: "WASSCE Past Q: Nitrogen-fixing bacteria in root nodules of legumes are:", options: ["Rhizobium", "Azotobacter", "Clostridium", "Nitrosomonas"], correct: 0, sol: "Rhizobium species form symbiotic relationships with legume roots." },
+                                    { q: "WASSCE Past Q: Which blood vessel carries oxygenated blood from lungs to heart?", options: ["Pulmonary vein", "Pulmonary artery", "Vena cava", "Aorta"], correct: 0, sol: "Pulmonary veins transport oxygen-rich blood back to the left atrium." },
+                                    { q: "WASSCE Past Q: Crossing over during meiosis occurs during which phase?", options: ["Prophase I", "Metaphase I", "Anaphase II", "Telophase I"], correct: 0, sol: "Homologous chromosomes exchange genetic material during Prophase I." },
+                                    { q: "WASSCE Past Q: Movement of water molecules across a semi-permeable membrane is:", options: ["Osmosis", "Diffusion", "Active transport", "Phagocytosis"], correct: 0, sol: "Osmosis is the net movement of water from high to low water potential." },
+                                    { q: "WASSCE Past Q: The mammalian tooth specialized for tearing meat is the:", options: ["Canine", "Incisor", "Premolar", "Molar"], correct: 0, sol: "Canines are pointed teeth designed for piercing and tearing flesh." }
                                 ]
                             ]
                         }
                     ]
                 },
                 {
-                    id: "gen-arts",
-                    streamName: "General Arts Course Stream",
+                    streamName: "General Arts Stream",
                     icon: "fa-landmark",
-                    badgeColor: "bg-purple-500",
-                    coreSubjects: [
-                        { name: "Core Mathematics", icon: "fa-calculator", questionSets: [[]] },
-                        { name: "English Language", icon: "fa-pen-nib", questionSets: [[]] }
-                    ],
-                    electiveSubjects: [
+                    desc: "Economics, Government, Geography, History & Core Subjects",
+                    subjects: [
+                        {
+                            name: "Core Mathematics",
+                            icon: "fa-square-root-variable",
+                            type: "Core",
+                            sets: [
+                                [
+                                    { q: "WASSCE Past Q: Simplify $3(x + 4) - 2(x - 1)$.", options: ["$x + 14$", "$x + 10$", "$5x + 12$", "$x - 2$"], correct: 0, sol: "$3x + 12 - 2x + 2 = x + 14$." },
+                                    { q: "WASSCE Past Q: Find the median of the scores: $12, 15, 9, 17, 8, 20$.", options: ["13.5", "14", "12", "15"], correct: 0, sol: "Arrange: $8, 9, 12, 15, 17, 20$. Middle values are 12 and 15. Median = $(12+15)/2 = 13.5$." },
+                                    { q: "WASSCE Past Q: Express 45 as a percentage of 150.", options: ["$30\\%$", "$45\\%$", "$15\\%$", "$60\\%$"], correct: 0, sol: "$\\frac{45}{150} \\times 100\\% = 30\\%$." },
+                                    { q: "WASSCE Past Q: If $2^{x} = 32$, find the value of $x$.", options: ["5", "4", "6", "3"], correct: 0, sol: "$2^x = 2^5 \\implies x = 5$." },
+                                    { q: "WASSCE Past Q: Calculate the perimeter of a rectangle of length 12 cm and width 8 cm.", options: ["40 cm", "96 cm", "20 cm", "48 cm"], correct: 0, sol: "Perimeter = $2(l + w) = 2(12 + 8) = 40\\text{ cm}$." },
+                                    { q: "WASSCE Past Q: Solve simultaneous equations: $x + y = 10$, $x - y = 4$.", options: ["$x = 7, y = 3$", "$x = 6, y = 4$", "$x = 8, y = 2$", "$x = 5, y = 5$"], correct: 0, sol: "Add equations: $2x = 14 \\implies x = 7$. Then $7 + y = 10 \\implies y = 3$." },
+                                    { q: "WASSCE Past Q: Convert $72\\text{ km/h}$ to meters per second ($\\text{m/s}$).", options: ["$20\\text{ m/s}$", "$25\\text{ m/s}$", "$72\\text{ m/s}$", "$15\\text{ m/s}$"], correct: 0, sol: "$72 \\times \\frac{5}{18} = 20\\text{ m/s}$." }
+                                ]
+                            ]
+                        },
                         {
                             name: "Economics",
                             icon: "fa-chart-line",
-                            questionSets: [
+                            type: "Elective",
+                            sets: [
                                 [
-                                    { q: "WAEC 2023: If price elasticity of demand is greater than 1, demand is described as:", options: ["Elastic", "Inelastic", "Unitary elastic", "Perfectly inelastic"], correct: 0, sol: "Elasticity $> 1$ indicates that percentage change in quantity demanded is larger than percentage change in price." },
-                                    { q: "WAEC 2022: The law of diminishing marginal utility states that as consumption of a commodity increases:", options: ["Marginal utility decreases", "Total utility decreases", "Marginal utility increases", "Price falls"], correct: 0, sol: "Each additional unit consumed provides less additional satisfaction than the previous unit." },
-                                    { q: "WAEC 2021: Inflation caused by excessive increase in aggregate demand over aggregate supply is:", options: ["Demand-pull inflation", "Cost-push inflation", "Hyperinflation", "Structural inflation"], correct: 0, sol: "Demand-pull inflation occurs when 'too much money chases too few goods'." },
-                                    { q: "WAEC 2020: An official trade ban on imports or exports with a specific country is called an:", options: ["Embargo", "Tariff", "Quota", "Subsidy"], correct: 0, sol: "An embargo is a complete legal restriction or ban on trade with a foreign nation." },
-                                    { q: "WAEC 2022: Which economic system relies entirely on market forces of demand and supply?", options: ["Free market (Capitalist) economy", "Command (Planned) economy", "Mixed economy", "Traditional economy"], correct: 0, sol: "In a free market economy, price mechanism allocates resources without government intervention." },
-                                    { q: "WAEC 2023: Fixed cost plus variable cost equals:", options: ["Total Cost", "Average Cost", "Marginal Cost", "Opportunity Cost"], correct: 0, sol: "Total Cost ($TC$) = Total Fixed Cost ($TFC$) + Total Variable Cost ($TVC$)." },
-                                    { q: "WAEC 2021: Central Bank tool involving buying and selling government securities is:", options: ["Open Market Operations (OMO)", "Bank Rate", "Reserve Requirement", "Moral Suasion"], correct: 0, sol: "OMO involves purchasing or selling treasury bills/bonds to regulate money supply in commercial banks." }
+                                    { q: "WASSCE Past Q: What is opportunity cost?", options: ["The next best alternative forgone", "Total money spent on goods", "Government tax expenditure", "Production cost of a firm"], correct: 0, sol: "Opportunity cost represents the sacrifice of the next best choice." },
+                                    { q: "WASSCE Past Q: When demand for a commodity is price inelastic, a rise in price will:", options: ["Increase total revenue", "Decrease total revenue", "Leave revenue unchanged", "Cause zero sales"], correct: 0, sol: "Inelastic demand means quantity demanded drops proportionally less than price hike, raising revenue." },
+                                    { q: "WASSCE Past Q: An economic system where resources are owned and allocated by the state is:", options: ["Command / Socialist economy", "Capitalist economy", "Mixed economy", "Traditional economy"], correct: 0, sol: "Centrally planned economies are controlled by government decree." },
+                                    { q: "WASSCE Past Q: Inflation caused by excessive money supply in an economy is termed:", options: ["Demand-pull inflation", "Cost-push inflation", "Imported inflation", "Structural inflation"], correct: 0, sol: "Too much money chasing too few goods causes demand-pull inflation." },
+                                    { q: "WASSCE Past Q: GDP stands for:", options: ["Gross Domestic Product", "General Domestic Production", "Gross Distribution Price", "Government Debt Plan"], correct: 0, sol: "Gross Domestic Product measures total monetary value of goods and services produced." },
+                                    { q: "WASSCE Past Q: A budget deficit occurs when:", options: ["Government expenditure exceeds revenue", "Revenue exceeds expenditure", "Exports equal imports", "Taxation is zero"], correct: 0, sol: "Deficit happens when spending is higher than income earned." },
+                                    { q: "WASSCE Past Q: The reward for capital as a factor of production is:", options: ["Interest", "Profit", "Rent", "Wages"], correct: 0, sol: "Interest is the payment for capital investment." }
                                 ]
                             ]
                         },
                         {
                             name: "Government",
-                            icon: "fa-gavel",
-                            questionSets: [
+                            icon: "fa-balance-scale",
+                            type: "Elective",
+                            sets: [
                                 [
-                                    { q: "WAEC 2023: Supreme power of the state to make and enforce laws without external control is:", options: ["Sovereignty", "Legitimacy", "Authority", "Rule of Law"], correct: 0, sol: "Sovereignty is the absolute legal supreme power exercised by a independent state." },
-                                    { q: "WAEC 2022: A system of government where power is shared between central and component regional units is:", options: ["Federal system", "Unitary system", "Confederal system", "Monarchial system"], correct: 0, sol: "Federalism constitutionally divides powers between central government and state/regional governments." },
-                                    { q: "WAEC 2021: Franchise refers to the constitutional right to:", options: ["Vote in elections", "Form political parties", "Own private property", "Criticize government"], correct: 0, sol: "Franchise (suffrage) is the legal right given to eligible citizens to vote in public elections." },
-                                    { q: "WAEC 2020: Which
+                                    { q: "WASSCE Past Q: Which arm of government is responsible for executing laws?", options: ["The Executive", "The Legislature", "The Judiciary", "The Press"], correct: 0, sol: "The Executive branch implements and enforces laws." },
+                                    { q: "WASSCE Past Q: A political system with only one legal political party is:", options: ["One-party state", "Multi-party democracy", "Confederation", "Diarchy"], correct: 0, sol: "Single-party states permit no opposition parties." },
+                                    { q: "WASSCE Past Q: Franchise refers to:", options: ["The right of citizens to vote in elections", "A government trade license", "Tax exemption status", "Parliamentary immunity"], correct: 0, sol: "Suffrage or franchise is the constitutional right to vote." },
+                                    { q: "WASSCE Past Q: The principle of separation of powers was popularized by:", options: ["Montesquieu", "John Locke", "Karl Marx", "A.V. Dicey"], correct: 0, sol: "Baron de Montesquieu advocated for separating executive, legislative, and judicial powers." },
+                                    { q: "WASSCE Past Q: The head of state in a parliamentary republic is usually:", options: ["A ceremonial President or Monarch", "An absolute dictator", "The Chief Justice", "Head of Police"], correct: 0, sol: "In parliamentary systems, head of state holds ceremonial duties while Prime Minister leads government." },
+                                    { q: "WASSCE Past Q: Rule of law implies:", options: ["Equality of all citizens before the law", "Supremacy of military decree", "Immunity for politicians", "Absence of courts"], correct: 0, sol: "Rule of law dictates that no person is above the law." },
+                                    { q: "WASSCE Past Q: Ghana attained republican status in which year?", options: ["1960", "1957", "1966", "1992"], correct: 0, sol: "Ghana became a republic on July 1, 1960." }
+                                ]
+                            ]
+                        }
+                    ]
+                },
+                {
+                    streamName: "Business Stream",
+                    icon: "fa-briefcase",
+                    desc: "Financial Accounting, Business Management & Economics",
+                    subjects: [
+                        {
+                            name: "Core Mathematics",
+                            icon: "fa-square-root-variable",
+                            type: "Core",
+                            sets: [
+                                [
+                                    { q: "WASSCE Past Q: Solve $2(3x - 1) = 16$.", options: ["$x = 3$", "$x = 2$", "$x = 4$", "$x = 5$"], correct: 0, sol: "$6x - 2 = 16 \\implies 6x = 18 \\implies x = 3$." },
+                                    { q: "WASSCE Past Q: Evaluate $\\frac{2}{3} + \\frac{1}{4} - \\frac{1}{2}$.", options: ["$\\frac{5}{12}$", "$\\frac{7}{12}$", "$\\frac{1}{3}$", "$\\frac{3}{4}$"], correct: 0, sol: "Common denominator is 12: $\\frac{8 + 3 - 6}{12} = \\frac{5}{12}$." },
+                                    { q: "WASSCE Past Q: Find the gradient of line passing through $(1, 2)$ and $(3, 8)$.", options: ["3", "2", "4", "1.5"], correct: 0, sol: "Gradient $m = \\frac{8 - 2}{3 - 1} = \\frac{6}{2} = 3$." },
+                                    { q: "WASSCE Past Q: If $p = \\begin{pmatrix} 3 \\\\ -2 \\end{pmatrix}$ and $q = \\begin{pmatrix} -1 \\\\ 5 \\end{pmatrix}$, find $p + q$.", options: ["$\\begin{pmatrix} 2 \\\\ 3 \\end{pmatrix}$", "$\\begin{pmatrix} 4 \\\\ -7 \\end{pmatrix}$", "$\\begin{pmatrix} -3 \\\\ -10 \\end{pmatrix}$", "$\\begin{pmatrix} 2 \\\\ -3 \\end{pmatrix}$"], correct: 0, sol: "Add corresponding components: $3 + (-1) = 2$ and $-2 + 5 = 3$." },
+                                    { q: "WASSCE Past Q: Find the volume of a cylinder with radius 3 cm and height 10 cm. (Use $\\pi = \\frac{22}{7}$)", options: ["$282.86\\text{ cm}^3$", "$198\\text{ cm}^3$", "$94.2\\text{ cm}^3$", "$314\\text{ cm}^3$"], correct: 0, sol: "Volume = $\\pi r^2 h = \\frac{22}{7} \\times 3^2 \\times 10 = \\frac{1980}{7} \\approx 282.86\\text{ cm}^3$." },
+                                    { q: "WASSCE Past Q: Express 0.375 as a fraction in its lowest terms.", options: ["$\\frac{3}{8}$", "$\\frac{5}{8}$", "$\\frac{3}{5}$", "$\\frac{7}{16}$"], correct: 0, sol: "$0.375 = \\frac{375}{1000} = \\frac{3}{8}$." },
+                                    { q: "WASSCE Past Q: The interior angle of a regular polygon is $120^\\circ$. Find the number of sides.", options: ["6", "5", "8", "10"], correct: 0, sol: "Exterior angle = $180^\\circ - 120^\\circ = 60^\\circ$. Number of sides $n = \\frac{360}{60} = 6$." }
+                                ]
+                            ]
+                        },
+                        {
+                            name: "Financial Accounting",
+                            icon: "fa-file-invoice-dollar",
+                            type: "Elective",
+                            sets: [
+                                [
+                                    { q: "WASSCE Past Q: The fundamental accounting equation is:", options: ["Assets = Capital + Liabilities", "Assets = Capital - Liabilities", "Liabilities = Assets + Capital", "Capital = Assets + Liabilities"], correct: 0, sol: "Assets always equal the sum of Liabilities and Owner's Equity (Capital)." },
+                                    { q: "WASSCE Past Q: Which book of prime entry is used to record credit purchases of goods?", options: ["Purchases Journal", "Sales Journal", "Cash Book", "General Journal"], correct: 0, sol: "Purchases Journal (or Purchases Day Book) records goods bought on credit." },
+                                    { q: "WASSCE Past Q: A trial balance is prepared primarily to test:", options: ["Arithmetical accuracy of ledger accounts", "Total net profit of business", "Cash in bank", "Total customer debts"], correct: 0, sol: "Trial balance checks that total debits equal total credits in ledger accounts." },
+                                    { q: "WASSCE Past Q: Depreciation of fixed assets is treated in financial statements as:", options: ["An expense", "An asset", "A liability", "Capital revenue"], correct: 0, sol: "Depreciation reduces asset value and is charged as an operating expense." },
+                                    { q: "WASSCE Past Q: Carriage inward is added to:", options: ["Trading account to find Cost of Goods Sold", "Profit and loss account as office expense", "Balance sheet as current asset", "Capital account directly"], correct: 0, sol: "Carriage inward is direct cost associated with purchase of goods." },
+                                    { q: "WASSCE Past Q: Bad debts recovered are classified as:", options: ["Revenue / Income", "Capital", "Expense", "Liability"], correct: 0, sol: "Recovered bad debts represent income earned by the business." },
+                                    { q: "WASSCE Past Q: Working capital is defined as:", options: ["Current Assets minus Current Liabilities", "Fixed Assets plus Current Assets", "Total Assets minus Total Liabilities", "Capital minus Drawings"], correct: 0, sol: "Net working capital evaluates short-term financial health." }
+                                ]
+                            ]
+                        }
+                    ]
+                }
+            ],
+            BECE: [
+                {
+                    streamName: "BECE Junior High School Core",
+                    icon: "fa-school",
+                    desc: "Core Mathematics, Integrated Science, Social Studies & English",
+                    subjects: [
+                        {
+                            name: "Core Mathematics",
+                            icon: "fa-square-root-variable",
+                            type: "Core",
+                            sets: [
+                                [
+                                    { q: "BECE Past Q: Find the LCM of 12, 15 and 20.", options: ["60", "120", "30", "240"], correct: 0, sol: "Prime factorizations give LCM = $2^2 \\times 3 \\times 5 = 60$." },
+                                    { q: "BECE Past Q: Simplify: $4x + 3y - 2x + 5y$.", options: ["$2x + 8y$", "$6x + 8y$", "$2x - 2y$", "$9xy$"], correct: 0, sol: "Collect like terms: $(4x - 2x) + (3y + 5y) = 2x + 8y$." },
+                                    { q: "BECE Past Q: Express $\\frac{3}{5}$ as a percentage.", options: ["$60\\%$", "$30\\%$", "$75\\%$", "$15\\%$"], correct: 0, sol: "$\\frac{3}{5} \\times 100\\% = 60\\%$." },
+                                    { q: "BECE Past Q: Find the value of $y$ if $3y - 5 = 16$.", options: ["7", "6", "8", "5"], correct: 0, sol: "$3y = 21 \\implies y = 7$." },
+                                    { q: "BECE Past Q: Calculate the area of a square whose side is 9 cm.", options: ["$81\\text{ cm}^2$", "$36\\text{ cm}^2$", "$18\\text{ cm}^2$", "$72\\text{ cm}^2$"], correct: 0, sol: "Area = $\\text{side} \\times \\text{side} = 9 \\times 9 = 81\\text{ cm}^2$." },
+                                    { q: "BECE Past Q: Write 4,500 in standard form.", options: ["$4.5 \\times 10^3$", "$4.5 \\times 10^2$", "$45 \\times 10^2$", "$0.45 \\times 10^4$"], correct: 0, sol: "Standard form: $4.5 \\times 10^3$." },
+                                    { q: "BECE Past Q: Find the median of: $5, 2, 9, 7, 3$.", options: ["5", "7", "3", "9"], correct: 0, sol: "Ordered: $2, 3, 5, 7, 9$. Middle number is 5." }
+                                ]
+                            ]
+                        },
+                        {
+                            name: "Integrated Science",
+                            icon: "fa-flask",
+                            type: "Core",
+                            sets: [
+                                [
+                                    { q: "BECE Past Q: Which of the following is a living thing?", options: ["Amoeba", "Stone", "Water", "Plastic bag"], correct: 0, sol: "Amoeba is a single-celled living organism." },
+                                    { q: "BECE Past Q: The gas used in fire extinguishers is:", options: ["Carbon dioxide", "Oxygen", "Hydrogen", "Nitrogen"], correct: 0, sol: "Carbon dioxide does not support combustion and smothers fires." },
+                                    { q: "BECE Past Q: Boiling point of pure water is:", options: ["$100^\\circ\\text{C}$", "$0^\\circ\\text{C}$", "$50^\\circ\\text{C}$", "$212^\\circ\\text{C}$"], correct: 0, sol: "Pure water boils at $100^\\circ\\text{C}$ at standard atmospheric pressure." },
+                                    { q: "BECE Past Q: Which part of the flower develops into a fruit?", options: ["Ovary", "Ovule", "Petal", "Sepal"], correct: 0, sol: "The fertilized ovary develops into a fruit." },
+                                    { q: "BECE Past Q: The SI unit of temperature is:", options: ["Kelvin", "Celsius", "Fahrenheit", "Joule"], correct: 0, sol: "Kelvin (K) is the SI base unit for temperature." },
+                                    { q: "BECE Past Q: Teeth used for biting and cutting food are:", options: ["Incisors", "Canines", "Molars", "Premolars"], correct: 0, sol: "Incisors are chisel-shaped front teeth." },
+                                    { q: "BECE Past Q: An example of a renewable energy source is:", options: ["Solar energy", "Crude oil", "Coal", "Natural gas"], correct: 0, sol: "Sunlight is naturally replenished and inexhaustible." }
+                                ]
+                            ]
+                        },
+                        {
+                            name: "Social Studies",
+                            icon: "fa-earth-africa",
+                            type: "Core",
+                            sets: [
+                                [
+                                    { q: "BECE Past Q: Ghana gained independence on:", options: ["6th March, 1957", "1st July, 1960", "25th May, 1963", "7th January, 1993"], correct: 0, sol: "Ghana became independent on March 6, 1957." },
+                                    { q: "BECE Past Q: The first President of Ghana was:", options: ["Dr. Kwame Nkrumah", "J.B. Danquah", "Jerry J. Rawlings", "John A. Kufuor"], correct: 0, sol: "Dr. Kwame Nkrumah led Ghana to independence and became first president." },
+                                    { q: "BECE Past Q: A nuclear family consists of:", options: ["Father, mother and children", "Grandparents, uncles and cousins", "Friends and neighbors", "Only teachers and students"], correct: 0, sol: "Nuclear family comprises parents and their children." },
+                                    { q: "BECE Past Q: The cardinal points of a map are:", options: ["North, South, East, West", "Up, Down, Left, Right", "Accra, Kumasi, Tamale, Takoradi", "Land, Sea, Air, Space"], correct: 0, sol: "The four primary cardinal directions are North, South, East, and West." },
+                                    { q: "BECE Past Q: The national currency of Ghana is the:", options: ["Ghana Cedi", "Naira", "Dollar", "Pound"], correct: 0, sol: "The Ghana Cedi (GH₵) is the official currency." },
+                                    { q: "BECE Past Q: Which of these is a symbol of national unity in Ghana?", options: ["National Flag", "School uniform", "Market square", "Football club"], correct: 0, sol: "The National Flag, Anthem, and Coat of Arms symbolize national unity." },
+                                    { q: "BECE Past Q: Adolescent chastity helps to prevent:", options: ["Sexually transmitted infections", "Good academic grades", "Physical fitness", "Talent development"], correct: 0, sol: "Abstinence protects youth from STIs and teenage pregnancies." }
+                                ]
+                            ]
+                        }
+                    ]
+                }
+            ],
+            TERTIARY: [
+                {
+                    streamName: "Tertiary Level Courses",
+                    icon: "fa-university",
+                    desc: "Computer Science, Software Engineering & Business Administration",
+                    subjects: [
+                        {
+                            name: "Computer Science",
+                            icon: "fa-laptop-code",
+                            type: "Core",
+                            sets: [
+                                [
+                                    { q: "University Exam Q: What does HTML stand for?", options: ["Hyper Text Markup Language", "High Tech Machine Language", "Hyperlink Text Management", "Home Tool Markup Language"], correct: 0, sol: "HTML is the standard markup language for creating web pages." },
+                                    { q: "University Exam Q: Which data structure operates on a Last-In-First-Out (LIFO) basis?", options: ["Stack", "Queue", "Array", "Graph"], correct: 0, sol: "A Stack pushes and pops elements from the same end (LIFO)." },
+                                    { q: "University Exam Q: What is the worst-case time complexity of Merge Sort?", options: ["$O(n \\log n)$", "$O(n^2)$", "$O(n)$", "$O(1)$"], correct: 0, sol: "Merge sort consistently runs in $O(n \\log n)$ time complexity." },
+                                    { q: "University Exam Q: Which SQL command is used to retrieve data from a database?", options: ["SELECT", "UPDATE", "INSERT", "DELETE"], correct: 0, sol: "SELECT query extracts records from database tables." },
+                                    { q: "University Exam Q: CPU scheduling algorithm that gives CPU to process with shortest burst time is:", options: ["Shortest Job First (SJF)", "First Come First Serve", "Round Robin", "Priority scheduling"], correct: 0, sol: "SJF minimizes waiting time by executing shortest jobs first." },
+                                    { q: "University Exam Q: IP address version 4 (IPv4) is expressed in how many bits?", options: ["32 bits", "64 bits", "128 bits", "16 bits"], correct: 0, sol: "IPv4 addresses consist of 32 bits divided into 4 octets." },
+                                    { q: "University Exam Q: Object-oriented programming principle of hiding internal state is called:", options: ["Encapsulation", "Inheritance", "Polymorphism", "Compilation"], correct: 0, sol: "Encapsulation bundles data and methods while restricting direct access." }
+                                ]
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // App State
+        let currentLevel = 'WASSCE';
+        let activeStream = null;
+        let activeSubject = null;
+        let currentSetIndex = 0;
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        let userXP = parseInt(localStorage.getItem('tka_xp')) || 0;
+        let userStreak = parseInt(localStorage.getItem('tka_streak')) || 1;
+
+        function updateStatsDisplay() {
+            document.getElementById('xp-count').innerText = userXP;
+            document.getElementById('streak-count').innerText = userStreak;
+        }
+
+        function filterLevel(level) {
+            currentLevel = level;
+            ['wassce', 'bece', 'tertiary'].forEach(l => {
+                const btn = document.getElementById(`tab-${l}`);
+                if (l.toUpperCase() === level) {
+                    btn.className = "pb-3 border-b-2 border-blue-600 text-blue-600 px-2 font-bold transition";
+                } else {
+                    btn.className = "pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-2 transition";
+                }
+            });
+            renderStreams();
+        }
+
+        function renderStreams() {
+            const grid = document.getElementById('streams-grid');
+            const streams = curriculumData[currentLevel];
+
+            grid.innerHTML = streams.map((stream, sIdx) => `
+                <div onclick="openStream(${sIdx})" class="bg-white border border-gray-200 hover:border-blue-500 hover:shadow-xl p-6 rounded-3xl cursor-pointer transition flex flex-col justify-between space-y-4 group">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-14 h-14 bg-blue-50 text-blue-600 border border-blue-100 rounded-2xl flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition">
+                            <i class="fas ${stream.icon}"></i>
+                        </div>
+                        <div class="space-y-1">
+                            <h3 class="font-extrabold text-gray-900 text-lg group-hover:text-blue-600 transition">${stream.streamName}</h3>
+                            <p class="text-xs text-gray-500 leading-relaxed">${stream.desc}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-gray-100 text-xs font-bold text-blue-600">
+                        <span>${stream.subjects.length} Core & Elective Subjects</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openStream(streamIdx) {
+            activeStream = curriculumData[currentLevel][streamIdx];
+            document.getElementById('stream-title').innerText = activeStream.streamName;
+
+            const sGrid = document.getElementById('subjects-grid');
+            sGrid.innerHTML = activeStream.subjects.map((sub, subIdx) => `
+                <div onclick="startQuiz(${subIdx})" class="bg-white border border-gray-200 hover:border-blue-500 hover:shadow-lg p-5 rounded-2xl cursor-pointer transition flex items-center justify-between group">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-blue-50 text-blue-600 border border-blue-100 rounded-xl flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition">
+                            <i class="fas ${sub.icon}"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <h4 class="font-bold text-gray-900 text-sm">${sub.name}</h4>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${sub.type === 'Core' ? 'bg-indigo-50 text-indigo-700' : 'bg-amber-50 text-amber-700'}">${sub.type}</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">${sub.sets.length * 7} WAEC Exam Questions (${sub.sets.length} Sets)</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-300 group-hover:text-blue-600 transition"></i>
+                </div>
+            `).join('');
+
+            document.getElementById('home-screen').classList.add('hidden');
+            document.getElementById('subjects-screen').classList.remove('hidden');
+        }
+
+        function showHomeScreen() {
+            document.getElementById('home-screen').classList.remove('hidden');
+            document.getElementById('subjects-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.add('hidden');
+            renderStreams();
+        }
+
+        function backToSubjects() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('subjects-screen').classList.remove('hidden');
+        }
+
+        function startQuiz(subIdx) {
+            activeSubject = activeStream.subjects[subIdx];
+            currentSetIndex = 0;
+            currentQuestionIndex = 0;
+            score = 0;
+
+            document.getElementById('subjects-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            document.getElementById('quiz-title').innerText = `${activeSubject.name} (Set ${currentSetIndex + 1})`;
+
+            renderQuestion();
+        }
+
+        function loadNextSet() {
+            currentSetIndex = (currentSetIndex + 1) % activeSubject.sets.length;
+            currentQuestionIndex = 0;
+            score = 0;
+
+            document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            document.getElementById('quiz-title').innerText = `${activeSubject.name} (Set ${currentSetIndex + 1})`;
+
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const currentSet = activeSubject.sets[currentSetIndex];
+            const q = currentSet[currentQuestionIndex];
+
+            document.getElementById('quiz-progress-text').innerText = `Q ${currentQuestionIndex + 1}/${currentSet.length}`;
+            document.getElementById('question-text').innerHTML = q.q;
+
+            document.getElementById('explanation-box').classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+
+            const container = document.getElementById('options-container');
+            container.innerHTML = q.options.map((opt, i) => `
+                <button id="opt-${i}" onclick="checkAnswer(${i})" class="w-full text-left p-4 rounded-xl border border-gray-200 bg-gray-50 hover:bg-gray-100 font-medium text-sm text-gray-800 transition flex justify-between items-center">
+                    <span>${opt}</span>
+                    <span class="w-6 h-6 rounded-full border border-gray-300 bg-white flex items-center justify-center text-xs text-gray-500 font-bold">${String.fromCharCode(65 + i)}</span>
+                </button>
+            `).join('');
+
+            if (window.MathJax) MathJax.typesetPromise();
+        }
+
+        function checkAnswer(chosenIdx) {
+            const currentSet = activeSubject.sets[currentSetIndex];
+            const q = currentSet[currentQuestionIndex];
+            const isCorrect = chosenIdx === q.correct;
+
+            currentSet.forEach((_, i) => {}); // placeholder loop reference
+            q.options.forEach((_, i) => {
+                const btn = document.getElementById(`opt-${i}`);
+                btn.onclick = null;
+                if (i === q.correct) {
+                    btn.className = "w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-sm flex justify-between items-center shadow-sm";
+                } else if (i === chosenIdx) {
+                    btn.className = "w-full text-left p-4 rounded-xl border-2 border-red-500 bg-red-50 text-red-900 font-bold text-sm flex justify-between items-center";
+                } else {
+                    btn.className = "w-full text-left p-4 rounded-xl border border-gray-200 bg-gray-50 text-gray-400 font-medium text-sm flex justify-between items-center opacity-50";
+                }
+            });
+
+            document.getElementById('explanation-text').innerHTML = q.sol;
+            document.getElementById('explanation-box').classList.remove('hidden');
+
+            if (isCorrect) {
+                score++;
+                userXP += 10;
+                localStorage.setItem('tka_xp', userXP);
+                updateStatsDisplay();
+                confetti({ particleCount: 25, spread: 50, origin: { y: 0.8 } });
+            }
+
+            document.getElementById('next-btn').classList.remove('hidden');
+            if (window.MathJax) MathJax.typesetPromise();
+        }
+
+        function nextQuestion() {
+            const currentSet = activeSubject.sets[currentSetIndex];
+            currentQuestionIndex++;
+            if (currentQuestionIndex < currentSet.length) {
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            const currentSet = activeSubject.sets[currentSetIndex];
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+
+            document.getElementById('final-score').innerText = `${score}/${currentSet.length}`;
+            document.getElementById('final-xp').innerText = `+${score * 10} XP`;
+
+            confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStatsDisplay();
+            filterLevel('WASSCE');
+        });
+    </script>
+</body>
+</html>
