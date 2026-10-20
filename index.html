@@ -1,482 +1,535 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toni Kroos Academy - Educational Quiz Platform</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax for Math & Science formulas -->
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!-- Canvas Confetti CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toni Kroos Academy | WASSCE • BECE • Tertiary Learning Hub</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Marked.js for AI Markdown parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- MathJax for rendering LaTeX math formulas -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .markdown-content p { margin-bottom: 0.75rem; }
+    .markdown-content h1, .markdown-content h2, .markdown-content h3 { font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem; }
+    .markdown-content ul, .markdown-content ol { margin-left: 1.5rem; margin-bottom: 0.75rem; list-style-type: disc; }
+    .markdown-content code { background-color: #f1f5f9; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.875em; font-family: monospace; }
+    .markdown-content pre { background-color: #0f172a; color: #f8fafc; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 0.75rem; }
+    .markdown-content pre code { background: none; color: inherit; padding: 0; }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col font-sans">
+<body class="min-h-screen flex flex-col justify-between">
 
-    <!-- Header / Navbar -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-            <!-- Brand -->
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('courses')">
-                <div class="bg-blue-600 text-white p-2.5 rounded-xl font-bold text-xl flex items-center justify-center w-11 h-11 shadow-md">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <div>
-                    <h1 class="font-black text-xl text-gray-900 tracking-tight leading-none">TONI KROOS ACADEMY</h1>
-                    <p class="text-xs text-blue-600 font-semibold mt-0.5">WASSCE • BECE • TERTIARY • KROOS AI</p>
-                </div>
-            </div>
-
-            <!-- Navigation Tabs & Stats -->
-            <div class="flex items-center space-x-3">
-                <nav class="flex bg-gray-100 p-1 rounded-xl text-sm font-semibold">
-                    <button id="nav-courses" onclick="switchTab('courses')" class="px-4 py-2 rounded-lg bg-white text-blue-600 shadow-sm transition">
-                        <i class="fas fa-book-open mr-1.5"></i> Courses
-                    </button>
-                    <button id="nav-ai" onclick="switchTab('ai')" class="px-4 py-2 rounded-lg text-gray-600 hover:text-blue-600 transition">
-                        <i class="fas fa-robot mr-1.5"></i> Kroos AI
-                    </button>
-                </nav>
-
-                <div class="hidden sm:flex items-center space-x-3 bg-blue-50 px-3 py-2 rounded-xl border border-blue-100 text-xs font-bold text-blue-900">
-                    <div class="flex items-center space-x-1" title="Daily Study Streak">
-                        <i class="fas fa-fire text-amber-500 animate-pulse text-sm"></i>
-                        <span id="streak-count">1</span> <span class="text-gray-500 font-normal">Days</span>
-                    </div>
-                    <div class="h-3 w-px bg-blue-200"></div>
-                    <div class="flex items-center space-x-1" title="Total XP Earned">
-                        <i class="fas fa-bolt text-yellow-500 text-sm"></i>
-                        <span id="xp-count">0</span> <span class="text-yellow-600 font-normal">XP</span>
-                    </div>
-                </div>
-            </div>
+  <!-- TOP NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Logo & Branding -->
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('courses')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center text-white text-xl font-black shadow-md shadow-brand-500/20">
+          <i class="fa-solid font-bold">TK</i>
         </div>
-    </header>
+        <div>
+          <h1 class="text-lg font-extrabold tracking-tight text-slate-900 leading-none">
+            TONI KROOS ACADEMY
+          </h1>
+          <p class="text-[10px] font-semibold tracking-wider text-brand-600 uppercase mt-0.5">
+            WASSCE • BECE • TERTIARY • KROOS AI
+          </p>
+        </div>
+      </div>
 
-    <!-- Main Content Container -->
-    <main class="flex-grow max-w-5xl w-full mx-auto p-4 md:p-6">
+      <!-- Center Navigation Tabs -->
+      <nav class="hidden md:flex items-center space-x-2 bg-slate-100 p-1 rounded-xl">
+        <button id="nav-courses-btn" onclick="switchTab('courses')" class="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-white text-brand-700 shadow-sm">
+          <i class="fa-solid fa-book-open mr-2"></i>Courses & Practice
+        </button>
+        <button id="nav-ai-btn" onclick="switchTab('ai')" class="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900">
+          <i class="fa-solid fa-robot mr-2 text-brand-600"></i>Kroos AI Research
+        </button>
+      </nav>
 
-        <!-- TAB 1: COURSES & QUIZ SYSTEM -->
-        <div id="tab-content-courses" class="space-y-6">
-            
-            <!-- Hero Banner -->
-            <div id="courses-hero" class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-6 md:p-8 text-white shadow-xl flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="space-y-2 text-center md:text-left">
-                    <span class="bg-blue-500/40 text-blue-100 text-xs font-bold px-3 py-1 rounded-full border border-blue-300/30">Official Exam Prep</span>
-                    <h2 class="text-3xl font-black">TONI KROOS ACADEMY</h2>
-                    <p class="text-blue-100 text-sm max-w-md">Practice core and elective subjects for WASSCE, BECE, and Tertiary levels with step-by-step solutions and WAEC grading.</p>
-                </div>
-                <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20 text-center min-w-[160px]">
-                    <span class="block text-2xl font-black text-yellow-300">7 Pasco</span>
-                    <span class="text-xs text-blue-100">Questions Per Subject</span>
-                </div>
-            </div>
-
-            <!-- Subject Categories Selector -->
-            <div id="home-screen" class="space-y-6">
-                <!-- Level Tabs -->
-                <div class="flex border-b border-gray-200 text-sm font-bold justify-center space-x-8">
-                    <button onclick="filterLevel('WASSCE')" id="tab-wassce" class="pb-3 border-b-2 border-blue-600 text-blue-600 px-2">WASSCE (SHS)</button>
-                    <button onclick="filterLevel('BECE')" id="tab-bece" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-900 px-2">BECE (JHS)</button>
-                    <button onclick="filterLevel('TERTIARY')" id="tab-tertiary" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-900 px-2">Tertiary</button>
-                </div>
-
-                <!-- Streams / Subjects Grid -->
-                <div id="subjects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Dynamic rendering by JS -->
-                </div>
-            </div>
-
-            <!-- QUIZ RUNNER SCREEN -->
-            <div id="quiz-screen" class="hidden space-y-6">
-                <div class="flex justify-between items-center bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-                    <button onclick="showHomeScreen()" class="text-xs font-bold text-gray-600 hover:text-blue-600 flex items-center">
-                        <i class="fas fa-arrow-left mr-2"></i> Exit Quiz
-                    </button>
-                    <span id="quiz-title" class="font-bold text-sm text-blue-600">Subject Name</span>
-                    <span id="quiz-progress-text" class="text-xs font-mono bg-gray-100 px-2.5 py-1 rounded-lg text-gray-700">Q 1/7</span>
-                </div>
-
-                <div class="bg-white rounded-2xl border border-gray-200 p-6 space-y-6 shadow-lg">
-                    <div id="question-text" class="text-lg font-semibold text-gray-900 leading-relaxed"></div>
-                    <div id="options-container" class="space-y-3"></div>
-
-                    <!-- Step-by-Step Explanation -->
-                    <div id="explanation-box" class="hidden bg-blue-50 border border-blue-200 p-4 rounded-xl text-sm space-y-1">
-                        <div class="font-bold text-blue-900 flex items-center">
-                            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i> Step-by-Step Explanation:
-                        </div>
-                        <div id="explanation-text" class="text-gray-700 leading-relaxed"></div>
-                    </div>
-
-                    <div class="pt-2 flex justify-end">
-                        <button id="next-btn" onclick="nextQuestion()" class="hidden px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition shadow-md">
-                            Next Question <i class="fas fa-chevron-right ml-2"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- WAEC RESULTS & GRADING SCREEN -->
-            <div id="results-screen" class="hidden text-center bg-white rounded-2xl border border-gray-200 p-8 space-y-6 shadow-xl">
-                <div id="result-icon" class="text-6xl">🏆</div>
-                <div>
-                    <h2 class="text-2xl font-black text-gray-900">Quiz Completed!</h2>
-                    <p class="text-xs text-gray-500 mt-1">Official WAEC / WASSCE Grade Assessment</p>
-                </div>
-
-                <div class="grid grid-cols-3 gap-3 max-w-md mx-auto">
-                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-                        <span id="final-score" class="block text-xl font-bold text-gray-900">0/7</span>
-                        <span class="text-xs text-gray-500">Score</span>
-                    </div>
-                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
-                        <span id="final-grade" class="block text-xl font-black text-blue-600">A1</span>
-                        <span class="text-xs text-blue-500 font-medium">WAEC Grade</span>
-                    </div>
-                    <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-100">
-                        <span id="final-xp" class="block text-xl font-bold text-yellow-600">+0 XP</span>
-                        <span class="text-xs text-yellow-600">XP Earned</span>
-                    </div>
-                </div>
-
-                <div class="flex justify-center space-x-4 pt-2">
-                    <button onclick="restartCurrentQuiz()" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition shadow-md">
-                        <i class="fas fa-redo mr-2"></i> Retake New Question Set
-                    </button>
-                    <button onclick="showHomeScreen()" class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-bold rounded-xl transition">
-                        Choose Another Subject
-                    </button>
-                </div>
-            </div>
-
+      <!-- Right User Stats & Settings -->
+      <div class="flex items-center space-x-3 sm:space-x-4">
+        <!-- Streak Counter -->
+        <div class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 text-xs sm:text-sm font-bold">
+          <i class="fa-solid fa-fire text-amber-500 animate-pulse"></i>
+          <span id="user-streak">1 Days</span>
         </div>
 
-        <!-- TAB 2: KROOS AI ASSISTANT -->
-        <div id="tab-content-ai" class="hidden flex flex-col h-[75vh] bg-white rounded-2xl border border-gray-200 shadow-xl overflow-hidden">
-            <!-- AI Header -->
-            <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-4 text-white flex justify-between items-center">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-lg font-bold">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-base leading-tight">Kroos AI Research Assistant</h3>
-                        <p class="text-xs text-blue-100">Powered by Gemini AI • Always ready to help you learn</p>
-                    </div>
-                </div>
-                <button onclick="clearChat()" class="text-xs bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg transition" title="Clear Chat">
-                    <i class="fas fa-trash-alt mr-1"></i> Clear
-                </button>
-            </div>
-
-            <!-- Chat Messages Container -->
-            <div id="ai-messages" class="flex-grow p-4 overflow-y-auto space-y-4 bg-gray-50/50">
-                <div class="flex items-start space-x-3">
-                    <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div class="bg-white border border-gray-200 rounded-2xl p-4 text-sm text-gray-800 max-w-[85%] shadow-sm leading-relaxed">
-                        Hello! 👋 I am <strong>Kroos AI</strong>, your personal study assistant. Ask me anything about your WASSCE, BECE, or Tertiary courses, or ask me to explain any difficult topic or math equation step-by-step!
-                    </div>
-                </div>
-            </div>
-
-            <!-- AI Input Box -->
-            <div class="p-4 bg-white border-t border-gray-200">
-                <form onsubmit="handleAISubmit(event)" class="flex space-x-2">
-                    <input type="text" id="ai-input" placeholder="Ask Kroos AI a research question, topic explanation, or equation..." class="flex-grow px-4 py-3 bg-gray-100 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 text-gray-900">
-                    <button type="submit" id="ai-send-btn" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition shadow-md flex items-center justify-center min-w-[90px]">
-                        Send <i class="fas fa-paper-plane ml-2"></i>
-                    </button>
-                </form>
-            </div>
+        <!-- XP Points -->
+        <div class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs sm:text-sm font-bold">
+          <i class="fa-solid fa-bolt text-emerald-500"></i>
+          <span id="user-xp">10 XP</span>
         </div>
 
-    </main>
+        <!-- API Key Settings Button -->
+        <button onclick="openApiKeyModal()" title="Configure Gemini API Key" class="p-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900 transition-colors">
+          <i class="fa-solid fa-key"></i>
+        </button>
+      </div>
+    </div>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 py-4 mt-8 text-center text-xs text-gray-500">
-        <p>&copy; 2026 Toni Kroos Academy. All rights reserved.</p>
-    </footer>
+    <!-- Mobile Navigation Tab Bar -->
+    <div class="md:hidden flex border-t border-slate-200 bg-slate-50">
+      <button id="mobile-nav-courses-btn" onclick="switchTab('courses')" class="flex-1 py-2.5 text-center text-xs font-bold text-brand-600 border-b-2 border-brand-600">
+        <i class="fa-solid fa-book-open block text-base mb-0.5"></i>Courses
+      </button>
+      <button id="mobile-nav-ai-btn" onclick="switchTab('ai')" class="flex-1 py-2.5 text-center text-xs font-bold text-slate-500 border-b-2 border-transparent">
+        <i class="fa-solid fa-robot block text-base mb-0.5 text-brand-600"></i>Kroos AI Research
+      </button>
+    </div>
+  </header>
 
-    <!-- App JavaScript Engine -->
-    <script>
-        // --- QUESTION DATABASE (7 Questions Per Subject) ---
-        const db = {
-            WASSCE: [
-                {
-                    stream: "General Science",
-                    subjects: [
-                        {
-                            name: "Elective Mathematics",
-                            icon: "fa-calculator",
-                            type: "Elective",
-                            questions: [
-                                { q: "Solve for $x$: $2x + 5 = 15$", options: ["x = 3", "x = 5", "x = 10", "x = 7"], correct: 1, sol: "Subtract 5 from both sides: $2x = 10$, then divide by 2: $x = 5$." },
-                                { q: "Evaluate $\\lim_{x \\to 2} (x^2 - 4)/(x - 2)$", options: ["0", "2", "4", "Undefined"], correct: 2, sol: "Factor numerator: $(x-2)(x+2)/(x-2) = x+2$. Evaluate at $x=2$: $2+2 = 4$." },
-                                { q: "If $f(x) = 3x^2 + 2x$, find $f'(x)$.", options: ["$6x + 2$", "$3x + 2$", "$6x^2$", "$6x$"], correct: 0, sol: "Power rule: $\\frac{d}{dx}(3x^2) = 6x$ and $\\frac{d}{dx}(2x) = 2$. Thus $f'(x) = 6x + 2$." },
-                                { q: "Find the determinant of matrix $\\begin{pmatrix} 3 & 2 \\\\ 1 & 4 \\end{pmatrix}$.", options: ["10", "14", "12", "8"], correct: 0, sol: "Determinant = $(3 \\times 4) - (2 \\times 1) = 12 - 2 = 10$." },
-                                { q: "What is $\\int 2x \\, dx$?", options: ["$x^2 + C$", "$2x^2 + C$", "$x + C$", "$2 + C$"], correct: 0, sol: "Integral of $2x$ is $2(x^2/2) + C = x^2 + C$." },
-                                { q: "Find the 5th term of the A.P. with first term 2 and common difference 3.", options: ["14", "12", "15", "11"], correct: 0, sol: "$U_n = a + (n-1)d \\Rightarrow U_5 = 2 + 4(3) = 14$." },
-                                { q: "Solve $\\sin \\theta = 0.5$ for $0^\\circ \\le \\theta \\le 90^\\circ$.", options: ["$30^\\circ$", "$45^\\circ$", "$60^\\circ$", "$90^\\circ$"], correct: 0, sol: "$\\sin(30^\\circ) = 0.5$." }
-                            ]
-                        },
-                        {
-                            name: "Physics",
-                            icon: "fa-atom",
-                            type: "Elective",
-                            questions: [
-                                { q: "What is the SI unit of Force?", options: ["Joule", "Watt", "Newton", "Pascal"], correct: 2, sol: "The SI unit of force is Newton (N)." },
-                                { q: "Calculate kinetic energy of a 2kg mass moving at 3m/s.", options: ["6 J", "9 J", "18 J", "12 J"], correct: 1, sol: "$KE = \\frac{1}{2} mv^2 = \\frac{1}{2}(2)(3^2) = 9\\text{ J}$." },
-                                { q: "What is standard gravity $g$ on Earth?", options: ["$9.8\\text{ m/s}^2$", "$10\\text{ m/s}^2$", "$8.9\\text{ m/s}^2$", "$9.8\\text{ cm/s}^2$"], correct: 0, sol: "Standard gravity is $9.8\\text{ m/s}^2$." },
-                                { q: "State Ohm's Law formula.", options: ["$P = VI$", "$V = IR$", "$F = ma$", "$E = mc^2$"], correct: 1, sol: "Ohm's Law states $V = IR$." },
-                                { q: "Which ray has the highest penetrating power?", options: ["Alpha", "Beta", "Gamma", "X-Ray"], correct: 2, sol: "Gamma rays have the highest penetration power." },
-                                { q: "A force of 10N moves a block 5m. Calculate work done.", options: ["50 J", "2 J", "15 J", "500 J"], correct: 0, sol: "$\\text{Work} = \\text{Force} \\times \\text{Distance} = 10 \\times 5 = 50\\text{ J}$." },
-                                { q: "What device converts mechanical energy into electrical energy?", options: ["Motor", "Generator", "Transformer", "Capacitor"], correct: 1, sol: "A generator converts mechanical energy into electricity." }
-                            ]
-                        }
-                    ]
-                }
-            ],
-            BECE: [
-                {
-                    stream: "JHS Core",
-                    subjects: [
-                        {
-                            name: "Core Mathematics",
-                            icon: "fa-shapes",
-                            type: "Core",
-                            questions: [
-                                { q: "Simplify: $3(x + 4) - 2x$", options: ["$x + 12$", "$x + 4$", "$5x + 12$", "$x - 12$"], correct: 0, sol: "Expand: $3x + 12 - 2x = x + 12$." },
-                                { q: "Find the mean of 4, 8, 12, 16.", options: ["8", "10", "12", "14"], correct: 1, sol: "Sum = 40. Count = 4. Mean = $40/4 = 10$." },
-                                { q: "Convert 0.75 to a simple fraction.", options: ["1/2", "3/4", "2/3", "4/5"], correct: 1, sol: "$0.75 = 75/100 = 3/4$." },
-                                { q: "Calculate perimeter of a square with side 5cm.", options: ["20 cm", "25 cm", "10 cm", "15 cm"], correct: 0, sol: "Perimeter = $4 \\times 5 = 20\\text{ cm}$." },
-                                { q: "What is the prime factor of 12?", options: ["2 and 3", "3 and 4", "1 and 12", "2 and 6"], correct: 0, sol: "Prime factors are 2 and 3 ($12 = 2^2 \\times 3$)." },
-                                { q: "Find $20\\%$ of 150.", options: ["30", "20", "15", "45"], correct: 0, sol: "$(20/100) \\times 150 = 30$." },
-                                { q: "If $y = 2x + 1$, find $y$ when $x = 3$.", options: ["7", "6", "5", "8"], correct: 0, sol: "$y = 2(3) + 1 = 6 + 1 = 7$." }
-                            ]
-                        }
-                    ]
-                }
-            ],
-            TERTIARY: [
-                {
-                    stream: "Higher Studies",
-                    subjects: [
-                        {
-                            name: "Computer Science",
-                            icon: "fa-laptop-code",
-                            type: "Core",
-                            questions: [
-                                { q: "What does HTML stand for?", options: ["Hyper Text Markup Language", "High Tech Machine Language", "Hyperlink Text Management Language", "Home Tool Markup Language"], correct: 0, sol: "HTML stands for Hyper Text Markup Language." },
-                                { q: "Which data structure uses FIFO?", options: ["Stack", "Queue", "Tree", "Graph"], correct: 1, sol: "Queue uses First-In-First-Out." },
-                                { q: "What is the time complexity of Binary Search?", options: ["O(n)", "O(1)", "O(log n)", "O(n^2)"], correct: 2, sol: "Binary search operates in $O(\\log n)$ time." },
-                                { q: "Which key uniquely identifies a database record?", options: ["Foreign Key", "Primary Key", "Composite Key", "Unique Key"], correct: 1, sol: "Primary Key uniquely identifies each row." },
-                                { q: "Which memory is fastest?", options: ["RAM", "Hard Disk", "Cache Memory", "ROM"], correct: 2, sol: "Cache memory is integrated close to CPU cores." },
-                                { q: "What protocol secures web communication?", options: ["HTTP", "HTTPS", "FTP", "SMTP"], correct: 1, sol: "HTTPS uses TLS/SSL encryption for security." },
-                                { q: "Which component executes instructions in a computer?", options: ["CPU", "RAM", "GPU", "SSD"], correct: 0, sol: "The Central Processing Unit (CPU) executes software instructions." }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        };
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
 
-        // App State
-        let currentLevel = 'WASSCE';
-        let currentQuizData = null;
-        let qIdx = 0;
-        let score = 0;
-        let userXP = parseInt(localStorage.getItem('tka_xp')) || 0;
-        let userStreak = parseInt(localStorage.getItem('tka_streak')) || 1;
+    <!-- HERO BANNER SECTION -->
+    <section id="hero-banner" class="mb-8 rounded-2xl bg-gradient-to-r from-brand-700 via-brand-600 to-indigo-600 text-white p-6 sm:p-8 shadow-xl shadow-brand-500/10 relative overflow-hidden">
+      <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="relative z-10 max-w-3xl">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/15 text-white/90 text-xs font-semibold backdrop-blur-md mb-3">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>Official WAEC / WASSCE & BECE Master Hub</span>
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-2 leading-tight">
+          Master Your Exams with Kroos AI Support
+        </h2>
+        <p class="text-white/80 text-sm sm:text-base mb-6">
+          Practice standard WAEC questions with step-by-step LaTeX math rendering, instant grading, and ask our integrated Kroos AI research tutor for deep topic breakdowns.
+        </p>
 
-        function updateStatsDisplay() {
-            document.getElementById('xp-count').innerText = userXP;
-            document.getElementById('streak-count').innerText = userStreak;
-        }
+        <!-- Stats Badges -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/10">
+            <span class="block text-xs text-white/70">Target Level</span>
+            <span class="text-sm font-bold">WASSCE & BECE</span>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/10">
+            <span class="block text-xs text-white/70">Streams</span>
+            <span class="text-sm font-bold">6 Key Programs</span>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/10">
+            <span class="block text-xs text-white/70">Grading System</span>
+            <span class="text-sm font-bold">WAEC Standard</span>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm p-3 rounded-xl border border-white/10">
+            <span class="block text-xs text-white/70">AI Engine</span>
+            <span class="text-sm font-bold text-amber-300"><i class="fa-solid fa-sparkles mr-1"></i>Gemini AI</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        function switchTab(tab) {
-            if (tab === 'courses') {
-                document.getElementById('tab-content-courses').classList.remove('hidden');
-                document.getElementById('tab-content-ai').classList.add('hidden');
-                document.getElementById('nav-courses').className = "px-4 py-2 rounded-lg bg-white text-blue-600 shadow-sm font-bold";
-                document.getElementById('nav-ai').className = "px-4 py-2 rounded-lg text-gray-600 hover:text-blue-600 transition font-bold";
-            } else {
-                document.getElementById('tab-content-courses').classList.add('hidden');
-                document.getElementById('tab-content-ai').classList.remove('hidden');
-                document.getElementById('nav-ai').className = "px-4 py-2 rounded-lg bg-white text-blue-600 shadow-sm font-bold";
-                document.getElementById('nav-courses').className = "px-4 py-2 rounded-lg text-gray-600 hover:text-blue-600 transition font-bold";
+    <!-- SECTION 1: COURSES & QUIZ MODULE -->
+    <div id="courses-section" class="space-y-6">
+      
+      <!-- Program Stream Selection Tabs -->
+      <div class="bg-white p-2 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-2 overflow-x-auto custom-scrollbar">
+        <button onclick="selectProgram('wassce-sc')" id="prog-wassce-sc" class="prog-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-bold text-sm transition-all bg-brand-600 text-white shadow-md">
+          <i class="fa-solid fa-flask mr-2"></i>WASSCE Science
+        </button>
+        <button onclick="selectProgram('wassce-arts')" id="prog-wassce-arts" class="prog-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-bold text-sm text-slate-600 hover:bg-slate-100 transition-all">
+          <i class="fa-solid fa-scale-balanced mr-2"></i>General Arts
+        </button>
+        <button onclick="selectProgram('wassce-bus')" id="prog-wassce-bus" class="prog-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-bold text-sm text-slate-600 hover:bg-slate-100 transition-all">
+          <i class="fa-solid fa-briefcase mr-2"></i>Business
+        </button>
+        <button onclick="selectProgram('wassce-he')" id="prog-wassce-he" class="prog-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-bold text-sm text-slate-600 hover:bg-slate-100 transition-all">
+          <i class="fa-solid fa-utensils mr-2"></i>Home Econ.
+        </button>
+        <button onclick="selectProgram('bece-jhs')" id="prog-bece-jhs" class="prog-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-bold text-sm text-slate-600 hover:bg-slate-100 transition-all">
+          <i class="fa-solid fa-child mr-2"></i>BECE (JHS)
+        </button>
+        <button onclick="selectProgram('tertiary')" id="prog-tertiary" class="prog-tab flex-shrink-0 px-4 py-2.5 rounded-xl font-bold text-sm text-slate-600 hover:bg-slate-100 transition-all">
+          <i class="fa-solid fa-university mr-2"></i>Tertiary
+        </button>
+      </div>
+
+      <!-- Subject Selection Cards Container -->
+      <div id="subject-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Dynamically Filled by JavaScript -->
+      </div>
+
+      <!-- QUIZ VIEW CONTAINER -->
+      <div id="quiz-container" class="hidden bg-white rounded-2xl border border-slate-200 shadow-lg p-6 sm:p-8">
+        <!-- Quiz Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-5 mb-6 gap-4">
+          <div>
+            <button onclick="exitQuiz()" class="text-xs font-bold text-brand-600 hover:text-brand-800 mb-2 inline-flex items-center">
+              <i class="fa-solid fa-arrow-left mr-1.5"></i>Back to Subject List
+            </button>
+            <h3 id="quiz-subject-title" class="text-2xl font-extrabold text-slate-900">Core Mathematics</h3>
+            <span id="quiz-category-badge" class="inline-block mt-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-50 text-brand-700">WASSCE Core</span>
+          </div>
+
+          <!-- Question Progress Bar -->
+          <div class="flex items-center space-x-4">
+            <div class="text-right">
+              <span class="block text-xs font-medium text-slate-400">Progress</span>
+              <span id="quiz-progress-text" class="text-sm font-bold text-slate-800">Question 1 of 7</span>
+            </div>
+            <div class="w-24 sm:w-32 bg-slate-100 h-3 rounded-full overflow-hidden">
+              <div id="quiz-progress-bar" class="bg-brand-600 h-full w-0 transition-all duration-300"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question Body -->
+        <div id="question-card" class="space-y-6">
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200/80">
+            <p id="question-text" class="text-lg font-medium text-slate-800 leading-relaxed">
+              Loading question...
+            </p>
+          </div>
+
+          <!-- Answer Choices -->
+          <div id="options-list" class="space-y-3"></div>
+
+          <!-- Immediate Explanation Box -->
+          <div id="explanation-box" class="hidden p-4 rounded-xl border bg-slate-50 border-slate-200 text-sm">
+            <h4 class="font-bold flex items-center mb-1 text-slate-800" id="explanation-title">
+              <i class="fa-solid fa-lightbulb text-amber-500 mr-2"></i>Step-by-Step Explanation
+            </h4>
+            <div id="explanation-text" class="text-slate-700 space-y-1"></div>
+          </div>
+
+          <!-- Quiz Action Footer -->
+          <div class="flex justify-end pt-4 border-t border-slate-100">
+            <button id="next-question-btn" onclick="nextQuestion()" disabled class="px-6 py-3 rounded-xl font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+              Next Question <i class="fa-solid fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- QUIZ RESULT VIEW -->
+        <div id="quiz-result-card" class="hidden text-center py-6 space-y-6">
+          <div class="w-20 h-20 rounded-full bg-brand-50 text-brand-600 mx-auto flex items-center justify-center text-3xl font-black shadow-inner">
+            <i class="fa-solid fa-trophy"></i>
+          </div>
+
+          <div>
+            <h3 class="text-3xl font-extrabold text-slate-900">Quiz Completed!</h3>
+            <p class="text-slate-500 text-sm mt-1">Official WAEC Standard Assessment Grade</p>
+          </div>
+
+          <!-- Score & Grade Badges -->
+          <div class="max-w-md mx-auto grid grid-cols-2 gap-4">
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+              <span class="block text-xs font-semibold text-slate-400 uppercase">Score</span>
+              <span id="final-score-text" class="text-3xl font-black text-slate-800">5 / 7</span>
+              <span id="final-percentage-text" class="block text-xs text-slate-500 mt-0.5">71.4%</span>
+            </div>
+            <div id="waec-grade-box" class="bg-brand-50 border border-brand-200 p-4 rounded-2xl text-brand-800">
+              <span class="block text-xs font-semibold text-brand-600 uppercase">WAEC Grade</span>
+              <span id="final-waec-grade" class="text-3xl font-black text-brand-700">B2</span>
+              <span id="final-waec-desc" class="block text-xs font-medium text-brand-600 mt-0.5">Very Good</span>
+            </div>
+          </div>
+
+          <p id="grade-feedback-message" class="text-sm font-medium text-slate-600 max-w-lg mx-auto">
+            Great performance! You demonstrated a deep understanding of core principles.
+          </p>
+
+          <!-- Result Buttons -->
+          <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+            <button onclick="retakeCurrentQuiz()" class="px-6 py-3 rounded-xl font-bold bg-brand-600 text-white hover:bg-brand-700 transition-all shadow-md">
+              <i class="fa-solid fa-rotate-right mr-2"></i>Retake Quiz
+            </button>
+            <button onclick="askAIToExplainWeakness()" class="px-6 py-3 rounded-xl font-bold bg-emerald-600 text-white hover:bg-emerald-700 transition-all shadow-md">
+              <i class="fa-solid fa-robot mr-2"></i>Ask Kroos AI to Review Topics
+            </button>
+            <button onclick="exitQuiz()" class="px-6 py-3 rounded-xl font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+              <i class="fa-solid fa-list mr-2"></i>Choose Another Subject
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- SECTION 2: KROOS AI RESEARCH ASSISTANT -->
+    <div id="ai-section" class="hidden h-[calc(100vh-140px)] flex flex-col bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
+      
+      <!-- AI Chat Header -->
+      <div class="bg-slate-900 text-white p-4 px-6 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-indigo-500 flex items-center justify-center text-white text-lg shadow-md">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h3 class="font-bold text-base leading-tight">Kroos AI Study Assistant</h3>
+              <span id="api-status-tag" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                AI Active
+              </span>
+            </div>
+            <p class="text-xs text-slate-400">Ask any WASSCE/BECE problem, greeting, essay, or research question</p>
+          </div>
+        </div>
+
+        <!-- Chat Header Controls -->
+        <div class="flex items-center space-x-2">
+          <button onclick="clearChatHistory()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">
+            <i class="fa-solid fa-trash-can mr-1.5"></i>Clear Chat
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Prompt Chips Banner -->
+      <div class="bg-slate-50 border-b border-slate-200 p-2.5 px-4 overflow-x-auto custom-scrollbar flex items-center space-x-2 text-xs flex-shrink-0">
+        <span class="font-bold text-slate-400 flex-shrink-0 uppercase text-[10px] tracking-wider">Quick Prompts:</span>
+        <button onclick="usePromptChip('Hi Kroos AI! Can you introduce yourself and how you help students?')" class="chip-btn flex-shrink-0 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 hover:border-brand-500 hover:text-brand-600 transition-colors">
+          👋 Friendly Greeting
+        </button>
+        <button onclick="usePromptChip('Explain Photosynthesis step-by-step for WASSCE Biology.')" class="chip-btn flex-shrink-0 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 hover:border-brand-500 hover:text-brand-600 transition-colors">
+          🌿 Explain Photosynthesis
+        </button>
+        <button onclick="usePromptChip('How do I solve quadratic equations using the quadratic formula? Give an example.')" class="chip-btn flex-shrink-0 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 hover:border-brand-500 hover:text-brand-600 transition-colors">
+          📐 Quadratic Equations
+        </button>
+        <button onclick="usePromptChip('Give me key tips to score Grade A1 in WASSCE English Essay writing.')" class="chip-btn flex-shrink-0 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 hover:border-brand-500 hover:text-brand-600 transition-colors">
+          ✍️ WASSCE Essay Tips
+        </button>
+        <button onclick="usePromptChip('Explain Ohm\'s Law with mathematical formula and practical circuit application.')" class="chip-btn flex-shrink-0 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 hover:border-brand-500 hover:text-brand-600 transition-colors">
+          ⚡ Ohm's Law (Physics)
+        </button>
+      </div>
+
+      <!-- Chat Scrollable History Area -->
+      <div id="ai-chat-history" class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-4 custom-scrollbar bg-slate-50/50">
+        <!-- Initial AI Welcome Message -->
+        <div class="flex items-start space-x-3 max-w-3xl">
+          <div class="w-8 h-8 rounded-lg bg-brand-600 text-white flex items-center justify-center text-sm font-bold flex-shrink-0">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-none p-4 shadow-sm text-sm text-slate-800 leading-relaxed markdown-content">
+            <p><strong>Hello! I am Kroos AI</strong>, your personal study assistant and research tutor.</p>
+            <p>I can help you with:</p>
+            <ul>
+              <li>Step-by-step explanations for <strong>WASSCE & BECE Core/Elective subjects</strong></li>
+              <li>Solving Mathematics, Physics, Chemistry, and Accounting problems with formulas</li>
+              <li>Essay breakdowns, history timelines, and scientific concepts</li>
+              <li>Or just answer any question you have! What topic are we studying today?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typing Indicator -->
+      <div id="ai-typing-indicator" class="hidden px-6 py-2 bg-white border-t border-slate-100 text-xs font-semibold text-slate-500 flex items-center space-x-2">
+        <div class="flex space-x-1">
+          <div class="w-2 h-2 bg-brand-500 rounded-full animate-bounce"></div>
+          <div class="w-2 h-2 bg-brand-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+          <div class="w-2 h-2 bg-brand-500 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+        </div>
+        <span>Kroos AI is thinking and generating answer...</span>
+      </div>
+
+      <!-- AI Chat Input Box Bar -->
+      <div class="p-4 bg-white border-t border-slate-200 flex items-center space-x-3">
+        <input 
+          type="text" 
+          id="ai-user-input" 
+          placeholder="Ask Kroos AI a study question, topic explanation, equation, or greeting..." 
+          onkeydown="if(event.key === 'Enter') sendAIMessage()"
+          class="flex-1 bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all"
+        />
+        <button 
+          onclick="sendAIMessage()" 
+          id="ai-send-btn"
+          class="px-5 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md transition-all flex items-center space-x-2 flex-shrink-0"
+        >
+          <span>Send</span>
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- MODAL: SET GEMINI API KEY -->
+  <div id="api-key-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="text-lg font-extrabold text-slate-900 flex items-center">
+          <i class="fa-solid fa-key text-brand-600 mr-2"></i>Configure Gemini API Key
+        </h3>
+        <button onclick="closeApiKeyModal()" class="text-slate-400 hover:text-slate-600 text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-slate-600 leading-relaxed">
+        Kroos AI has an intelligent built-in academic engine. Optionally, enter a free Google Gemini API Key below to query live models directly.
+      </p>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Gemini API Key</label>
+        <input 
+          type="password" 
+          id="custom-api-key-input" 
+          placeholder="AIzaSy..." 
+          class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+        />
+      </div>
+
+      <div class="flex items-center justify-end space-x-3 pt-2">
+        <button onclick="closeApiKeyModal()" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">
+          Cancel
+        </button>
+        <button onclick="saveApiKey()" class="px-5 py-2 rounded-xl text-xs font-bold bg-brand-600 text-white hover:bg-brand-700 shadow-md">
+          Save Configuration
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-slate-200 py-6 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
+      <p>© 2026 <strong>Toni Kroos Academy</strong>. All learning materials are aligned with WAEC (WASSCE / BECE) guidelines.</p>
+    </div>
+  </footer>
+
+  <!-- APPLICATION JAVASCRIPT LOGIC -->
+  <script>
+    // ==========================================
+    // DATA STRUCTURE: COURSES & QUESTIONS
+    // ==========================================
+    const COURSE_DATA = {
+      'wassce-sc': [
+        {
+          id: 'sc-core-math',
+          title: 'Core Mathematics',
+          badge: 'Core Subject',
+          questions: [
+            {
+              q: 'Solve for $x$ in the equation: $2x^2 - 8x + 6 = 0$.',
+              options: ['A) $x = 1$ or $x = 3$', 'B) $x = -1$ or $x = -3$', 'C) $x = 2$ or $x = 4$', 'D) $x = 0$ or $x = 6$'],
+              answer: 0,
+              exp: 'Dividing by 2 gives $x^2 - 4x + 3 = 0$. Factoring gives $(x-1)(x-3) = 0$, so $x=1$ or $x=3$.'
+            },
+            {
+              q: 'Find the gradient of the line passing through points $A(2, 5)$ and $B(6, 13)$.',
+              options: ['A) $m = 1$', 'B) $m = 2$', 'C) $m = 3$', 'D) $m = 4$'],
+              answer: 1,
+              exp: 'Gradient $m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{13 - 5}{6 - 2} = \\frac{8}{4} = 2$.'
+            },
+            {
+              q: 'Evaluate $\\log_{10}(1000) + \\log_{10}(100)$.',
+              options: ['A) $3$', 'B) $4$', 'C) $5$', 'D) $6$'],
+              answer: 2,
+              exp: '$\\log_{10}(1000) = 3$ and $\\log_{10}(100) = 2$. Therefore, $3 + 2 = 5$.'
+            },
+            {
+              q: 'If the mean of $4, 8, x, 12, 16$ is $10$, find $x$.',
+              options: ['A) $8$', 'B) $10$', 'C) $11$', 'D) $12$'],
+              answer: 1,
+              exp: '$\\frac{4 + 8 + x + 12 + 16}{5} = 10 \\implies 40 + x = 50 \\implies x = 10$.'
+            },
+            {
+              q: 'Find the volume of a sphere with radius $r = 3\\text{ cm}$.',
+              options: ['A) $12\\pi\\text{ cm}^3$', 'B) $36\\pi\\text{ cm}^3$', 'C) $48\\pi\\text{ cm}^3$', 'D) $108\\pi\\text{ cm}^3$'],
+              answer: 1,
+              exp: 'Volume $V = \\frac{4}{3}\\pi r^3 = \\frac{4}{3}\\pi (27) = 36\\pi\\text{ cm}^3$.'
+            },
+            {
+              q: 'Calculate the simple interest on GH₵ 1,200 for 3 years at 5% per annum.',
+              options: ['A) GH₵ 150', 'B) GH₵ 180', 'C) GH₵ 200', 'D) GH₵ 240'],
+              answer: 1,
+              exp: '$\\text{S.I.} = \\frac{P \\times R \\times T}{100} = \\frac{1200 \\times 5 \\times 3}{100} = \\text{GH₵ } 180$.'
+            },
+            {
+              q: 'In a right-angled triangle, if $\\sin \\theta = \\frac{3}{5}$, find $\\cos \\theta$.',
+              options: ['A) $\\frac{4}{5}$', 'B) $\\frac{3}{4}$', 'C) $\\frac{5}{4}$', 'D) $\\frac{2}{5}$'],
+              answer: 0,
+              exp: 'By Pythagoras theorem, $\\text{Adjacent} = \\sqrt{5^2 - 3^2} = 4$. Thus $\\cos \\theta = \\frac{4}{5}$.'
             }
-        }
-
-        function filterLevel(level) {
-            currentLevel = level;
-            ['wassce', 'bece', 'tertiary'].forEach(l => {
-                const btn = document.getElementById(`tab-${l}`);
-                if (l.toUpperCase() === level) {
-                    btn.className = "pb-3 border-b-2 border-blue-600 text-blue-600 px-2 font-bold";
-                } else {
-                    btn.className = "pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-900 px-2 font-bold";
-                }
-            });
-            renderSubjects();
-        }
-
-        function renderSubjects() {
-            const grid = document.getElementById('subjects-grid');
-            let html = '';
-            
-            db[currentLevel].forEach(streamGroup => {
-                streamGroup.subjects.forEach((s, idx) => {
-                    html += `
-                        <div onclick="startQuiz('${s.name}')" class="bg-white border border-gray-200 hover:border-blue-500 p-5 rounded-2xl cursor-pointer transition shadow-sm hover:shadow-md flex items-center justify-between">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-blue-50 text-blue-600 border border-blue-100 rounded-xl flex items-center justify-center text-xl">
-                                    <i class="fas ${s.icon}"></i>
-                                </div>
-                                <div>
-                                    <div class="flex items-center space-x-2">
-                                        <h3 class="font-bold text-gray-900 text-base">${s.name}</h3>
-                                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${s.type === 'Core' ? 'bg-amber-100 text-amber-800' : 'bg-blue-100 text-blue-800'}">${s.type}</span>
-                                    </div>
-                                    <p class="text-xs text-gray-500 mt-0.5">${s.questions.length} Practice Questions • Step-by-Step</p>
-                                </div>
-                            </div>
-                            <i class="fas fa-chevron-right text-gray-300 text-sm"></i>
-                        </div>
-                    `;
-                });
-            });
-            grid.innerHTML = html;
-        }
-
-        function showHomeScreen() {
-            document.getElementById('home-screen').classList.remove('hidden');
-            document.getElementById('courses-hero').classList.remove('hidden');
-            document.getElementById('quiz-screen').classList.add('hidden');
-            document.getElementById('results-screen').classList.add('hidden');
-            renderSubjects();
-        }
-
-        function startQuiz(subjectName) {
-            let found = null;
-            Object.keys(db).forEach(lvl => {
-                db[lvl].forEach(st => {
-                    st.subjects.forEach(sb => {
-                        if (sb.name === subjectName) found = sb;
-                    });
-                });
-            });
-
-            if (!found) return;
-            currentQuizData = found;
-            qIdx = 0;
-            score = 0;
-
-            document.getElementById('home-screen').classList.add('hidden');
-            document.getElementById('courses-hero').classList.add('hidden');
-            document.getElementById('results-screen').classList.add('hidden');
-            document.getElementById('quiz-screen').classList.remove('hidden');
-            document.getElementById('quiz-title').innerText = currentQuizData.name;
-
-            renderQuestion();
-        }
-
-        function restartCurrentQuiz() {
-            qIdx = 0;
-            score = 0;
-            document.getElementById('results-screen').classList.add('hidden');
-            document.getElementById('quiz-screen').classList.remove('hidden');
-            renderQuestion();
-        }
-
-        function renderQuestion() {
-            const q = currentQuizData.questions[qIdx];
-            document.getElementById('quiz-progress-text').innerText = `Q ${qIdx + 1}/${currentQuizData.questions.length}`;
-            document.getElementById('question-text').innerHTML = q.q;
-
-            document.getElementById('explanation-box').classList.add('hidden');
-            document.getElementById('next-btn').classList.add('hidden');
-
-            const container = document.getElementById('options-container');
-            container.innerHTML = q.options.map((opt, i) => `
-                <button id="opt-${i}" onclick="checkAnswer(${i})" class="w-full text-left p-4 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 font-medium text-sm text-gray-800 transition flex justify-between items-center shadow-sm">
-                    <span>${opt}</span>
-                    <span class="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center text-xs text-gray-500 font-bold">${String.fromCharCode(65 + i)}</span>
-                </button>
-            `).join('');
-
-            if (window.MathJax) MathJax.typesetPromise();
-        }
-
-        function checkAnswer(chosenIdx) {
-            const q = currentQuizData.questions[qIdx];
-            const isCorrect = chosenIdx === q.correct;
-
-            q.options.forEach((_, i) => {
-                const btn = document.getElementById(`opt-${i}`);
-                btn.onclick = null;
-                if (i === q.correct) {
-                    btn.className = "w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-sm flex justify-between items-center shadow-md";
-                } else if (i === chosenIdx) {
-                    btn.className = "w-full text-left p-4 rounded-xl border-2 border-red-500 bg-red-50 text-red-900 font-bold text-sm flex justify-between items-center";
-                } else {
-                    btn.className = "w-full text-left p-4 rounded-xl border border-gray-200 bg-gray-50 text-gray-400 font-medium text-sm flex justify-between items-center opacity-50";
-                }
-            });
-
-            document.getElementById('explanation-text').innerHTML = q.sol;
-            document.getElementById('explanation-box').classList.remove('hidden');
-
-            if (isCorrect) {
-                score++;
-                userXP += 10;
-                localStorage.setItem('tka_xp', userXP);
-                updateStatsDisplay();
-                confetti({ particleCount: 25, spread: 50, origin: { y: 0.8 } });
-            }
-
-            document.getElementById('next-btn').classList.remove('hidden');
-            if (window.MathJax) MathJax.typesetPromise();
-        }
-
-        function nextQuestion() {
-            qIdx++;
-            if (qIdx < currentQuizData.questions.length) {
-                renderQuestion();
-            } else {
-                showResults();
-            }
-        }
-
-        function calculateWAECGrade(percentage) {
-            if (percentage >= 80) return { grade: "A1", label: "Excellent" };
-            if (percentage >= 70) return { grade: "B2", label: "Very Good" };
-            if (percentage >= 65) return { grade: "B3", label: "Good" };
-            if (percentage >= 60) return { grade: "C4", label: "Credit" };
-            if (percentage >= 55) return { grade: "C5", label: "Credit" };
-            if (percentage >= 50) return { grade: "C6", label: "Credit" };
-            if (percentage >= 45) return { grade: "D7", label: "Pass" };
-            if (percentage >= 40) return { grade: "E8", label: "Pass" };
-            return { grade: "F9", label: "Fail" };
-        }
-
-        function showResults() {
-            document.getElementById('quiz-screen').classList.add('hidden');
-            document.getElementById('results-screen').classList.remove('hidden');
-
-            const total = currentQuizData.questions.length;
-            const pct = Math.round((score / total) * 100);
-            const waec = calculateWAECGrade(pct);
-
-            document.getElementById('final-score').innerText = `${score}/${total}`;
-            document.getElementById('final-grade').innerText = `${waec.grade}`;
-            document.getElementById('final-xp').innerText = `+${score * 10} XP`;
-
-            confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
-        }
-
-        // --- SMART KROOS AI CHAT
+          ]
+        },
+        {
+          id: 'sc-phy',
+          title: 'Elective Physics',
+          badge: 'Elective Subject',
+          questions: [
+            {
+              q: 'A force of $20\\text{ N}$ acts on a mass of $4\\text{ kg}$. Calculate the acceleration.',
+              options: ['A) $2\\text{ m/s}^2$', 'B) $5\\text{ m/s}^2$', 'C) $10\\text{ m/s}^2$', 'D) $80\\text{ m/s}^2$'],
+              answer: 1,
+              exp: 'According to Newton\'s 2nd Law, $F = ma \\implies a = \\frac{F}{m} = \\frac{20}{4} = 5\\text{ m/s}^2$.'
+            },
+            {
+              q: 'Which of the following is a scalar quantity?',
+              options: ['A) Velocity', 'B) Acceleration', 'C) Electric Potential', 'D) Force'],
+              answer: 2,
+              exp: 'Electric potential has magnitude only without direction, making it a scalar.'
+            },
+            {
+              q: 'Calculate the kinetic energy of a $2\\text{ kg}$ object moving at $6\\text{ m/s}$.',
+              options: ['A) $12\\text{ J}$', 'B) $24\\text{ J}$', 'C) $36\\text{ J}$', 'D) $72\\text{ J}$'],
