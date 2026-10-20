@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toni Kroos Academy - Select Course & Level</title>
+    <title>Toni Kroos Academy - All Courses & Elective Subjects</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -49,7 +49,7 @@
                 </div>
                 <div>
                     <span class="font-extrabold text-lg text-slate-900 dark:text-white tracking-tight">Toni Kroos Academy</span>
-                    <span class="block text-xs font-semibold text-indigo-600 dark:text-indigo-400">Interactive Quiz Platform</span>
+                    <span class="block text-xs font-semibold text-indigo-600 dark:text-indigo-400">Interactive Learning Engine</span>
                 </div>
             </div>
 
@@ -62,23 +62,25 @@
         </div>
     </header>
 
-    <!-- Welcome / Course Selection Screen -->
-    <main class="max-w-5xl mx-auto px-4 py-8">
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        
+        <!-- Welcome / Course Selection Screen -->
         <div id="homeView" class="space-y-8">
-            <div class="text-center max-w-2xl mx-auto space-y-4 pt-2">
+            <div class="text-center max-w-3xl mx-auto space-y-4 pt-2">
                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/50">
-                    <i class="fa-solid fa-sliders mr-2"></i> Custom Course & Level Engine
+                    <i class="fa-solid fa-layer-group mr-2"></i> All WASSCE & BECE Courses Covered
                 </span>
                 <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                    Select Your Level & Course
+                    Select Your Course & Electives
                 </h1>
                 <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base">
-                    Choose your level of education and your specific course stream to load specialized practice quizzes!
+                    Choose your educational level and specific course stream to load all matching elective subjects and practice quizzes!
                 </p>
             </div>
 
             <!-- DUAL SELECTOR BOX (Level + Course) -->
-            <div class="max-w-xl mx-auto glass-card p-6 rounded-2xl shadow-xl border border-indigo-100 dark:border-slate-800 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="max-w-2xl mx-auto glass-card p-6 rounded-2xl shadow-xl border border-indigo-100 dark:border-slate-800 grid grid-cols-1 md:grid-cols-2 gap-4">
                 
                 <!-- 1. Education Level -->
                 <div class="space-y-2">
@@ -86,21 +88,31 @@
                         <i class="fa-solid fa-school mr-1"></i> Level of Education:
                     </label>
                     <select id="levelSelect" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-                        <option value="wassce">🏫 WASSCE / SHS</option>
-                        <option value="bece">🎓 BECE / JHS</option>
-                        <option value="tertiary">🏛️ University / Tertiary</option>
+                        <option value="wassce">🏫 WASSCE / Senior High School (SHS)</option>
+                        <option value="bece">🎓 BECE / Junior High School (JHS)</option>
+                        <option value="tertiary">🏛️ University / Tertiary Level</option>
                     </select>
                 </div>
 
                 <!-- 2. Course / Department -->
                 <div class="space-y-2">
                     <label class="block text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-                        <i class="fa-solid fa-book-bookmark mr-1"></i> Course / Stream:
+                        <i class="fa-solid fa-book-bookmark mr-1"></i> Course / Department Stream:
                     </label>
                     <select id="courseSelect" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
                     </select>
                 </div>
 
+            </div>
+
+            <!-- Header Info for Selected Stream -->
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+                <h2 id="streamTitle" class="text-xl font-extrabold text-slate-900 dark:text-white flex items-center">
+                    <i class="fa-solid fa-list-check text-indigo-600 mr-2"></i> Available Elective Subjects
+                </h2>
+                <span id="subjectCountBadge" class="text-xs font-bold bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full">
+                    0 Subjects
+                </span>
             </div>
 
             <!-- Subject Cards Container -->
@@ -115,7 +127,7 @@
                     <i class="fa-solid fa-xmark mr-1 text-sm"></i> Exit Quiz
                 </button>
                 <div id="questionTracker">Question 1 of 5</div>
-                <div id="activeBadge" class="text-indigo-600 font-extrabold uppercase">COURSE QUIZ</div>
+                <div id="activeBadge" class="text-indigo-600 font-extrabold uppercase">ELECTIVE PRACTICE</div>
             </div>
 
             <div class="w-full bg-slate-200 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
@@ -123,14 +135,14 @@
             </div>
 
             <div class="glass-card rounded-2xl p-6 md:p-8 space-y-6 border border-slate-200 dark:border-slate-800 shadow-xl">
-                <div id="questionText" class="text-lg md:text-xl font-bold text-slate-900 dark:text-white"></div>
+                <div id="questionText" class="text-lg md:text-xl font-bold text-slate-900 dark:text-white leading-relaxed"></div>
                 <div id="optionsContainer" class="space-y-3 pt-2"></div>
 
                 <div id="explanationBox" class="hidden p-4 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-2">
                     <div class="font-bold text-xs text-indigo-600 dark:text-indigo-400 flex items-center">
-                        <i class="fa-solid fa-circle-info mr-1.5"></i> Step-by-Step Solution
+                        <i class="fa-solid fa-circle-info mr-1.5"></i> Step-by-Step Solution & Explanation
                     </div>
-                    <div id="explanationText" class="text-xs text-slate-600 dark:text-slate-300"></div>
+                    <div id="explanationText" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"></div>
                 </div>
 
                 <button id="nextBtn" onclick="nextQuestion()" class="hidden w-full py-3.5 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-lg shadow-indigo-500/30">
@@ -145,72 +157,155 @@
                 <div class="w-20 h-20 mx-auto rounded-full bg-indigo-100 dark:bg-indigo-950/80 text-indigo-600 flex items-center justify-center text-3xl font-extrabold">
                     <i class="fa-solid fa-trophy"></i>
                 </div>
-                <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white">Quiz Complete!</h2>
+                <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white">Quiz Completed!</h2>
                 <div id="finalScore" class="text-4xl font-extrabold text-indigo-600">0/0</div>
                 <button onclick="resetToHome()" class="w-full py-3.5 rounded-xl bg-indigo-600 text-white font-bold text-sm">
-                    Select Another Course <i class="fa-solid fa-rotate-right ml-2"></i>
+                    Back to Course Selection <i class="fa-solid fa-rotate-right ml-2"></i>
                 </button>
             </div>
         </div>
     </main>
 
-    <!-- Data and Script Engine -->
+    <!-- Master Data Engine -->
     <script>
         const courseMapping = {
             wassce: [
-                { id: 'science', name: 'General Science' },
-                { id: 'arts', name: 'General Arts' },
-                { id: 'business', name: 'Business' },
-                { id: 'visual_arts', name: 'Visual Arts' }
+                { id: 'gen_science', name: 'General Science' },
+                { id: 'gen_arts', name: 'General Arts' },
+                { id: 'business', name: 'Business Stream' },
+                { id: 'home_econ', name: 'Home Economics' },
+                { id: 'vis_arts', name: 'Visual Arts' },
+                { id: 'agric_sci', name: 'Agricultural Science' }
             ],
             bece: [
-                { id: 'jhs_core', name: 'Core Subjects (JHS 1 - 3)' }
+                { id: 'bece_core', name: 'JHS Core Subjects (JHS 1 - 3)' }
             ],
             tertiary: [
-                { id: 'comp_sci', name: 'Computer Science / IT' },
-                { id: 'engineering', name: 'Engineering / Physical Science' },
-                { id: 'business_admin', name: 'Business Administration' }
+                { id: 'cs_it', name: 'Computer Science & Information Technology' },
+                { id: 'eng_physical', name: 'Engineering & Physical Sciences' },
+                { id: 'bus_admin', name: 'Business Administration & Finance' }
             ]
         };
 
         const subjectDatabase = {
-            science: [
-                { id: 'elect_math', name: 'Elective Mathematics', desc: 'Matrices, Vectors & Calculus', icon: 'fa-calculator' },
-                { id: 'biology', name: 'Biology', desc: 'Fungal Biology, Cell Structures & Genetics', icon: 'fa-dna' }
+            // --- WASSCE GENERAL SCIENCE ---
+            gen_science: [
+                { id: 'elect_math', name: 'Elective Mathematics', desc: 'Matrices, Calculus, Vectors & Polynomials', icon: 'fa-calculator' },
+                { id: 'physics', name: 'Physics', desc: 'Mechanics, Ohm’s Law, Optics & Atomic Physics', icon: 'fa-bolt' },
+                { id: 'chemistry', name: 'Chemistry', desc: 'Atomic Structure, Chemical Bonding & Stoichiometry', icon: 'fa-flask' },
+                { id: 'biology', name: 'Biology', desc: 'Cellular Structures, Fungi, Genetics & Ecology', icon: 'fa-dna' }
             ],
-            arts: [
-                { id: 'core_math', name: 'Core Mathematics', desc: 'Algebra, Probability & Statistics', icon: 'fa-chart-pie' },
-                { id: 'gov', name: 'Government', desc: 'Constitution, Political Systems & Rights', icon: 'fa-landmark' }
+
+            // --- WASSCE GENERAL ARTS ---
+            gen_arts: [
+                { id: 'elect_math', name: 'Elective Mathematics', desc: 'Trigonometry, Matrices & Differential Calculus', icon: 'fa-calculator' },
+                { id: 'econ', name: 'Economics', desc: 'Microeconomics, Demand/Supply & Inflation', icon: 'fa-chart-line' },
+                { id: 'gov', name: 'Government', desc: 'Constitutional Development, Arms of Gov & Rights', icon: 'fa-landmark' },
+                { id: 'geog', name: 'Geography', desc: 'Physical Features, Weathering & Map Reading', icon: 'fa-earth-africa' },
+                { id: 'hist', name: 'History', desc: 'Pre-Colonial Africa, Independence & World History', icon: 'fa-timeline' },
+                { id: 'lit', name: 'Literature-in-English', desc: 'African Prose, Drama, Poetry & Literary Devices', icon: 'fa-book-open' },
+                { id: 'crs', name: 'Christian Religious Studies', desc: 'Old Testament, Synoptic Gospels & Epistles', icon: 'fa-cross' }
             ],
+
+            // --- WASSCE BUSINESS ---
             business: [
-                { id: 'accounting', name: 'Financial Accounting', desc: 'Balance Sheets, Ledgers & Journals', icon: 'fa-receipt' },
-                { id: 'core_math', name: 'Core Mathematics', desc: 'Percentages, Ratios & Interest', icon: 'fa-calculator' }
+                { id: 'fin_acc', name: 'Financial Accounting', desc: 'Double Entry, Trial Balance & Balance Sheets', icon: 'fa-receipt' },
+                { id: 'cost_acc', name: 'Cost Accounting', desc: 'Labor Costs, Material Valuation & Overheads', icon: 'fa-file-invoice-dollar' },
+                { id: 'bus_mgmt', name: 'Business Management', desc: 'Organizational Structures, Marketing & HR', icon: 'fa-briefcase' },
+                { id: 'econ', name: 'Economics', desc: 'Market Structures, National Income & Banking', icon: 'fa-chart-line' },
+                { id: 'elect_math', name: 'Elective Mathematics', desc: 'Probability, Matrices & Commercial Math', icon: 'fa-calculator' }
             ],
-            visual_arts: [
-                { id: 'gfx', name: 'Graphic Design', desc: 'Color Theory, Typography & Layouts', icon: 'fa-palette' }
+
+            // --- WASSCE HOME ECONOMICS ---
+            home_econ: [
+                { id: 'food_nutr', name: 'Food & Nutrition', desc: 'Nutrients, Balanced Diets & Food Preservation', icon: 'fa-utensils' },
+                { id: 'mgmt_living', name: 'Management-in-Living', desc: 'Family Resources, Consumer Rights & Housing', icon: 'fa-house-user' },
+                { id: 'cloth_text', name: 'Clothing & Textiles', desc: 'Fibres, Fabrics, Garment Making & Fashion', icon: 'fa-shirt' },
+                { id: 'biology', name: 'Biology', desc: 'Digestive Systems, Enzymes & Microorganisms', icon: 'fa-dna' },
+                { id: 'chemistry', name: 'Chemistry', desc: 'Organic Compounds, Solutions & Acids', icon: 'fa-flask' }
             ],
-            jhs_core: [
-                { id: 'int_science', name: 'Integrated Science', desc: 'Photosynthesis, Cells & Matter', icon: 'fa-flask' },
-                { id: 'jhs_math', name: 'JHS Mathematics', desc: 'Fractions, Probability & Equations', icon: 'fa-calculator' }
+
+            // --- WASSCE VISUAL ARTS ---
+            vis_arts: [
+                { id: 'gfx_design', name: 'Graphic Design', desc: 'Typography, Branding, Color Theory & Layouts', icon: 'fa-palette' },
+                { id: 'picture_making', name: 'Picture Making', desc: 'Painting, Drawing & Perspective', icon: 'fa-image' },
+                { id: 'sculpture', name: 'Sculpture', desc: 'Carving, Modeling, Casting & Materials', icon: 'fa-cubes' },
+                { id: 'textiles_art', name: 'Textiles', desc: 'Weaving, Dyeing, Printing & Fabric Design', icon: 'fa-scroll' },
+                { id: 'leatherwork', name: 'Leatherwork', desc: 'Tanning, Pattern Drafting & Leather Products', icon: 'fa-mitten' },
+                { id: 'gka', name: 'General Knowledge in Art', desc: 'African Art History, Appreciation & Design', icon: 'fa-paint-brush' }
             ],
-            comp_sci: [
-                { id: 'dsa', name: 'Data Structures & Cache', desc: 'L1/L2 Cache Memory, Memory Latency', icon: 'fa-microchip' },
-                { id: 'linear_algebra', name: 'Linear Algebra', desc: 'Matrix Multiplication, Determinants', icon: 'fa-square-root-variable' }
+
+            // --- WASSCE AGRICULTURAL SCIENCE ---
+            agric_sci: [
+                { id: 'gen_agric', name: 'General Agriculture', desc: 'Soil Fertility, Land Tenure & Farm Mechanization', icon: 'fa-wheat-awn' },
+                { id: 'animal_hosp', name: 'Animal Husbandry', desc: 'Livestock Nutrition, Breeding & Poultry', icon: 'fa-cow' },
+                { id: 'crop_hosp', name: 'Crop Husbandry', desc: 'Cereal Crops, Pest Management & Irrigation', icon: 'fa-seedling' },
+                { id: 'chemistry', name: 'Chemistry', desc: 'Agrochemicals, Soil pH & Organic Matter', icon: 'fa-flask' },
+                { id: 'physics', name: 'Physics', desc: 'Farm Machinery, Energy & Simple Machines', icon: 'fa-bolt' }
             ],
-            engineering: [
-                { id: 'linear_algebra', name: 'Linear Algebra', desc: 'Matrix Multiplication, Determinants', icon: 'fa-square-root-variable' }
+
+            // --- BECE / JHS CORE ---
+            bece_core: [
+                { id: 'bece_math', name: 'Core Mathematics', desc: 'Sets, Fractions, Probability & Geometry', icon: 'fa-calculator' },
+                { id: 'bece_sci', name: 'Integrated Science', desc: 'Photosynthesis, Matter, Cells & Acids', icon: 'fa-flask' },
+                { id: 'bece_soc', name: 'Social Studies', desc: 'Environment, Culture, Governance & Economy', icon: 'fa-globe' },
+                { id: 'bece_eng', name: 'English Language', desc: 'Grammar, Comprehension, Idioms & Essay Writing', icon: 'fa-pen-nib' },
+                { id: 'bece_ict', name: 'Computing / ICT', desc: 'Computer Hardware, Operating Systems & Internet', icon: 'fa-desktop' }
             ],
-            business_admin: [
-                { id: 'bus_stats', name: 'Business Statistics', desc: 'Probability, Sampling & Data', icon: 'fa-chart-line' }
+
+            // --- TERTIARY ---
+            cs_it: [
+                { id: 'dsa_cache', name: 'Data Structures & Cache Architecture', desc: 'L1/L2 Cache Memory, Latency & Algorithms', icon: 'fa-microchip' },
+                { id: 'linear_alg', name: 'Linear Algebra', desc: 'Matrix Multiplication, Determinants & Eigenvalues', icon: 'fa-square-root-variable' }
+            ],
+            eng_physical: [
+                { id: 'linear_alg', name: 'Linear Algebra', desc: 'Matrix Algebra, Vectors & Systems', icon: 'fa-square-root-variable' }
+            ],
+            bus_admin: [
+                { id: 'bus_stats', name: 'Business Statistics', desc: 'Probability Distributions & Regression', icon: 'fa-chart-line' }
             ]
         };
 
         const quizQuestions = [
-            { courseId: 'science', subjectId: 'elect_math', question: 'What is the sum of matrices $$\\begin{bmatrix} 2 & 4 \\\\ 1 & 3 \\end{bmatrix} + \\begin{bmatrix} 5 & 1 \\\\ 2 & 6 \\end{bmatrix}$$?', options: ['$$\\begin{bmatrix} 7 & 5 \\\\ 3 & 9 \\end{bmatrix}$$', '$$\\begin{bmatrix} 10 & 4 \\\\ 2 & 18 \\end{bmatrix}$$'], correct: 0, explanation: 'Add matching elements: Top-left ($2+5=7$), Top-right ($4+1=5$), Bottom-left ($1+2=3$), Bottom-right ($3+6=9$).' },
-            { courseId: 'science', subjectId: 'biology', question: 'Which hyphae structure anchors *Rhizopus* fungi to its substrate?', options: ['Rhizoids', 'Stolons', 'Sporangiophores'], correct: 0, explanation: 'Rhizoids act as root-like hyphae to absorb food and anchor the mold.' },
-            { courseId: 'comp_sci', subjectId: 'dsa', question: 'Which level of CPU cache is directly integrated on the processor core?', options: ['L1 Cache', 'L2 Cache', 'L3 Cache'], correct: 0, explanation: 'L1 Cache is integrated into the core and provides the fastest access speeds.' },
-            { courseId: 'jhs_core', subjectId: 'jhs_math', question: 'What is the probability of rolling an even number on a 6-sided die?', options: ['1/2', '1/3', '1/6'], correct: 0, explanation: 'Even numbers = {2, 4, 6}. Probability = 3/6 = 1/2.' },
-            { courseId: 'jhs_core', subjectId: 'int_science', question: 'Which process allows green plants to convert sunlight into chemical energy?', options: ['Photosynthesis', 'Respiration', 'Transpiration'], correct: 0, explanation: 'Photosynthesis produces glucose using sunlight, water, and carbon dioxide.' }
+            // --- ELECTIVE MATH / LINEAR ALGEBRA ---
+            { subjectId: 'elect_math', question: 'Solve matrix addition: $$\\begin{bmatrix} 2 & 4 \\\\ 1 & 3 \\end{bmatrix} + \\begin{bmatrix} 5 & 1 \\\\ 2 & 6 \\end{bmatrix}$$', options: ['$$\\begin{bmatrix} 7 & 5 \\\\ 3 & 9 \\end{bmatrix}$$', '$$\\begin{bmatrix} 10 & 4 \\\\ 2 & 18 \\end{bmatrix}$$'], correct: 0, explanation: 'Add matching elements ($2+5=7$, $4+1=5$, $1+2=3$, $3+6=9$).' },
+            { subjectId: 'elect_math', question: 'Find the determinant of $$\\begin{bmatrix} 4 & 2 \\\\ 1 & 3 \\end{bmatrix}$$:', options: ['10', '12', '14'], correct: 0, explanation: 'Determinant = $(4 \\times 3) - (2 \\times 1) = 12 - 2 = 10$.' },
+
+            // --- PHYSICS ---
+            { subjectId: 'physics', question: 'What is the SI unit of electrical resistance?', options: ['Ohm ($\\Omega$)', 'Volt', 'Ampere'], correct: 0, explanation: 'Electrical resistance is measured in Ohms.' },
+            { subjectId: 'physics', question: 'According to Ohm\'s Law, voltage ($$V$$) is calculated as:', options: ['$$V = I \\times R$$', '$$V = I / R$$', '$$V = P \\times R$$'], correct: 0, explanation: 'Ohm\'s Law states Voltage equals Current ($$I$$) times Resistance ($$R$$).' },
+
+            // --- CHEMISTRY ---
+            { subjectId: 'chemistry', question: 'What is the atomic number of Carbon on the periodic table?', options: ['6', '8', '12'], correct: 0, explanation: 'Carbon contains 6 protons in its nucleus, making its atomic number 6.' },
+
+            // --- BIOLOGY ---
+            { subjectId: 'biology', question: 'Which hyphae structure anchors *Rhizopus* bread mold to its substrate?', options: ['Rhizoids', 'Stolons', 'Sporangiophores'], correct: 0, explanation: 'Rhizoids serve as root-like structures to absorb nutrients and anchor mold.' },
+            { subjectId: 'biology', question: 'What chemical compound forms the main cell wall of fungi?', options: ['Chitin', 'Cellulose', 'Lignin'], correct: 0, explanation: 'Fungal cell walls are composed of chitin.' },
+
+            // --- ECONOMICS ---
+            { subjectId: 'econ', question: 'When the price of a good rises, what usually happens to the quantity demanded?', options: ['It decreases', 'It increases', 'It remains unchanged'], correct: 0, explanation: 'According to the Law of Demand, price and quantity demanded move in opposite directions.' },
+
+            // --- GOVERNMENT ---
+            { subjectId: 'gov', question: 'Which organ of government is responsible for making and passing laws?', options: ['Legislature', 'Executive', 'Judiciary'], correct: 0, explanation: 'The Legislature drafts and enacts laws.' },
+
+            // --- FINANCIAL ACCOUNTING ---
+            { subjectId: 'fin_acc', question: 'In double-entry bookkeeping, every debit entry must have an equal:', options: ['Credit entry', 'Asset', 'Liability'], correct: 0, explanation: 'The fundamental accounting rule requires equal debits and credits.' },
+
+            // --- FOOD & NUTRITION ---
+            { subjectId: 'food_nutr', question: 'Which vitamin deficiency leads to night blindness?', options: ['Vitamin A', 'Vitamin C', 'Vitamin D'], correct: 0, explanation: 'Vitamin A is essential for maintaining healthy vision.' },
+
+            // --- GRAPHIC DESIGN ---
+            { subjectId: 'gfx_design', question: 'Which color model is used primarily for digital screens?', options: ['RGB (Red, Green, Blue)', 'CMYK (Cyan, Magenta, Yellow, Black)', 'Monochrome'], correct: 0, explanation: 'RGB is light-based color designed for screen displays.' },
+
+            // --- GENERAL AGRICULTURE ---
+            { subjectId: 'gen_agric', question: 'Which soil component provides essential nutrients for crop growth?', options: ['Humus / Organic Matter', 'Sand particles', 'Clay minerals'], correct: 0, explanation: 'Humus is rich in decayed organic matter that fertilizes soil.' },
+
+            // --- BECE SUBJECTS ---
+            { subjectId: 'bece_math', question: 'What is the probability of rolling an even number on a 6-sided die?', options: ['1/2', '1/3', '1/6'], correct: 0, explanation: 'Even numbers = {2, 4, 6}. Probability = 3/6 = 1/2.' },
+            { subjectId: 'bece_sci', question: 'Which process converts water and carbon dioxide into glucose using sunlight?', options: ['Photosynthesis', 'Respiration', 'Transpiration'], correct: 0, explanation: 'Photosynthesis is the food-making process in green plants.' },
+
+            // --- TERTIARY ---
+            { subjectId: 'dsa_cache', question: 'Which level of CPU cache is closest to the processor core for fastest access?', options: ['L1 Cache', 'L2 Cache', 'L3 Cache'], correct: 0, explanation: 'L1 Cache sits directly on the core, offering minimal access latency.' }
         ];
 
         let activeQuizQuestions = [];
@@ -240,15 +335,16 @@
             grid.innerHTML = '';
 
             const subjects = subjectDatabase[courseId] || [];
-            
+            document.getElementById('subjectCountBadge').innerText = `${subjects.length} Subjects`;
+
             if (subjects.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-8 text-slate-500 font-bold">No subjects added for this course stream yet. More coming soon!</div>`;
+                grid.innerHTML = `<div class="col-span-full text-center py-8 text-slate-500 font-bold">No subjects added for this stream yet. More coming soon!</div>`;
                 return;
             }
 
             subjects.forEach(s => {
                 const card = document.createElement('div');
-                card.onclick = () => startCourseQuiz(courseId, s.id);
+                card.onclick = () => startCourseQuiz(s.id);
                 card.className = `glass-card rounded-2xl p-6 space-y-4 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer border border-slate-200 dark:border-slate-800`;
                 card.innerHTML = `
                     <div class="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 flex items-center justify-center text-xl font-bold">
@@ -266,11 +362,11 @@
             });
         }
 
-        function startCourseQuiz(courseId, subjectId) {
-            activeQuizQuestions = quizQuestions.filter(q => q.courseId === courseId && q.subjectId === subjectId);
+        function startCourseQuiz(subjectId) {
+            activeQuizQuestions = quizQuestions.filter(q => q.subjectId === subjectId);
 
             if (activeQuizQuestions.length === 0) {
-                alert('Quiz questions for this subject are currently being added!');
+                alert('Quiz questions for this elective subject are currently being added! Try Elective Mathematics, Physics, Biology, Economics, or Government.');
                 return;
             }
 
@@ -295,7 +391,7 @@
 
             q.options.forEach((opt, idx) => {
                 const btn = document.createElement('button');
-                btn.className = "w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-left font-medium text-sm flex items-center justify-between";
+                btn.className = "w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-left font-medium text-sm flex items-center justify-between hover:border-indigo-500";
                 btn.onclick = () => selectOption(idx);
                 btn.innerHTML = `<span>${opt}</span> <i class="fa-regular fa-circle"></i>`;
                 container.appendChild(btn);
@@ -343,12 +439,12 @@
 
         function toggleDarkMode() { document.documentElement.classList.toggle('dark'); }
 
-        // Event listeners to ensure options populate instantly
         document.getElementById('levelSelect').addEventListener('change', updateCourseOptions);
         document.getElementById('courseSelect').addEventListener('change', renderSubjects);
 
-        // Run immediately when script loads
-        updateCourseOptions();
+        document.addEventListener("DOMContentLoaded", function() {
+            updateCourseOptions();
+        });
     </script>
 </body>
 </html>
