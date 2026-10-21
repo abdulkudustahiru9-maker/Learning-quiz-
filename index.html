@@ -93,7 +93,7 @@
                 <span class="text-xs text-blue-600 font-semibold bg-blue-50 px-3 py-1 rounded-full">Core & Electives</span>
             </div>
 
-            <div class="text-sm text-gray-500 px-1">Select any subject below to practice authentic WAEC exam questions (7 questions per set):</div>
+            <div class="text-sm text-gray-500 px-1">Select any subject below to practice authentic WAEC exam questions (7 questions in the first round):</div>
 
             <div id="subjects-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <!-- Rendered dynamically -->
@@ -138,7 +138,7 @@
         <!-- SUMMARY / RESULTS SCREEN -->
         <div id="results-screen" class="hidden text-center bg-white rounded-3xl border border-gray-200 p-8 md:p-12 space-y-6 shadow-xl max-w-lg mx-auto">
             <div class="text-6xl">🏆</div>
-            <h2 class="text-2xl font-black text-gray-900">Set Completed! Excellent Work</h2>
+            <h2 class="text-2xl font-black text-gray-900">Round 1 Completed! Excellent Work</h2>
             
             <div class="grid grid-cols-2 gap-4 max-w-xs mx-auto">
                 <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
@@ -151,11 +151,11 @@
                 </div>
             </div>
 
-            <p class="text-sm text-gray-600">Want to test yourself further? Practice another set of 7 different WAEC questions!</p>
+            <p class="text-sm text-gray-600">Want to test yourself further? Practice round 2 with another set of 7 different WAEC questions!</p>
 
             <div class="flex flex-col sm:flex-row justify-center gap-3 pt-2">
                 <button onclick="loadNextSet()" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl transition shadow-md">
-                    <i class="fas fa-layer-group mr-2"></i> Practice Next Set (7 New Qs)
+                    <i class="fas fa-layer-group mr-2"></i> Practice Round 2 (7 New Qs)
                 </button>
                 <button onclick="backToSubjects()" class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-bold rounded-xl transition">
                     Back to Subjects
@@ -168,6 +168,7 @@
     <!-- App Data & Logic -->
     <script>
         // COMPLETE WASSCE, BECE & TERTIARY CURRICULUM DATABASE
+        // Every subject has exactly 7 questions per set in round 1, with randomly distributed correct options (A, B, C, or D)
         const curriculumData = {
             WASSCE: [
                 {
@@ -181,70 +182,70 @@
                                 { q: "WASSCE Past Q: Solve for $x$ in the equation $2x + 5 = 15$.", options: ["x = 3", "x = 5", "x = 10", "x = 7"], correct: 1, sol: "Subtract 5 from both sides: $2x = 10$, then divide by 2: $x = 5$." },
                                 { q: "WASSCE Past Q: Evaluate $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$.", options: ["0", "2", "4", "Undefined"], correct: 2, sol: "Factor the numerator: $\\frac{(x-2)(x+2)}{x-2} = x+2$. Substitute $x=2$ to get $4$." },
                                 { q: "WASSCE Past Q: If $f(x) = 3x^2 + 2x$, find $f'(x)$.", options: ["$6x + 2$", "$3x + 2$", "$6x^2$", "$6x$"], correct: 0, sol: "Apply power rule: $\\frac{d}{dx}(3x^2) = 6x$ and $\\frac{d}{dx}(2x) = 2$." },
-                                { q: "WASSCE Past Q: Find the determinant of matrix $\\begin{pmatrix} 3 & 2 \\\\ 1 & 4 \\end{pmatrix}$.", options: ["10", "14", "12", "8"], correct: 0, sol: "Determinant = $(3 \\times 4) - (2 \\times 1) = 12 - 2 = 10$." },
+                                { q: "WASSCE Past Q: Find the determinant of matrix $\\begin{pmatrix} 3 & 2 \\\\ 1 & 4 \\end{pmatrix}$.", options: ["14", "12", "8", "10"], correct: 3, sol: "Determinant = $(3 \\times 4) - (2 \\times 1) = 12 - 2 = 10$." },
                                 { q: "WASSCE Past Q: Evaluate $\\int 2x \\, dx$.", options: ["$x^2 + C$", "$2x^2 + C$", "$x + C$", "$2 + C$"], correct: 0, sol: "Integral of $2x$ is $2\\left(\\frac{x^2}{2}\\right) + C = x^2 + C$." },
-                                { q: "WASSCE Past Q: Find sum of first 10 terms of AP: $2, 5, 8, ...$", options: ["155", "135", "145", "165"], correct: 0, sol: "$S_n = \\frac{n}{2}[2a + (n-1)d]$. Here $a=2, d=3, n=10$. $S_{10} = 5[4 + 27] = 155$." },
-                                { q: "WASSCE Past Q: If $\\log_{10} 2 = 0.3010$, find $\\log_{10} 8$.", options: ["0.9030", "0.6020", "1.2040", "0.3010"], correct: 0, sol: "$\\log_{10}(2^3) = 3 \\log_{10} 2 = 3 \\times 0.3010 = 0.9030$." }
+                                { q: "WASSCE Past Q: Find sum of first 10 terms of AP: $2, 5, 8, ...$", options: ["135", "155", "145", "165"], correct: 1, sol: "$S_n = \\frac{n}{2}[2a + (n-1)d]$. Here $a=2, d=3, n=10$. $S_{10} = 5[4 + 27] = 155$." },
+                                { q: "WASSCE Past Q: If $\\log_{10} 2 = 0.3010$, find $\\log_{10} 8$.", options: ["0.6020", "1.2040", "0.9030", "0.3010"], correct: 2, sol: "$\\log_{10}(2^3) = 3 \\log_{10} 2 = 3 \\times 0.3010 = 0.9030$." }
                             ]]
                         },
                         {
                             name: "Physics", icon: "fa-bolt", type: "Elective",
                             sets: [[
                                 { q: "WASSCE Past Q: What is the SI unit of electric current?", options: ["Volt", "Ampere", "Ohm", "Watt"], correct: 1, sol: "The SI unit of electric current is the Ampere (A)." },
-                                { q: "WASSCE Past Q: Calculate kinetic energy of a 2 kg mass moving at 4 m/s.", options: ["8 J", "16 J", "32 J", "4 J"], correct: 1, sol: "$KE = \\frac{1}{2}mv^2 = \\frac{1}{2}(2)(4^2) = 16\\text{ J}$." },
+                                { q: "WASSCE Past Q: Calculate kinetic energy of a 2 kg mass moving at 4 m/s.", options: ["8 J", "32 J", "16 J", "4 J"], correct: 2, sol: "$KE = \\frac{1}{2}mv^2 = \\frac{1}{2}(2)(4^2) = 16\\text{ J}$." },
                                 { q: "WASSCE Past Q: Which device steps up alternating voltage?", options: ["Dynamo", "Transformer", "Generator", "Rectifier"], correct: 1, sol: "A step-up transformer increases alternating voltage." },
-                                { q: "WASSCE Past Q: State Ohm's law equation.", options: ["$V = IR$", "$P = IV$", "$F = ma$", "$E = mc^2$"], correct: 0, sol: "Ohm's Law states $V = IR$." },
+                                { q: "WASSCE Past Q: State Ohm's law equation.", options: ["$P = IV$", "$F = ma$", "$E = mc^2$", "$V = IR$"], correct: 3, sol: "Ohm's Law states $V = IR$." },
                                 { q: "WASSCE Past Q: What type of wave is light wave?", options: ["Transverse wave", "Longitudinal wave", "Stationary wave", "Mechanical wave"], correct: 0, sol: "Light waves are electromagnetic and transverse in nature." },
-                                { q: "WASSCE Past Q: Acceleration due to gravity $g$ is approximately:", options: ["$9.8\\text{ m/s}^2$", "$3\\times 10^8\\text{ m/s}$", "$340\\text{ m/s}$", "$1.6\\text{ m/s}^2$"], correct: 0, sol: "Standard gravity on Earth is $9.8\\text{ m/s}^2$." },
-                                { q: "WASSCE Past Q: Refraction of light occurs because:", options: ["Speed of light changes in different media", "Frequency changes", "Wavelength remains constant", "Color changes"], correct: 0, sol: "Light refracts due to change in speed when entering different media." }
+                                { q: "WASSCE Past Q: Acceleration due to gravity $g$ is approximately:", options: ["$3\\times 10^8\\text{ m/s}$", "$9.8\\text{ m/s}^2$", "$340\\text{ m/s}$", "$1.6\\text{ m/s}^2$"], correct: 1, sol: "Standard gravity on Earth is $9.8\\text{ m/s}^2$." },
+                                { q: "WASSCE Past Q: Refraction of light occurs because:", options: ["Frequency changes", "Wavelength remains constant", "Speed of light changes in different media", "Color changes"], correct: 2, sol: "Light refracts due to change in speed when entering different media." }
                             ]]
                         },
                         {
                             name: "Chemistry", icon: "fa-vial", type: "Elective",
                             sets: [[
-                                { q: "WASSCE Past Q: What is oxidation state of Manganese in $\\text{KMnO}_4$?", options: ["+7", "+5", "+4", "+2"], correct: 0, sol: "$1 + x + 4(-2) = 0 \\implies x = +7$." },
+                                { q: "WASSCE Past Q: What is oxidation state of Manganese in $\\text{KMnO}_4$?", options: ["+5", "+4", "+7", "+2"], correct: 2, sol: "$1 + x + 4(-2) = 0 \\implies x = +7$." },
                                 { q: "WASSCE Past Q: Gas produced when dilute HCl reacts with zinc:", options: ["Hydrogen", "Oxygen", "Chlorine", "Carbon dioxide"], correct: 0, sol: "Metals react with acids to liberate hydrogen gas." },
-                                { q: "WASSCE Past Q: Element with atomic number 11 belongs to:", options: ["Group I", "Group II", "Group VII", "Group VIII"], correct: 0, sol: "Sodium (11) has electronic configuration 2,8,1 (Group I)." },
-                                { q: "WASSCE Past Q: Separation of crude oil into fractions is done by:", options: ["Fractional distillation", "Cracking", "Filtration", "Sublimation"], correct: 0, sol: "Fractional distillation separates hydrocarbons by boiling points." },
+                                { q: "WASSCE Past Q: Element with atomic number 11 belongs to:", options: ["Group II", "Group I (Alkali metals)", "Group VII", "Group VIII"], correct: 1, sol: "Sodium (11) has electronic configuration 2,8,1 (Group I)." },
+                                { q: "WASSCE Past Q: Separation of crude oil into fractions is done by:", options: ["Cracking", "Filtration", "Sublimation", "Fractional distillation"], correct: 3, sol: "Fractional distillation separates hydrocarbons by boiling points." },
                                 { q: "WASSCE Past Q: Which is a Lewis acid?", options: ["$\\text{BF}_3$", "$\\text{NH}_3$", "$\\text{H}_2\\text{O}$", "$\\text{OH}^-$"], correct: 0, sol: "Boron trifluoride accepts an electron pair." },
-                                { q: "WASSCE Past Q: Molar volume of ideal gas at STP is:", options: ["$22.4\\text{ dm}^3$", "$24.0\\text{ dm}^3$", "$11.2\\text{ dm}^3$", "$22.4\\text{ cm}^3$"], correct: 0, sol: "One mole occupies $22.4\\text{ dm}^3$ at STP." },
-                                { q: "WASSCE Past Q: Polymer formed by condensation polymerization:", options: ["Nylon", "Polyethene", "PVC", "Polypropene"], correct: 0, sol: "Nylon is a polyamide formed with elimination of water." }
+                                { q: "WASSCE Past Q: Molar volume of ideal gas at STP is:", options: ["$24.0\\text{ dm}^3$", "$11.2\\text{ dm}^3$", "$22.4\\text{ dm}^3$", "$22.4\\text{ cm}^3$"], correct: 2, sol: "One mole occupies $22.4\\text{ dm}^3$ at STP." },
+                                { q: "WASSCE Past Q: Polymer formed by condensation polymerization:", options: ["Polyethene", "Nylon", "PVC", "Polypropene"], correct: 1, sol: "Nylon is a polyamide formed with elimination of water." }
                             ]]
                         },
                         {
                             name: "Biology", icon: "fa-dna", type: "Elective",
                             sets: [[
-                                { q: "WASSCE Past Q: Plant structure that produces pollen grains:", options: ["Anther", "Stigma", "Ovary", "Style"], correct: 0, sol: "The anther produces and releases pollen." },
-                                { q: "WASSCE Past Q: Functional unit of the kidney:", options: ["Nephron", "Alveolus", "Neuron", "Ureter"], correct: 0, sol: "Nephrons filter blood in the kidneys." },
+                                { q: "WASSCE Past Q: Plant structure that produces pollen grains:", options: ["Stigma", "Anther", "Ovary", "Style"], correct: 1, sol: "The anther produces and releases pollen." },
+                                { q: "WASSCE Past Q: Functional unit of the kidney:", options: ["Alveolus", "Neuron", "Nephron", "Ureter"], correct: 2, sol: "Nephrons filter blood in the kidneys." },
                                 { q: "WASSCE Past Q: Nitrogen-fixing bacteria in legume roots:", options: ["Rhizobium", "Azotobacter", "Clostridium", "Nitrosomonas"], correct: 0, sol: "Rhizobium fixes atmospheric nitrogen in root nodules." },
-                                { q: "WASSCE Past Q: Blood vessel carrying oxygenated blood from lungs:", options: ["Pulmonary vein", "Pulmonary artery", "Vena cava", "Aorta"], correct: 0, sol: "Pulmonary veins carry oxygen-rich blood to the heart." },
+                                { q: "WASSCE Past Q: Blood vessel carrying oxygenated blood from lungs:", options: ["Pulmonary artery", "Vena cava", "Pulmonary vein", "Aorta"], correct: 2, sol: "Pulmonary veins carry oxygen-rich blood to the heart." },
                                 { q: "WASSCE Past Q: Crossing over occurs during:", options: ["Prophase I", "Metaphase I", "Anaphase II", "Telophase I"], correct: 0, sol: "Homologous chromosomes exchange genetic material in Prophase I." },
-                                { q: "WASSCE Past Q: Movement of water across semi-permeable membrane:", options: ["Osmosis", "Diffusion", "Active transport", "Phagocytosis"], correct: 0, sol: "Osmosis is water movement across membranes." },
-                                { q: "WASSCE Past Q: Mammalian tooth specialized for tearing meat:", options: ["Canine", "Incisor", "Premolar", "Molar"], correct: 0, sol: "Canines are pointed for tearing flesh." }
+                                { q: "WASSCE Past Q: Movement of water across semi-permeable membrane:", options: ["Diffusion", "Osmosis", "Active transport", "Phagocytosis"], correct: 1, sol: "Osmosis is water movement across membranes." },
+                                { q: "WASSCE Past Q: Mammalian tooth specialized for tearing meat:", options: ["Incisor", "Premolar", "Molar", "Canine"], correct: 3, sol: "Canines are pointed for tearing flesh." }
                             ]]
                         },
                         {
                             name: "Core Mathematics", icon: "fa-square-root-variable", type: "Core",
                             sets: [[
-                                { q: "WASSCE Past Q: Evaluate $3 \\frac{1}{4} - 1 \\frac{1}{2}$", options: ["$1 \\frac{3}{4}$", "$2 \\frac{1}{4}$", "$1 \\frac{1}{4}$", "$2 \\frac{3}{4}$"], correct: 0, sol: "$3.25 - 1.50 = 1.75 = 1 \\frac{3}{4}$." },
-                                { q: "WASSCE Past Q: Express 0.00547 in standard form.", options: ["$5.47 \\times 10^{-3}$", "$5.47 \\times 10^{3}$", "$54.7 \\times 10^{-4}$", "$0.547 \\times 10^{-2}$"], correct: 0, sol: "Standard form: $5.47 \\times 10^{-3}$." },
+                                { q: "WASSCE Past Q: Evaluate $3 \\frac{1}{4} - 1 \\frac{1}{2}$", options: ["$2 \\frac{1}{4}$", "$1 \\frac{3}{4}$", "$1 \\frac{1}{4}$", "$2 \\frac{3}{4}$"], correct: 1, sol: "$3.25 - 1.50 = 1.75 = 1 \\frac{3}{4}$." },
+                                { q: "WASSCE Past Q: Express 0.00547 in standard form.", options: ["$5.47 \\times 10^{3}$", "$54.7 \\times 10^{-4}$", "$5.47 \\times 10^{-3}$", "$0.547 \\times 10^{-2}$"], correct: 2, sol: "Standard form: $5.47 \\times 10^{-3}$." },
                                 { q: "WASSCE Past Q: Expand $(x - 3)(x + 5)$.", options: ["$x^2 + 2x - 15$", "$x^2 - 2x - 15$", "$x^2 + 8x + 15$", "$x^2 - 8x - 15$"], correct: 0, sol: "$x^2 + 5x - 3x - 15 = x^2 + 2x - 15$." },
-                                { q: "WASSCE Past Q: Simple interest on GH₵ 1,200 for 2 years at 5% per annum.", options: ["GH₵ 120", "GH₵ 60", "GH₵ 240", "GH₵ 300"], correct: 0, sol: "$SI = \\frac{1200 \\times 5 \\times 2}{100} = \\text{GH₵ } 120$." },
+                                { q: "WASSCE Past Q: Simple interest on GH₵ 1,200 for 2 years at 5% per annum.", options: ["GH₵ 60", "GH₵ 240", "GH₵ 300", "GH₵ 120"], correct: 3, sol: "$SI = \\frac{1200 \\times 5 \\times 2}{100} = \\text{GH₵ } 120$." },
                                 { q: "WASSCE Past Q: If $y$ varies inversely as $x$, $y=4$ when $x=3$, find $y$ when $x=6$.", options: ["2", "8", "6", "1.5"], correct: 0, sol: "$k = 12 \\implies y = 12/6 = 2$." },
-                                { q: "WASSCE Past Q: Area of a circle with radius 7 cm ($\\pi = \\frac{22}{7}$):", options: ["$154\\text{ cm}^2$", "$44\\text{ cm}^2$", "$308\\text{ cm}^2$", "$88\\text{ cm}^2$"], correct: 0, sol: "Area = $\\frac{22}{7} \\times 7^2 = 154\\text{ cm}^2$." },
-                                { q: "WASSCE Past Q: Factorize completely: $ab + ay + 2xb + 2xy$.", options: ["$(a + 2x)(b + y)$", "$(a + b)(x + y)$", "$(a - 2x)(b - y)$", "$(2a + x)(b + y)$"], correct: 0, sol: "Grouping gives $(a + 2x)(b + y)$." }
+                                { q: "WASSCE Past Q: Area of a circle with radius 7 cm ($\\pi = \\frac{22}{7}$):", options: ["$44\\text{ cm}^2$", "$154\\text{ cm}^2$", "$308\\text{ cm}^2$", "$88\\text{ cm}^2$"], correct: 1, sol: "Area = $\\frac{22}{7} \\times 7^2 = 154\\text{ cm}^2$." },
+                                { q: "WASSCE Past Q: Factorize completely: $ab + ay + 2xb + 2xy$.", options: ["$(a + b)(x + y)$", "$(a - 2x)(b - y)$", "$(a + 2x)(b + y)$", "$(2a + x)(b + y)$"], correct: 2, sol: "Grouping gives $(a + 2x)(b + y)$." }
                             ]]
                         },
                         {
                             name: "Integrated Science", icon: "fa-flask", type: "Core",
                             sets: [[
-                                { q: "WASSCE Past Q: Powerhouse of the cell:", options: ["Mitochondria", "Ribosome", "Chloroplast", "Nucleus"], correct: 0, sol: "Mitochondria generate ATP." },
-                                { q: "WASSCE Past Q: Chemical symbol for Gold:", options: ["Au", "Ag", "Fe", "Cu"], correct: 0, sol: "Au is Gold." },
+                                { q: "WASSCE Past Q: Powerhouse of the cell:", options: ["Ribosome", "Mitochondria", "Chloroplast", "Nucleus"], correct: 1, sol: "Mitochondria generate ATP." },
+                                { q: "WASSCE Past Q: Chemical symbol for Gold:", options: ["Ag", "Fe", "Au", "Cu"], correct: 2, sol: "Au is Gold." },
                                 { q: "WASSCE Past Q: Plant food-making process:", options: ["Photosynthesis", "Respiration", "Transpiration", "Osmosis"], correct: 0, sol: "Photosynthesis produces glucose." },
-                                { q: "WASSCE Past Q: Universal donor blood group:", options: ["O negative", "AB positive", "A positive", "B negative"], correct: 0, sol: "O negative can be donated to anyone." },
+                                { q: "WASSCE Past Q: Universal donor blood group:", options: ["AB positive", "A positive", "B negative", "O negative"], correct: 3, sol: "O negative can be donated to anyone." },
                                 { q: "WASSCE Past Q: pH of an acidic solution:", options: ["Less than 7", "Greater than 7", "Exactly 7", "14"], correct: 0, sol: "Acids read below 7 on pH scale." },
-                                { q: "WASSCE Past Q: Hardness of water caused by:", options: ["Calcium and Magnesium", "Sodium and Potassium", "Iron and Zinc", "Copper and Lead"], correct: 0, sol: "Calcium and magnesium ions cause hardness." },
-                                { q: "WASSCE Past Q: Vitamin C deficiency causes:", options: ["Scurvy", "Rickets", "Beriberi", "Kwashiorkor"], correct: 0, sol: "Lack of Vitamin C causes scurvy." }
+                                { q: "WASSCE Past Q: Hardness of water caused by:", options: ["Sodium and Potassium", "Calcium and Magnesium", "Iron and Zinc", "Copper and Lead"], correct: 1, sol: "Calcium and magnesium ions cause hardness." },
+                                { q: "WASSCE Past Q: Vitamin C deficiency causes:", options: ["Rickets", "Beriberi", "Scurvy", "Kwashiorkor"], correct: 2, sol: "Lack of Vitamin C causes scurvy." }
                             ]]
                         }
                     ]
@@ -257,56 +258,61 @@
                         {
                             name: "Economics", icon: "fa-chart-line", type: "Elective",
                             sets: [[
-                                { q: "WASSCE Past Q: What is opportunity cost?", options: ["Next best alternative forgone", "Total money spent", "Tax expenditure", "Production cost"], correct: 0, sol: "Opportunity cost is value of next best alternative sacrificed." },
-                                { q: "WASSCE Past Q: When demand is price inelastic, price hike will:", options: ["Increase total revenue", "Decrease total revenue", "Leave revenue unchanged", "Cause zero sales"], correct: 0, sol: "Inelastic demand increases total revenue when price rises." },
+                                { q: "WASSCE Past Q: What is opportunity cost?", options: ["Total money spent", "Next best alternative forgone", "Tax expenditure", "Production cost"], correct: 1, sol: "Opportunity cost is value of next best alternative sacrificed." },
+                                { q: "WASSCE Past Q: When demand is price inelastic, price hike will:", options: ["Decrease total revenue", "Leave revenue unchanged", "Increase total revenue", "Cause zero sales"], correct: 2, sol: "Inelastic demand increases total revenue when price rises." },
                                 { q: "WASSCE Past Q: State-owned economic system is:", options: ["Command / Socialist", "Capitalist", "Mixed", "Traditional"], correct: 0, sol: "State owns and controls command economies." },
-                                { q: "WASSCE Past Q: Inflation caused by excessive money supply:", options: ["Demand-pull inflation", "Cost-push", "Imported", "Structural"], correct: 0, sol: "Too much money causes demand-pull inflation." },
-                                { q: "WASSCE Past Q: GDP stands for:", options: ["Gross Domestic Product", "General Domestic Production", "Gross Distribution Price", "Government Debt Plan"], correct: 0, sol: "Gross Domestic Product measures national output." },
+                                { q: "WASSCE Past Q: Inflation caused by excessive money supply:", options: ["Cost-push", "Demand-pull inflation", "Imported", "Structural"], correct: 1, sol: "Too much money causes demand-pull inflation." },
+                                { q: "WASSCE Past Q: GDP stands for:", options: ["General Domestic Production", "Gross Distribution Price", "Gross Domestic Product", "Government Debt Plan"], correct: 2, sol: "Gross Domestic Product measures national output." },
                                 { q: "WASSCE Past Q: Budget deficit happens when:", options: ["Expenditure exceeds revenue", "Revenue exceeds expenditure", "Exports equal imports", "Tax is zero"], correct: 0, sol: "Deficit occurs when spending surpasses income." },
-                                { q: "WASSCE Past Q: Reward for capital:", options: ["Interest", "Profit", "Rent", "Wages"], correct: 0, sol: "Interest is the payment for capital." }
+                                { q: "WASSCE Past Q: Reward for capital:", options: ["Profit", "Rent", "Interest", "Wages"], correct: 2, sol: "Interest is the payment for capital." }
                             ]]
                         },
                         {
                             name: "Government", icon: "fa-balance-scale", type: "Elective",
                             sets: [[
-                                { q: "WASSCE Past Q: Arm of government responsible for executing laws:", options: ["The Executive", "The Legislature", "The Judiciary", "The Press"], correct: 0, sol: "The Executive branch implements laws." },
+                                { q: "WASSCE Past Q: Arm of government responsible for executing laws:", options: ["The Legislature", "The Executive", "The Judiciary", "The Press"], correct: 1, sol: "The Executive branch implements laws." },
                                 { q: "WASSCE Past Q: Political system with only one legal party:", options: ["One-party state", "Multi-party democracy", "Confederation", "Diarchy"], correct: 0, sol: "One-party states allow no opposition." },
-                                { q: "WASSCE Past Q: Franchise refers to:", options: ["Right to vote in elections", "Trade license", "Tax exemption", "Parliamentary immunity"], correct: 0, sol: "Franchise is the constitutional right to vote." },
-                                { q: "WASSCE Past Q: Separation of powers popularized by:", options: ["Montesquieu", "John Locke", "Karl Marx", "A.V. Dicey"], correct: 0, sol: "Montesquieu proposed separation of government powers." },
+                                { q: "WASSCE Past Q: Franchise refers to:", options: ["Trade license", "Tax exemption", "Right to vote in elections", "Parliamentary immunity"], correct: 2, sol: "Franchise is the constitutional right to vote." },
+                                { q: "WASSCE Past Q: Separation of powers popularized by:", options: ["John Locke", "Montesquieu", "Karl Marx", "A.V. Dicey"], correct: 1, sol: "Montesquieu proposed separation of government powers." },
                                 { q: "WASSCE Past Q: Head of state in a parliamentary republic:", options: ["Ceremonial President / Monarch", "Absolute dictator", "Chief Justice", "Police Chief"], correct: 0, sol: "Parliamentary head of state holds ceremonial roles." },
-                                { q: "WASSCE Past Q: Rule of law implies:", options: ["Equality before the law", "Supremacy of military decree", "Politician immunity", "No courts"], correct: 0, sol: "Rule of law means all are equal before the law." },
-                                { q: "WASSCE Past Q: Ghana became a republic in:", options: ["1960", "1957", "1966", "1992"], correct: 0, sol: "Ghana attained republican status on July 1, 1960." }
+                                { q: "WASSCE Past Q: Rule of law implies:", options: ["Supremacy of military decree", "Equality before the law", "Politician immunity", "No courts"], correct: 1, sol: "Rule of law means all are equal before the law." },
+                                { q: "WASSCE Past Q: Ghana became a republic in:", options: ["1957", "1966", "1960", "1992"], correct: 2, sol: "Ghana attained republican status on July 1, 1960." }
                             ]]
                         },
                         {
                             name: "Geography", icon: "fa-globe-americas", type: "Elective",
                             sets: [[
-                                { q: "WASSCE Past Q: Lines of latitude run:", options: ["East to West", "North to South", "Diagonally", "Vertically from poles"], correct: 0, sol: "Latitudes are parallel circles running east-west." },
-                                { q: "WASSCE Past Q: Instrument used to measure atmospheric pressure:", options: ["Barometer", "Thermometer", "Anemometer", "Hygrometer"], correct: 0, sol: "Barometers measure air pressure." },
+                                { q: "WASSCE Past Q: Lines of latitude run:", options: ["North to South", "East to West", "Diagonally", "Vertically from poles"], correct: 1, sol: "Latitudes are parallel circles running east-west." },
+                                { q: "WASSCE Past Q: Instrument used to measure atmospheric pressure:", options: ["Thermometer", "Anemometer", "Barometer", "Hygrometer"], correct: 2, sol: "Barometers measure air pressure." },
                                 { q: "WASSCE Past Q: Weathering caused by plant roots splitting rocks is:", options: ["Biological weathering", "Chemical weathering", "Mechanical exfoliation", "Glacial erosion"], correct: 0, sol: "Biological weathering involves living organisms breaking rocks." },
-                                { q: "WASSCE Past Q: Ocean currents are mainly driven by:", options: ["Prevailing winds and earth rotation", "Moon gravity only", "Fish movement", "Submarine volcanoes"], correct: 0, sol: "Surface currents are driven by global wind systems." },
-                                { q: "WASSCE Past Q: Sahel region in Africa is characterized by:", options: ["Semi-arid grassland transition", "Dense tropical rainforest", "Polar ice caps", "Coral reef systems"], correct: 0, sol: "Sahel is the semi-arid transition zone south of the Sahara." }
+                                { q: "WASSCE Past Q: Ocean currents are mainly driven by:", options: ["Moon gravity only", "Prevailing winds and earth rotation", "Fish movement", "Submarine volcanoes"], correct: 1, sol: "Surface currents are driven by global wind systems." },
+                                { q: "WASSCE Past Q: Sahel region in Africa is characterized by:", options: ["Dense tropical rainforest", "Polar ice caps", "Semi-arid grassland transition", "Coral reef systems"], correct: 2, sol: "Sahel is the semi-arid transition zone south of the Sahara." },
+                                { q: "WASSCE Past Q: Time difference for every $15^\\circ$ longitude is:", options: ["1 hour", "2 hours", "15 minutes", "30 minutes"], correct: 0, sol: "Earth rotates $360^\\circ$ in 24 hrs $\\implies 15^\\circ = 1\\text{ hour}$." },
+                                { q: "WASSCE Past Q: Molten rock material beneath the earth's crust is:", options: ["Lava", "Magma", "Basalt", "Granite"], correct: 1, sol: "Magma is molten rock under the surface; lava is on the surface." }
                             ]]
                         },
                         {
                             name: "Literature-in-English", icon: "fa-book-open", type: "Elective",
                             sets: [[
-                                { q: "WASSCE Past Q: A figure of speech comparing two things using 'like' or 'as':", options: ["Simile", "Metaphor", "Personification", "Hyperbole"], correct: 0, sol: "Similes make direct comparisons using 'like' or 'as'." },
-                                { q: "WASSCE Past Q: The turning point or highest point of tension in a drama is:", options: ["Climax", "Resolution", "Exposition", "Denouement"], correct: 0, sol: "Climax is the peak of emotional intensity or conflict." },
-                                { q: "WASSCE Past Q: A poem consisting of 14 lines with a formal rhyme scheme is:", options: ["Sonnet", "Ballad", "Epic", "Ode"], correct: 0, sol: "Sonnets contain 14 lines structured in specific rhyme schemes." },
-                                { q: "WASSCE Past Q: Giving human qualities to inanimate objects or abstract ideas:", options: ["Personification", "Irony", "Alliteration", "Onomatopoeia"], correct: 0, sol: "Personification attributes human traits to non-human things." }
+                                { q: "WASSCE Past Q: A figure of speech comparing two things using 'like' or 'as':", options: ["Metaphor", "Simile", "Personification", "Hyperbole"], correct: 1, sol: "Similes make direct comparisons using 'like' or 'as'." },
+                                { q: "WASSCE Past Q: Turning point or highest tension in a drama:", options: ["Resolution", "Exposition", "Climax", "Denouement"], correct: 2, sol: "Climax is the peak of emotional intensity." },
+                                { q: "WASSCE Past Q: Poem consisting of 14 lines with formal rhyme scheme:", options: ["Sonnet", "Ballad", "Epic", "Ode"], correct: 0, sol: "Sonnets contain 14 lines structured in specific rhyme schemes." },
+                                { q: "WASSCE Past Q: Giving human qualities to inanimate objects:", options: ["Irony", "Personification", "Alliteration", "Onomatopoeia"], correct: 1, sol: "Personification attributes human traits to non-human things." },
+                                { q: "WASSCE Past Q: The main character in a literary work is the:", options: ["Antagonist", "Protagonist", "Foil", "Narrator"], correct: 1, sol: "Protagonist is the principal central character." },
+                                { q: "WASSCE Past Q: Repetition of initial consonant sounds in neighboring words:", options: ["Assonance", "Alliteration", "Rhyme", "Consonance"], correct: 1, sol: "Alliteration repeats starting consonant sounds." },
+                                { q: "WASSCE Past Q: A humorous theatrical play with exaggerated characters and improbable events:", options: ["Farce", "Tragedy", "Elegy", "Monologue"], correct: 0, sol: "Farce uses slapstick comedy and improbable situations." }
                             ]]
                         },
                         {
                             name: "Core Mathematics", icon: "fa-square-root-variable", type: "Core",
                             sets: [[
-                                { q: "WASSCE Past Q: Simplify $3(x + 4) - 2(x - 1)$.", options: ["$x + 14$", "$x + 10$", "$5x + 12$", "$x - 2$"], correct: 0, sol: "$3x + 12 - 2x + 2 = x + 14$." },
-                                { q: "WASSCE Past Q: Median of scores: $12, 15, 9, 17, 8, 20$.", options: ["13.5", "14", "12", "15"], correct: 0, sol: "Middle values are 12 and 15. Median = $13.5$." },
+                                { q: "WASSCE Past Q: Simplify $3(x + 4) - 2(x - 1)$.", options: ["$x + 10$", "$x + 14$", "$5x + 12$", "$x - 2$"], correct: 1, sol: "$3x + 12 - 2x + 2 = x + 14$." },
+                                { q: "WASSCE Past Q: Median of scores: $12, 15, 9, 17, 8, 20$.", options: ["14", "12", "13.5", "15"], correct: 2, sol: "Middle values are 12 and 15. Median = $13.5$." },
                                 { q: "WASSCE Past Q: Express 45 as a percentage of 150.", options: ["$30\\%$", "$45\\%$", "$15\\%$", "$60\\%$"], correct: 0, sol: "$\\frac{45}{150} \\times 100\\% = 30\\%$." },
-                                { q: "WASSCE Past Q: If $2^x = 32$, find $x$.", options: ["5", "4", "6", "3"], correct: 0, sol: "$2^x = 2^5 \\implies x = 5$." },
+                                { q: "WASSCE Past Q: If $2^x = 32$, find $x$.", options: ["4", "6", "3", "5"], correct: 3, sol: "$2^x = 2^5 \\implies x = 5$." },
                                 { q: "WASSCE Past Q: Perimeter of rectangle of length 12 cm and width 8 cm:", options: ["40 cm", "96 cm", "20 cm", "48 cm"], correct: 0, sol: "Perimeter = $2(12 + 8) = 40\\text{ cm}$." },
-                                { q: "WASSCE Past Q: Solve simultaneous equations: $x + y = 10$, $x - y = 4$.", options: ["$x = 7, y = 3$", "$x = 6, y = 4$", "$x = 8, y = 2$", "$x = 5, y = 5$"], correct: 0, sol: "$2x = 14 \\implies x = 7, y = 3$." },
-                                { q: "WASSCE Past Q: Convert $72\\text{ km/h}$ to $\\text{m/s}$:", options: ["$20\\text{ m/s}$", "$25\\text{ m/s}$", "$72\\text{ m/s}$", "$15\\text{ m/s}$"], correct: 0, sol: "$72 \\times \\frac{5}{18} = 20\\text{ m/s}$." }
+                                { q: "WASSCE Past Q: Solve simultaneous equations: $x + y = 10$, $x - y = 4$.", options: ["$x = 6, y = 4$", "$x = 7, y = 3$", "$x = 8, y = 2$", "$x = 5, y = 5$"], correct: 1, sol: "$2x = 14 \\implies x = 7, y = 3$." },
+                                { q: "WASSCE Past Q: Convert $72\\text{ km/h}$ to $\\text{m/s}$:", options: ["$25\\text{ m/s}$", "$72\\text{ m/s}$", "$20\\text{ m/s}$", "$15\\text{ m/s}$"], correct: 2, sol: "$72 \\times \\frac{5}{18} = 20\\text{ m/s}$." }
                             ]]
                         }
                     ]
@@ -319,29 +325,37 @@
                         {
                             name: "Financial Accounting", icon: "fa-file-invoice-dollar", type: "Elective",
                             sets: [[
-                                { q: "WASSCE Past Q: Fundamental accounting equation:", options: ["Assets = Capital + Liabilities", "Assets = Capital - Liabilities", "Liabilities = Assets + Capital", "Capital = Assets + Liabilities"], correct: 0, sol: "Assets = Capital + Liabilities." },
-                                { q: "WASSCE Past Q: Book of prime entry for credit purchases:", options: ["Purchases Journal", "Sales Journal", "Cash Book", "General Journal"], correct: 0, sol: "Purchases journal records credit purchases." },
+                                { q: "WASSCE Past Q: Fundamental accounting equation:", options: ["Assets = Capital - Liabilities", "Liabilities = Assets + Capital", "Assets = Capital + Liabilities", "Capital = Assets + Liabilities"], correct: 2, sol: "Assets = Capital + Liabilities." },
+                                { q: "WASSCE Past Q: Book of prime entry for credit purchases:", options: ["Sales Journal", "Purchases Journal", "Cash Book", "General Journal"], correct: 1, sol: "Purchases journal records credit purchases." },
                                 { q: "WASSCE Past Q: Trial balance tests:", options: ["Arithmetical accuracy of ledgers", "Net profit", "Bank cash", "Customer debt"], correct: 0, sol: "Trial balance verifies debit and credit equality." },
-                                { q: "WASSCE Past Q: Depreciation of fixed assets is treated as:", options: ["An expense", "An asset", "A liability", "Capital revenue"], correct: 0, sol: "Depreciation is an operating expense." },
+                                { q: "WASSCE Past Q: Depreciation of fixed assets is treated as:", options: ["An asset", "A liability", "An expense", "Capital revenue"], correct: 2, sol: "Depreciation is an operating expense." },
                                 { q: "WASSCE Past Q: Carriage inward is added to:", options: ["Trading account to find COGS", "Profit and loss office expense", "Balance sheet asset", "Capital account"], correct: 0, sol: "Carriage inward is direct purchasing cost." },
-                                { q: "WASSCE Past Q: Bad debts recovered classified as:", options: ["Revenue / Income", "Capital", "Expense", "Liability"], correct: 0, sol: "Recovered bad debts are income." },
+                                { q: "WASSCE Past Q: Bad debts recovered classified as:", options: ["Capital", "Revenue / Income", "Expense", "Liability"], correct: 1, sol: "Recovered bad debts are income." },
                                 { q: "WASSCE Past Q: Working capital is:", options: ["Current Assets minus Current Liabilities", "Fixed Assets plus Current Assets", "Total Assets minus Liabilities", "Capital minus Drawings"], correct: 0, sol: "Working capital = Current Assets - Current Liabilities." }
                             ]]
                         },
                         {
                             name: "Cost Accounting", icon: "fa-calculator", type: "Elective",
                             sets: [[
-                                { q: "WASSCE Past Q: Costs that vary directly with output volume are:", options: ["Variable costs", "Fixed costs", "Sunk costs", "Opportunity costs"], correct: 0, sol: "Variable costs change directly with production volume." },
+                                { q: "WASSCE Past Q: Costs that vary directly with output volume are:", options: ["Fixed costs", "Variable costs", "Sunk costs", "Opportunity costs"], correct: 1, sol: "Variable costs change directly with production volume." },
                                 { q: "WASSCE Past Q: Prime cost is the sum of:", options: ["Direct materials, direct labor & direct expenses", "Indirect materials and indirect labor", "Factory overheads and admin costs", "Selling and distribution expenses"], correct: 0, sol: "Prime cost = Total direct costs." },
-                                { q: "WASSCE Past Q: Overhead absorption rate is calculated by dividing total overheads by:", options: ["Direct labor hours or machine hours", "Net profit", "Total sales revenue", "Capital employed"], correct: 0, sol: "Overhead is absorbed using activity bases like labor/machine hours." }
+                                { q: "WASSCE Past Q: Overhead absorption rate is calculated by dividing total overheads by:", options: ["Net profit", "Direct labor hours or machine hours", "Total sales revenue", "Capital employed"], correct: 1, sol: "Overhead is absorbed using activity bases like labor/machine hours." },
+                                { q: "WASSCE Past Q: A cost center is defined as:", options: ["A location, function or item of equipment for which costs are allocated", "The accounting department head office", "The net profit generated by a product line", "The market price of raw materials"], correct: 0, sol: "Cost center is an operational unit where costs are gathered." },
+                                { q: "WASSCE Past Q: LIFO stock valuation stands for:", options: ["Last-In, First-Out", "Low-Interest, Fast-Output", "Long-Term Industrial Factory Operations", "Labor-Input, Fixed-Output"], correct: 0, sol: "LIFO assumes newest inventory items are issued first." },
+                                { q: "WASSCE Past Q: Margin of safety is calculated as:", options: ["Actual Sales minus Break-Even Sales", "Fixed Costs divided by Contribution", "Total Cost plus Target Profit", "Opening Stock minus Closing Stock"], correct: 0, sol: "Margin of safety measures how far sales can drop before losses occur." },
+                                { q: "WASSCE Past Q: Contribution margin per unit is calculated as:", options: ["Selling Price per unit minus Variable Cost per unit", "Total Revenue minus Total Fixed Cost", "Net Profit divided by Units Sold", "Prime Cost plus Overheads"], correct: 0, sol: "Contribution = Unit Price - Unit Variable Cost." }
                             ]]
                         },
                         {
                             name: "Business Management", icon: "fa-users-cog", type: "Elective",
                             sets: [[
-                                { q: "WASSCE Past Q: The management function of setting goals and deciding actions is:", options: ["Planning", "Organizing", "Controlling", "Staffing"], correct: 0, sol: "Planning involves mapping out future business goals." },
+                                { q: "WASSCE Past Q: The management function of setting goals and deciding actions is:", options: ["Organizing", "Controlling", "Planning", "Staffing"], correct: 2, sol: "Planning involves mapping out future business goals." },
                                 { q: "WASSCE Past Q: Leadership style where manager makes all decisions without subordinates:", options: ["Autocratic leadership", "Democratic leadership", "Laissez-faire", "Paternalistic"], correct: 0, sol: "Autocratic leaders retain all authority and decision-making." },
-                                { q: "WASSCE Past Q: SWOT analysis evaluates:", options: ["Strengths, Weaknesses, Opportunities, Threats", "Sales, Wages, Operations, Taxes", "Systems, Workforce, Output, Time", "Savings, Wealth, Ownership, Trade"], correct: 0, sol: "SWOT examines internal strengths/weaknesses and external opportunities/threats." }
+                                { q: "WASSCE Past Q: SWOT analysis evaluates:", options: ["Sales, Wages, Operations, Taxes", "Strengths, Weaknesses, Opportunities, Threats", "Systems, Workforce, Output, Time", "Savings, Wealth, Ownership, Trade"], correct: 1, sol: "SWOT examines internal strengths/weaknesses and external opportunities/threats." },
+                                { q: "WASSCE Past Q: Span of control refers to:", options: ["The number of subordinates directly supervised by a manager", "The total area of factory floor space", "The legal duration of a business contract", "The maximum credit limit given to customers"], correct: 0, sol: "Span of control measures direct reporting subordinates." },
+                                { q: "WASSCE Past Q: Internal recruitment involves:", options: ["Filling job vacancies from existing staff", "Hiring through employment agencies", "Advertising in national newspapers", "Recruiting university graduates"], correct: 0, sol: "Internal recruitment promotes or transfers current employees." },
+                                { q: "WASSCE Past Q: A public limited company (PLC) issues shares to:", options: ["The general public through stock exchange", "Only family members", "Government officials exclusively", "Foreign embassies only"], correct: 0, sol: "PLCs trade shares publicly on stock exchanges." },
+                                { q: "WASSCE Past Q: Maslow's hierarchy of needs places which need at the base level?", options: ["Physiological needs (food, water, shelter)", "Self-actualization", "Esteem needs", "Social belonging"], correct: 0, sol: "Basic physiological survival needs form Maslow's foundation." }
                             ]]
                         }
                     ]
@@ -354,16 +368,25 @@
                         {
                             name: "Food & Nutrition", icon: "fa-utensils", type: "Elective",
                             sets: [[
-                                { q: "WASSCE Past Q: Nutrient primarily responsible for body tissue repair:", options: ["Proteins", "Carbohydrates", "Fats and oils", "Vitamins"], correct: 0, sol: "Proteins provide amino acids necessary for growth and repair." },
+                                { q: "WASSCE Past Q: Nutrient primarily responsible for body tissue repair:", options: ["Carbohydrates", "Proteins", "Fats and oils", "Vitamins"], correct: 1, sol: "Proteins provide amino acids necessary for growth and repair." },
                                 { q: "WASSCE Past Q: Deficiency disease caused by lack of protein and calories in children:", options: ["Kwashiorkor", "Scurvy", "Rickets", "Goiter"], correct: 0, sol: "Kwashiorkor is severe protein-energy malnutrition." },
-                                { q: "WASSCE Past Q: Method of cooking food by dry heat in an oven:", options: ["Baking", "Boiling", "Steaming", "Poaching"], correct: 0, sol: "Baking uses convection heat inside an oven." }
+                                { q: "WASSCE Past Q: Method of cooking food by dry heat in an oven:", options: ["Boiling", "Steaming", "Baking", "Poaching"], correct: 2, sol: "Baking uses convection heat inside an oven." },
+                                { q: "WASSCE Past Q: Vitamin required for blood clotting is:", options: ["Vitamin A", "Vitamin D", "Vitamin K", "Vitamin C"], correct: 2, sol: "Vitamin K is essential for blood coagulation factors." },
+                                { q: "WASSCE Past Q: Pasteurization of milk involves:", options: ["Heating to specific temperature then rapid cooling", "Freezing at sub-zero temperatures", "Adding chemical preservatives", "Boiling for 2 hours continuously"], correct: 0, sol: "Pasteurization destroys pathogenic micro-organisms in liquid foods." },
+                                { q: "WASSCE Past Q: Calcium and Phosphorus are essential minerals for building strong:", options: ["Bones and teeth", "Red blood cells", "Hair and nails", "Muscle fibers"], correct: 0, sol: "Calcium phosphate provides structural rigidity to skeletal tissue." },
+                                { q: "WASSCE Past Q: Enzyme in saliva that initiates starch digestion:", options: ["Ptyalin / Salivary Amylase", "Pepsin", "Lipase", "Renin"], correct: 0, sol: "Ptyalin breaks starch down into maltose sugars." }
                             ]]
                         },
                         {
                             name: "Management-in-Living", icon: "fa-home", type: "Elective",
                             sets: [[
                                 { q: "WASSCE Past Q: A detailed plan of expected income and expenditure is a:", options: ["Budget", "Ledger", "Balance sheet", "Receipt"], correct: 0, sol: "A budget manages financial resources over a period." },
-                                { q: "WASSCE Past Q: Decision making process begins with:", options: ["Identifying the problem or goal", "Evaluating alternatives", "Implementing the choice", "Gathering cash"], correct: 0, sol: "Recognizing the problem is the first step in decision making." }
+                                { q: "WASSCE Past Q: Decision making process begins with:", options: ["Identifying the problem or goal", "Evaluating alternatives", "Implementing the choice", "Gathering cash"], correct: 0, sol: "Recognizing the problem is the first step in decision making." },
+                                { q: "WASSCE Past Q: Non-human family resources include:", options: ["Money, time, goods and housing", "Knowledge, skills and energy", "Intelligence and creativity", "Friendships and love"], correct: 0, sol: "Material/tangible items are non-human resources." },
+                                { q: "WASSCE Past Q: Work simplification technique aimed at saving energy:", options: ["Combining tasks and using appropriate tools", "Working without resting", "Hiring more domestic servants", "Buying expensive appliances"], correct: 0, sol: "Streamlining routines minimizes physical fatigue." },
+                                { q: "WASSCE Past Q: Primary function of home management is:", options: ["Achieving family goals through effective resource use", "Earning high monthly salary", "Furnishing living room luxuriously", "Cooking exotic meals daily"], correct: 0, sol: "Home management applies managerial principles to family life." },
+                                { q: "WASSCE Past Q: First aid treatment for minor burns includes:", options: ["Running cold water over the area", "Applying thick butter or grease", "Popping raised blisters immediately", "Wrapping with tight dry bandage"], correct: 0, sol: "Cold running water cools tissues and alleviates pain." },
+                                { q: "WASSCE Past Q: Consumer rights include right to safety, information, and to be:", options: ["Heard and choose", "Given free samples", "Excused from taxes", "Granted loans"], correct: 0, sol: "Consumer rights guarantee fair choice, safety, and grievance representation." }
                             ]]
                         }
                     ]
@@ -376,8 +399,13 @@
                         {
                             name: "Graphic Design", icon: "fa-paint-brush", type: "Elective",
                             sets: [[
-                                { q: "WASSCE Past Q: Primary colors in art and pigment mixing are:", options: ["Red, Yellow, Blue", "Orange, Green, Purple", "Black, White, Gray", "Cyan, Magenta, Yellow"], correct: 0, sol: "Traditional primary colors are red, yellow, and blue." },
-                                { q: "WASSCE Past Q: The lightness or darkness of a color is known as its:", options: ["Value / Tone", "Hue", "Chroma", "Texture"], correct: 0, sol: "Value refers to relative lightness or darkness of a hue." }
+                                { q: "WASSCE Past Q: Primary colors in art and pigment mixing are:", options: ["Orange, Green, Purple", "Red, Yellow, Blue", "Black, White, Gray", "Cyan, Magenta, Yellow"], correct: 1, sol: "Traditional primary colors are red, yellow, and blue." },
+                                { q: "WASSCE Past Q: The lightness or darkness of a color is known as its:", options: ["Value / Tone", "Hue", "Chroma", "Texture"], correct: 0, sol: "Value refers to relative lightness or darkness of a hue." },
+                                { q: "WASSCE Past Q: Arrangement of visual elements in an artwork is called:", options: ["Composition", "Perspective", "Symmetrical balance", "Contrast"], correct: 0, sol: "Composition organizes lines, shapes, and colors harmoniously." },
+                                { q: "WASSCE Past Q: A symbol or graphic emblem used to identify a brand or company is a:", options: ["Logo", "Poster", "Banner", "Billboard"], correct: 0, sol: "Logos serve as visual brand identifiers." },
+                                { q: "WASSCE Past Q: Printmaking technique where ink is transferred through a mesh screen:", options: ["Serigraphy / Screen printing", "Relief printing", "Intaglio", "Lithography"], correct: 0, sol: "Screen printing uses stencils on mesh screens." },
+                                { q: "WASSCE Past Q: Complementary colors on the color wheel are located:", options: ["Directly opposite each other", "Side by side next to each other", "In triangular formation", "Inside the central neutral ring"], correct: 0, sol: "Opposite colors create high contrast when paired." },
+                                { q: "WASSCE Past Q: Typography refers to the art and technique of arranging:", options: ["Typefaces / Text fonts", "Ceramic clay sculptures", "Woven textile yarns", "Oil paint canvas textures"], correct: 0, sol: "Typography crafts readable and appealing letterforms." }
                             ]]
                         }
                     ]
@@ -390,8 +418,13 @@
                         {
                             name: "General Agriculture", icon: "fa-tractor", type: "Elective",
                             sets: [[
-                                { q: "WASSCE Past Q: The topmost layer of the earth's crust supporting plant growth is:", options: ["Soil", "Bedrock", "Magma", "Clay deposit"], correct: 0, sol: "Soil provides mechanical anchorage and nutrients for crops." },
-                                { q: "WASSCE Past Q: Rearing of aquatic organisms like fish in controlled water bodies:", options: ["Aquaculture", "Apiculture", "Horticulture", "Sericulture"], correct: 0, sol: "Aquaculture is farming of aquatic life." }
+                                { q: "WASSCE Past Q: The topmost layer of the earth's crust supporting plant growth is:", options: ["Bedrock", "Magma", "Soil", "Clay deposit"], correct: 2, sol: "Soil provides mechanical anchorage and nutrients for crops." },
+                                { q: "WASSCE Past Q: Rearing of aquatic organisms like fish in controlled water bodies:", options: ["Aquaculture", "Apiculture", "Horticulture", "Sericulture"], correct: 0, sol: "Aquaculture is farming of aquatic life." },
+                                { q: "WASSCE Past Q: Soil erosion caused by raindrops dislodging soil particles is:", options: ["Splash erosion", "Rill erosion", "Gully erosion", "Sheet erosion"], correct: 0, sol: "Raindrop impact causes initial splash erosion." },
+                                { q: "WASSCE Past Q: Which crop is classified as a legume?", options: ["Cowpea / Groundnut", "Maize", "Cassava", "Oil palm"], correct: 0, sol: "Legumes fix nitrogen through root nodule bacteria." },
+                                { q: "WASSCE Past Q: Castration of farm animals is performed primarily to:", options: ["Improve meat quality and tame aggressiveness", "Increase fertility rate", "Prevent disease transmission completely", "Stimulate milk yield"], correct: 0, sol: "Castration dociles males and improves fat distribution in meat." },
+                                { q: "WASSCE Past Q: Method of irrigation where water is applied directly to plant roots in drops:", options: ["Drip / Trickle irrigation", "Sprinkler irrigation", "Furrow irrigation", "Flood irrigation"], correct: 0, sol: "Drip irrigation conserves water by targeted application." },
+                                { q: "WASSCE Past Q: The gestation period for swine (pigs) is approximately:", options: ["114 days (3 months, 3 weeks, 3 days)", "280 days", "150 days", "21 days"], correct: 0, sol: "Sow gestation averages 114 days." }
                             ]]
                         }
                     ]
@@ -406,35 +439,37 @@
                         {
                             name: "Core Mathematics", icon: "fa-square-root-variable", type: "Core",
                             sets: [[
-                                { q: "BECE Past Q: Find LCM of 12, 15 and 20.", options: ["60", "120", "30", "240"], correct: 0, sol: "LCM of 12, 15, 20 is 60." },
+                                { q: "BECE Past Q: Find LCM of 12, 15 and 20.", options: ["120", "60", "30", "240"], correct: 1, sol: "LCM of 12, 15, 20 is 60." },
                                 { q: "BECE Past Q: Simplify: $4x + 3y - 2x + 5y$.", options: ["$2x + 8y$", "$6x + 8y$", "$2x - 2y$", "$9xy$"], correct: 0, sol: "Combining like terms gives $2x + 8y$." },
-                                { q: "BECE Past Q: Express $\\frac{3}{5}$ as percentage:", options: ["$60\\%$", "$30\\%$", "$75\\%$", "$15\\%$"], correct: 0, sol: "$\\frac{3}{5} \\times 100\\% = 60\\%$." },
-                                { q: "BECE Past Q: If $3y - 5 = 16$, find $y$.", options: ["7", "6", "8", "5"], correct: 0, sol: "$3y = 21 \\implies y = 7$." },
-                                { q: "BECE Past Q: Area of a square with side 9 cm:", options: ["$81\\text{ cm}^2$", "$36\\text{ cm}^2$", "$18\\text{ cm}^2$", "$72\\text{ cm}^2$"], correct: 0, sol: "Area = $9 \\times 9 = 81\\text{ cm}^2$." },
+                                { q: "BECE Past Q: Express $\\frac{3}{5}$ as percentage:", options: ["$30\\%$", "$75\\%$", "$60\\%$", "$15\\%$"], correct: 2, sol: "$\\frac{3}{5} \\times 100\\% = 60\\%$." },
+                                { q: "BECE Past Q: If $3y - 5 = 16$, find $y$.", options: ["6", "7", "8", "5"], correct: 1, sol: "$3y = 21 \\implies y = 7$." },
+                                { q: "BECE Past Q: Area of a square with side 9 cm:", options: ["$36\\text{ cm}^2$", "$18\\text{ cm}^2$", "$81\\text{ cm}^2$", "$72\\text{ cm}^2$"], correct: 2, sol: "Area = $9 \\times 9 = 81\\text{ cm}^2$." },
                                 { q: "BECE Past Q: Write 4,500 in standard form:", options: ["$4.5 \\times 10^3$", "$4.5 \\times 10^2$", "$45 \\times 10^2$", "$0.45 \\times 10^4$"], correct: 0, sol: "Standard form is $4.5 \\times 10^3$." },
-                                { q: "BECE Past Q: Median of scores: $5, 2, 9, 7, 3$.", options: ["5", "7", "3", "9"], correct: 0, sol: "Ordered numbers middle value is 5." }
+                                { q: "BECE Past Q: Median of scores: $5, 2, 9, 7, 3$.", options: ["7", "3", "5", "9"], correct: 2, sol: "Ordered numbers middle value is 5." }
                             ]]
                         },
                         {
                             name: "Integrated Science", icon: "fa-flask", type: "Core",
                             sets: [[
-                                { q: "BECE Past Q: Which of these is a living thing?", options: ["Amoeba", "Stone", "Water", "Plastic bag"], correct: 0, sol: "Amoeba is unicellular life." },
+                                { q: "BECE Past Q: Which of these is a living thing?", options: ["Stone", "Amoeba", "Water", "Plastic bag"], correct: 1, sol: "Amoeba is unicellular life." },
                                 { q: "BECE Past Q: Gas used in fire extinguishers:", options: ["Carbon dioxide", "Oxygen", "Hydrogen", "Nitrogen"], correct: 0, sol: "Carbon dioxide smothers fires." },
-                                { q: "BECE Past Q: Boiling point of pure water:", options: ["$100^\\circ\\text{C}$", "$0^\\circ\\text{C}$", "$50^\\circ\\text{C}$", "$212^\\circ\\text{C}$"], correct: 0, sol: "Water boils at $100^\\circ\\text{C}$." },
+                                { q: "BECE Past Q: Boiling point of pure water:", options: ["$0^\\circ\\text{C}$", "$50^\\circ\\text{C}$", "$100^\\circ\\text{C}$", "$212^\\circ\\text{C}$"], correct: 2, sol: "Water boils at $100^\\circ\\text{C}$." },
                                 { q: "BECE Past Q: Plant part that develops into fruit:", options: ["Ovary", "Ovule", "Petal", "Sepal"], correct: 0, sol: "Fertilized ovary becomes fruit." },
-                                { q: "BECE Past Q: SI unit of temperature:", options: ["Kelvin", "Celsius", "Fahrenheit", "Joule"], correct: 0, sol: "Kelvin is SI temperature unit." },
-                                { q: "BECE Past Q: Teeth used for biting and cutting:", options: ["Incisors", "Canines", "Molars", "Premolars"], correct: 0, sol: "Incisors cut food." },
-                                { q: "BECE Past Q: Renewable energy source:", options: ["Solar energy", "Crude oil", "Coal", "Natural gas"], correct: 0, sol: "Sunlight is renewable." }
+                                { q: "BECE Past Q: SI unit of temperature:", options: ["Celsius", "Kelvin", "Fahrenheit", "Joule"], correct: 1, sol: "Kelvin is SI temperature unit." },
+                                { q: "BECE Past Q: Teeth used for biting and cutting:", options: ["Canines", "Incisors", "Molars", "Premolars"], correct: 1, sol: "Incisors cut food." },
+                                { q: "BECE Past Q: Renewable energy source:", options: ["Crude oil", "Coal", "Solar energy", "Natural gas"], correct: 2, sol: "Sunlight is renewable." }
                             ]]
                         },
                         {
                             name: "Social Studies", icon: "fa-earth-africa", type: "Core",
                             sets: [[
                                 { q: "BECE Past Q: Ghana gained independence on:", options: ["6th March, 1957", "1st July, 1960", "25th May, 1963", "7th January, 1993"], correct: 0, sol: "Independence day is March 6, 1957." },
-                                { q: "BECE Past Q: First President of Ghana:", options: ["Dr. Kwame Nkrumah", "J.B. Danquah", "Jerry J. Rawlings", "John A. Kufuor"], correct: 0, sol: "Dr. Kwame Nkrumah was first president." },
-                                { q: "BECE Past Q: Nuclear family consists of:", options: ["Father, mother and children", "Grandparents and cousins", "Friends", "Teachers and students"], correct: 0, sol: "Nuclear family includes parents and children." },
-                                { q: "BECE Past Q: Cardinal points of a map:", options: ["North, South, East, West", "Up, Down, Left, Right", "Accra, Kumasi", "Land and Sea"], correct: 0, sol: "Cardinal points are N, S, E, W." },
-                                { q: "BECE Past Q: National currency of Ghana:", options: ["Ghana Cedi", "Naira", "Dollar", "Pound"], correct: 0, sol: "Ghana Cedi is official currency." }
+                                { q: "BECE Past Q: First President of Ghana:", options: ["J.B. Danquah", "Dr. Kwame Nkrumah", "Jerry J. Rawlings", "John A. Kufuor"], correct: 1, sol: "Dr. Kwame Nkrumah was first president." },
+                                { q: "BECE Past Q: Nuclear family consists of:", options: ["Grandparents and cousins", "Father, mother and children", "Friends", "Teachers and students"], correct: 1, sol: "Nuclear family includes parents and children." },
+                                { q: "BECE Past Q: Cardinal points of a map:", options: ["Up, Down, Left, Right", "Accra, Kumasi", "North, South, East, West", "Land and Sea"], correct: 2, sol: "Cardinal points are N, S, E, W." },
+                                { q: "BECE Past Q: National currency of Ghana:", options: ["Naira", "Dollar", "Pound", "Ghana Cedi"], correct: 3, sol: "Ghana Cedi is official currency." },
+                                { q: "BECE Past Q: The head of the traditional government in a village is the:", options: ["Chief / King", "District Chief Executive", "Member of Parliament", "Assembly Member"], correct: 0, sol: "Chiefs lead traditional administrative structures." },
+                                { q: "BECE Past Q: Environmental degradation is caused by:", options: ["Illegal mining (Galamsey) and deforestation", "Planting trees", "Recycling waste", "Conserving soil"], correct: 0, sol: "Galamsey destroys land and water bodies." }
                             ]]
                         }
                     ]
@@ -449,18 +484,25 @@
                         {
                             name: "Computer Science", icon: "fa-laptop-code", type: "Core",
                             sets: [[
-                                { q: "University Exam Q: What does HTML stand for?", options: ["Hyper Text Markup Language", "High Tech Machine Language", "Hyperlink Text Management", "Home Tool Markup Language"], correct: 0, sol: "HTML stands for Hyper Text Markup Language." },
-                                { q: "University Exam Q: Data structure operating on LIFO basis:", options: ["Stack", "Queue", "Array", "Graph"], correct: 0, sol: "Stack operates as Last-In-First-Out." },
+                                { q: "University Exam Q: What does HTML stand for?", options: ["High Tech Machine Language", "Hyper Text Markup Language", "Hyperlink Text Management", "Home Tool Markup Language"], correct: 1, sol: "HTML stands for Hyper Text Markup Language." },
+                                { q: "University Exam Q: Data structure operating on LIFO basis:", options: ["Queue", "Array", "Stack", "Graph"], correct: 2, sol: "Stack operates as Last-In-First-Out." },
                                 { q: "University Exam Q: Worst-case time complexity of Merge Sort:", options: ["$O(n \\log n)$", "$O(n^2)$", "$O(n)$", "$O(1)$"], correct: 0, sol: "Merge sort runs in $O(n \\log n)$ time." },
-                                { q: "University Exam Q: SQL command used to retrieve data:", options: ["SELECT", "UPDATE", "INSERT", "DELETE"], correct: 0, sol: "SELECT queries retrieve database table rows." },
-                                { q: "University Exam Q: IPv4 address is expressed in how many bits?", options: ["32 bits", "64 bits", "128 bits", "16 bits"], correct: 0, sol: "IPv4 uses 32-bit addresses." }
+                                { q: "University Exam Q: SQL command used to retrieve data:", options: ["UPDATE", "INSERT", "DELETE", "SELECT"], correct: 3, sol: "SELECT queries retrieve database table rows." },
+                                { q: "University Exam Q: IPv4 address is expressed in how many bits?", options: ["32 bits", "64 bits", "128 bits", "16 bits"], correct: 0, sol: "IPv4 uses 32-bit addresses." },
+                                { q: "University Exam Q: Operating system scheduling algorithm that allocates fixed time slice:", options: ["Round Robin", "Shortest Job First", "First Come First Serve", "Priority Scheduling"], correct: 0, sol: "Round Robin rotates CPU time quantum slices." },
+                                { q: "University Exam Q: In relational databases, a foreign key:", options: ["References a primary key in another table", "Must be unique in its own table", "Cannot contain duplicate values", "Is automatically generated by CPU"], correct: 0, sol: "Foreign keys establish relational links across tables." }
                             ]]
                         },
                         {
                             name: "Business Administration", icon: "fa-chart-pie", type: "Core",
                             sets: [[
-                                { q: "University Exam Q: Process of monitoring performance and taking corrective action:", options: ["Controlling", "Planning", "Organizing", "Staffing"], correct: 0, sol: "Controlling measures performance against standards." },
-                                { q: "University Exam Q: Financial statement showing financial position at specific date:", options: ["Balance Sheet", "Income Statement", "Cash Flow Statement", "Trial Balance"], correct: 0, sol: "Balance sheet details assets, liabilities, and equity." }
+                                { q: "University Exam Q: Process of monitoring performance and taking corrective action:", options: ["Planning", "Organizing", "Controlling", "Staffing"], correct: 2, sol: "Controlling measures performance against standards." },
+                                { q: "University Exam Q: Financial statement showing financial position at specific date:", options: ["Balance Sheet", "Income Statement", "Cash Flow Statement", "Trial Balance"], correct: 0, sol: "Balance sheet details assets, liabilities, and equity." },
+                                { q: "University Exam Q: Marketing mix 4 Ps include Product, Price, Place, and:", options: ["Promotion", "People", "Process", "Profit"], correct: 0, sol: "The classic 4 Ps are Product, Price, Place, Promotion." },
+                                { q: "University Exam Q: Corporate social responsibility (CSR) means:", options: ["Businesses acting ethically toward society and environment", "Maximizing profits without paying taxes", "Ignoring employee welfare", "Focusing solely on foreign export"], correct: 0, sol: "CSR reflects voluntary ethical contributions to society." },
+                                { q: "University Exam Q: Benchmarking involves:", options: ["Comparing business processes with industry leaders", "Selling company furniture at auction", "Setting interest rates for bank deposits", "Designing new company logo"], correct: 0, sol: "Benchmarking measures performance against best standards." },
+                                { q: "University Exam Q: Organizational structure organized by functions like Sales, Finance, HR is:", options: ["Functional structure", "Matrix structure", "Divisional structure", "Flat network"], correct: 0, sol: "Functional grouping aligns departments by specialized tasks." },
+                                { q: "University Exam Q: Net Present Value (NPV) is positive when:", options: ["Present value of cash inflows exceeds initial investment", "Discount rate is zero", "Internal rate of return is negative", "Company incurs net loss"], correct: 0, sol: "Positive NPV indicates profitable capital investment." }
                             ]]
                         }
                     ]
@@ -536,7 +578,7 @@
                                 <h4 class="font-bold text-gray-900 text-sm">${sub.name}</h4>
                                 <span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${sub.type === 'Core' ? 'bg-indigo-50 text-indigo-700' : 'bg-amber-50 text-amber-700'}">${sub.type}</span>
                             </div>
-                            <p class="text-xs text-gray-500 mt-1">${sub.sets.length * 7} WAEC Exam Questions (${sub.sets.length} Sets)</p>
+                            <p class="text-xs text-gray-500 mt-1">${sub.sets[0].length} Questions in 1st Round (${sub.sets.length} Round)</p>
                         </div>
                     </div>
                     <i class="fas fa-chevron-right text-gray-300 group-hover:text-blue-600 transition"></i>
@@ -569,102 +611,4 @@
 
             document.getElementById('subjects-screen').classList.add('hidden');
             document.getElementById('quiz-screen').classList.remove('hidden');
-            document.getElementById('quiz-title').innerText = `${activeSubject.name} (Set ${currentSetIndex + 1})`;
-
-            renderQuestion();
-        }
-
-        function loadNextSet() {
-            currentSetIndex = (currentSetIndex + 1) % activeSubject.sets.length;
-            currentQuestionIndex = 0;
-            score = 0;
-
-            document.getElementById('results-screen').classList.add('hidden');
-            document.getElementById('quiz-screen').classList.remove('hidden');
-            document.getElementById('quiz-title').innerText = `${activeSubject.name} (Set ${currentSetIndex + 1})`;
-
-            renderQuestion();
-        }
-
-        function renderQuestion() {
-            const currentSet = activeSubject.sets[currentSetIndex];
-            const q = currentSet[currentQuestionIndex];
-
-            document.getElementById('quiz-progress-text').innerText = `Q ${currentQuestionIndex + 1}/${currentSet.length}`;
-            document.getElementById('question-text').innerHTML = q.q;
-
-            document.getElementById('explanation-box').classList.add('hidden');
-            document.getElementById('next-btn').classList.add('hidden');
-
-            const container = document.getElementById('options-container');
-            container.innerHTML = q.options.map((opt, i) => `
-                <button id="opt-${i}" onclick="checkAnswer(${i})" class="w-full text-left p-4 rounded-xl border border-gray-200 bg-gray-50 hover:bg-gray-100 font-medium text-sm text-gray-800 transition flex justify-between items-center">
-                    <span>${opt}</span>
-                    <span class="w-6 h-6 rounded-full border border-gray-300 bg-white flex items-center justify-center text-xs text-gray-500 font-bold">${String.fromCharCode(65 + i)}</span>
-                </button>
-            `).join('');
-
-            if (window.MathJax) MathJax.typesetPromise();
-        }
-
-        function checkAnswer(chosenIdx) {
-            const currentSet = activeSubject.sets[currentSetIndex];
-            const q = currentSet[currentQuestionIndex];
-            const isCorrect = chosenIdx === q.correct;
-
-            q.options.forEach((_, i) => {
-                const btn = document.getElementById(`opt-${i}`);
-                btn.onclick = null;
-                if (i === q.correct) {
-                    btn.className = "w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-sm flex justify-between items-center shadow-sm";
-                } else if (i === chosenIdx) {
-                    btn.className = "w-full text-left p-4 rounded-xl border-2 border-red-500 bg-red-50 text-red-900 font-bold text-sm flex justify-between items-center";
-                } else {
-                    btn.className = "w-full text-left p-4 rounded-xl border border-gray-200 bg-gray-50 text-gray-400 font-medium text-sm flex justify-between items-center opacity-50";
-                }
-            });
-
-            document.getElementById('explanation-text').innerHTML = q.sol;
-            document.getElementById('explanation-box').classList.remove('hidden');
-
-            if (isCorrect) {
-                score++;
-                userXP += 10;
-                localStorage.setItem('tka_xp', userXP);
-                updateStatsDisplay();
-                confetti({ particleCount: 25, spread: 50, origin: { y: 0.8 } });
-            }
-
-            document.getElementById('next-btn').classList.remove('hidden');
-            if (window.MathJax) MathJax.typesetPromise();
-        }
-
-        function nextQuestion() {
-            const currentSet = activeSubject.sets[currentSetIndex];
-            currentQuestionIndex++;
-            if (currentQuestionIndex < currentSet.length) {
-                renderQuestion();
-            } else {
-                showResults();
-            }
-        }
-
-        function showResults() {
-            const currentSet = activeSubject.sets[currentSetIndex];
-            document.getElementById('quiz-screen').classList.add('hidden');
-            document.getElementById('results-screen').classList.remove('hidden');
-
-            document.getElementById('final-score').innerText = `${score}/${currentSet.length}`;
-            document.getElementById('final-xp').innerText = `+${score * 10} XP`;
-
-            confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
-        }
-
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', () => {
-            updateStatsDisplay();
-            filterLevel('WASSCE');
-        });
-    </script>
-</body>
-</html>
+            document.
