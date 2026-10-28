@@ -1,166 +1,290 @@
+
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toni Kroos Academy - Educational Quiz Platform</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax for Math & Science formulas -->
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!-- Canvas Confetti CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toni Kroos Academy</title>
+<style>
+:root{--blue:#2458e8;--purple:#6941d9;--bg:#f4f7fc;--ink:#18243b}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:white;padding:16px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 10px #17255412;position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{background:var(--blue);color:white;border-radius:13px;padding:13px;font-size:22px}
+h1{font-size:19px;margin:0}
+header p{margin:5px 0 0;color:var(--blue);font-size:12px}
+button,select{cursor:pointer;font:inherit}
+button{border:0;border-radius:10px;padding:11px 15px;background:var(--blue);color:white;font-weight:bold}
+button.secondary{background:#e9efff;color:var(--blue)}
+button.dark{background:#17243d}
+button:focus-visible,select:focus-visible{outline:3px solid #91b4ff}
+main{max-width:1150px;margin:auto;padding:24px 16px}
+.hero{background:linear-gradient(120deg,#194bd7,#7544df);color:white;padding:30px;border-radius:22px;margin-bottom:24px}
+.hero h2{font-size:clamp(25px,4vw,38px);margin:12px 0}
+.hero p{line-height:1.6;max-width:650px}
+.pill{background:#ffffff27;padding:8px 12px;border-radius:30px;font-size:12px}
+.tabs{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0}
+.tabs button{background:white;color:#52617a;border:1px solid #e1e7f1}
+.tabs button.active{background:var(--blue);color:white}
+.section-title{margin:25px 0 8px}
+.muted{color:#68758a;line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:16px}
+.card{background:white;border:1px solid #e4eaf3;border-radius:17px;padding:20px;box-shadow:0 5px 18px #23375a08}
+.card h3{margin:0 0 10px}
+.card p{line-height:1.5}
+.card .emoji{font-size:27px;margin-bottom:12px}
+.card button{width:100%;margin-top:10px}
+.tag{display:inline-block;background:#edf2ff;color:#2852c8;padding:6px 9px;border-radius:20px;font-size:12px;margin:3px}
+.panel{background:white;padding:22px;border-radius:18px;border:1px solid #e4eaf3;margin:18px 0}
+select,input{padding:12px;border:1px solid #d7dfeb;border-radius:9px;background:white;max-width:100%;width:100%;margin:6px 0 14px}
+label{display:block;font-weight:bold;font-size:14px;margin-top:12px}
+.question{padding:17px;border:1px solid #e1e7f0;border-radius:13px;margin:15px 0}
+.option{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid #e0e7f1;border-radius:9px;margin:8px 0;cursor:pointer;font-weight:normal}
+.option input{width:auto;margin:3px 0 0}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
+.stat{padding:18px;border-radius:14px;background:#eef3ff}
+.stat strong{display:block;font-size:27px;margin-top:9px}
+table{border-collapse:collapse;width:100%;min-width:570px}
+th,td{text-align:left;padding:12px;border-bottom:1px solid #e3e9f2;font-size:13px}
+th{background:#f1f5fb}
+.table-wrap{overflow-x:auto}
+.notice{background:#fff8df;border:1px solid #f0df9d;padding:13px;border-radius:10px;line-height:1.5}
+.good{color:#08794c;font-weight:bold}
+.bad{color:#c02d43;font-weight:bold}
+footer{text-align:center;color:#738097;padding:25px;font-size:13px}
+.hidden{display:none!important}
+@media(max-width:550px){header{padding:12px}header h1{font-size:16px}header .admin-label{display:none}.hero{padding:22px}.panel{padding:15px}main{padding:15px 12px}}
+</style>
 </head>
-<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col font-sans">
+<body>
+<header>
+  <div class="brand">
+    <div class="logo">🎓</div>
+    <div><h1>Toni Kroos Academy</h1><p>WASSCE · BECE · Tertiary</p></div>
+  </div>
+  <button class="secondary admin-label" onclick="showDashboard()">📊 Dashboard</button>
+</header>
 
-    <!-- Header / Navbar -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-            <!-- Brand -->
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="showHomeScreen()">
-                <div class="bg-blue-600 text-white p-2 rounded-xl font-bold text-xl flex items-center justify-center w-10 h-10 shadow-md">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <div>
-                    <h1 class="font-extrabold text-xl text-gray-900 leading-tight tracking-tight">Toni Kroos Academy</h1>
-                    <p class="text-xs text-blue-600 font-semibold">WASSCE • BECE • Tertiary</p>
-                </div>
-            </div>
+<main>
+<section class="hero">
+  <span class="pill">✨ YOUR LEARNING JOURNEY STARTS HERE</span>
+  <h2>Learn smarter. Practise better.</h2>
+  <p>Choose your educational level, select your course and subject, practise questions, and track your progress.</p>
+  <button onclick="document.getElementById('levels').scrollIntoView({behavior:'smooth'})">Explore courses ↓</button>
+</section>
 
-            <!-- Stats Bar (XP & Streaks) -->
-            <div class="flex items-center space-x-3 bg-gray-100 px-3 py-1.5 rounded-xl border border-gray-200 text-xs">
-                <div class="flex items-center space-x-1" title="Daily Study Streak">
-                    <i class="fas fa-fire text-amber-500 animate-pulse"></i>
-                    <span id="streak-count" class="font-bold text-gray-800">1</span>
-                    <span class="text-gray-500">Days</span>
-                </div>
-                <div class="h-3 w-px bg-gray-300"></div>
-                <div class="flex items-center space-x-1" title="Total XP Earned">
-                    <i class="fas fa-bolt text-yellow-500"></i>
-                    <span id="xp-count" class="font-bold text-gray-800">0</span>
-                    <span class="text-yellow-600 font-semibold">XP</span>
-                </div>
-            </div>
-        </div>
-    </header>
+<section id="home">
+<h2 id="levels" class="section-title">Choose your educational level</h2>
+<p class="muted">Select the level that matches your studies.</p>
+<div class="tabs" id="levelTabs">
+<button class="active" onclick="chooseLevel('WASSCE',this)">WASSCE / SHS</button>
+<button onclick="chooseLevel('BECE',this)">BECE / JHS</button>
+<button onclick="chooseLevel('Tertiary',this)">Tertiary</button>
+</div>
+<div id="courseGrid" class="grid"></div>
 
-    <!-- Main Content Area -->
-    <main class="flex-grow max-w-5xl w-full mx-auto p-4 md:p-6">
+<section class="panel">
+<h2>📝 Start a quiz</h2>
+<p class="muted">Choose your course and subject. Questions must be added to the question bank before a quiz can be taken.</p>
+<label for="courseSelect">Course / stream</label>
+<select id="courseSelect" onchange="fillSubjects()"></select>
+<label for="subjectSelect">Subject</label>
+<select id="subjectSelect"></select>
+<label for="studentName">Student name or ID</label>
+<input id="studentName" maxlength="60" placeholder="Enter your name or student ID">
+<button onclick="startQuiz()">Start quiz →</button>
+<div id="quizArea"></div>
+</section>
+</section>
 
-        <!-- HOME SCREEN -->
-        <div id="home-screen" class="space-y-8">
-            
-            <!-- Hero Banner featuring TONI KROOS ACADEMY -->
-            <div class="bg-gradient-to-r from-blue-700 via-indigo-600 to-blue-800 text-white rounded-3xl p-6 md:p-8 shadow-xl relative overflow-hidden">
-                <div class="relative z-10 space-y-3 max-w-2xl">
-                    <span class="inline-block bg-white/20 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider">
-                        ✨ Welcome to Official Platform
-                    </span>
-                    <h2 class="text-3xl md:text-4xl font-black leading-tight tracking-tight">
-                        TONI KROOS ACADEMY
-                    </h2>
-                    <p class="text-blue-100 text-sm md:text-base leading-relaxed">
-                        Master your WASSCE, BECE, and Tertiary exam preparation with structured courses, step-by-step solutions, and instant XP tracking!
-                    </p>
-                </div>
-                <!-- Decorative background elements -->
-                <div class="absolute -right-10 -bottom-10 opacity-10 text-white text-9xl">
-                    <i class="fas fa-futbol"></i>
-                </div>
-            </div>
+<section id="dashboard" class="hidden">
+<div class="panel">
+<button class="secondary" onclick="showHome()">← Back to courses</button>
+<h2>📊 Student performance dashboard</h2>
+<p class="muted">Quiz attempts, aggregate scores, and subject performance recorded on this browser.</p>
+<div class="notice">Important: this first version stores results in this browser only. It does not collect results from other students' phones or computers. A shared school-wide dashboard requires a database and secure administrator access.</div>
+</div>
+<div id="stats" class="stat-grid"></div>
+<div class="panel">
+<h3>Performance by subject</h3>
+<div class="table-wrap"><table><thead><tr><th>Subject</th><th>Attempts</th><th>Average</th><th>Pass rate</th></tr></thead><tbody id="subjectStats"></tbody></table></div>
+</div>
+<div class="panel">
+<h3>Recent quiz attempts</h3>
+<div class="table-wrap"><table><thead><tr><th>Student</th><th>Course</th><th>Subject</th><th>Score</th><th>Date</th></tr></thead><tbody id="attemptRows"></tbody></table></div>
+<button class="secondary" onclick="exportResults()">⬇ Export results as CSV</button>
+<button class="secondary" onclick="clearResults()">Clear local results</button>
+</div>
+</section>
+</main>
+<footer>© Toni Kroos Academy · Learn, practise, improve.</footer>
 
-            <!-- Level Selector Tabs -->
-            <div class="flex border-b border-gray-200 text-sm font-bold justify-center space-x-4 md:space-x-8">
-                <button onclick="filterLevel('WASSCE')" id="tab-wassce" class="pb-3 border-b-2 border-blue-600 text-blue-600 px-2">WASSCE (SHS Streams)</button>
-                <button onclick="filterLevel('BECE')" id="tab-bece" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-2">BECE (JHS Core)</button>
-                <button onclick="filterLevel('TERTIARY')" id="tab-tertiary" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-2">Tertiary Courses</button>
-            </div>
+<script>
+const courses={
+ WASSCE:[
+ {name:"General Science",icon:"🔬",core:["English Language","Core Mathematics","Social Studies","Integrated Science"],electives:["Physics","Chemistry","Biology","Elective Mathematics","Computer Science"]},
+ {name:"General Arts",icon:"📚",core:["English Language","Core Mathematics","Social Studies","Integrated Science"],electives:["Economics","Government","Geography","History","Literature in English","Christian Religious Studies","Islamic Religious Studies","French","Elective Mathematics"]},
+ {name:"Business",icon:"💼",core:["English Language","Core Mathematics","Social Studies","Integrated Science"],electives:["Financial Accounting","Cost Accounting","Business Management","Economics","Elective Mathematics","ICT"]},
+ {name:"Home Economics",icon:"🍲",core:["English Language","Core Mathematics","Social Studies","Integrated Science"],electives:["Food and Nutrition","Management in Living","Clothing and Textiles","Biology","Chemistry","Economics"]},
+ {name:"Visual Arts",icon:"🎨",core:["English Language","Core Mathematics","Social Studies","Integrated Science"],electives:["Graphic Design","Picture Making","Sculpture","Textiles","Ceramics","General Knowledge in Art"]},
+ {name:"Agricultural Science",icon:"🌱",core:["English Language","Core Mathematics","Social Studies","Integrated Science"],electives:["General Agriculture","Animal Husbandry","Crop Husbandry","Horticulture","Chemistry","Biology","Economics"]}
+ ],
+ BECE:[
+ {name:"JHS Core Subjects",icon:"📖",core:["English Language","Mathematics","Science","Social Studies","Computing","Career Technology","Creative Arts and Design","Religious and Moral Education","Ghanaian Language","French"],electives:[]}
+ ],
+ Tertiary:[
+ {name:"General Studies",icon:"🎓",core:["English Language","Communication Skills","ICT"],electives:["Mathematics","Research Methods","Business Studies","Economics"]}
+ ]
+};
 
-            <!-- Courses Container -->
-            <div id="courses-container" class="space-y-8">
-                <!-- Dynamically rendered by JS -->
-            </div>
-        </div>
+// Add verified, curriculum-aligned questions to this bank before using it for real exams.
+// The examples below are demonstrations, not a complete WAEC question bank.
+const questionBank={
+ "Core Mathematics":[
+ {q:"What is 25% of 200?",options:["25","40","50","75"],answer:2,explanation:"25% = 25/100; (25/100) × 200 = 50."},
+ {q:"Solve: 3x = 21.",options:["6","7","8","9"],answer:1,explanation:"Divide both sides by 3: x = 7."},
+ {q:"What is the area of a rectangle 8 cm long and 4 cm wide?",options:["12 cm²","24 cm²","32 cm²","36 cm²"],answer:2,explanation:"Area = length × width = 8 × 4 = 32 cm²."}
+ ],
+ "English Language":[
+ {q:"Which word is an adjective in 'The clever student answered'?",options:["The","clever","student","answered"],answer:1,explanation:"Clever describes the noun student."},
+ {q:"Choose the correct plural of 'child'.",options:["Childs","Childes","Children","Childrens"],answer:2,explanation:"The plural form is children."}
+ ],
+ "Integrated Science":[
+ {q:"Which organelle is mainly responsible for releasing energy during respiration?",options:["Nucleus","Mitochondrion","Cell wall","Vacuole"],answer:1,explanation:"Mitochondria are the main site of aerobic respiration."}
+ ],
+ "Biology":[
+ {q:"Which process do green plants use to make food?",options:["Respiration","Photosynthesis","Digestion","Excretion"],answer:1,explanation:"Photosynthesis uses light energy to make food."}
+ ],
+ "Chemistry":[
+ {q:"What is the chemical symbol for sodium?",options:["S","So","Na","N"],answer:2,explanation:"The chemical symbol for sodium is Na."}
+ ],
+ "Physics":[
+ {q:"What is the SI unit of force?",options:["Joule","Watt","Newton","Pascal"],answer:2,explanation:"Force is measured in newtons (N)."}
+ ],
+ "Economics":[
+ {q:"What is the basic economic problem caused by limited resources?",options:["Scarcity","Inflation only","Surplus","Trade"],answer:0,explanation:"Scarcity means resources are limited relative to wants."}
+ ],
+ "General Agriculture":[
+ {q:"Which soil component is formed from decomposed organic matter?",options:["Humus","Gravel","Bedrock","Clay only"],answer:0,explanation:"Humus is decomposed organic material in soil."}
+ ],
+ "Computer Science":[
+ {q:"Which device is commonly used to enter text into a computer?",options:["Monitor","Keyboard","Speaker","Projector"],answer:1,explanation:"A keyboard is an input device."}
+ ]
+};
 
-        <!-- QUIZ SCREEN -->
-        <div id="quiz-screen" class="hidden space-y-6">
-            
-            <!-- Quiz Header -->
-            <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
-                <button onclick="showHomeScreen()" class="text-xs font-semibold text-gray-600 hover:text-blue-600 flex items-center">
-                    <i class="fas fa-arrow-left mr-2"></i> Exit Quiz
-                </button>
-                <span id="quiz-title" class="font-bold text-sm text-blue-600">Subject Name</span>
-                <span id="quiz-progress-text" class="text-xs text-gray-500 font-mono font-bold">Q 1/5</span>
-            </div>
+let currentLevel="WASSCE",currentCourse=null,currentSubject=null,currentQuestions=[];
+let attemptAnswers={};
 
-            <!-- Question & Options Card -->
-            <div class="bg-white rounded-3xl border border-gray-200 p-6 md:p-8 space-y-6 shadow-md">
-                
-                <!-- Question Box -->
-                <div id="question-text" class="text-base sm:text-lg font-semibold text-gray-900 leading-relaxed">
-                    <!-- Question string rendered here -->
-                </div>
-
-                <!-- Options List -->
-                <div id="options-container" class="space-y-3">
-                    <!-- Option buttons rendered here -->
-                </div>
-
-                <!-- Solution & Explanation Box -->
-                <div id="explanation-box" class="hidden bg-blue-50 border border-blue-200 p-5 rounded-2xl text-sm text-blue-900 space-y-2">
-                    <div class="font-bold text-blue-700 flex items-center text-sm">
-                        <i class="fas fa-lightbulb text-amber-500 mr-2 text-base"></i> Step-by-Step Explanation:
-                    </div>
-                    <div id="explanation-text" class="text-gray-700 leading-relaxed"></div>
-                </div>
-
-                <!-- Controls -->
-                <div class="pt-2 flex justify-end">
-                    <button id="next-btn" onclick="nextQuestion()" class="hidden px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition shadow-lg">
-                        Next Question <i class="fas fa-chevron-right ml-2"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- SUMMARY / RESULTS SCREEN -->
-        <div id="results-screen" class="hidden text-center bg-white rounded-3xl border border-gray-200 p-8 md:p-12 space-y-6 shadow-xl max-w-lg mx-auto">
-            <div class="text-6xl">🏆</div>
-            <h2 class="text-2xl font-black text-gray-900">Quiz Completed!</h2>
-            
-            <div class="grid grid-cols-2 gap-4 max-w-xs mx-auto">
-                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
-                    <span id="final-score" class="block text-3xl font-extrabold text-emerald-600">0/5</span>
-                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Score</span>
-                </div>
-                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
-                    <span id="final-xp" class="block text-3xl font-extrabold text-yellow-500">+0 XP</span>
-                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">XP Gained</span>
-                </div>
-            </div>
-
-            <div class="flex justify-center space-x-4 pt-2">
-                <button onclick="restartCurrentQuiz()" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition shadow-md">
-                    <i class="fas fa-redo mr-2"></i> Try Again
-                </button>
-                <button onclick="showHomeScreen()" class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-bold rounded-xl transition">
-                    Back to Courses
-                </button>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- App Data & Logic -->
-    <script>
-        // COMPREHENSIVE COURSE & SUBJECT DATABASE
-        const courseDatabase = {
-            WASSCE: [
-                {
-                    stream: "General Science Stream",
-                    subjects: [
-                        { name: "Elective Mathematics", icon: "fa-calculator", questions: [
-                            { q: "Solve for $x$: $2x + 5 = 15$", options: ["x = 3", "x = 5", "x = 10", "x = 7"], correct: 1,
+function allSubjects(course){
+ return [...course.core,...course.electives];
+}
+function chooseLevel(level,button){
+ currentLevel=level;
+ document.querySelectorAll("#levelTabs button").forEach(b=>b.classList.remove("active"));
+ button.classList.add("active");
+ renderCourses();
+}
+function renderCourses(){
+ const grid=document.getElementById("courseGrid");
+ grid.innerHTML="";
+ courses[currentLevel].forEach((course,index)=>{
+ const card=document.createElement("article");
+ card.className="card";
+ card.innerHTML=`<div class="emoji">${course.icon}</div><h3>${course.name}</h3><p class="muted">${course.core.length} core subjects · ${course.electives.length} electives</p><div>${course.core.map(s=>`<span class="tag">${s}</span>`).join("")}</div><details><summary>View elective subjects</summary><p>${course.electives.length?course.electives.map(s=>`<span class="tag">${s}</span>`).join(""):"No electives listed for this level."}</p></details><button onclick="selectCourse(${index})">Choose this course</button>`;
+ grid.appendChild(card);
+ });
+ const select=document.getElementById("courseSelect");
+ select.innerHTML="";
+ courses[currentLevel].forEach((c,i)=>select.add(new Option(c.name,String(i))));
+ fillSubjects();
+}
+function selectCourse(index){
+ document.getElementById("courseSelect").value=String(index);
+ fillSubjects();
+ document.getElementById("courseSelect").scrollIntoView({behavior:"smooth",block:"center"});
+}
+function fillSubjects(){
+ const course=courses[currentLevel][Number(document.getElementById("courseSelect").value)||0];
+ const select=document.getElementById("subjectSelect");
+ select.innerHTML="";
+ allSubjects(course).forEach(s=>select.add(new Option(s,s)));
+}
+function startQuiz(){
+ const course=courses[currentLevel][Number(document.getElementById("courseSelect").value)||0];
+ const subject=document.getElementById("subjectSelect").value;
+ const student=document.getElementById("studentName").value.trim();
+ const area=document.getElementById("quizArea");
+ if(!student){area.innerHTML='<p class="bad">Please enter your name or student ID first.</p>';return;}
+ const questions=questionBank[subject];
+ if(!questions||!questions.length){
+ area.innerHTML=`<div class="notice"><strong>Question bank not ready yet.</strong><p>${subject} is available in the course list, but its quiz questions have not been added. Add curriculum-verified questions to the questionBank section of this file before offering this quiz to students.</p></div>`;
+ return;
+ }
+ currentCourse=course.name;currentSubject=subject;currentQuestions=questions;attemptAnswers={};
+ area.innerHTML=`<h3>${course.name} · ${subject}</h3><p class="muted">${questions.length} practice questions</p><form id="quizForm">${questions.map((q,i)=>`<div class="question"><strong>${i+1}. ${q.q}</strong>${q.options.map((opt,j)=>`<label class="option"><input type="radio" name="q${i}" value="${j}" required><span>${String.fromCharCode(65+j)}. ${opt}</span></label>`).join("")}</div>`).join("")}<button type="submit">Submit answers</button></form>`;
+ document.getElementById("quizForm").addEventListener("submit",submitQuiz);
+}
+function submitQuiz(event){
+ event.preventDefault();
+ const form=new FormData(event.target);
+ let correct=0;
+ currentQuestions.forEach((q,i)=>{if(Number(form.get("q"+i))===q.answer)correct++;});
+ const total=currentQuestions.length;
+ const percent=Math.round(correct/total*100);
+ const results=JSON.parse(localStorage.getItem("tkaResults")||"[]");
+ const review=currentQuestions.map((q,i)=>{
+ const chosen=Number(form.get("q"+i));
+ return {question:q.q,chosen:q.options[chosen],correctAnswer:q.options[q.answer],correct:chosen===q.answer,explanation:q.explanation};
+ });
+ results.push({student:document.getElementById("studentName").value.trim(),level:currentLevel,course:currentCourse,subject:currentSubject,correct,total,percent,date:new Date().toISOString(),review});
+ localStorage.setItem("tkaResults",JSON.stringify(results));
+ document.getElementById("quizArea").innerHTML=`<div class="panel"><h2>Quiz completed! 🎉</h2><p>Your score</p><h2>${correct}/${total} (${percent}%)</h2><p class="${percent>=50?"good":"bad"}">${percent>=50?"Good effort! Keep practising.":"Keep learning and try again."}</p>${review.map((r,i)=>`<div class="question"><strong>${i+1}. ${r.question}</strong><p class="${r.correct?"good":"bad"}">${r.correct?"Correct":"Incorrect"} · Your answer: ${r.chosen}</p><p>Correct answer: ${r.correctAnswer}</p><p class="muted">${r.explanation||""}</p></div>`).join("")}<button onclick="startQuiz()">Try again</button><button class="secondary" onclick="showDashboard()">View dashboard</button></div>`;
+}
+function showHome(){
+ document.getElementById("home").classList.remove("hidden");
+ document.getElementById("dashboard").classList.add("hidden");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function showDashboard(){
+ document.getElementById("home").classList.add("hidden");
+ document.getElementById("dashboard").classList.remove("hidden");
+ renderDashboard();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function getResults(){return JSON.parse(localStorage.getItem("tkaResults")||"[]");}
+function renderDashboard(){
+ const results=getResults();
+ const attempts=results.length;
+ const avg=attempts?Math.round(results.reduce((sum,r)=>sum+r.percent,0)/attempts):0;
+ const students=new Set(results.map(r=>r.student)).size;
+ const passed=results.filter(r=>r.percent>=50).length;
+ document.getElementById("stats").innerHTML=[
+ ["Quiz attempts",attempts],["Students / IDs",students],["Average score",avg+"%"],["Pass rate",attempts?Math.round(passed/attempts*100)+"%":"0%"]
+ ].map(([name,value])=>`<div class="stat">${name}<strong>${value}</strong></div>`).join("");
+ const subjects={};
+ results.forEach(r=>{if(!subjects[r.subject])subjects[r.subject]={n:0,sum:0,pass:0};const s=subjects[r.subject];s.n++;s.sum+=r.percent;if(r.percent>=50)s.pass++;});
+ const body=document.getElementById("subjectStats");
+ body.innerHTML=Object.entries(subjects).map(([name,s])=>`<tr><td>${escapeHTML(name)}</td><td>${s.n}</td><td>${Math.round(s.sum/s.n)}%</td><td>${Math.round(s.pass/s.n*100)}%</td></tr>`).join("")||'<tr><td colspan="4">No quiz attempts recorded yet.</td></tr>';
+ document.getElementById("attemptRows").innerHTML=results.slice().reverse().slice(0,100).map(r=>`<tr><td>${escapeHTML(r.student)}</td><td>${escapeHTML(r.course)}</td><td>${escapeHTML(r.subject)}</td><td>${r.correct}/${r.total} (${r.percent}%)</td><td>${new Date(r.date).toLocaleDateString()}</td></tr>`).join("")||'<tr><td colspan="5">No results yet.</td></tr>';
+}
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function exportResults(){
+ const results=getResults();
+ if(!results.length){alert("There are no results to export yet.");return;}
+ const rows=[["Student","Level","Course","Subject","Correct","Total","Score %","Date"],...results.map(r=>[r.student,r.level,r.course,r.subject,r.correct,r.total,r.percent,r.date])];
+ const csv=rows.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")).join("\r\n");
+ const url=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8;"}));
+ const a=document.createElement("a");a.href=url;a.download="toni-kroos-academy-results.csv";a.click();URL.revokeObjectURL(url);
+}
+function clearResults(){
+ if(confirm("Delete all quiz results saved in this browser? This cannot be undone.")){
+ localStorage.removeItem("tkaResults");renderDashboard();
+ }
+}
+renderCourses();
+</script>
+</body>
+</html>
