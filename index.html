@@ -1,144 +1,146 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toni Kroos Academy</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Toni Kroos Academy</title>
+<style>
+:root{--blue:#2458e8;--ink:#18243b;--bg:#f4f7fc}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--ink)}header{position:sticky;top:0;background:white;box-shadow:0 2px 10px #17255418;padding:12px 4%;display:flex;justify-content:space-between;align-items:center;gap:10px;z-index:2}.brand{display:flex;gap:10px;align-items:center}.logo{background:var(--blue);color:white;padding:12px;border-radius:12px}h1{font-size:18px;margin:0}header p{margin:4px 0;color:var(--blue);font-size:12px}main{max-width:1100px;margin:auto;padding:18px}.hero{background:linear-gradient(120deg,#194bd7,#7544df);color:white;padding:26px;border-radius:20px}.hero h2{font-size:clamp(25px,4vw,38px)}button,select,input,textarea{font:inherit}button{border:0;border-radius:9px;padding:11px 14px;background:var(--blue);color:white;font-weight:bold;cursor:pointer;margin:4px 3px 4px 0}.secondary{background:#e9efff;color:var(--blue)}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:18px 0}.tabs button{background:white;color:#52617a;border:1px solid #dfe6f1}.tabs .active{background:var(--blue);color:white}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.card,.panel{background:white;border:1px solid #e1e8f2;border-radius:15px;padding:18px;margin:15px 0}.card h3{margin:6px 0}.muted{color:#68758a;line-height:1.55}.tag{display:inline-block;background:#edf2ff;color:#2852c8;padding:5px 8px;border-radius:18px;font-size:12px;margin:3px}label{display:block;font-size:14px;font-weight:bold;margin:12px 0 5px}select,input,textarea{width:100%;padding:11px;border:1px solid #d5deeb;border-radius:8px;background:white;margin:5px 0 12px}.question{border:1px solid #e0e7f1;border-radius:12px;padding:15px;margin:13px 0}.option{display:flex;gap:9px;align-items:flex-start;padding:10px;border:1px solid #e0e7f1;border-radius:8px;margin:7px 0;font-weight:normal;cursor:pointer}.option input{width:auto;margin:3px 0}.notice{background:#fff8df;border:1px solid #efdf9d;padding:12px;border-radius:9px;line-height:1.5}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px}.stat{background:#edf2ff;border-radius:12px;padding:16px}.stat strong{display:block;font-size:26px;margin-top:7px}.tablewrap{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:520px}td,th{text-align:left;padding:10px;border-bottom:1px solid #e3e9f2;font-size:13px}th{background:#f1f5fb}.good{color:#08794c;font-weight:bold}.bad{color:#bd2d43;font-weight:bold}.hidden{display:none!important}footer{text-align:center;color:#738097;padding:25px}@media(max-width:500px){header{padding:10px}h1{font-size:15px}header button{font-size:12px;padding:9px 8px;white-space:nowrap}main{padding:12px}.hero{padding:20px}}
+</style></head>
 <body>
-
-<header class="header">
-  <div class="brand">
-    <div class="logo">TK</div>
-    <div>
-      <h2>Toni Kroos Academy</h2>
-      <p>WAEC • WASSCE • BECE • Tertiary</p>
-    </div>
-  </div>
-
-  <nav>
-    <button onclick="showPage('courses')">Courses</button>
-    <button onclick="showPage('dashboard')">Dashboard</button>
-  </nav>
-</header>
-
-<main class="container">
-
-  <section class="hero">
-    <p>LEARN • PRACTISE • SUCCEED</p>
-    <h1>Welcome to Toni Kroos Academy</h1>
-    <p>Choose your course, practise your subjects and track your progress.</p>
-  </section>
-
-  <section id="courses">
-    <h2>Choose Your Course</h2>
-    <p class="subtitle">Select your preferred academic stream.</p>
-
-    <div class="course-grid" id="courseGrid"></div>
-  </section>
-
-  <section id="subjects" hidden>
-    <button class="back" onclick="showPage('courses')">← Back to courses</button>
-    <h2 id="streamTitle">Subjects</h2>
-    <p class="subtitle">Choose a subject to start your quiz.</p>
-    <div class="subject-grid" id="subjectGrid"></div>
-  </section>
-
-  <section id="quiz" hidden>
-    <button class="back" onclick="showPage('subjects')">← Back to subjects</button>
-    <div class="quiz-card">
-      <p id="quizSubject" class="subtitle"></p>
-      <div class="progress">
-        <div id="progressBar"></div>
-      </div>
-      <p id="questionNumber"></p>
-      <h2 id="questionText"></h2>
-      <div id="options"></div>
-      <button class="primary" id="nextButton" onclick="nextQuestion()">
-        Next Question →
-      </button>
-      <p id="quizMessage"></p>
-    </div>
-  </section>
-
-  <section id="results" hidden>
-    <div class="result-card">
-      <h2>Quiz Completed!</h2>
-      <p>Your score is:</p>
-      <h1 id="finalScore">0%</h1>
-      <p id="scoreDetails"></p>
-      <button class="primary" onclick="showPage('subjects')">
-        Choose Another Subject
-      </button>
-      <button class="secondary" onclick="showPage('dashboard')">
-        View Dashboard
-      </button>
-    </div>
-  </section>
-
-  <section id="dashboard" hidden>
-    <h2>Student Performance Dashboard</h2>
-    <p class="subtitle">Monitor quiz results and student progress.</p>
-
-    <div class="stats-grid">
-      <div class="stat-card">
-        <p>Total Quiz Attempts</p>
-        <h2 id="totalAttempts">0</h2>
-      </div>
-      <div class="stat-card">
-        <p>Average Score</p>
-        <h2 id="averageScore">0%</h2>
-      </div>
-      <div class="stat-card">
-        <p>Questions Answered</p>
-        <h2 id="totalQuestions">0</h2>
-      </div>
-      <div class="stat-card">
-        <p>Answer Accuracy</p>
-        <h2 id="accuracy">0%</h2>
-      </div>
-    </div>
-
-    <div class="dashboard-card">
-      <h3>Performance by Subject</h3>
-      <div id="subjectPerformance"></div>
-    </div>
-
-    <div class="dashboard-card">
-      <h3>Recent Student Results</h3>
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>Student</th>
-              <th>Stream</th>
-              <th>Subject</th>
-              <th>Correct</th>
-              <th>Score</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody id="resultsTable"></tbody>
-        </table>
-      </div>
-      <p id="emptyResults">No quiz results recorded yet.</p>
-      <button class="primary" onclick="exportResults()">Export Results CSV</button>
-    </div>
-
-    <p class="warning">
-      This version stores results in the current browser only.
-      A shared school-wide dashboard requires a database and student accounts.
-    </p>
-  </section>
-
-</main>
-
-<footer>
-  © <span id="year"></span> Toni Kroos Academy. Keep learning!
-</footer>
-
-<script src="app.js"></script>
-</body>
-</html>
+<header><div class="brand"><div class="logo">🎓</div><div><h1>Toni Kroos Academy</h1><p>WASSCE · BECE · Tertiary</p></div></div><button class="secondary" onclick="showDashboard()">📊 Dashboard</button></header>
+<main>
+<section class="hero"><span>✨ YOUR LEARNING JOURNEY STARTS HERE</span><h2>Learn smarter. Practise better.</h2><p>Practise multiple-choice and theory questions, then review your progress.</p></section>
+<section id="home">
+<h2>Choose your educational level</h2><div class="tabs" id="levelTabs"><button class="active" onclick="chooseLevel('WASSCE',this)">WASSCE / SHS</button><button onclick="chooseLevel('BECE',this)">BECE / JHS</button><button onclick="chooseLevel('Tertiary',this)">Tertiary</button></div>
+<div id="courseGrid" class="grid"></div>
+<div class="panel"><h2>📝 Multiple-choice quiz</h2><p class="muted">Up to seven questions per quiz. Answer choices are shuffled, so the correct answer does not always appear as A.</p><label>Course / stream</label><select id="courseSelect" onchange="fillSubjects()"></select><label>Subject</label><select id="subjectSelect"></select><label>Student name or ID</label><input id="studentName" maxlength="60" placeholder="Enter your name or student ID"><button onclick="startQuiz()">Start quiz →</button><div id="quizArea"></div></div>
+<div class="panel"><h2>✍️ Theory section</h2><p class="muted">Written practice questions are separate from the multiple-choice quiz. Answers are saved in this browser but are not automatically marked.</p><label>Subject</label><select id="theorySubject"></select><button onclick="startTheory()">Open theory questions →</button><div id="theoryArea"></div></div>
+</section>
+<section id="dashboard" class="hidden"><div class="panel"><button class="secondary" onclick="showHome()">← Back to courses</button><h2>📊 Student performance dashboard</h2><p class="muted">Quiz scores, averages and pass rates.</p><div class="notice"><b>Important:</b> this version stores results in the current browser only. Students on other phones will not appear here. A shared school-wide dashboard needs a database (for example Firebase) and secure admin sign-in.</div></div><div id="stats" class="stats"></div><div class="panel"><h3>Performance by subject</h3><div class="tablewrap"><table><thead><tr><th>Subject</th><th>Attempts</th><th>Average</th><th>Pass rate</th></tr></thead><tbody id="subjectStats"></tbody></table></div></div><div class="panel"><h3>Recent attempts</h3><div class="tablewrap"><table><thead><tr><th>Student</th><th>Course</th><th>Subject</th><th>Score</th><th>Date</th></tr></thead><tbody id="attemptRows"></tbody></table></div><button class="secondary" onclick="exportResults()">Export CSV</button><button class="secondary" onclick="clearResults()">Clear local results</button></div></section>
+</main><footer>© Toni Kroos Academy · Learn, practise, improve.</footer>
+<script>
+const courses={
+WASSCE:[
+{name:"General Science",icon:"🔬",core:["English Language","Core Mathematics","Social Studies","Integrated Science"],electives:["Physics","Chemistry","Biology","Elective Mathematics","Computer Science"]},
+{name:"General Arts",icon:"📚",core:["English Language","Core Mathematics","Social Studies","Integrated Science"],electives:["Economics","Government","Geography","History","Literature in English","Christian Religious Studies","Islamic Religious Studies","French","Elective Mathematics"]},
+{name:"Business",icon:"💼",core:["English Language","Core Mathematics","Social Studies","Integrated Science"],electives:["Financial Accounting","Cost Accounting","Business Management","Economics","Elective Mathematics","ICT"]},
+{name:"Home Economics",icon:"🍲",core:["English Language","Core Mathematics","Social Studies","Integrated Science"],electives:["Food and Nutrition","Management in Living","Clothing and Textiles","Biology","Chemistry","Economics"]},
+{name:"Visual Arts",icon:"🎨",core:["English Language","Core Mathematics","Social Studies","Integrated Science"],electives:["Graphic Design","Picture Making","Sculpture","Textiles","Ceramics","General Knowledge in Art"]},
+{name:"Agricultural Science",icon:"🌱",core:["English Language","Core Mathematics","Social Studies","Integrated Science"],electives:["General Agriculture","Animal Husbandry","Crop Husbandry","Horticulture","Chemistry","Biology","Economics"]}],
+BECE:[{name:"JHS Core Subjects",icon:"📖",core:["English Language","Mathematics","Science","Social Studies","Computing","Career Technology","Creative Arts and Design","Religious and Moral Education","Ghanaian Language","French"],electives:[]}],
+Tertiary:[{name:"General Studies",icon:"🎓",core:["English Language","Communication Skills","ICT"],electives:["Mathematics","Research Methods","Business Studies","Economics"]}]
+};
+// Original revision questions in a WAEC-style format. They are not confirmed or leaked WAEC 2027 questions.
+const questionBank={
+"Core Mathematics":[
+["What is 25% of 200?",["25","40","50","75"],2,"25% × 200 = 50."],
+["Solve: 3x = 21.",["6","7","8","9"],1,"Divide both sides by 3: x = 7."],
+["Find the area of a rectangle 8 cm by 4 cm.",["12 cm²","24 cm²","32 cm²","36 cm²"],2,"Area = length × width = 32 cm²."],
+["Simplify 3a + 5a − 2a.",["6a","10a","8a","a"],0,"Combine like terms: 3 + 5 − 2 = 6."],
+["Express 0.75 in its lowest fractional form.",["1/4","2/3","3/4","4/5"],2,"0.75 = 75/100 = 3/4."],
+["Find the mean of 2, 4, 6 and 8.",["4","5","6","20"],1,"The sum is 20; 20 ÷ 4 = 5."],
+["An item costs GH₵80 after a 20% discount. Find its original price.",["GH₵96","GH₵100","GH₵120","GH₵64"],1,"GH₵80 is 80% of the original price: 80 ÷ 0.8 = GH₵100."]
+],
+"English Language":[
+["Which word is an adjective in 'The clever student answered'?",["The","clever","student","answered"],1,"Clever describes the noun student."],
+["Choose the correct plural of child.",["Childs","Childes","Children","Childrens"],2,"The plural is children."],
+["Choose the correct sentence.",["She have gone home.","She has gone home.","She gone home.","She having gone home."],1,"The correct form is 'has gone'."],
+["The opposite of scarce is:",["Rare","Limited","Abundant","Small"],2,"Abundant means available in large quantities."],
+["Which punctuation mark ends a direct question?",["Comma","Full stop","Question mark","Colon"],2,"A direct question ends with a question mark."],
+["In 'Although it rained, we played', although expresses:",["Contrast","Addition","Place","Quantity"],0,"Although introduces contrast or concession."],
+["Choose the correct reported speech: Ama said, 'I am tired.'",["Ama said that I am tired.","Ama said that she was tired.","Ama says she tired.","Ama said she is tiring."],1,"Pronoun and tense normally change in reported speech."]
+],
+"Integrated Science":[
+["Which organelle is a major site of aerobic respiration?",["Nucleus","Mitochondrion","Cell wall","Vacuole"],1,"Mitochondria are a major site of aerobic respiration."],
+["Which is a renewable energy source?",["Coal","Petroleum","Sunlight","Natural gas"],2,"Sunlight is naturally replenished."],
+["Liquid water changing into water vapour is:",["Condensation","Evaporation","Freezing","Melting"],1,"Evaporation changes liquid to gas."],
+["Which blood cells help defend the body against infection?",["Red blood cells","White blood cells","Platelets","Plasma only"],1,"White blood cells help protect against pathogens."],
+["Which instrument measures temperature?",["Barometer","Thermometer","Ammeter","Hygrometer"],1,"A thermometer measures temperature."],
+["A material that allows current to pass easily is a:",["Conductor","Insulator","Fuel","Solvent"],0,"Conductors allow electric charge to flow."],
+["Which action helps prevent water-borne disease?",["Drink untreated water","Open defecation","Treat drinking water","Leave refuse near wells"],2,"Treating water helps remove disease-causing organisms."]
+],
+"Biology":[
+["Which process do green plants use to make food?",["Respiration","Photosynthesis","Digestion","Excretion"],1,"Photosynthesis uses light energy to make food."],
+["The basic structural and functional unit of life is the:",["Organ","Tissue","Cell","System"],2,"The cell is the basic unit of life."],
+["Which part of a flower produces pollen?",["Stigma","Anther","Ovary","Sepal"],1,"The anther produces pollen."],
+["Organisms that break down dead organic matter are:",["Decomposers","Producers only","Herbivores only","Pollinators"],0,"Decomposers recycle nutrients."],
+["Which gas is taken in by plants during photosynthesis?",["Oxygen","Nitrogen","Carbon dioxide","Hydrogen"],2,"Plants use carbon dioxide in photosynthesis."],
+["The movement of water through a selectively permeable membrane is:",["Diffusion","Osmosis","Transpiration","Respiration"],1,"Osmosis is the movement of water across a selectively permeable membrane."],
+["Which blood component helps clotting?",["Platelets","Red cells","Water","White cells"],0,"Platelets help blood clot."]
+],
+"Chemistry":[
+["What is the chemical symbol for sodium?",["S","So","Na","N"],2,"Sodium's symbol is Na."],
+["A solution with pH 2 is:",["Acidic","Neutral","Alkaline","Pure water"],0,"A pH below 7 is acidic."],
+["Which method separates an insoluble solid from a liquid?",["Filtration","Distillation","Chromatography","Crystallisation only"],0,"Filtration separates insoluble solids from liquids."],
+["The smallest unit of an element retaining its chemical identity is an:",["Atom","Mixture","Solution","Compound"],0,"An atom is the smallest unit of an element retaining its identity."],
+["Which gas relights a glowing splint?",["Carbon dioxide","Oxygen","Ammonia","Hydrogen chloride"],1,"Oxygen supports combustion."],
+["A bond formed by transfer of electrons is:",["Covalent","Ionic","Metallic only","Hydrogen"],1,"Ionic bonding involves electron transfer and electrostatic attraction."],
+["What is the formula of water?",["CO₂","H₂O","O₂","NaCl"],1,"Water contains hydrogen and oxygen in a 2:1 ratio."]
+],
+"Physics":[
+["What is the SI unit of force?",["Joule","Watt","Newton","Pascal"],2,"Force is measured in newtons."],
+["Speed is calculated as:",["Time ÷ distance","Distance ÷ time","Mass × volume","Force ÷ time"],1,"Speed = distance divided by time."],
+["Which instrument measures electric current?",["Voltmeter","Ammeter","Thermometer","Barometer"],1,"An ammeter measures current."],
+["Energy possessed by a moving object is:",["Chemical","Kinetic","Potential only","Nuclear"],1,"Kinetic energy is energy of motion."],
+["Which lens converges parallel rays?",["Concave","Convex","Plane glass","Mirror"],1,"A convex lens converges parallel rays."],
+["The unit of electrical resistance is the:",["Ampere","Volt","Ohm","Coulomb"],2,"Resistance is measured in ohms."],
+["Heat transfer through a vacuum occurs by:",["Conduction","Convection","Radiation","Evaporation"],2,"Radiation can travel through a vacuum."]
+],
+"Economics":[
+["The basic economic problem caused by limited resources is:",["Scarcity","Surplus","Trade","Advertising"],0,"Scarcity means resources are limited relative to wants."],
+["The reward for labour is:",["Rent","Wages","Interest","Profit"],1,"Labour earns wages or salaries."],
+["A sustained general rise in prices is:",["Deflation","Inflation","Depression","Appreciation"],1,"Inflation is a general rise in prices."],
+["Demand is the quantity consumers are willing and able to:",["Produce","Buy at given prices","Store forever","Export only"],1,"Demand involves willingness and ability to buy."],
+["Which institution is Ghana's central bank?",["Bank of Ghana","Ghana Education Service","Electoral Commission","Ghana Police Service"],0,"The Bank of Ghana is the central bank."],
+["Opportunity cost is the:",["Money in a bank","Next best alternative forgone","Price of every item","Cost that never changes"],1,"It is the next best alternative given up."],
+["A tax on imported goods is a:",["Subsidy","Tariff","Grant","Dividend"],1,"A tariff is a tax on imports."]
+],
+"General Agriculture":[
+["Which soil component comes from decomposed organic matter?",["Humus","Gravel","Bedrock","Clay only"],0,"Humus is decomposed organic material."],
+["Which hand tool is commonly used to loosen soil?",["Rake only","Hoe","Sprayer","Sickle only"],1,"A hoe is used to loosen and cultivate soil."],
+["Removing unwanted plants from a farm is:",["Pruning","Weeding","Harvesting","Irrigation"],1,"Weeding removes unwanted plants."],
+["Which nutrient supports leafy vegetative growth?",["Nitrogen","Lead","Mercury","Plastic"],0,"Nitrogen supports vegetative growth."],
+["Keeping and breeding livestock is called:",["Horticulture","Animal husbandry","Mining","Afforestation"],1,"Animal husbandry concerns livestock care and breeding."],
+["Which practice helps reduce erosion on slopes?",["Contour ploughing","Removing all plants","Overgrazing","Repeated burning"],0,"Contour ploughing slows runoff."],
+["A young plant grown from a seed is a:",["Seedling","Fertiliser","Pest","Compost"],0,"A seedling is a young plant."]
+],
+"Computer Science":[
+["Which device is used to enter text into a computer?",["Monitor","Keyboard","Speaker","Projector"],1,"A keyboard is an input device."],
+["Which is an operating system?",["Windows","Keyboard","Mouse","Printer"],0,"Windows is an operating system."],
+["CPU stands for:",["Central Processing Unit","Computer Personal Utility","Control Program User","Central Print Unit"],0,"CPU means Central Processing Unit."],
+["Which device displays visual output?",["Monitor","Microphone","Scanner","Keyboard"],0,"A monitor displays visual output."],
+["A strong password should be:",["Your name only","123456","Long and hard to guess","Shared with friends"],2,"Use a long, unique password and keep it private."],
+["Which device stores files long-term?",["SSD","Monitor","Speaker","Mouse"],0,"An SSD is a storage device."],
+["A step-by-step method for solving a problem is an:",["Algorithm","Icon","Folder","Browser tab"],0,"An algorithm is a sequence of steps."]
+]};
+const theoryBank={
+"Core Mathematics":["Solve 2x + y = 11 and x − y = 1. Show your working.","An item costs GH₵240 and is sold for GH₵300. Calculate profit and percentage profit.","Find the mean and range of 8, 10, 12, 14 and 16."],
+"English Language":["Write a formal letter to your headteacher suggesting three ways to improve sanitation in your school.","Summarise three benefits of reading regularly.","Explain simple and compound sentences, giving one example of each."],
+"Integrated Science":["Explain three ways to prevent water-borne diseases.","Describe photosynthesis and state two conditions necessary for it.","State three differences between renewable and non-renewable energy."],
+"Biology":["Describe the functions of the root, stem and leaves.","Explain how the human heart helps circulate blood.","State three differences between plant and animal cells."],
+"Chemistry":["Describe how to separate a mixture of sand and salt.","Define acids and bases and give two examples of each.","Explain the difference between an element, a compound and a mixture."],
+"Physics":["Define speed, distance and time and state the formula linking them.","Give two differences between series and parallel circuits.","Explain three methods of heat transfer with examples."],
+"Economics":["Explain three causes of scarcity and how it affects household choices.","Distinguish between needs and wants, giving three examples of each.","Explain the law of demand and two factors that can change demand."],
+"General Agriculture":["Explain four practices that maintain soil fertility.","Describe three methods of controlling crop pests.","State four factors to consider when choosing a poultry farm site."],
+"Computer Science":["Explain hardware and software with three examples of each.","Describe four ways to protect personal information online.","Explain the input-process-output cycle using an example."]
+};
+let level="WASSCE",quizQuestions=[],quizSubject="",quizCourse="";
+function subjects(c){return [...c.core,...c.electives]}
+function chooseLevel(l,b){level=l;document.querySelectorAll("#levelTabs button").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderCourses()}
+function renderCourses(){let grid=document.getElementById("courseGrid");grid.innerHTML="";courses[level].forEach((c,i)=>{let d=document.createElement("article");d.className="card";d.innerHTML=`<div style="font-size:28px">${c.icon}</div><h3>${esc(c.name)}</h3><p class="muted">${c.core.length} core · ${c.electives.length} elective subjects</p><div>${c.core.map(s=>`<span class="tag">${esc(s)}</span>`).join("")}</div><details><summary>View electives</summary><p>${c.electives.map(s=>`<span class="tag">${esc(s)}</span>`).join("")||"No electives listed."}</p></details><button onclick="selectCourse(${i})">Choose course</button>`;grid.appendChild(d)});let sel=document.getElementById("courseSelect");sel.innerHTML="";courses[level].forEach((c,i)=>sel.add(new Option(c.name,i)));fillSubjects();fillTheorySubjects()}
+function selectCourse(i){document.getElementById("courseSelect").value=i;fillSubjects();document.getElementById("courseSelect").scrollIntoView({behavior:"smooth",block:"center"})}
+function fillSubjects(){let c=courses[level][Number(document.getElementById("courseSelect").value)||0],s=document.getElementById("subjectSelect");s.innerHTML="";subjects(c).forEach(x=>s.add(new Option(x,x)))}
+function fillTheorySubjects(){let s=document.getElementById("theorySubject");s.innerHTML="";let seen=new Set();courses[level].forEach(c=>subjects(c).forEach(x=>{if(!seen.has(x)){s.add(new Option(x,x));seen.add(x)}}))}
+function shuffle(q){let opts=q[1].map((text,i)=>({text,old:i}));for(let i=opts.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[opts[i],opts[j]]=[opts[j],opts[i]]}return {q:q[0],opts,answer:opts.findIndex(x=>x.old===q[2]),explanation:q[3]}}
+function startQuiz(){let c=courses[level][Number(document.getElementById("courseSelect").value)||0],s=document.getElementById("subjectSelect").value,student=document.getElementById("studentName").value.trim(),area=document.getElementById("quizArea");if(!student){area.innerHTML='<p class="bad">Enter your name or student ID first.</p>';return}if(!questionBank[s]){area.innerHTML=`<div class="notice"><b>Question bank still needed.</b><p>Reviewed questions have not yet been added for ${esc(s)}. The question bank currently contains seven questions for selected subjects only.</p></div>`;return}quizCourse=c.name;quizSubject=s;quizQuestions=questionBank[s].slice(0,7).map(shuffle);area.innerHTML=`<h3>${esc(c.name)} · ${esc(s)}</h3><p class="muted">${quizQuestions.length} questions</p><form id="quizForm">${quizQuestions.map((q,i)=>`<div class="question"><b>${i+1}. ${esc(q.q)}</b>${q.opts.map((o,j)=>`<label class="option"><input type="radio" name="q${i}" value="${j}" required><span>${"ABCD"[j]}. ${esc(o.text)}</span></label>`).join("")}</div>`).join("")}<button>Submit answers</button></form>`;document.getElementById("quizForm").addEventListener("submit",submitQuiz)}
+function submitQuiz(e){e.preventDefault();let f=new FormData(e.target),correct=0,review=quizQuestions.map((q,i)=>{let chosen=Number(f.get("q"+i)),ok=chosen===q.answer;if(ok)correct++;return {question:q.q,chosen:q.opts[chosen].text,correctAnswer:q.opts.find(o=>o.old===questionBank[quizSubject][i][2]).text,correct:ok,explanation:q.explanation}}),total=quizQuestions.length,percent=Math.round(correct/total*100),results=getResults();results.push({student:document.getElementById("studentName").value.trim(),level,course:quizCourse,subject:quizSubject,correct,total,percent,date:new Date().toISOString()});localStorage.setItem("tkaResults",JSON.stringify(results));document.getElementById("quizArea").innerHTML=`<div class="panel"><h2>Quiz completed</h2><h2>${correct}/${total} (${percent}%)</h2>${review.map((r,i)=>`<div class="question"><b>${i+1}. ${esc(r.question)}</b><p class="${r.correct?"good":"bad"}">${r.correct?"Correct":"Incorrect"} — Your answer: ${esc(r.chosen)}</p><p>Correct answer: ${esc(r.correctAnswer)}</p><p class="muted">${esc(r.explanation)}</p></div>`).join("")}<button onclick="startQuiz()">Try again</button><button class="secondary" onclick="showDashboard()">View dashboard</button></div>`}
+function startTheory(){let s=document.getElementById("theorySubject").value,qs=theoryBank[s]||["Explain three important concepts in "+s+" and give examples.","Describe a real-life issue related to "+s+" and suggest possible solutions.","Write a structured answer about a key topic you have studied in "+s+"."];let area=document.getElementById("theoryArea");area.innerHTML=`<h3>${esc(s)} — theory practice</h3><div class="notice">These are revision prompts, not confirmed questions for the 2027 examination. Theory answers are not automatically marked.</div><form id="theoryForm">${qs.slice(0,3).map((q,i)=>`<div class="question"><b>${i+1}. ${esc(q)}</b><textarea name="a${i}" rows="5" placeholder="Write your answer..." required></textarea></div>`).join("")}<button>Save theory answers on this device</button></form><div id="theorySaved"></div>`;document.getElementById("theoryForm").addEventListener("submit",e=>{e.preventDefault();let answers=[...new FormData(e.target)].map(([k,v])=>({question:qs[Number(k.slice(1))],answer:v})),arr=JSON.parse(localStorage.getItem("tkaTheory")||"[]");arr.push({student:document.getElementById("studentName").value.trim()||"Unnamed student",subject:s,answers,date:new Date().toISOString()});localStorage.setItem("tkaTheory",JSON.stringify(arr));document.getElementById("theorySaved").innerHTML='<p class="good">Saved in this browser. These answers have not been sent to a teacher.</p>'})}
+function showHome(){document.getElementById("home").classList.remove("hidden");document.getElementById("dashboard").classList.add("hidden");scrollTo({top:0,behavior:"smooth"})}
+function showDashboard(){document.getElementById("home").classList.add("hidden");document.getElementById("dashboard").classList.remove("hidden");renderDashboard();scrollTo({top:0,behavior:"smooth"})}
+function getResults(){return JSON.parse(localStorage.getItem("tkaResults")||"[]")}
+function renderDashboard(){let r=getResults(),n=r.length,avg=n?Math.round(r.reduce((a,x)=>a+x.percent,0)/n):0,students=new Set(r.map(x=>x.student)).size,passed=r.filter(x=>x.percent>=50).length;document.getElementById("stats").innerHTML=[["Quiz attempts",n],["Students / IDs",students],["Average score",avg+"%"],["Pass rate",n?Math.round(passed/n*100)+"%":"0%"]].map(([a,b])=>`<div class="stat">${a}<strong>${b}</strong></div>`).join("");let ss={};r.forEach(x=>{ss[x.subject]??={n:0,sum:0,pass:0};ss[x.subject].n++;ss[x.subject].sum+=x.percent;if(x.percent>=50)ss[x.subject].pass++});document.getElementById("subjectStats").innerHTML=Object.entries(ss).map(([s,x])=>`<tr><td>${esc(s)}</td><td>${x.n}</td><td>${Math.round(x.sum/x.n)}%</td><td>${Math.round(x.pass/x.n*100)}%</td></tr>`).join("")||'<tr><td colspan="4">No attempts recorded yet.</td></tr>';document.getElementById("attemptRows").innerHTML=r.slice().reverse().slice(0,100).map(x=>`<tr><td>${esc(x.student)}</td><td>${esc(x.course)}</td><td>${esc(x.subject)}</td><td>${x.correct}/${x.total} (${x.percent}%)</td><td>${new Date(x.date).toLocaleDateString()}</td></tr>`).join("")||'<tr><td colspan="5">No results yet.</td></tr>'}
+function esc(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function exportResults(){let r=getResults();if(!r.length){alert("No results to export yet.");return}let rows=[["Student","Level","Course","Subject","Correct","Total","Score %","Date"],...r.map(x=>[x.student,x.level,x.course,x.subject,x.correct,x.total,x.percent,x.date])],csv=rows.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")).join("\r\n"),url=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"})),a=document.createElement("a");a.href=url;a.download="toni-kroos-academy-results.csv";a.click();URL.revokeObjectURL(url)}
+function clearResults(){if(confirm("Delete all results saved in this browser?")){localStorage.removeItem("tkaResults");renderDashboard()}}
+renderCourses();
+</script></body></html>
