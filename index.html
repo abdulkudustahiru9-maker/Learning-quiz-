@@ -1,614 +1,144 @@
+
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toni Kroos Academy - WAEC & Educational Exam Prep</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- MathJax for Math & Science formulas -->
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <!-- Canvas Confetti CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toni Kroos Academy</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col font-sans">
+<body>
 
-    <!-- Header / Navbar -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-            <!-- Brand -->
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="showHomeScreen()">
-                <div class="bg-blue-600 text-white p-2.5 rounded-xl font-bold text-xl flex items-center justify-center w-10 h-10 shadow-md">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <div>
-                    <h1 class="font-extrabold text-lg text-gray-900 leading-tight tracking-tight">Toni Kroos Academy</h1>
-                    <p class="text-xs text-blue-600 font-semibold">WAEC WASSCE • BECE • Tertiary</p>
-                </div>
-            </div>
+<header class="header">
+  <div class="brand">
+    <div class="logo">TK</div>
+    <div>
+      <h2>Toni Kroos Academy</h2>
+      <p>WAEC • WASSCE • BECE • Tertiary</p>
+    </div>
+  </div>
 
-            <!-- Stats Bar (XP & Streaks) -->
-            <div class="flex items-center space-x-3 bg-gray-100 px-3 py-1.5 rounded-xl border border-gray-200 text-xs">
-                <div class="flex items-center space-x-1" title="Daily Study Streak">
-                    <i class="fas fa-fire text-amber-500 animate-pulse"></i>
-                    <span id="streak-count" class="font-bold text-gray-800">1</span>
-                    <span class="text-gray-500">Days</span>
-                </div>
-                <div class="h-3 w-px bg-gray-300"></div>
-                <div class="flex items-center space-x-1" title="Total XP Earned">
-                    <i class="fas fa-bolt text-yellow-500"></i>
-                    <span id="xp-count" class="font-bold text-gray-800">0</span>
-                    <span class="text-yellow-600 font-semibold">XP</span>
-                </div>
-            </div>
-        </div>
-    </header>
+  <nav>
+    <button onclick="showPage('courses')">Courses</button>
+    <button onclick="showPage('dashboard')">Dashboard</button>
+  </nav>
+</header>
 
-    <!-- Main Content Area -->
-    <main class="flex-grow max-w-5xl w-full mx-auto p-4 md:p-6 space-y-6">
+<main class="container">
 
-        <!-- HOME SCREEN: Streams & Courses -->
-        <div id="home-screen" class="space-y-6">
-            
-            <!-- Hero Banner featuring TONI KROOS ACADEMY -->
-            <div class="bg-gradient-to-r from-blue-700 via-indigo-600 to-blue-800 text-white rounded-3xl p-6 md:p-8 shadow-xl relative overflow-hidden">
-                <div class="relative z-10 space-y-3 max-w-2xl">
-                    <span class="inline-block bg-white/20 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider">
-                        ✨ Official WAEC Exam Prep Platform
-                    </span>
-                    <h2 class="text-3xl md:text-5xl font-black leading-tight tracking-tight">
-                        TONI KROOS ACADEMY
-                    </h2>
-                    <p class="text-blue-100 text-sm md:text-base leading-relaxed">
-                        Practice authentic WAEC past questions across all SHS course streams, core subjects, and electives with step-by-step examiner solutions!
-                    </p>
-                </div>
-                <div class="absolute -right-10 -bottom-10 opacity-10 text-white text-9xl">
-                    <i class="fas fa-award"></i>
-                </div>
-            </div>
+  <section class="hero">
+    <p>LEARN • PRACTISE • SUCCEED</p>
+    <h1>Welcome to Toni Kroos Academy</h1>
+    <p>Choose your course, practise your subjects and track your progress.</p>
+  </section>
 
-            <!-- Level Selector Tabs -->
-            <div class="flex border-b border-gray-200 text-sm font-bold justify-center space-x-6 md:space-x-8">
-                <button onclick="filterLevel('WASSCE')" id="tab-wassce" class="pb-3 border-b-2 border-blue-600 text-blue-600 px-2 transition">WASSCE (SHS Streams)</button>
-                <button onclick="filterLevel('BECE')" id="tab-bece" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-2 transition">BECE (JHS Core)</button>
-                <button onclick="filterLevel('TERTIARY')" id="tab-tertiary" class="pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-2 transition">Tertiary Level</button>
-            </div>
+  <section id="courses">
+    <h2>Choose Your Course</h2>
+    <p class="subtitle">Select your preferred academic stream.</p>
 
-            <!-- Course Streams Grid -->
-            <div id="streams-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Rendered dynamically -->
-            </div>
-        </div>
+    <div class="course-grid" id="courseGrid"></div>
+  </section>
 
-        <!-- SUBJECTS VIEW (Appears when a Course Stream is clicked) -->
-        <div id="subjects-screen" class="hidden space-y-6">
-            <div class="flex items-center justify-between bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
-                <button onclick="showHomeScreen()" class="text-xs font-bold text-gray-600 hover:text-blue-600 flex items-center bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-xl transition">
-                    <i class="fas fa-arrow-left mr-2"></i> Back to Courses
-                </button>
-                <h3 id="stream-title" class="font-black text-gray-900 text-lg">Stream Title</h3>
-                <span class="text-xs text-blue-600 font-semibold bg-blue-50 px-3 py-1 rounded-full">Core & Electives</span>
-            </div>
+  <section id="subjects" hidden>
+    <button class="back" onclick="showPage('courses')">← Back to courses</button>
+    <h2 id="streamTitle">Subjects</h2>
+    <p class="subtitle">Choose a subject to start your quiz.</p>
+    <div class="subject-grid" id="subjectGrid"></div>
+  </section>
 
-            <div class="text-sm text-gray-500 px-1">Select any subject below to practice authentic WAEC exam questions (7 questions in the first round):</div>
+  <section id="quiz" hidden>
+    <button class="back" onclick="showPage('subjects')">← Back to subjects</button>
+    <div class="quiz-card">
+      <p id="quizSubject" class="subtitle"></p>
+      <div class="progress">
+        <div id="progressBar"></div>
+      </div>
+      <p id="questionNumber"></p>
+      <h2 id="questionText"></h2>
+      <div id="options"></div>
+      <button class="primary" id="nextButton" onclick="nextQuestion()">
+        Next Question →
+      </button>
+      <p id="quizMessage"></p>
+    </div>
+  </section>
 
-            <div id="subjects-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- Rendered dynamically -->
-            </div>
-        </div>
+  <section id="results" hidden>
+    <div class="result-card">
+      <h2>Quiz Completed!</h2>
+      <p>Your score is:</p>
+      <h1 id="finalScore">0%</h1>
+      <p id="scoreDetails"></p>
+      <button class="primary" onclick="showPage('subjects')">
+        Choose Another Subject
+      </button>
+      <button class="secondary" onclick="showPage('dashboard')">
+        View Dashboard
+      </button>
+    </div>
+  </section>
 
-        <!-- QUIZ RUNNER SCREEN -->
-        <div id="quiz-screen" class="hidden space-y-6">
-            <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
-                <button onclick="backToSubjects()" class="text-xs font-semibold text-gray-600 hover:text-blue-600 flex items-center">
-                    <i class="fas fa-arrow-left mr-2"></i> Exit Subject
-                </button>
-                <span id="quiz-title" class="font-bold text-sm text-blue-600">Subject Name</span>
-                <span id="quiz-progress-text" class="text-xs text-gray-500 font-mono font-bold">Q 1/7</span>
-            </div>
+  <section id="dashboard" hidden>
+    <h2>Student Performance Dashboard</h2>
+    <p class="subtitle">Monitor quiz results and student progress.</p>
 
-            <!-- Question Card -->
-            <div class="bg-white rounded-3xl border border-gray-200 p-6 md:p-8 space-y-6 shadow-md">
-                <div class="inline-block bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full font-bold">
-                    <i class="fas fa-star mr-1"></i> WAEC Exam Practice Question
-                </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <p>Total Quiz Attempts</p>
+        <h2 id="totalAttempts">0</h2>
+      </div>
+      <div class="stat-card">
+        <p>Average Score</p>
+        <h2 id="averageScore">0%</h2>
+      </div>
+      <div class="stat-card">
+        <p>Questions Answered</p>
+        <h2 id="totalQuestions">0</h2>
+      </div>
+      <div class="stat-card">
+        <p>Answer Accuracy</p>
+        <h2 id="accuracy">0%</h2>
+      </div>
+    </div>
 
-                <div id="question-text" class="text-base sm:text-lg font-semibold text-gray-900 leading-relaxed"></div>
+    <div class="dashboard-card">
+      <h3>Performance by Subject</h3>
+      <div id="subjectPerformance"></div>
+    </div>
 
-                <div id="options-container" class="space-y-3"></div>
+    <div class="dashboard-card">
+      <h3>Recent Student Results</h3>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Stream</th>
+              <th>Subject</th>
+              <th>Correct</th>
+              <th>Score</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="resultsTable"></tbody>
+        </table>
+      </div>
+      <p id="emptyResults">No quiz results recorded yet.</p>
+      <button class="primary" onclick="exportResults()">Export Results CSV</button>
+    </div>
 
-                <div id="explanation-box" class="hidden bg-blue-50 border border-blue-200 p-5 rounded-2xl text-sm text-blue-900 space-y-2">
-                    <div class="font-bold text-blue-700 flex items-center text-sm">
-                        <i class="fas fa-lightbulb text-amber-500 mr-2 text-base"></i> WAEC Examiner Step-by-Step Solution:
-                    </div>
-                    <div id="explanation-text" class="text-gray-700 leading-relaxed"></div>
-                </div>
+    <p class="warning">
+      This version stores results in the current browser only.
+      A shared school-wide dashboard requires a database and student accounts.
+    </p>
+  </section>
 
-                <div class="pt-2 flex justify-end">
-                    <button id="next-btn" onclick="nextQuestion()" class="hidden px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition shadow-lg">
-                        Next Question <i class="fas fa-chevron-right ml-2"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+</main>
 
-        <!-- SUMMARY / RESULTS SCREEN -->
-        <div id="results-screen" class="hidden text-center bg-white rounded-3xl border border-gray-200 p-8 md:p-12 space-y-6 shadow-xl max-w-lg mx-auto">
-            <div class="text-6xl">🏆</div>
-            <h2 class="text-2xl font-black text-gray-900">Round 1 Completed! Excellent Work</h2>
-            
-            <div class="grid grid-cols-2 gap-4 max-w-xs mx-auto">
-                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
-                    <span id="final-score" class="block text-3xl font-extrabold text-emerald-600">0/7</span>
-                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Score</span>
-                </div>
-                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
-                    <span id="final-xp" class="block text-3xl font-extrabold text-yellow-500">+0 XP</span>
-                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">XP Gained</span>
-                </div>
-            </div>
+<footer>
+  © <span id="year"></span> Toni Kroos Academy. Keep learning!
+</footer>
 
-            <p class="text-sm text-gray-600">Want to test yourself further? Practice round 2 with another set of 7 different WAEC questions!</p>
-
-            <div class="flex flex-col sm:flex-row justify-center gap-3 pt-2">
-                <button onclick="loadNextSet()" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl transition shadow-md">
-                    <i class="fas fa-layer-group mr-2"></i> Practice Round 2 (7 New Qs)
-                </button>
-                <button onclick="backToSubjects()" class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-bold rounded-xl transition">
-                    Back to Subjects
-                </button>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- App Data & Logic -->
-    <script>
-        // COMPLETE WASSCE, BECE & TERTIARY CURRICULUM DATABASE
-        // Every subject has exactly 7 questions per set in round 1, with randomly distributed correct options (A, B, C, or D)
-        const curriculumData = {
-            WASSCE: [
-                {
-                    streamName: "General Science Stream",
-                    icon: "fa-atom",
-                    desc: "Physics, Chemistry, Biology, Elective Mathematics & Core Science",
-                    subjects: [
-                        {
-                            name: "Elective Mathematics", icon: "fa-calculator", type: "Elective",
-                            sets: [[
-                                { q: "WASSCE Past Q: Solve for $x$ in the equation $2x + 5 = 15$.", options: ["x = 3", "x = 5", "x = 10", "x = 7"], correct: 1, sol: "Subtract 5 from both sides: $2x = 10$, then divide by 2: $x = 5$." },
-                                { q: "WASSCE Past Q: Evaluate $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$.", options: ["0", "2", "4", "Undefined"], correct: 2, sol: "Factor the numerator: $\\frac{(x-2)(x+2)}{x-2} = x+2$. Substitute $x=2$ to get $4$." },
-                                { q: "WASSCE Past Q: If $f(x) = 3x^2 + 2x$, find $f'(x)$.", options: ["$6x + 2$", "$3x + 2$", "$6x^2$", "$6x$"], correct: 0, sol: "Apply power rule: $\\frac{d}{dx}(3x^2) = 6x$ and $\\frac{d}{dx}(2x) = 2$." },
-                                { q: "WASSCE Past Q: Find the determinant of matrix $\\begin{pmatrix} 3 & 2 \\\\ 1 & 4 \\end{pmatrix}$.", options: ["14", "12", "8", "10"], correct: 3, sol: "Determinant = $(3 \\times 4) - (2 \\times 1) = 12 - 2 = 10$." },
-                                { q: "WASSCE Past Q: Evaluate $\\int 2x \\, dx$.", options: ["$x^2 + C$", "$2x^2 + C$", "$x + C$", "$2 + C$"], correct: 0, sol: "Integral of $2x$ is $2\\left(\\frac{x^2}{2}\\right) + C = x^2 + C$." },
-                                { q: "WASSCE Past Q: Find sum of first 10 terms of AP: $2, 5, 8, ...$", options: ["135", "155", "145", "165"], correct: 1, sol: "$S_n = \\frac{n}{2}[2a + (n-1)d]$. Here $a=2, d=3, n=10$. $S_{10} = 5[4 + 27] = 155$." },
-                                { q: "WASSCE Past Q: If $\\log_{10} 2 = 0.3010$, find $\\log_{10} 8$.", options: ["0.6020", "1.2040", "0.9030", "0.3010"], correct: 2, sol: "$\\log_{10}(2^3) = 3 \\log_{10} 2 = 3 \\times 0.3010 = 0.9030$." }
-                            ]]
-                        },
-                        {
-                            name: "Physics", icon: "fa-bolt", type: "Elective",
-                            sets: [[
-                                { q: "WASSCE Past Q: What is the SI unit of electric current?", options: ["Volt", "Ampere", "Ohm", "Watt"], correct: 1, sol: "The SI unit of electric current is the Ampere (A)." },
-                                { q: "WASSCE Past Q: Calculate kinetic energy of a 2 kg mass moving at 4 m/s.", options: ["8 J", "32 J", "16 J", "4 J"], correct: 2, sol: "$KE = \\frac{1}{2}mv^2 = \\frac{1}{2}(2)(4^2) = 16\\text{ J}$." },
-                                { q: "WASSCE Past Q: Which device steps up alternating voltage?", options: ["Dynamo", "Transformer", "Generator", "Rectifier"], correct: 1, sol: "A step-up transformer increases alternating voltage." },
-                                { q: "WASSCE Past Q: State Ohm's law equation.", options: ["$P = IV$", "$F = ma$", "$E = mc^2$", "$V = IR$"], correct: 3, sol: "Ohm's Law states $V = IR$." },
-                                { q: "WASSCE Past Q: What type of wave is light wave?", options: ["Transverse wave", "Longitudinal wave", "Stationary wave", "Mechanical wave"], correct: 0, sol: "Light waves are electromagnetic and transverse in nature." },
-                                { q: "WASSCE Past Q: Acceleration due to gravity $g$ is approximately:", options: ["$3\\times 10^8\\text{ m/s}$", "$9.8\\text{ m/s}^2$", "$340\\text{ m/s}$", "$1.6\\text{ m/s}^2$"], correct: 1, sol: "Standard gravity on Earth is $9.8\\text{ m/s}^2$." },
-                                { q: "WASSCE Past Q: Refraction of light occurs because:", options: ["Frequency changes", "Wavelength remains constant", "Speed of light changes in different media", "Color changes"], correct: 2, sol: "Light refracts due to change in speed when entering different media." }
-                            ]]
-                        },
-                        {
-                            name: "Chemistry", icon: "fa-vial", type: "Elective",
-                            sets: [[
-                                { q: "WASSCE Past Q: What is oxidation state of Manganese in $\\text{KMnO}_4$?", options: ["+5", "+4", "+7", "+2"], correct: 2, sol: "$1 + x + 4(-2) = 0 \\implies x = +7$." },
-                                { q: "WASSCE Past Q: Gas produced when dilute HCl reacts with zinc:", options: ["Hydrogen", "Oxygen", "Chlorine", "Carbon dioxide"], correct: 0, sol: "Metals react with acids to liberate hydrogen gas." },
-                                { q: "WASSCE Past Q: Element with atomic number 11 belongs to:", options: ["Group II", "Group I (Alkali metals)", "Group VII", "Group VIII"], correct: 1, sol: "Sodium (11) has electronic configuration 2,8,1 (Group I)." },
-                                { q: "WASSCE Past Q: Separation of crude oil into fractions is done by:", options: ["Cracking", "Filtration", "Sublimation", "Fractional distillation"], correct: 3, sol: "Fractional distillation separates hydrocarbons by boiling points." },
-                                { q: "WASSCE Past Q: Which is a Lewis acid?", options: ["$\\text{BF}_3$", "$\\text{NH}_3$", "$\\text{H}_2\\text{O}$", "$\\text{OH}^-$"], correct: 0, sol: "Boron trifluoride accepts an electron pair." },
-                                { q: "WASSCE Past Q: Molar volume of ideal gas at STP is:", options: ["$24.0\\text{ dm}^3$", "$11.2\\text{ dm}^3$", "$22.4\\text{ dm}^3$", "$22.4\\text{ cm}^3$"], correct: 2, sol: "One mole occupies $22.4\\text{ dm}^3$ at STP." },
-                                { q: "WASSCE Past Q: Polymer formed by condensation polymerization:", options: ["Polyethene", "Nylon", "PVC", "Polypropene"], correct: 1, sol: "Nylon is a polyamide formed with elimination of water." }
-                            ]]
-                        },
-                        {
-                            name: "Biology", icon: "fa-dna", type: "Elective",
-                            sets: [[
-                                { q: "WASSCE Past Q: Plant structure that produces pollen grains:", options: ["Stigma", "Anther", "Ovary", "Style"], correct: 1, sol: "The anther produces and releases pollen." },
-                                { q: "WASSCE Past Q: Functional unit of the kidney:", options: ["Alveolus", "Neuron", "Nephron", "Ureter"], correct: 2, sol: "Nephrons filter blood in the kidneys." },
-                                { q: "WASSCE Past Q: Nitrogen-fixing bacteria in legume roots:", options: ["Rhizobium", "Azotobacter", "Clostridium", "Nitrosomonas"], correct: 0, sol: "Rhizobium fixes atmospheric nitrogen in root nodules." },
-                                { q: "WASSCE Past Q: Blood vessel carrying oxygenated blood from lungs:", options: ["Pulmonary artery", "Vena cava", "Pulmonary vein", "Aorta"], correct: 2, sol: "Pulmonary veins carry oxygen-rich blood to the heart." },
-                                { q: "WASSCE Past Q: Crossing over occurs during:", options: ["Prophase I", "Metaphase I", "Anaphase II", "Telophase I"], correct: 0, sol: "Homologous chromosomes exchange genetic material in Prophase I." },
-                                { q: "WASSCE Past Q: Movement of water across semi-permeable membrane:", options: ["Diffusion", "Osmosis", "Active transport", "Phagocytosis"], correct: 1, sol: "Osmosis is water movement across membranes." },
-                                { q: "WASSCE Past Q: Mammalian tooth specialized for tearing meat:", options: ["Incisor", "Premolar", "Molar", "Canine"], correct: 3, sol: "Canines are pointed for tearing flesh." }
-                            ]]
-                        },
-                        {
-                            name: "Core Mathematics", icon: "fa-square-root-variable", type: "Core",
-                            sets: [[
-                                { q: "WASSCE Past Q: Evaluate $3 \\frac{1}{4} - 1 \\frac{1}{2}$", options: ["$2 \\frac{1}{4}$", "$1 \\frac{3}{4}$", "$1 \\frac{1}{4}$", "$2 \\frac{3}{4}$"], correct: 1, sol: "$3.25 - 1.50 = 1.75 = 1 \\frac{3}{4}$." },
-                                { q: "WASSCE Past Q: Express 0.00547 in standard form.", options: ["$5.47 \\times 10^{3}$", "$54.7 \\times 10^{-4}$", "$5.47 \\times 10^{-3}$", "$0.547 \\times 10^{-2}$"], correct: 2, sol: "Standard form: $5.47 \\times 10^{-3}$." },
-                                { q: "WASSCE Past Q: Expand $(x - 3)(x + 5)$.", options: ["$x^2 + 2x - 15$", "$x^2 - 2x - 15$", "$x^2 + 8x + 15$", "$x^2 - 8x - 15$"], correct: 0, sol: "$x^2 + 5x - 3x - 15 = x^2 + 2x - 15$." },
-                                { q: "WASSCE Past Q: Simple interest on GH₵ 1,200 for 2 years at 5% per annum.", options: ["GH₵ 60", "GH₵ 240", "GH₵ 300", "GH₵ 120"], correct: 3, sol: "$SI = \\frac{1200 \\times 5 \\times 2}{100} = \\text{GH₵ } 120$." },
-                                { q: "WASSCE Past Q: If $y$ varies inversely as $x$, $y=4$ when $x=3$, find $y$ when $x=6$.", options: ["2", "8", "6", "1.5"], correct: 0, sol: "$k = 12 \\implies y = 12/6 = 2$." },
-                                { q: "WASSCE Past Q: Area of a circle with radius 7 cm ($\\pi = \\frac{22}{7}$):", options: ["$44\\text{ cm}^2$", "$154\\text{ cm}^2$", "$308\\text{ cm}^2$", "$88\\text{ cm}^2$"], correct: 1, sol: "Area = $\\frac{22}{7} \\times 7^2 = 154\\text{ cm}^2$." },
-                                { q: "WASSCE Past Q: Factorize completely: $ab + ay + 2xb + 2xy$.", options: ["$(a + b)(x + y)$", "$(a - 2x)(b - y)$", "$(a + 2x)(b + y)$", "$(2a + x)(b + y)$"], correct: 2, sol: "Grouping gives $(a + 2x)(b + y)$." }
-                            ]]
-                        },
-                        {
-                            name: "Integrated Science", icon: "fa-flask", type: "Core",
-                            sets: [[
-                                { q: "WASSCE Past Q: Powerhouse of the cell:", options: ["Ribosome", "Mitochondria", "Chloroplast", "Nucleus"], correct: 1, sol: "Mitochondria generate ATP." },
-                                { q: "WASSCE Past Q: Chemical symbol for Gold:", options: ["Ag", "Fe", "Au", "Cu"], correct: 2, sol: "Au is Gold." },
-                                { q: "WASSCE Past Q: Plant food-making process:", options: ["Photosynthesis", "Respiration", "Transpiration", "Osmosis"], correct: 0, sol: "Photosynthesis produces glucose." },
-                                { q: "WASSCE Past Q: Universal donor blood group:", options: ["AB positive", "A positive", "B negative", "O negative"], correct: 3, sol: "O negative can be donated to anyone." },
-                                { q: "WASSCE Past Q: pH of an acidic solution:", options: ["Less than 7", "Greater than 7", "Exactly 7", "14"], correct: 0, sol: "Acids read below 7 on pH scale." },
-                                { q: "WASSCE Past Q: Hardness of water caused by:", options: ["Sodium and Potassium", "Calcium and Magnesium", "Iron and Zinc", "Copper and Lead"], correct: 1, sol: "Calcium and magnesium ions cause hardness." },
-                                { q: "WASSCE Past Q: Vitamin C deficiency causes:", options: ["Rickets", "Beriberi", "Scurvy", "Kwashiorkor"], correct: 2, sol: "Lack of Vitamin C causes scurvy." }
-                            ]]
-                        }
-                    ]
-                },
-                {
-                    streamName: "General Arts Stream",
-                    icon: "fa-landmark",
-                    desc: "Economics, Government, Geography, History, Literature & Core Subjects",
-                    subjects: [
-                        {
-                            name: "Economics", icon: "fa-chart-line", type: "Elective",
-                            sets: [[
-                                { q: "WASSCE Past Q: What is opportunity cost?", options: ["Total money spent", "Next best alternative forgone", "Tax expenditure", "Production cost"], correct: 1, sol: "Opportunity cost is value of next best alternative sacrificed." },
-                                { q: "WASSCE Past Q: When demand is price inelastic, price hike will:", options: ["Decrease total revenue", "Leave revenue unchanged", "Increase total revenue", "Cause zero sales"], correct: 2, sol: "Inelastic demand increases total revenue when price rises." },
-                                { q: "WASSCE Past Q: State-owned economic system is:", options: ["Command / Socialist", "Capitalist", "Mixed", "Traditional"], correct: 0, sol: "State owns and controls command economies." },
-                                { q: "WASSCE Past Q: Inflation caused by excessive money supply:", options: ["Cost-push", "Demand-pull inflation", "Imported", "Structural"], correct: 1, sol: "Too much money causes demand-pull inflation." },
-                                { q: "WASSCE Past Q: GDP stands for:", options: ["General Domestic Production", "Gross Distribution Price", "Gross Domestic Product", "Government Debt Plan"], correct: 2, sol: "Gross Domestic Product measures national output." },
-                                { q: "WASSCE Past Q: Budget deficit happens when:", options: ["Expenditure exceeds revenue", "Revenue exceeds expenditure", "Exports equal imports", "Tax is zero"], correct: 0, sol: "Deficit occurs when spending surpasses income." },
-                                { q: "WASSCE Past Q: Reward for capital:", options: ["Profit", "Rent", "Interest", "Wages"], correct: 2, sol: "Interest is the payment for capital." }
-                            ]]
-                        },
-                        {
-                            name: "Government", icon: "fa-balance-scale", type: "Elective",
-                            sets: [[
-                                { q: "WASSCE Past Q: Arm of government responsible for executing laws:", options: ["The Legislature", "The Executive", "The Judiciary", "The Press"], correct: 1, sol: "The Executive branch implements laws." },
-                                { q: "WASSCE Past Q: Political system with only one legal party:", options: ["One-party state", "Multi-party democracy", "Confederation", "Diarchy"], correct: 0, sol: "One-party states allow no opposition." },
-                                { q: "WASSCE Past Q: Franchise refers to:", options: ["Trade license", "Tax exemption", "Right to vote in elections", "Parliamentary immunity"], correct: 2, sol: "Franchise is the constitutional right to vote." },
-                                { q: "WASSCE Past Q: Separation of powers popularized by:", options: ["John Locke", "Montesquieu", "Karl Marx", "A.V. Dicey"], correct: 1, sol: "Montesquieu proposed separation of government powers." },
-                                { q: "WASSCE Past Q: Head of state in a parliamentary republic:", options: ["Ceremonial President / Monarch", "Absolute dictator", "Chief Justice", "Police Chief"], correct: 0, sol: "Parliamentary head of state holds ceremonial roles." },
-                                { q: "WASSCE Past Q: Rule of law implies:", options: ["Supremacy of military decree", "Equality before the law", "Politician immunity", "No courts"], correct: 1, sol: "Rule of law means all are equal before the law." },
-                                { q: "WASSCE Past Q: Ghana became a republic in:", options: ["1957", "1966", "1960", "1992"], correct: 2, sol: "Ghana attained republican status on July 1, 1960." }
-                            ]]
-                        },
-                        {
-                            name: "Geography", icon: "fa-globe-americas", type: "Elective",
-                            sets: [[
-                                { q: "WASSCE Past Q: Lines of latitude run:", options: ["North to South", "East to West", "Diagonally", "Vertically from poles"], correct: 1, sol: "Latitudes are parallel circles running east-west." },
-                                { q: "WASSCE Past Q: Instrument used to measure atmospheric pressure:", options: ["Thermometer", "Anemometer", "Barometer", "Hygrometer"], correct: 2, sol: "Barometers measure air pressure." },
-                                { q: "WASSCE Past Q: Weathering caused by plant roots splitting rocks is:", options: ["Biological weathering", "Chemical weathering", "Mechanical exfoliation", "Glacial erosion"], correct: 0, sol: "Biological weathering involves living organisms breaking rocks." },
-                                { q: "WASSCE Past Q: Ocean currents are mainly driven by:", options: ["Moon gravity only", "Prevailing winds and earth rotation", "Fish movement", "Submarine volcanoes"], correct: 1, sol: "Surface currents are driven by global wind systems." },
-                                { q: "WASSCE Past Q: Sahel region in Africa is characterized by:", options: ["Dense tropical rainforest", "Polar ice caps", "Semi-arid grassland transition", "Coral reef systems"], correct: 2, sol: "Sahel is the semi-arid transition zone south of the Sahara." },
-                                { q: "WASSCE Past Q: Time difference for every $15^\\circ$ longitude is:", options: ["1 hour", "2 hours", "15 minutes", "30 minutes"], correct: 0, sol: "Earth rotates $360^\\circ$ in 24 hrs $\\implies 15^\\circ = 1\\text{ hour}$." },
-                                { q: "WASSCE Past Q: Molten rock material beneath the earth's crust is:", options: ["Lava", "Magma", "Basalt", "Granite"], correct: 1, sol: "Magma is molten rock under the surface; lava is on the surface." }
-                            ]]
-                        },
-                        {
-                            name: "Literature-in-English", icon: "fa-book-open", type: "Elective",
-                            sets: [[
-                                { q: "WASSCE Past Q: A figure of speech comparing two things using 'like' or 'as':", options: ["Metaphor", "Simile", "Personification", "Hyperbole"], correct: 1, sol: "Similes make direct comparisons using 'like' or 'as'." },
-                                { q: "WASSCE Past Q: Turning point or highest tension in a drama:", options: ["Resolution", "Exposition", "Climax", "Denouement"], correct: 2, sol: "Climax is the peak of emotional intensity." },
-                                { q: "WASSCE Past Q: Poem consisting of 14 lines with formal rhyme scheme:", options: ["Sonnet", "Ballad", "Epic", "Ode"], correct: 0, sol: "Sonnets contain 14 lines structured in specific rhyme schemes." },
-                                { q: "WASSCE Past Q: Giving human qualities to inanimate objects:", options: ["Irony", "Personification", "Alliteration", "Onomatopoeia"], correct: 1, sol: "Personification attributes human traits to non-human things." },
-                                { q: "WASSCE Past Q: The main character in a literary work is the:", options: ["Antagonist", "Protagonist", "Foil", "Narrator"], correct: 1, sol: "Protagonist is the principal central character." },
-                                { q: "WASSCE Past Q: Repetition of initial consonant sounds in neighboring words:", options: ["Assonance", "Alliteration", "Rhyme", "Consonance"], correct: 1, sol: "Alliteration repeats starting consonant sounds." },
-                                { q: "WASSCE Past Q: A humorous theatrical play with exaggerated characters and improbable events:", options: ["Farce", "Tragedy", "Elegy", "Monologue"], correct: 0, sol: "Farce uses slapstick comedy and improbable situations." }
-                            ]]
-                        },
-                        {
-                            name: "Core Mathematics", icon: "fa-square-root-variable", type: "Core",
-                            sets: [[
-                                { q: "WASSCE Past Q: Simplify $3(x + 4) - 2(x - 1)$.", options: ["$x + 10$", "$x + 14$", "$5x + 12$", "$x - 2$"], correct: 1, sol: "$3x + 12 - 2x + 2 = x + 14$." },
-                                { q: "WASSCE Past Q: Median of scores: $12, 15, 9, 17, 8, 20$.", options: ["14", "12", "13.5", "15"], correct: 2, sol: "Middle values are 12 and 15. Median = $13.5$." },
-                                { q: "WASSCE Past Q: Express 45 as a percentage of 150.", options: ["$30\\%$", "$45\\%$", "$15\\%$", "$60\\%$"], correct: 0, sol: "$\\frac{45}{150} \\times 100\\% = 30\\%$." },
-                                { q: "WASSCE Past Q: If $2^x = 32$, find $x$.", options: ["4", "6", "3", "5"], correct: 3, sol: "$2^x = 2^5 \\implies x = 5$." },
-                                { q: "WASSCE Past Q: Perimeter of rectangle of length 12 cm and width 8 cm:", options: ["40 cm", "96 cm", "20 cm", "48 cm"], correct: 0, sol: "Perimeter = $2(12 + 8) = 40\\text{ cm}$." },
-                                { q: "WASSCE Past Q: Solve simultaneous equations: $x + y = 10$, $x - y = 4$.", options: ["$x = 6, y = 4$", "$x = 7, y = 3$", "$x = 8, y = 2$", "$x = 5, y = 5$"], correct: 1, sol: "$2x = 14 \\implies x = 7, y = 3$." },
-                                { q: "WASSCE Past Q: Convert $72\\text{ km/h}$ to $\\text{m/s}$:", options: ["$25\\text{ m/s}$", "$72\\text{ m/s}$", "$20\\text{ m/s}$", "$15\\text{ m/s}$"], correct: 2, sol: "$72 \\times \\frac{5}{18} = 20\\text{ m/s}$." }
-                            ]]
-                        }
-                    ]
-                },
-                {
-                    streamName: "Business Stream",
-                    icon: "fa-briefcase",
-                    desc: "Financial Accounting, Cost Accounting, Business Management & Economics",
-                    subjects: [
-                        {
-                            name: "Financial Accounting", icon: "fa-file-invoice-dollar", type: "Elective",
-                            sets: [[
-                                { q: "WASSCE Past Q: Fundamental accounting equation:", options: ["Assets = Capital - Liabilities", "Liabilities = Assets + Capital", "Assets = Capital + Liabilities", "Capital = Assets + Liabilities"], correct: 2, sol: "Assets = Capital + Liabilities." },
-                                { q: "WASSCE Past Q: Book of prime entry for credit purchases:", options: ["Sales Journal", "Purchases Journal", "Cash Book", "General Journal"], correct: 1, sol: "Purchases journal records credit purchases." },
-                                { q: "WASSCE Past Q: Trial balance tests:", options: ["Arithmetical accuracy of ledgers", "Net profit", "Bank cash", "Customer debt"], correct: 0, sol: "Trial balance verifies debit and credit equality." },
-                                { q: "WASSCE Past Q: Depreciation of fixed assets is treated as:", options: ["An asset", "A liability", "An expense", "Capital revenue"], correct: 2, sol: "Depreciation is an operating expense." },
-                                { q: "WASSCE Past Q: Carriage inward is added to:", options: ["Trading account to find COGS", "Profit and loss office expense", "Balance sheet asset", "Capital account"], correct: 0, sol: "Carriage inward is direct purchasing cost." },
-                                { q: "WASSCE Past Q: Bad debts recovered classified as:", options: ["Capital", "Revenue / Income", "Expense", "Liability"], correct: 1, sol: "Recovered bad debts are income." },
-                                { q: "WASSCE Past Q: Working capital is:", options: ["Current Assets minus Current Liabilities", "Fixed Assets plus Current Assets", "Total Assets minus Liabilities", "Capital minus Drawings"], correct: 0, sol: "Working capital = Current Assets - Current Liabilities." }
-                            ]]
-                        },
-                        {
-                            name: "Cost Accounting", icon: "fa-calculator", type: "Elective",
-                            sets: [[
-                                { q: "WASSCE Past Q: Costs that vary directly with output volume are:", options: ["Fixed costs", "Variable costs", "Sunk costs", "Opportunity costs"], correct: 1, sol: "Variable costs change directly with production volume." },
-                                { q: "WASSCE Past Q: Prime cost is the sum of:", options: ["Direct materials, direct labor & direct expenses", "Indirect materials and indirect labor", "Factory overheads and admin costs", "Selling and distribution expenses"], correct: 0, sol: "Prime cost = Total direct costs." },
-                                { q: "WASSCE Past Q: Overhead absorption rate is calculated by dividing total overheads by:", options: ["Net profit", "Direct labor hours or machine hours", "Total sales revenue", "Capital employed"], correct: 1, sol: "Overhead is absorbed using activity bases like labor/machine hours." },
-                                { q: "WASSCE Past Q: A cost center is defined as:", options: ["A location, function or item of equipment for which costs are allocated", "The accounting department head office", "The net profit generated by a product line", "The market price of raw materials"], correct: 0, sol: "Cost center is an operational unit where costs are gathered." },
-                                { q: "WASSCE Past Q: LIFO stock valuation stands for:", options: ["Last-In, First-Out", "Low-Interest, Fast-Output", "Long-Term Industrial Factory Operations", "Labor-Input, Fixed-Output"], correct: 0, sol: "LIFO assumes newest inventory items are issued first." },
-                                { q: "WASSCE Past Q: Margin of safety is calculated as:", options: ["Actual Sales minus Break-Even Sales", "Fixed Costs divided by Contribution", "Total Cost plus Target Profit", "Opening Stock minus Closing Stock"], correct: 0, sol: "Margin of safety measures how far sales can drop before losses occur." },
-                                { q: "WASSCE Past Q: Contribution margin per unit is calculated as:", options: ["Selling Price per unit minus Variable Cost per unit", "Total Revenue minus Total Fixed Cost", "Net Profit divided by Units Sold", "Prime Cost plus Overheads"], correct: 0, sol: "Contribution = Unit Price - Unit Variable Cost." }
-                            ]]
-                        },
-                        {
-                            name: "Business Management", icon: "fa-users-cog", type: "Elective",
-                            sets: [[
-                                { q: "WASSCE Past Q: The management function of setting goals and deciding actions is:", options: ["Organizing", "Controlling", "Planning", "Staffing"], correct: 2, sol: "Planning involves mapping out future business goals." },
-                                { q: "WASSCE Past Q: Leadership style where manager makes all decisions without subordinates:", options: ["Autocratic leadership", "Democratic leadership", "Laissez-faire", "Paternalistic"], correct: 0, sol: "Autocratic leaders retain all authority and decision-making." },
-                                { q: "WASSCE Past Q: SWOT analysis evaluates:", options: ["Sales, Wages, Operations, Taxes", "Strengths, Weaknesses, Opportunities, Threats", "Systems, Workforce, Output, Time", "Savings, Wealth, Ownership, Trade"], correct: 1, sol: "SWOT examines internal strengths/weaknesses and external opportunities/threats." },
-                                { q: "WASSCE Past Q: Span of control refers to:", options: ["The number of subordinates directly supervised by a manager", "The total area of factory floor space", "The legal duration of a business contract", "The maximum credit limit given to customers"], correct: 0, sol: "Span of control measures direct reporting subordinates." },
-                                { q: "WASSCE Past Q: Internal recruitment involves:", options: ["Filling job vacancies from existing staff", "Hiring through employment agencies", "Advertising in national newspapers", "Recruiting university graduates"], correct: 0, sol: "Internal recruitment promotes or transfers current employees." },
-                                { q: "WASSCE Past Q: A public limited company (PLC) issues shares to:", options: ["The general public through stock exchange", "Only family members", "Government officials exclusively", "Foreign embassies only"], correct: 0, sol: "PLCs trade shares publicly on stock exchanges." },
-                                { q: "WASSCE Past Q: Maslow's hierarchy of needs places which need at the base level?", options: ["Physiological needs (food, water, shelter)", "Self-actualization", "Esteem needs", "Social belonging"], correct: 0, sol: "Basic physiological survival needs form Maslow's foundation." }
-                            ]]
-                        }
-                    ]
-                },
-                {
-                    streamName: "Home Economics Stream",
-                    icon: "fa-utensils",
-                    desc: "Food & Nutrition, Management-in-Living, Clothing & Textiles",
-                    subjects: [
-                        {
-                            name: "Food & Nutrition", icon: "fa-utensils", type: "Elective",
-                            sets: [[
-                                { q: "WASSCE Past Q: Nutrient primarily responsible for body tissue repair:", options: ["Carbohydrates", "Proteins", "Fats and oils", "Vitamins"], correct: 1, sol: "Proteins provide amino acids necessary for growth and repair." },
-                                { q: "WASSCE Past Q: Deficiency disease caused by lack of protein and calories in children:", options: ["Kwashiorkor", "Scurvy", "Rickets", "Goiter"], correct: 0, sol: "Kwashiorkor is severe protein-energy malnutrition." },
-                                { q: "WASSCE Past Q: Method of cooking food by dry heat in an oven:", options: ["Boiling", "Steaming", "Baking", "Poaching"], correct: 2, sol: "Baking uses convection heat inside an oven." },
-                                { q: "WASSCE Past Q: Vitamin required for blood clotting is:", options: ["Vitamin A", "Vitamin D", "Vitamin K", "Vitamin C"], correct: 2, sol: "Vitamin K is essential for blood coagulation factors." },
-                                { q: "WASSCE Past Q: Pasteurization of milk involves:", options: ["Heating to specific temperature then rapid cooling", "Freezing at sub-zero temperatures", "Adding chemical preservatives", "Boiling for 2 hours continuously"], correct: 0, sol: "Pasteurization destroys pathogenic micro-organisms in liquid foods." },
-                                { q: "WASSCE Past Q: Calcium and Phosphorus are essential minerals for building strong:", options: ["Bones and teeth", "Red blood cells", "Hair and nails", "Muscle fibers"], correct: 0, sol: "Calcium phosphate provides structural rigidity to skeletal tissue." },
-                                { q: "WASSCE Past Q: Enzyme in saliva that initiates starch digestion:", options: ["Ptyalin / Salivary Amylase", "Pepsin", "Lipase", "Renin"], correct: 0, sol: "Ptyalin breaks starch down into maltose sugars." }
-                            ]]
-                        },
-                        {
-                            name: "Management-in-Living", icon: "fa-home", type: "Elective",
-                            sets: [[
-                                { q: "WASSCE Past Q: A detailed plan of expected income and expenditure is a:", options: ["Budget", "Ledger", "Balance sheet", "Receipt"], correct: 0, sol: "A budget manages financial resources over a period." },
-                                { q: "WASSCE Past Q: Decision making process begins with:", options: ["Identifying the problem or goal", "Evaluating alternatives", "Implementing the choice", "Gathering cash"], correct: 0, sol: "Recognizing the problem is the first step in decision making." },
-                                { q: "WASSCE Past Q: Non-human family resources include:", options: ["Money, time, goods and housing", "Knowledge, skills and energy", "Intelligence and creativity", "Friendships and love"], correct: 0, sol: "Material/tangible items are non-human resources." },
-                                { q: "WASSCE Past Q: Work simplification technique aimed at saving energy:", options: ["Combining tasks and using appropriate tools", "Working without resting", "Hiring more domestic servants", "Buying expensive appliances"], correct: 0, sol: "Streamlining routines minimizes physical fatigue." },
-                                { q: "WASSCE Past Q: Primary function of home management is:", options: ["Achieving family goals through effective resource use", "Earning high monthly salary", "Furnishing living room luxuriously", "Cooking exotic meals daily"], correct: 0, sol: "Home management applies managerial principles to family life." },
-                                { q: "WASSCE Past Q: First aid treatment for minor burns includes:", options: ["Running cold water over the area", "Applying thick butter or grease", "Popping raised blisters immediately", "Wrapping with tight dry bandage"], correct: 0, sol: "Cold running water cools tissues and alleviates pain." },
-                                { q: "WASSCE Past Q: Consumer rights include right to safety, information, and to be:", options: ["Heard and choose", "Given free samples", "Excused from taxes", "Granted loans"], correct: 0, sol: "Consumer rights guarantee fair choice, safety, and grievance representation." }
-                            ]]
-                        }
-                    ]
-                },
-                {
-                    streamName: "Visual Arts Stream",
-                    icon: "fa-palette",
-                    desc: "Graphic Design, Picture Making, Sculpture, Textiles & Ceramics",
-                    subjects: [
-                        {
-                            name: "Graphic Design", icon: "fa-paint-brush", type: "Elective",
-                            sets: [[
-                                { q: "WASSCE Past Q: Primary colors in art and pigment mixing are:", options: ["Orange, Green, Purple", "Red, Yellow, Blue", "Black, White, Gray", "Cyan, Magenta, Yellow"], correct: 1, sol: "Traditional primary colors are red, yellow, and blue." },
-                                { q: "WASSCE Past Q: The lightness or darkness of a color is known as its:", options: ["Value / Tone", "Hue", "Chroma", "Texture"], correct: 0, sol: "Value refers to relative lightness or darkness of a hue." },
-                                { q: "WASSCE Past Q: Arrangement of visual elements in an artwork is called:", options: ["Composition", "Perspective", "Symmetrical balance", "Contrast"], correct: 0, sol: "Composition organizes lines, shapes, and colors harmoniously." },
-                                { q: "WASSCE Past Q: A symbol or graphic emblem used to identify a brand or company is a:", options: ["Logo", "Poster", "Banner", "Billboard"], correct: 0, sol: "Logos serve as visual brand identifiers." },
-                                { q: "WASSCE Past Q: Printmaking technique where ink is transferred through a mesh screen:", options: ["Serigraphy / Screen printing", "Relief printing", "Intaglio", "Lithography"], correct: 0, sol: "Screen printing uses stencils on mesh screens." },
-                                { q: "WASSCE Past Q: Complementary colors on the color wheel are located:", options: ["Directly opposite each other", "Side by side next to each other", "In triangular formation", "Inside the central neutral ring"], correct: 0, sol: "Opposite colors create high contrast when paired." },
-                                { q: "WASSCE Past Q: Typography refers to the art and technique of arranging:", options: ["Typefaces / Text fonts", "Ceramic clay sculptures", "Woven textile yarns", "Oil paint canvas textures"], correct: 0, sol: "Typography crafts readable and appealing letterforms." }
-                            ]]
-                        }
-                    ]
-                },
-                {
-                    streamName: "Agricultural Science Stream",
-                    icon: "fa-seedling",
-                    desc: "General Agriculture, Animal Husbandry, Crop Husbandry & Horticulture",
-                    subjects: [
-                        {
-                            name: "General Agriculture", icon: "fa-tractor", type: "Elective",
-                            sets: [[
-                                { q: "WASSCE Past Q: The topmost layer of the earth's crust supporting plant growth is:", options: ["Bedrock", "Magma", "Soil", "Clay deposit"], correct: 2, sol: "Soil provides mechanical anchorage and nutrients for crops." },
-                                { q: "WASSCE Past Q: Rearing of aquatic organisms like fish in controlled water bodies:", options: ["Aquaculture", "Apiculture", "Horticulture", "Sericulture"], correct: 0, sol: "Aquaculture is farming of aquatic life." },
-                                { q: "WASSCE Past Q: Soil erosion caused by raindrops dislodging soil particles is:", options: ["Splash erosion", "Rill erosion", "Gully erosion", "Sheet erosion"], correct: 0, sol: "Raindrop impact causes initial splash erosion." },
-                                { q: "WASSCE Past Q: Which crop is classified as a legume?", options: ["Cowpea / Groundnut", "Maize", "Cassava", "Oil palm"], correct: 0, sol: "Legumes fix nitrogen through root nodule bacteria." },
-                                { q: "WASSCE Past Q: Castration of farm animals is performed primarily to:", options: ["Improve meat quality and tame aggressiveness", "Increase fertility rate", "Prevent disease transmission completely", "Stimulate milk yield"], correct: 0, sol: "Castration dociles males and improves fat distribution in meat." },
-                                { q: "WASSCE Past Q: Method of irrigation where water is applied directly to plant roots in drops:", options: ["Drip / Trickle irrigation", "Sprinkler irrigation", "Furrow irrigation", "Flood irrigation"], correct: 0, sol: "Drip irrigation conserves water by targeted application." },
-                                { q: "WASSCE Past Q: The gestation period for swine (pigs) is approximately:", options: ["114 days (3 months, 3 weeks, 3 days)", "280 days", "150 days", "21 days"], correct: 0, sol: "Sow gestation averages 114 days." }
-                            ]]
-                        }
-                    ]
-                }
-            ],
-            BECE: [
-                {
-                    streamName: "BECE Junior High School Core",
-                    icon: "fa-school",
-                    desc: "Core Mathematics, Integrated Science, Social Studies & English Language",
-                    subjects: [
-                        {
-                            name: "Core Mathematics", icon: "fa-square-root-variable", type: "Core",
-                            sets: [[
-                                { q: "BECE Past Q: Find LCM of 12, 15 and 20.", options: ["120", "60", "30", "240"], correct: 1, sol: "LCM of 12, 15, 20 is 60." },
-                                { q: "BECE Past Q: Simplify: $4x + 3y - 2x + 5y$.", options: ["$2x + 8y$", "$6x + 8y$", "$2x - 2y$", "$9xy$"], correct: 0, sol: "Combining like terms gives $2x + 8y$." },
-                                { q: "BECE Past Q: Express $\\frac{3}{5}$ as percentage:", options: ["$30\\%$", "$75\\%$", "$60\\%$", "$15\\%$"], correct: 2, sol: "$\\frac{3}{5} \\times 100\\% = 60\\%$." },
-                                { q: "BECE Past Q: If $3y - 5 = 16$, find $y$.", options: ["6", "7", "8", "5"], correct: 1, sol: "$3y = 21 \\implies y = 7$." },
-                                { q: "BECE Past Q: Area of a square with side 9 cm:", options: ["$36\\text{ cm}^2$", "$18\\text{ cm}^2$", "$81\\text{ cm}^2$", "$72\\text{ cm}^2$"], correct: 2, sol: "Area = $9 \\times 9 = 81\\text{ cm}^2$." },
-                                { q: "BECE Past Q: Write 4,500 in standard form:", options: ["$4.5 \\times 10^3$", "$4.5 \\times 10^2$", "$45 \\times 10^2$", "$0.45 \\times 10^4$"], correct: 0, sol: "Standard form is $4.5 \\times 10^3$." },
-                                { q: "BECE Past Q: Median of scores: $5, 2, 9, 7, 3$.", options: ["7", "3", "5", "9"], correct: 2, sol: "Ordered numbers middle value is 5." }
-                            ]]
-                        },
-                        {
-                            name: "Integrated Science", icon: "fa-flask", type: "Core",
-                            sets: [[
-                                { q: "BECE Past Q: Which of these is a living thing?", options: ["Stone", "Amoeba", "Water", "Plastic bag"], correct: 1, sol: "Amoeba is unicellular life." },
-                                { q: "BECE Past Q: Gas used in fire extinguishers:", options: ["Carbon dioxide", "Oxygen", "Hydrogen", "Nitrogen"], correct: 0, sol: "Carbon dioxide smothers fires." },
-                                { q: "BECE Past Q: Boiling point of pure water:", options: ["$0^\\circ\\text{C}$", "$50^\\circ\\text{C}$", "$100^\\circ\\text{C}$", "$212^\\circ\\text{C}$"], correct: 2, sol: "Water boils at $100^\\circ\\text{C}$." },
-                                { q: "BECE Past Q: Plant part that develops into fruit:", options: ["Ovary", "Ovule", "Petal", "Sepal"], correct: 0, sol: "Fertilized ovary becomes fruit." },
-                                { q: "BECE Past Q: SI unit of temperature:", options: ["Celsius", "Kelvin", "Fahrenheit", "Joule"], correct: 1, sol: "Kelvin is SI temperature unit." },
-                                { q: "BECE Past Q: Teeth used for biting and cutting:", options: ["Canines", "Incisors", "Molars", "Premolars"], correct: 1, sol: "Incisors cut food." },
-                                { q: "BECE Past Q: Renewable energy source:", options: ["Crude oil", "Coal", "Solar energy", "Natural gas"], correct: 2, sol: "Sunlight is renewable." }
-                            ]]
-                        },
-                        {
-                            name: "Social Studies", icon: "fa-earth-africa", type: "Core",
-                            sets: [[
-                                { q: "BECE Past Q: Ghana gained independence on:", options: ["6th March, 1957", "1st July, 1960", "25th May, 1963", "7th January, 1993"], correct: 0, sol: "Independence day is March 6, 1957." },
-                                { q: "BECE Past Q: First President of Ghana:", options: ["J.B. Danquah", "Dr. Kwame Nkrumah", "Jerry J. Rawlings", "John A. Kufuor"], correct: 1, sol: "Dr. Kwame Nkrumah was first president." },
-                                { q: "BECE Past Q: Nuclear family consists of:", options: ["Grandparents and cousins", "Father, mother and children", "Friends", "Teachers and students"], correct: 1, sol: "Nuclear family includes parents and children." },
-                                { q: "BECE Past Q: Cardinal points of a map:", options: ["Up, Down, Left, Right", "Accra, Kumasi", "North, South, East, West", "Land and Sea"], correct: 2, sol: "Cardinal points are N, S, E, W." },
-                                { q: "BECE Past Q: National currency of Ghana:", options: ["Naira", "Dollar", "Pound", "Ghana Cedi"], correct: 3, sol: "Ghana Cedi is official currency." },
-                                { q: "BECE Past Q: The head of the traditional government in a village is the:", options: ["Chief / King", "District Chief Executive", "Member of Parliament", "Assembly Member"], correct: 0, sol: "Chiefs lead traditional administrative structures." },
-                                { q: "BECE Past Q: Environmental degradation is caused by:", options: ["Illegal mining (Galamsey) and deforestation", "Planting trees", "Recycling waste", "Conserving soil"], correct: 0, sol: "Galamsey destroys land and water bodies." }
-                            ]]
-                        }
-                    ]
-                }
-            ],
-            TERTIARY: [
-                {
-                    streamName: "Tertiary Level Courses",
-                    icon: "fa-university",
-                    desc: "Computer Science, Software Engineering & Business Administration",
-                    subjects: [
-                        {
-                            name: "Computer Science", icon: "fa-laptop-code", type: "Core",
-                            sets: [[
-                                { q: "University Exam Q: What does HTML stand for?", options: ["High Tech Machine Language", "Hyper Text Markup Language", "Hyperlink Text Management", "Home Tool Markup Language"], correct: 1, sol: "HTML stands for Hyper Text Markup Language." },
-                                { q: "University Exam Q: Data structure operating on LIFO basis:", options: ["Queue", "Array", "Stack", "Graph"], correct: 2, sol: "Stack operates as Last-In-First-Out." },
-                                { q: "University Exam Q: Worst-case time complexity of Merge Sort:", options: ["$O(n \\log n)$", "$O(n^2)$", "$O(n)$", "$O(1)$"], correct: 0, sol: "Merge sort runs in $O(n \\log n)$ time." },
-                                { q: "University Exam Q: SQL command used to retrieve data:", options: ["UPDATE", "INSERT", "DELETE", "SELECT"], correct: 3, sol: "SELECT queries retrieve database table rows." },
-                                { q: "University Exam Q: IPv4 address is expressed in how many bits?", options: ["32 bits", "64 bits", "128 bits", "16 bits"], correct: 0, sol: "IPv4 uses 32-bit addresses." },
-                                { q: "University Exam Q: Operating system scheduling algorithm that allocates fixed time slice:", options: ["Round Robin", "Shortest Job First", "First Come First Serve", "Priority Scheduling"], correct: 0, sol: "Round Robin rotates CPU time quantum slices." },
-                                { q: "University Exam Q: In relational databases, a foreign key:", options: ["References a primary key in another table", "Must be unique in its own table", "Cannot contain duplicate values", "Is automatically generated by CPU"], correct: 0, sol: "Foreign keys establish relational links across tables." }
-                            ]]
-                        },
-                        {
-                            name: "Business Administration", icon: "fa-chart-pie", type: "Core",
-                            sets: [[
-                                { q: "University Exam Q: Process of monitoring performance and taking corrective action:", options: ["Planning", "Organizing", "Controlling", "Staffing"], correct: 2, sol: "Controlling measures performance against standards." },
-                                { q: "University Exam Q: Financial statement showing financial position at specific date:", options: ["Balance Sheet", "Income Statement", "Cash Flow Statement", "Trial Balance"], correct: 0, sol: "Balance sheet details assets, liabilities, and equity." },
-                                { q: "University Exam Q: Marketing mix 4 Ps include Product, Price, Place, and:", options: ["Promotion", "People", "Process", "Profit"], correct: 0, sol: "The classic 4 Ps are Product, Price, Place, Promotion." },
-                                { q: "University Exam Q: Corporate social responsibility (CSR) means:", options: ["Businesses acting ethically toward society and environment", "Maximizing profits without paying taxes", "Ignoring employee welfare", "Focusing solely on foreign export"], correct: 0, sol: "CSR reflects voluntary ethical contributions to society." },
-                                { q: "University Exam Q: Benchmarking involves:", options: ["Comparing business processes with industry leaders", "Selling company furniture at auction", "Setting interest rates for bank deposits", "Designing new company logo"], correct: 0, sol: "Benchmarking measures performance against best standards." },
-                                { q: "University Exam Q: Organizational structure organized by functions like Sales, Finance, HR is:", options: ["Functional structure", "Matrix structure", "Divisional structure", "Flat network"], correct: 0, sol: "Functional grouping aligns departments by specialized tasks." },
-                                { q: "University Exam Q: Net Present Value (NPV) is positive when:", options: ["Present value of cash inflows exceeds initial investment", "Discount rate is zero", "Internal rate of return is negative", "Company incurs net loss"], correct: 0, sol: "Positive NPV indicates profitable capital investment." }
-                            ]]
-                        }
-                    ]
-                }
-            ]
-        };
-
-        // App State
-        let currentLevel = 'WASSCE';
-        let activeStream = null;
-        let activeSubject = null;
-        let currentSetIndex = 0;
-        let currentQuestionIndex = 0;
-        let score = 0;
-
-        let userXP = parseInt(localStorage.getItem('tka_xp')) || 0;
-        let userStreak = parseInt(localStorage.getItem('tka_streak')) || 1;
-
-        function updateStatsDisplay() {
-            document.getElementById('xp-count').innerText = userXP;
-            document.getElementById('streak-count').innerText = userStreak;
-        }
-
-        function filterLevel(level) {
-            currentLevel = level;
-            ['wassce', 'bece', 'tertiary'].forEach(l => {
-                const btn = document.getElementById(`tab-${l}`);
-                if (l.toUpperCase() === level) {
-                    btn.className = "pb-3 border-b-2 border-blue-600 text-blue-600 px-2 font-bold transition";
-                } else {
-                    btn.className = "pb-3 border-b-2 border-transparent text-gray-500 hover:text-gray-800 px-2 transition";
-                }
-            });
-            renderStreams();
-        }
-
-        function renderStreams() {
-            const grid = document.getElementById('streams-grid');
-            const streams = curriculumData[currentLevel];
-
-            grid.innerHTML = streams.map((stream, sIdx) => `
-                <div onclick="openStream(${sIdx})" class="bg-white border border-gray-200 hover:border-blue-500 hover:shadow-xl p-6 rounded-3xl cursor-pointer transition flex flex-col justify-between space-y-4 group">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-14 h-14 bg-blue-50 text-blue-600 border border-blue-100 rounded-2xl flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition">
-                            <i class="fas ${stream.icon}"></i>
-                        </div>
-                        <div class="space-y-1">
-                            <h3 class="font-extrabold text-gray-900 text-lg group-hover:text-blue-600 transition">${stream.streamName}</h3>
-                            <p class="text-xs text-gray-500 leading-relaxed">${stream.desc}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between pt-3 border-t border-gray-100 text-xs font-bold text-blue-600">
-                        <span>${stream.subjects.length} Core & Elective Subjects</span>
-                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function openStream(streamIdx) {
-            activeStream = curriculumData[currentLevel][streamIdx];
-            document.getElementById('stream-title').innerText = activeStream.streamName;
-
-            const sGrid = document.getElementById('subjects-grid');
-            sGrid.innerHTML = activeStream.subjects.map((sub, subIdx) => `
-                <div onclick="startQuiz(${subIdx})" class="bg-white border border-gray-200 hover:border-blue-500 hover:shadow-lg p-5 rounded-2xl cursor-pointer transition flex items-center justify-between group">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 bg-blue-50 text-blue-600 border border-blue-100 rounded-xl flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition">
-                            <i class="fas ${sub.icon}"></i>
-                        </div>
-                        <div>
-                            <div class="flex items-center space-x-2">
-                                <h4 class="font-bold text-gray-900 text-sm">${sub.name}</h4>
-                                <span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${sub.type === 'Core' ? 'bg-indigo-50 text-indigo-700' : 'bg-amber-50 text-amber-700'}">${sub.type}</span>
-                            </div>
-                            <p class="text-xs text-gray-500 mt-1">${sub.sets[0].length} Questions in 1st Round (${sub.sets.length} Round)</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-right text-gray-300 group-hover:text-blue-600 transition"></i>
-                </div>
-            `).join('');
-
-            document.getElementById('home-screen').classList.add('hidden');
-            document.getElementById('subjects-screen').classList.remove('hidden');
-        }
-
-        function showHomeScreen() {
-            document.getElementById('home-screen').classList.remove('hidden');
-            document.getElementById('subjects-screen').classList.add('hidden');
-            document.getElementById('quiz-screen').classList.add('hidden');
-            document.getElementById('results-screen').classList.add('hidden');
-            renderStreams();
-        }
-
-        function backToSubjects() {
-            document.getElementById('quiz-screen').classList.add('hidden');
-            document.getElementById('results-screen').classList.add('hidden');
-            document.getElementById('subjects-screen').classList.remove('hidden');
-        }
-
-        function startQuiz(subIdx) {
-            activeSubject = activeStream.subjects[subIdx];
-            currentSetIndex = 0;
-            currentQuestionIndex = 0;
-            score = 0;
-
-            document.getElementById('subjects-screen').classList.add('hidden');
-            document.getElementById('quiz-screen').classList.remove('hidden');
-            document.
+<script src="app.js"></script>
+</body>
+</html>
